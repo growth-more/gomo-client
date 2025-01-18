@@ -3,7 +3,7 @@ import MainLayout from '@/layouts/main-layout'
 import MainPage from '@/pages/main-page'
 import { createBrowserRouter } from 'react-router-dom'
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     element: <MainLayout />,
     children: [
@@ -14,3 +14,5 @@ export const router = createBrowserRouter([
     ],
   },
 ])
+
+export default router
