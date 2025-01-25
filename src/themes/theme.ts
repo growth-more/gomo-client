@@ -1,6 +1,7 @@
 import { ThemeOptions } from '@mui/material'
 import palette from './palette'
 import typography from './typography'
+import { components } from './components'
 
 const lightTheme: ThemeOptions = {
   palette: {
@@ -8,6 +9,7 @@ const lightTheme: ThemeOptions = {
     ...palette.light,
   },
   typography,
+  components,
 }
 
 const darkTheme: ThemeOptions = {
@@ -16,6 +18,7 @@ const darkTheme: ThemeOptions = {
     ...palette.dark,
   },
   typography,
+  components,
 }
 
 const theme = {
