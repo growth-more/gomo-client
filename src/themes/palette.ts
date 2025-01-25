@@ -1,4 +1,4 @@
-import colors from '@/configs/color'
+import colors from '@/themes/color'
 import { alpha, PaletteOptions, TypeAction } from '@mui/material'
 
 const baseAction: Partial<TypeAction> = {

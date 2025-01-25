@@ -1,7 +1,7 @@
 const paths = {
   root: '/',
-  signin: '/sign-in',
-  signup: '/sign-up',
+  login: '/login',
+  join: '/join',
 }
 
 export default paths

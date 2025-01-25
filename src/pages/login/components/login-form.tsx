@@ -3,7 +3,7 @@ import { alpha, Box, Button, Stack } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { FormOptions } from './form-options'
 
-interface SignInFormProps {
+interface LoginFormProps {
   onSubmit?: (form: Form) => void
   autoReset?: boolean
 }
@@ -13,7 +13,7 @@ export interface Form {
   password: string
 }
 
-export function SignInForm({ onSubmit, autoReset = true }: SignInFormProps) {
+export function LoginForm({ onSubmit, autoReset = true }: LoginFormProps) {
   const formMethod = useForm<Form>({
     mode: 'onSubmit',
     defaultValues: {

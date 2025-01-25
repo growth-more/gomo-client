@@ -1,6 +1,6 @@
 import { FullContainer } from '@/components/container'
 import { alpha, Box, SxProps, Theme } from '@mui/material'
-import { Form, SignInForm } from './components/sign-in-form'
+import { Form, LoginForm } from './components/login-form'
 import { OAuthForm } from './components/oauth-form'
 import { OAuthDivider } from './components/oauth-divider'
 
@@ -11,7 +11,7 @@ const backgroundSx: SxProps<Theme> = {
   backgroundRepeat: 'no-repeat',
 }
 
-export function SignInPage() {
+export function LoginPage() {
   const submitHandler = (form: Form) => {
     console.log(form)
     console.log('submit')
@@ -28,7 +28,7 @@ export function SignInPage() {
           borderRadius: 2,
         }}
       >
-        <SignInForm onSubmit={submitHandler} autoReset={false} />
+        <LoginForm onSubmit={submitHandler} autoReset={false} />
         <OAuthDivider />
         <OAuthForm />
       </Box>
