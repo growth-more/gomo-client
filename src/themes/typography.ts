@@ -1,6 +1,7 @@
 import type { TypographyOptions } from '@mui/material/styles/createTypography'
 
-const defaultFont = 'noto-sans-kr-variable'
+// const defaultFont = 'noto-sans-kr-variable'
+const defaultFont = 'pretendard-variable'
 
 function pxToRem(value: number): string {
   return `${value / 16}rem`
