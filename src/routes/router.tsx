@@ -1,6 +1,7 @@
-import paths from '@/configs/paths'
+import paths from '@/routes/paths'
 import MainLayout from '@/layouts/main-layout'
-import MainPage from '@/pages/main-page'
+import MainPage from '@/pages/main'
+import LoginPage from '@/pages/login'
 import { createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
       {
         path: paths.root,
         element: <MainPage />,
+      },
+      {
+        path: paths.login,
+        element: <LoginPage />,
       },
     ],
   },
