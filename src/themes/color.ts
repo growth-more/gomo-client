@@ -29,7 +29,7 @@ interface Color {
   common: CommonColor
 }
 
-const colors: Color = {
+export const colors: Color = {
   primary: {
     light: '#6366f1',
     main: '#4f46e5',
@@ -83,5 +83,3 @@ const colors: Color = {
     white: '#FFFFFF',
   },
 }
-
-export default colors

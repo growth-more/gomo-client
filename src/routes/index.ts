@@ -1,3 +1,2 @@
-import router from './router'
-
-export default router
+export * from './paths'
+export * from './router'

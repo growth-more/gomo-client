@@ -7,7 +7,7 @@ function pxToRem(value: number): string {
   return `${value / 16}rem`
 }
 
-const typography: TypographyOptions = {
+export const typography: TypographyOptions = {
   fontFamily: defaultFont,
   fontWeightLight: '300',
   fontWeightRegular: '400',
@@ -78,5 +78,3 @@ const typography: TypographyOptions = {
     textTransform: 'unset',
   },
 }
-
-export default typography

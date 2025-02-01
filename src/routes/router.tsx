@@ -1,11 +1,9 @@
-import paths from '@/routes/paths'
-import MainLayout from '@/layouts/main-layout'
-import MainPage from '@/pages/main'
-import LoginPage from '@/pages/login'
-import JoinPage from '@/pages/join'
 import { createBrowserRouter } from 'react-router-dom'
+import { JoinPage, LoginPage, MainPage } from '@/pages'
+import { paths } from '@/routes'
+import { MainLayout } from '@/layouts'
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     element: <MainLayout />,
     children: [
@@ -24,5 +22,3 @@ const router = createBrowserRouter([
     ],
   },
 ])
-
-export default router

@@ -1,5 +1,5 @@
 import { Stack, Typography } from '@mui/material'
-import { DetailsForm, Form } from './components/details-form'
+import { DetailsForm, Form } from './components'
 
 interface JoinFormPageProps {
   onNext?: () => void

@@ -1,4 +1,4 @@
-import colors from '@/themes/color'
+import { colors } from '@/themes/color'
 import { alpha, PaletteOptions, TypeAction } from '@mui/material'
 
 const baseAction: Partial<TypeAction> = {
@@ -32,9 +32,7 @@ const darkPalette: PaletteOptions = {
   action: { ...baseAction },
 }
 
-const palette = {
+export const palette = {
   light: lightPalette,
   dark: darkPalette,
 }
-
-export default palette

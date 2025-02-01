@@ -1,8 +1,8 @@
 import { Container, Stack } from '@mui/material'
-import { JoinStepper } from './components'
 import { useState } from 'react'
-import { JoinTermPage } from './join-term-page'
+import { JoinStepper } from './components'
 import { InvisibleContainer } from '@/components/container'
+import { JoinTermPage } from './join-term-page'
 import { JoinFormPage } from './join-form-page'
 import { JoinSuccessPage } from './join-success-page'
 
