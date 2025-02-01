@@ -10,9 +10,6 @@ const STEPS = [
   {
     label: '가입완료',
   },
-  {
-    label: '초기설정',
-  },
 ]
 
 interface JoinStepperProps {

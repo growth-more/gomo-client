@@ -150,8 +150,8 @@ export function DetailsForm({ onSubmit, autoReset = true }: DetailsFormProps) {
               control={control}
               rules={{
                 required: { value: true, message: '비밀번호를 입력해주세요' },
-                min: { value: 8, message: '비밀번호는 8자 이상이어야 합니다' },
-                max: { value: 15, message: '비밀번호는 15자 이하여야 합니다' },
+                minLength: { value: 8, message: '비밀번호는 8자 이상이어야 합니다' },
+                maxLength: { value: 15, message: '비밀번호는 15자 이하여야 합니다' },
               }}
             />
             <Info
@@ -193,8 +193,8 @@ export function DetailsForm({ onSubmit, autoReset = true }: DetailsFormProps) {
               control={control}
               rules={{
                 required: { value: true, message: '이름을 입력해주세요' },
-                min: { value: 1, message: '이름은 1자 이상이어야 합니다' },
-                max: { value: 30, message: '이름은 30자 이하여야 합니다' },
+                minLength: { value: 1, message: '이름은 1자 이상이어야 합니다' },
+                maxLength: { value: 30, message: '이름은 30자 이하여야 합니다' },
               }}
             />
             <Info
@@ -219,8 +219,8 @@ export function DetailsForm({ onSubmit, autoReset = true }: DetailsFormProps) {
               control={control}
               rules={{
                 required: { value: true, message: '핸들을 입력해주세요' },
-                min: { value: 3, message: '핸들은 3자 이상이어야 합니다' },
-                max: { value: 30, message: '핸들은 30자 이하여야 합니다' },
+                minLength: { value: 3, message: '핸들은 3자 이상이어야 합니다' },
+                maxLength: { value: 30, message: '핸들은 30자 이하여야 합니다' },
               }}
               slotProps={{
                 input: {
