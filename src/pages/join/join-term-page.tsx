@@ -1,4 +1,4 @@
-import { Button, Stack } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 import terms from '@/assets/term'
 import { TermForm } from './components'
 import { useMemo, useState } from 'react'
@@ -19,7 +19,10 @@ export function JoinTermPage({ onNext }: JoinTermPageProps) {
   }
 
   return (
-    <Stack spacing={4} p={4}>
+    <Stack spacing={4} p={4} alignItems="center">
+      <Typography variant="h4" fontWeight={400} py={4}>
+        약관동의
+      </Typography>
       {terms.map((term, i) => (
         <TermForm
           key={i}
@@ -29,7 +32,7 @@ export function JoinTermPage({ onNext }: JoinTermPageProps) {
           onAgree={() => agreeHandler(i)}
         />
       ))}
-      <Button size="large" onClick={onNext} disabled={!isAllAgree}>
+      <Button size="large" onClick={onNext} disabled={!isAllAgree} fullWidth>
         다음
       </Button>
     </Stack>
