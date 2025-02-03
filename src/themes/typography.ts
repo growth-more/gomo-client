@@ -1,12 +1,13 @@
 import type { TypographyOptions } from '@mui/material/styles/createTypography'
 
-const defaultFont = 'noto-sans-kr-variable'
+// const defaultFont = 'noto-sans-kr-variable'
+const defaultFont = 'pretendard-variable'
 
 function pxToRem(value: number): string {
   return `${value / 16}rem`
 }
 
-const typography: TypographyOptions = {
+export const typography: TypographyOptions = {
   fontFamily: defaultFont,
   fontWeightLight: '300',
   fontWeightRegular: '400',
@@ -77,5 +78,3 @@ const typography: TypographyOptions = {
     textTransform: 'unset',
   },
 }
-
-export default typography

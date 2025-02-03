@@ -14,14 +14,13 @@ export interface Form {
 }
 
 export function LoginForm({ onSubmit, autoReset = true }: LoginFormProps) {
-  const formMethod = useForm<Form>({
+  const { control, handleSubmit, reset } = useForm<Form>({
     mode: 'onSubmit',
     defaultValues: {
       email: '',
       password: '',
     },
   })
-  const { control, handleSubmit, reset } = formMethod
 
   const submitHandler = handleSubmit((form) => {
     if (!onSubmit) {

@@ -1,7 +1,7 @@
 import { ThemeOptions } from '@mui/material'
-import palette from './palette'
-import typography from './typography'
-import { components } from './components'
+import { palette } from '@/themes/palette'
+import { typography } from '@/themes/typography'
+import { components } from '@/themes/components'
 
 const lightTheme: ThemeOptions = {
   palette: {
@@ -21,9 +21,7 @@ const darkTheme: ThemeOptions = {
   components,
 }
 
-const theme = {
+export const theme = {
   light: lightTheme,
   dark: darkTheme,
 }
-
-export default theme

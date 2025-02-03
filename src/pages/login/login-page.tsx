@@ -1,8 +1,6 @@
 import { FullContainer } from '@/components/container'
 import { alpha, Box, SxProps, Theme } from '@mui/material'
-import { Form, LoginForm } from './components/login-form'
-import { OAuthForm } from './components/oauth-form'
-import { OAuthDivider } from './components/oauth-divider'
+import { Form, LoginForm, OAuthDivider, OAuthForm } from './components'
 
 const backgroundSx: SxProps<Theme> = {
   backgroundImage: 'url("/img/cover.webp")',

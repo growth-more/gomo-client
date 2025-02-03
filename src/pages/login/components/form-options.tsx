@@ -1,4 +1,4 @@
-import paths from '@/routes/paths'
+import { paths } from '@/routes'
 import { Button, Stack, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 

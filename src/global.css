@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'noto-sans-kr-variable';
+  font-weight: 100 900;
+  font-style: normal;
+  src: url('./assets/fonts/NotoSansKR-Variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'pretendard-variable';
+  font-weight: 100 900;
+  font-style: normal;
+  src: url('./assets/fonts/PretendardVariable.ttf') format('truetype');
+}
