@@ -1,8 +1,8 @@
 import { LoginMemberRequest } from '@/api/types'
-import { uri, AXIOS } from '@/api'
+import { AXIOS, endpoints } from '@/api'
 
 const login = async (request: LoginMemberRequest) => {
-  const response = await AXIOS.post(uri.member.login, request)
+  const response = await AXIOS.post(endpoints.member.login, request)
   return response.data
 }
 
