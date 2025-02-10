@@ -1,7 +1,7 @@
 export const member = {
   login: '/members/login',
 
-  get: '/members',
+  profile: '/members',
   create: '/members',
   update: '/members',
   delete: '/members',

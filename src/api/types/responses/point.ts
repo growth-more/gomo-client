@@ -6,7 +6,7 @@ interface AvailablePointResponse {
   availablePoints: number
 }
 
-interface HistoryPointListResponse {
+interface PointHistoryListResponse {
   historyPoints: {
     pointType: string
     transactionType: string
@@ -16,4 +16,4 @@ interface HistoryPointListResponse {
   }[]
 }
 
-export type { AvailablePointResponse, HistoryPointListResponse }
+export type { AvailablePointResponse, PointHistoryListResponse }

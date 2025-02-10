@@ -1,3 +1,3 @@
 export const point = {
-  getHistoryPoint: `/points/histories`,
+  getPointHistory: `/points/histories`,
 }
