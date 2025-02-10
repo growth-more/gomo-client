@@ -13,67 +13,79 @@ import {
   UpdateProfileImageResponse,
   UpdateQuestPropertyRequest,
 } from '@/api/types'
+import { axiosStatus } from '@/api/utils'
 
 export const member = {
   create: async (request: CreateMemberRequest): Promise<CreateMemberResponse> => {
-    const response = await AXIOS.post<CreateMemberResponse>(endpoints.member.create, request)
-    return response.data
+    return axiosStatus(() => AXIOS.post<CreateMemberResponse>(endpoints.member.create, request), {
+      onSuccess: (data) => data,
+    })
   },
 
   profile: async (): Promise<ProfileResponse> => {
-    const response = await AXIOS.get<ProfileResponse>(endpoints.member.profile)
-    return response.data
+    return axiosStatus(() => AXIOS.get<ProfileResponse>(endpoints.member.profile), {
+      onSuccess: (data) => data,
+    })
   },
 
   update: async (request: UpdateMemberRequest): Promise<void> => {
-    const response = await AXIOS.put(endpoints.member.update, request)
-    return response.data
+    return axiosStatus(() => AXIOS.put(endpoints.member.update, request), {
+      onSuccess: (data) => data,
+    })
   },
 
-  delelte: async (): Promise<void> => {
-    const response = await AXIOS.delete(endpoints.member.delete)
-    return response.data
+  delete: async (): Promise<void> => {
+    return axiosStatus(() => AXIOS.delete(endpoints.member.delete), {
+      onSuccess: (data) => data,
+    })
   },
 
   createEmailCode: async (
     request: CreateEmailAuthCodeRequest
   ): Promise<CreateEmailAuthCodeResponse> => {
-    const response = await AXIOS.post<CreateEmailAuthCodeResponse>(
-      endpoints.member.createEmailCode,
-      request
+    return axiosStatus(
+      () => AXIOS.post<CreateEmailAuthCodeResponse>(endpoints.member.createEmailCode, request),
+      {
+        onSuccess: (data) => data,
+      }
     )
-    return response.data
   },
 
   checkHandleDuplicate: async (): Promise<void> => {
-    const response = await AXIOS.post(endpoints.member.checkHandleDuplicate)
-    return response.data
+    return axiosStatus(() => AXIOS.post(endpoints.member.checkHandleDuplicate), {
+      onSuccess: (data) => data,
+    })
   },
 
   updateHandle: async (request: UpdateHandleRequest): Promise<void> => {
-    const response = await AXIOS.put(endpoints.member.updateHandle, request)
-    return response.data
+    return axiosStatus(() => AXIOS.put(endpoints.member.updateHandle, request), {
+      onSuccess: (data) => data,
+    })
   },
 
   updateProfileImage: async (
     request: UpdateProfileImageRequest
   ): Promise<UpdateProfileImageResponse> => {
-    const response = await AXIOS.put(endpoints.member.updateProfileImage, request)
-    return response.data
+    return axiosStatus(() => AXIOS.put(endpoints.member.updateProfileImage, request), {
+      onSuccess: (data) => data,
+    })
   },
 
   updatePassword: async (request: UpdatePasswordRequest): Promise<void> => {
-    const response = await AXIOS.put(endpoints.member.updatePassword, request)
-    return response.data
+    return axiosStatus(() => AXIOS.put(endpoints.member.updatePassword, request), {
+      onSuccess: (data) => data,
+    })
   },
 
   getQuestProperty: async (): Promise<QuestPropertyResponse> => {
-    const response = await AXIOS.get<QuestPropertyResponse>(endpoints.member.getQuestProperty)
-    return response.data
+    return axiosStatus(() => AXIOS.get<QuestPropertyResponse>(endpoints.member.getQuestProperty), {
+      onSuccess: (data) => data,
+    })
   },
 
   updateQuestProperty: async (request: UpdateQuestPropertyRequest): Promise<void> => {
-    const response = await AXIOS.put(endpoints.member.updateQuestProperty, request)
-    return response.data
+    return axiosStatus(() => AXIOS.put(endpoints.member.updateQuestProperty, request), {
+      onSuccess: (data) => data,
+    })
   },
 }

@@ -1,9 +1,11 @@
 import { AXIOS, endpoints } from '@/api'
 import { StreakListResponse } from '@/api/types'
+import { axiosStatus } from '@/api/utils'
 
 export const streak = {
   getStreak: async (): Promise<StreakListResponse> => {
-    const response = await AXIOS.get<StreakListResponse>(endpoints.streak.getStreak)
-    return response.data
+    return axiosStatus(() => AXIOS.get<StreakListResponse>(endpoints.streak.getStreak), {
+      onSuccess: (data) => data,
+    })
   },
 }

@@ -1,14 +1,17 @@
 import { AXIOS, endpoints } from '@/api'
 import { CreateSurveyAnswerRequest, SurveyQuestionListResponse } from '@/api/types'
+import { axiosStatus } from '@/api/utils'
 
 export const survey = {
   getQuestion: async (): Promise<SurveyQuestionListResponse> => {
-    const response = await AXIOS.get<SurveyQuestionListResponse>(endpoints.survey.getQuestion)
-    return response.data
+    return axiosStatus(() => AXIOS.get<SurveyQuestionListResponse>(endpoints.survey.getQuestion), {
+      onSuccess: (data) => data,
+    })
   },
 
   createAnswer: async (request: CreateSurveyAnswerRequest): Promise<void> => {
-    const response = await AXIOS.post(endpoints.survey.createAnswer, request)
-    return response.data
+    return axiosStatus(() => AXIOS.post(endpoints.survey.createAnswer, request), {
+      onSuccess: (data) => data,
+    })
   },
 }
