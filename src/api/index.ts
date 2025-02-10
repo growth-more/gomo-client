@@ -1,2 +1,3 @@
 export * from './axios.ts'
-export * from './uri.ts'
+export * from './endpoints'
+export * from './fetches'
