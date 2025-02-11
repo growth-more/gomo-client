@@ -1,6 +1,4 @@
 export const member = {
-  login: '/members/login',
-
   profile: '/members',
   create: '/members',
   update: '/members',

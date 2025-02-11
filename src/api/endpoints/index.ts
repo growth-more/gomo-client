@@ -4,6 +4,7 @@ import { quest } from './quest'
 import { streak } from './streak'
 import { point } from './point'
 import { survey } from './survey'
+import { auth } from './auth'
 
 export const endpoints = {
   member,
@@ -12,4 +13,5 @@ export const endpoints = {
   streak,
   point,
   survey,
+  auth,
 }

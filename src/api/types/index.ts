@@ -6,6 +6,7 @@ export type * from './requests/interest'
 export type * from './requests/member'
 export type * from './requests/quest'
 export type * from './requests/survey'
+export type * from './requests/auth'
 
 // ===================================
 // RESPONSES
@@ -17,7 +18,4 @@ export type * from './responses/point'
 export type * from './responses/quest'
 export type * from './responses/streak'
 export type * from './responses/survey'
-
-// ===================================
-// ENTITIES
-// ===================================
+export type * from './responses/auth'
