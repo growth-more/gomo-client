@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { setupAccessTokenInterceptor, setupRefreshTokenInterceptor } from './interceptors'
 
 const BASE_URL = '/api'
 
@@ -8,3 +9,6 @@ export const AXIOS = axios.create({
     'Content-Type': 'application/json',
   },
 })
+
+setupAccessTokenInterceptor()
+setupRefreshTokenInterceptor()
