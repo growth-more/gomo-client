@@ -1,6 +1,5 @@
-import { AXIOS, endpoints } from '@/api'
+import { AXIOS, endpoints, axiosStatus } from '@/api'
 import { CreateSurveyAnswerRequest, SurveyQuestionListResponse } from '@/api/types'
-import { axiosStatus } from '@/api/utils'
 
 export const survey = {
   getQuestion: async (): Promise<SurveyQuestionListResponse> => {

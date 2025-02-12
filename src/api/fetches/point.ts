@@ -1,6 +1,5 @@
-import { AXIOS, endpoints } from '@/api'
+import { AXIOS, endpoints, axiosStatus } from '@/api'
 import { PointHistoryListResponse } from '@/api/types'
-import { axiosStatus } from '@/api/utils'
 
 export const point = {
   getPointHistory: async (): Promise<PointHistoryListResponse> => {

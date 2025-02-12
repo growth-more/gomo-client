@@ -1,4 +1,4 @@
-import { AXIOS, endpoints } from '@/api'
+import { AXIOS, endpoints, axiosStatus } from '@/api'
 import {
   AssignQuestHistoryListResponse,
   AssignQuestListResponse,
@@ -13,7 +13,6 @@ import {
   UpdateRepeatQuestOrderRequest,
   UpdateRepeatQuestRequest,
 } from '@/api/types'
-import { axiosStatus } from '@/api/utils'
 
 export const quest = {
   createAssignQuest: async (

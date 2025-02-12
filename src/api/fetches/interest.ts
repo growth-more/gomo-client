@@ -1,4 +1,4 @@
-import { AXIOS, endpoints } from '@/api'
+import { AXIOS, endpoints, axiosStatus } from '@/api'
 import {
   CreateInterestEdgeRequest,
   CreateInterestEdgeResponse,
@@ -15,7 +15,6 @@ import {
   UpdateInterestRequest,
   UpdateMajorInterestOrderRequest,
 } from '@/api/types'
-import { axiosStatus } from '@/api/utils'
 
 export const interest = {
   create: async (request: CreateInterestRequest): Promise<CreateInterestResponse> => {
