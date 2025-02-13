@@ -1,6 +1,5 @@
-import { AXIOS, endpoints } from '@/api'
+import { AXIOS, endpoints, axiosStatus } from '@/api'
 import { StreakListResponse } from '@/api/types'
-import { axiosStatus } from '@/api/utils'
 
 export const streak = {
   getStreak: async (): Promise<StreakListResponse> => {

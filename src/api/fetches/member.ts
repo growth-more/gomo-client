@@ -1,4 +1,4 @@
-import { AXIOS, endpoints } from '@/api'
+import { AXIOS, endpoints, axiosStatus } from '@/api'
 import {
   CreateEmailAuthCodeRequest,
   CreateEmailAuthCodeResponse,
@@ -13,7 +13,6 @@ import {
   UpdateProfileImageResponse,
   UpdateQuestPropertyRequest,
 } from '@/api/types'
-import { axiosStatus } from '@/api/utils'
 
 export const member = {
   create: async (request: CreateMemberRequest): Promise<CreateMemberResponse> => {

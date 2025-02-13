@@ -1,13 +1,4 @@
 // ===================================
-// LOGIN
-// ===================================
-
-interface LoginResponse {
-  accessToken: string
-  refreshToken: string
-}
-
-// ===================================
 // JOIN
 // ===================================
 
@@ -55,7 +46,6 @@ interface QuestPropertyResponse {
 export type {
   CreateEmailAuthCodeResponse,
   CreateMemberResponse,
-  LoginResponse,
   QuestPropertyResponse,
   UpdateProfileImageResponse,
   ProfileResponse,

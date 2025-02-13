@@ -1,13 +1,4 @@
 // ===================================
-// LOGIN
-// ===================================
-
-interface LoginRequest {
-  email: string
-  password: string
-}
-
-// ===================================
 // JOIN
 // ===================================
 
@@ -56,7 +47,6 @@ interface UpdateQuestPropertyRequest {
 }
 
 export type {
-  LoginRequest,
   CreateEmailAuthCodeRequest,
   CreateMemberRequest,
   UpdateHandleRequest,
