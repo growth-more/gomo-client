@@ -2,9 +2,19 @@ import { ReactNode } from 'react'
 
 interface WindowViewState {
   id: string
-  position: WindowViewPosition
-  size: WindowViewSize
-  content?: ReactNode
+  props: WindowViewProps
+  //   position: WindowViewPosition
+  //   size: WindowViewSize
+}
+
+interface WindowViewProps {
+  id: string
+  title?: string
+  defaultPosition?: WindowViewPosition
+  defaultSize?: WindowViewSize
+  children?: ReactNode
+  resizable?: boolean
+  closable?: boolean
 }
 
 interface WindowViewPosition {
@@ -17,4 +27,4 @@ interface WindowViewSize {
   height: number
 }
 
-export type { WindowViewState, WindowViewPosition, WindowViewSize }
+export type { WindowViewState, WindowViewProps, WindowViewPosition, WindowViewSize }

@@ -1,19 +1,21 @@
 import { FullContainer } from '@/components/container'
-import { Window } from '@/components/window'
-import { Box } from '@mui/material'
+import { useWindowStore } from '@/stores'
+import { Button } from '@mui/material'
 
 export function MainPage() {
+  const { addView } = useWindowStore()
+
+  const createWindowViewHandler = () => {
+    addView({
+      title: 'Window',
+      resizable: true,
+      closable: true,
+    })
+  }
+
   return (
     <FullContainer>
-      <Window>
-        <Box>Hello</Box>
-      </Window>
-      <Window resizable>
-        <Box>Hello</Box>
-      </Window>
-      <Window resizable closable>
-        <Box>Hello</Box>
-      </Window>
+      <Button onClick={createWindowViewHandler}>Create New Window View</Button>
     </FullContainer>
   )
 }

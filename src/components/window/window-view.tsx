@@ -1,36 +1,37 @@
 import { Box } from '@mui/material'
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
-import { ResizeEnable, Rnd } from 'react-rnd'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { Rnd } from 'react-rnd'
 import { WindowHeader } from './window-header'
 import { useBoolean } from '@/hooks'
-import { WindowViewPosition, WindowViewSize } from './type'
+import { WindowViewPosition, WindowViewProps, WindowViewSize } from './type'
+import {
+  DEFAULT_MANAGER_SELECTOR,
+  DEFAULT_MIN_HEIGHT,
+  DEFAULT_MIN_WIDTH,
+  DEFAULT_VIEW_POSITION,
+  DEFAULT_VIEW_SIZE,
+  DISABLE_RESIZE,
+  MANAGER_PADDING,
+} from './constant'
+import { useWindowStore } from '@/stores'
 
-const DEFAULT_MIN_WIDTH = 150
-const DEFAULT_MIN_HEIGHT = 100
+export function WindowView({
+  id,
+  title,
+  resizable,
+  closable,
+  defaultPosition,
+  defaultSize,
+  children,
+}: WindowViewProps) {
+  const { removeView, shiftToTop } = useWindowStore()
 
-const DISABLE_RESIZE: ResizeEnable = {
-  top: false,
-  right: false,
-  bottom: false,
-  left: false,
-  topRight: false,
-  bottomRight: false,
-  bottomLeft: false,
-  topLeft: false,
-}
-
-interface WindowViewProps {
-  children?: ReactNode
-  resizable?: boolean
-  closable?: boolean
-  onClose?: () => void
-}
-
-export function WindowView({ children, resizable, closable, onClose }: WindowViewProps) {
   const rnd = useRef<Rnd>(null)
 
-  const [size, setSize] = useState<WindowViewSize>({ width: 0, height: 0 })
-  const [position, setPosition] = useState<WindowViewPosition>({ x: 10, y: 10 })
+  const [size, setSize] = useState<WindowViewSize>(defaultSize ?? DEFAULT_VIEW_SIZE)
+  const [position, setPosition] = useState<WindowViewPosition>(
+    defaultPosition ?? DEFAULT_VIEW_POSITION
+  )
 
   const draggable = useBoolean()
 
@@ -41,18 +42,26 @@ export function WindowView({ children, resizable, closable, onClose }: WindowVie
     }
 
     const edgePosition: WindowViewPosition = {
-      x: window.innerWidth - 10,
-      y: window.innerHeight - 10,
+      x: window.innerWidth - MANAGER_PADDING,
+      y: window.innerHeight - MANAGER_PADDING,
     }
 
     if (endPosition.x > edgePosition.x) {
-      setPosition({ x: edgePosition.x - size.width - 10, y: position.y })
+      setPosition({ x: edgePosition.x - size.width - MANAGER_PADDING, y: position.y })
     }
 
     if (endPosition.y > edgePosition.y) {
-      setPosition({ x: position.x, y: edgePosition.y - size.height - 10 })
+      setPosition({ x: position.x, y: edgePosition.y - size.height - MANAGER_PADDING })
     }
   }, [position, size])
+
+  const shiftToTopHandler = () => {
+    shiftToTop(id)
+  }
+
+  const closeHandler = () => {
+    removeView(id)
+  }
 
   useEffect(() => {
     window.addEventListener('resize', resizeHandler)
@@ -63,15 +72,15 @@ export function WindowView({ children, resizable, closable, onClose }: WindowVie
 
   useEffect(() => {
     setSize({
-      width: rnd.current?.getSelfElement()?.clientWidth ?? 0,
-      height: rnd.current?.getSelfElement()?.clientHeight ?? 0,
+      width: rnd.current?.getSelfElement()?.clientWidth ?? DEFAULT_VIEW_SIZE.width,
+      height: rnd.current?.getSelfElement()?.clientHeight ?? DEFAULT_VIEW_SIZE.height,
     })
   }, [])
 
   return (
     <Rnd
       ref={rnd}
-      bounds="#window-manager"
+      bounds={DEFAULT_MANAGER_SELECTOR}
       minWidth={DEFAULT_MIN_WIDTH}
       minHeight={DEFAULT_MIN_HEIGHT}
       disableDragging={!draggable.value}
@@ -92,13 +101,14 @@ export function WindowView({ children, resizable, closable, onClose }: WindowVie
         borderRadius={2}
         border={1}
         borderColor="divider"
+        onMouseDown={shiftToTopHandler}
       >
         <WindowHeader
-          title="Window"
+          title={title}
           onEnter={draggable.onTrue}
           onLeave={draggable.onFalse}
           closable={closable}
-          onClose={onClose}
+          onClose={closeHandler}
         />
         <Box p={2}>{children}</Box>
       </Box>
