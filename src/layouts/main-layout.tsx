@@ -1,4 +1,5 @@
 import { fetches } from '@/api'
+import { WindowManager } from '@/components/window'
 import { useTokenStore } from '@/stores'
 import { theme } from '@/themes'
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
@@ -30,6 +31,7 @@ export function MainLayout() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={selectedTheme}>
         <CssBaseline />
+        <WindowManager />
         <Outlet />
       </ThemeProvider>
     </QueryClientProvider>

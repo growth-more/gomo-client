@@ -1,0 +1,42 @@
+import { Box } from '@mui/material'
+import { createPortal } from 'react-dom'
+import { FullContainer } from '../container'
+import { useEffect, useState } from 'react'
+import { useWindowStore } from '@/stores'
+import { WindowView } from './window-view'
+
+export function WindowManager() {
+  const { views } = useWindowStore()
+
+  const [anchor, setAnchor] = useState<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const root = document.getElementById('root')!
+    setAnchor(root)
+  }, [])
+
+  const windowManager = (
+    <FullContainer
+      sx={{
+        p: '10px',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        pointerEvents: 'none',
+      }}
+    >
+      <Box id="window-manager" width={1} height={1}>
+        <Box sx={{ pointerEvents: 'auto' }}>
+          {views.map((view) => (
+            <WindowView key={view.id} {...view.props} />
+          ))}
+        </Box>
+      </Box>
+    </FullContainer>
+  )
+
+  return anchor ? createPortal(windowManager, anchor) : null
+}
