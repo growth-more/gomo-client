@@ -1,1 +1,3 @@
-export const handlers = []
+import { member } from './member'
+
+export const handlers = [...member]
