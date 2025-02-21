@@ -14,6 +14,7 @@ import {
   MANAGER_PADDING,
 } from './constant'
 import { useWindowStore } from '@/stores'
+import { motion } from 'motion/react'
 
 export function WindowView({
   id,
@@ -102,13 +103,17 @@ export function WindowView({
       <Stack
         width={1}
         height={1}
-        bgcolor={(theme) => alpha(theme.palette.background.paper, 0.6)}
+        bgcolor={(theme) => alpha(theme.palette.background.paper, 0.5)}
         overflow="hidden"
         borderRadius={2}
         border={1}
         borderColor="divider"
         onMouseDown={shiftToTopHandler}
-        sx={{ backdropFilter: 'blur(10px)' }}
+        sx={{ backdropFilter: 'blur(15px)' }}
+        component={motion.div}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, height: 0 }}
       >
         <WindowHeader
           title={title}
@@ -117,7 +122,7 @@ export function WindowView({
           closable={closable}
           onClose={closeHandler}
         />
-        <Box width={1} flex={1}>
+        <Box width={1} flex={1} overflow="hidden">
           {children}
         </Box>
       </Stack>

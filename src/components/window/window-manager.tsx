@@ -4,6 +4,7 @@ import { FullContainer } from '../container'
 import { useEffect, useState } from 'react'
 import { useWindowStore } from '@/stores'
 import { WindowView } from './window-view'
+import { AnimatePresence } from 'motion/react'
 
 export function WindowManager() {
   const { views } = useWindowStore()
@@ -30,9 +31,11 @@ export function WindowManager() {
     >
       <Box id="window-manager" width={1} height={1}>
         <Box sx={{ pointerEvents: 'auto' }}>
-          {views.map((view) => (
-            <WindowView key={view.id} {...view.props} />
-          ))}
+          <AnimatePresence>
+            {views.map((view) => (
+              <WindowView key={view.id} {...view.props} />
+            ))}
+          </AnimatePresence>
         </Box>
       </Box>
     </FullContainer>
