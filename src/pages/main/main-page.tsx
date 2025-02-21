@@ -1,25 +1,18 @@
-import { useMemberProfile } from '@/api/hooks'
 import { FullContainer } from '@/components/container'
-import { useWindowStore } from '@/stores'
-import { Button, Typography } from '@mui/material'
+import { SxProps, Theme } from '@mui/material'
+import { ControlPanel } from './components/control-panel'
+
+const backgroundSx: SxProps<Theme> = {
+  backgroundImage: 'url("/img/room.png")',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+}
 
 export function MainPage() {
-  const { addView } = useWindowStore()
-
-  const { profile } = useMemberProfile()
-
-  const createWindowViewHandler = () => {
-    addView({
-      title: 'Window',
-      resizable: true,
-      closable: true,
-    })
-  }
-
   return (
-    <FullContainer>
-      <Button onClick={createWindowViewHandler}>Create New Window View</Button>
-      <Typography>{JSON.stringify(profile)}</Typography>
+    <FullContainer sx={{ ...backgroundSx, position: 'relative' }}>
+      <ControlPanel />
     </FullContainer>
   )
 }
