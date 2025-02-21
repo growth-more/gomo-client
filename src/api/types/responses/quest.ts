@@ -15,19 +15,47 @@ interface CreateAssignQuestResponse {
 }
 
 interface AssignQuestListResponse {
-  quests: {
+  dailyQuests: {
     id: string
-    interestId: string
+    subjectId: string
     questType: string
     point: number
     score: number
-    interestName: string
+    subjectName: string
     content: string
-    isConfirmed: boolean
-    isCompleted: boolean
-    proofUrl: string
+    proof: string
     startDateTime: Date
     displayOrder: number
+    completed: boolean
+    confirmed: boolean
+  }[]
+  weeklyQuests: {
+    id: string
+    subjectId: string
+    questType: string
+    point: number
+    score: number
+    subjectName: string
+    content: string
+    proof: string
+    startDateTime: Date
+    displayOrder: number
+    completed: boolean
+    confirmed: boolean
+  }[]
+  monthlyQuests: {
+    id: string
+    subjectId: string
+    questType: string
+    point: number
+    score: number
+    subjectName: string
+    content: string
+    proof: string
+    startDateTime: Date
+    displayOrder: number
+    completed: boolean
+    confirmed: boolean
   }[]
 }
 
