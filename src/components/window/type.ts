@@ -15,6 +15,10 @@ interface WindowViewProps {
   children?: ReactNode
   resizable?: boolean
   closable?: boolean
+  minWidth?: number
+  minHeight?: number
+  maxWidth?: number
+  maxHeight?: number
 }
 
 interface WindowViewPosition {
