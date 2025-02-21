@@ -9,7 +9,7 @@ interface InfoProps {
 
 export function Info({ info, sx }: InfoProps) {
   return (
-    <Tooltip title={info} placement="right" disableInteractive>
+    <Tooltip title={info} placement="right" arrow={false}>
       <Stack justifyContent="center" alignItems="center" sx={sx}>
         <Iconify icon="mdi:information-outline" />
       </Stack>
