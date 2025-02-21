@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && rm -f dist/mockServiceWorker.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@iconify/react": "^5.2.0",
+    "@types/node": "^22.13.4",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react-swc": "^3.5.0",
@@ -36,8 +37,14 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "msw": "^2.7.0",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.11"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

@@ -22,10 +22,11 @@ interface ProfileResponse {
   motto: string
   availablePoints: number
   profileImageUrl: string
+  loginProvider: string
   roleType: string
   subscriptionPlan: string
   activateStatus: string
-  singUpDateTime: Date
+  signUpDateTime: Date
 }
 
 interface UpdateProfileImageResponse {
