@@ -10,7 +10,7 @@ interface ControlButtonProps {
 
 export function ControlButton({ title, icon, onClick }: ControlButtonProps) {
   return (
-    <Tooltip title={title} placement="top" arrow disableInteractive>
+    <Tooltip title={title}>
       <Box
         component={motion.button}
         sx={{

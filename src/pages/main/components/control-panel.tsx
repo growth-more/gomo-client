@@ -15,13 +15,14 @@ export function ControlPanel() {
       minHeight: 350,
       maxWidth: 800,
       maxHeight: 800,
+      defaultSize: { width: 320, height: 450 },
       children: <QuestPage />,
     })
   }
 
   return (
     <Stack position="fixed" left={0} bottom={0} p={4}>
-      <ControlButton title="퀘스트" icon="mingcute:coin-3-fill" onClick={questViewHandler} />
+      <ControlButton title="퀘스트" icon="solar:star-bold" onClick={questViewHandler} />
     </Stack>
   )
 }

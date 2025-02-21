@@ -1,30 +1,59 @@
-import { alpha, Divider, Stack, Tab, Tabs } from '@mui/material'
-import { SyntheticEvent, useState } from 'react'
-
-const tabs = ['DAILY', 'WEEKLY', 'MONTHLY'] as const
-type Tab = (typeof tabs)[number]
+import { useAssignQuest } from '@/api/hooks'
+import { alpha, Divider, IconButton, Stack, Tab, Tabs, Tooltip } from '@mui/material'
+import { useQuestTab } from './hooks'
+import { QuestSection } from './components'
+import { ScrollContainer } from '@/components/scrollbar'
+import { InvisibleContainer } from '@/components/container'
+import { Iconify } from '@/components/iconify'
 
 export function QuestPage() {
-  const [selectedTab, setSelectedTab] = useState<Tab>('DAILY')
-
-  const tabHandler = (e: SyntheticEvent, tab: Tab) => {
-    setSelectedTab(tab)
-  }
+  const { daily, weekly, monthly } = useAssignQuest()
+  const { tabs, tab, tabHandler } = useQuestTab()
 
   return (
-    <Stack width={1} height={1}>
+    <Stack width={1} height={1} overflow="hidden">
       <Tabs
         variant="fullWidth"
-        value={selectedTab}
+        value={tab}
         onChange={tabHandler}
-        sx={{ bgcolor: (theme) => alpha(theme.palette.background.paper, 0.2) }}
+        sx={{ bgcolor: (theme) => alpha(theme.palette.background.paper, 0.4) }}
       >
-        <Tab label="일일" value="DAILY" />
-        <Tab label="주간" value="WEEKLY" />
-        <Tab label="월간" value="MONTHLY" />
+        {tabs.map((tab, i) => (
+          <Tab key={i} label={tab.label} value={tab.value} />
+        ))}
       </Tabs>
+
       <Divider />
-      <Stack flex={1} p={2}></Stack>
+      <Stack flex={1} spacing={2} sx={{ overflowY: 'auto' }}>
+        <ScrollContainer sx={{ p: 1 }}>
+          <InvisibleContainer visible={tab === 'DAILY'}>
+            <QuestSection quest={daily} questType="일일" />
+          </InvisibleContainer>
+
+          <InvisibleContainer visible={tab === 'WEEKLY'}>
+            <QuestSection quest={weekly} questType="주간" />
+          </InvisibleContainer>
+
+          <InvisibleContainer visible={tab === 'MONTHLY'}>
+            <QuestSection quest={monthly} questType="월간" />
+          </InvisibleContainer>
+        </ScrollContainer>
+      </Stack>
+
+      <Divider />
+      <Stack
+        direction="row"
+        p={1}
+        justifyContent="flex-end"
+        alignItems="center"
+        bgcolor={(theme) => alpha(theme.palette.background.paper, 0.4)}
+      >
+        <Tooltip title="퀘스트 설정">
+          <IconButton size="small">
+            <Iconify icon="solar:settings-bold" />
+          </IconButton>
+        </Tooltip>
+      </Stack>
     </Stack>
   )
 }
