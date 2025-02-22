@@ -19,4 +19,10 @@ interface OrganizedAssignQuest {
   unconfirmed: AssignQuest[]
 }
 
-export type { AssignQuest, OrganizedAssignQuest }
+interface QuestProperty {
+  dailyThreshold: number
+  weeklyThreshold: number
+  monthlyThreshold: number
+}
+
+export type { AssignQuest, OrganizedAssignQuest, QuestProperty }
