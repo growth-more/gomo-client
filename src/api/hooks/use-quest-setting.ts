@@ -1,13 +1,34 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
 import { QuestProperty } from '@/entities'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
+import { UpdateQuestPropertyRequest } from '../types'
 
 export function useQuestSetting() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ['GET', endpoints.member.getQuestProperty],
     queryFn: fetches.member.getQuestProperty,
   })
+
+  const { mutate } = useMutation({
+    mutationKey: ['PUT', endpoints.member.updateQuestProperty],
+    mutationFn: fetches.member.updateQuestProperty,
+  })
+
+  const update = useCallback(
+    (request: UpdateQuestPropertyRequest, onSuccess?: () => void, onError?: () => void) => {
+      mutate(request, {
+        onSuccess: () => {
+          refetch()
+          onSuccess?.()
+        },
+        onError: () => {
+          onError?.()
+        },
+      })
+    },
+    [mutate, refetch]
+  )
 
   const questProperty = useMemo<QuestProperty>(() => {
     if (!data) {
@@ -20,5 +41,5 @@ export function useQuestSetting() {
     return data
   }, [data])
 
-  return { questProperty, isLoading }
+  return { questProperty, isLoading, update }
 }

@@ -1,5 +1,5 @@
 import { endpoints } from '@/api'
-import { ProfileResponse, QuestPropertyResponse } from '@/api/types'
+import { ProfileResponse, QuestPropertyResponse, UpdateQuestPropertyRequest } from '@/api/types'
 import { mock } from '@/msw/data'
 import { http, HttpResponse } from 'msw'
 
@@ -10,5 +10,9 @@ export const member = [
 
   http.get<never, never, QuestPropertyResponse>(endpoints.member.getQuestProperty, async () => {
     return HttpResponse.json(mock.member.questProperty, { status: 200 })
+  }),
+
+  http.put<never, UpdateQuestPropertyRequest>(endpoints.member.updateQuestProperty, async () => {
+    return new HttpResponse(null, { status: 204 })
   }),
 ]

@@ -43,7 +43,7 @@ interface UpdateProfileImageRequest {
 interface UpdateQuestPropertyRequest {
   dailyThreshold: number
   weeklyThreshold: number
-  monthlyMax: number
+  monthlyThreshold: number
 }
 
 export type {
