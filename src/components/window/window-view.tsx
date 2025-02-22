@@ -20,6 +20,7 @@ export function WindowView({
   id,
   title,
   resizable,
+  resizeOption,
   closable,
   defaultPosition,
   defaultSize,
@@ -91,7 +92,7 @@ export function WindowView({
       maxWidth={maxWidth}
       maxHeight={maxHeight}
       disableDragging={!draggable.value}
-      enableResizing={resizable ? undefined : DISABLE_RESIZE}
+      enableResizing={resizable ? resizeOption ?? undefined : DISABLE_RESIZE}
       position={position}
       size={size}
       onDragStop={(_, d) => setPosition({ x: d.x, y: d.y })}

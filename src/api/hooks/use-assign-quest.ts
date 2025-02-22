@@ -33,7 +33,6 @@ function organizeAssignQuest(quests: AssignQuest[]) {
   const unconfirmed: AssignQuest[] = []
 
   quests.forEach((quest) => {
-    console.log(quest)
     if (quest.completed) {
       completed.push(quest)
     } else if (quest.confirmed) {

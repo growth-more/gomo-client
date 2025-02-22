@@ -1,14 +1,21 @@
 import { useAssignQuest } from '@/api/hooks'
 import { alpha, Divider, IconButton, Stack, Tab, Tabs, Tooltip } from '@mui/material'
-import { useQuestTab } from './hooks'
-import { QuestSection } from './components'
 import { ScrollContainer } from '@/components/scrollbar'
 import { InvisibleContainer } from '@/components/container'
 import { Iconify } from '@/components/iconify'
+import { useWindowStore } from '@/stores'
+import { QuestSection } from '@/pages/quest/components'
+import { useQuestTab } from '@/pages/quest/hooks'
+import { QUEST_SETTING_PAGE_ID, QUEST_SETTING_PAGE_VIEW } from '@/pages/quest/constants'
 
 export function QuestPage() {
   const { daily, weekly, monthly } = useAssignQuest()
   const { tabs, tab, tabHandler } = useQuestTab()
+  const { addViewWithId } = useWindowStore()
+
+  const questSettingPageHandler = () => {
+    addViewWithId(QUEST_SETTING_PAGE_ID, QUEST_SETTING_PAGE_VIEW)
+  }
 
   return (
     <Stack width={1} height={1} overflow="hidden">
@@ -49,7 +56,7 @@ export function QuestPage() {
         bgcolor={(theme) => alpha(theme.palette.background.paper, 0.4)}
       >
         <Tooltip title="퀘스트 설정">
-          <IconButton size="small">
+          <IconButton size="small" onClick={questSettingPageHandler}>
             <Iconify icon="solar:settings-bold" />
           </IconButton>
         </Tooltip>

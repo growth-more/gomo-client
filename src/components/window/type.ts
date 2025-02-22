@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { ResizeEnable } from 'react-rnd'
 
 interface WindowViewState {
   id: string
@@ -14,6 +15,7 @@ interface WindowViewProps {
   defaultSize?: WindowViewSize
   children?: ReactNode
   resizable?: boolean
+  resizeOption?: ResizeEnable
   closable?: boolean
   minWidth?: number
   minHeight?: number

@@ -1,23 +1,13 @@
 import { Stack } from '@mui/material'
 import { ControlButton } from './control-button'
 import { useWindowStore } from '@/stores'
-import { QuestPage } from '@/pages/quest/quest-page'
+import { QUEST_PAGE_ID, QUEST_PAGE_VIEW } from '@/pages/quest/constants'
 
 export function ControlPanel() {
   const { toggleViewWithId } = useWindowStore()
 
   const questViewHandler = () => {
-    toggleViewWithId('quest', {
-      title: '퀘스트',
-      closable: true,
-      resizable: true,
-      minWidth: 320,
-      minHeight: 350,
-      maxWidth: 800,
-      maxHeight: 800,
-      defaultSize: { width: 320, height: 450 },
-      children: <QuestPage />,
-    })
+    toggleViewWithId(QUEST_PAGE_ID, QUEST_PAGE_VIEW)
   }
 
   return (
