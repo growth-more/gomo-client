@@ -32,8 +32,9 @@ export const useWindowStore = create<WindowState>((set) => ({
 
   addViewWithId: (id, props) =>
     set((state) => {
-      if (state.views.some((v) => v.id === id)) {
-        return state
+      const view = state.views.find((v) => v.id === id)
+      if (view) {
+        return { views: [...state.views.filter((v) => v.id !== id), view] }
       }
       return {
         views: [...state.views, createState(id, props)],
@@ -60,6 +61,9 @@ export const useWindowStore = create<WindowState>((set) => ({
 
   shiftToTop: (id) =>
     set((state) => {
+      if (state.views.length > 0 && state.views[state.views.length - 1].id === id) {
+        return state
+      }
       const view = state.views.find((v) => v.id === id)
       if (!view) {
         return state
