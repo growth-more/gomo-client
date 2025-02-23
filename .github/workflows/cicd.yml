@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - feature-45/ci-cd
   workflow_dispatch:
     
 jobs:
