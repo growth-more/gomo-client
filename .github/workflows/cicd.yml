@@ -46,7 +46,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: frontend-build
-          path: /dist
+          path: .
       
       - name: Create SSH Key
         run: |
