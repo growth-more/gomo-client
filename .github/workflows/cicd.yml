@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - develop
-      - feature-45/ci-cd
   workflow_dispatch:
     
 jobs:
@@ -33,7 +32,7 @@ jobs:
         with:
           name: frontend-build
           path: ./dist
-  
+
   deploy:
     name: Deploy to Server
     runs-on: ubuntu-latest
@@ -47,7 +46,7 @@ jobs:
         with:
           name: frontend-build
           path: ./dist
-      
+
       - name: Debug Artifact Path
         run: ls -R
 
@@ -59,7 +58,7 @@ jobs:
       - name: Copy files to OCI Server
         run: |
           scp -i oci_key.key -o StrictHostKeyChecking=no -r ./dist ${{ secrets.OCI_USER }}@${{ secrets.OCI_HOST }}:/home/ubuntu/project/gomo/client/
-      
+
       - name: SSH into OCI and Restart Container
         run: |
           ssh -i oci_key.key -o StrictHostKeyChecking=no ${{ secrets.OCI_USER }}@${{ secrets.OCI_HOST }} << 'EOF'
