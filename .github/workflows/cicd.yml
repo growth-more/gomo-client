@@ -46,8 +46,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: frontend-build
-          path: .
+          path: ./dist
       
+      - name: Debug Artifact Path
+        run: ls -R
+
       - name: Create SSH Key
         run: |
           echo "${{ secrets.OCI_PRIVATE_KEY }}" > oci_key.key
