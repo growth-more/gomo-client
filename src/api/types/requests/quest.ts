@@ -31,7 +31,7 @@ interface UpdateAssignQuestOrderRequest {
 }
 
 interface CompleteAssignQuestRequest {
-  proofUrl: string
+  proof: string
 }
 
 // ===================================

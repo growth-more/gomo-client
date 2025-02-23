@@ -1,11 +1,13 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
 import { QuestProperty } from '@/entities'
 import { useCallback, useMemo } from 'react'
 import { UpdateQuestPropertyRequest } from '../types'
 
 export function useQuestSetting() {
-  const { data, isLoading, refetch } = useQuery({
+  const queryClient = useQueryClient()
+
+  const { data, isLoading } = useQuery({
     queryKey: ['GET', endpoints.member.getQuestProperty],
     queryFn: fetches.member.getQuestProperty,
   })
@@ -13,21 +15,18 @@ export function useQuestSetting() {
   const { mutate } = useMutation({
     mutationKey: ['PUT', endpoints.member.updateQuestProperty],
     mutationFn: fetches.member.updateQuestProperty,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.member.getQuestProperty] }),
   })
 
   const update = useCallback(
     (request: UpdateQuestPropertyRequest, onSuccess?: () => void, onError?: () => void) => {
       mutate(request, {
-        onSuccess: () => {
-          refetch()
-          onSuccess?.()
-        },
-        onError: () => {
-          onError?.()
-        },
+        onSuccess: () => onSuccess?.(),
+        onError: () => onError?.(),
       })
     },
-    [mutate, refetch]
+    [mutate]
   )
 
   const questProperty = useMemo<QuestProperty>(() => {

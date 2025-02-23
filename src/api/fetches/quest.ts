@@ -2,24 +2,27 @@ import { AXIOS, endpoints, axiosStatus } from '@/api'
 import {
   AssignQuestHistoryListResponse,
   AssignQuestListResponse,
-  CompleteAssignQuestRequest,
-  CreateAssignQuestRequest,
+  CompleteAssignQuestFetchRequest,
+  ConfirmAssignQuestFetchRequest,
+  CreateAssignQuestFetchRequest,
   CreateAssignQuestResponse,
-  CreateRepeatQuestRequest,
+  CreateRepeatQuestFetchRequest,
   CreateRepeatQuestResponse,
+  DeleteAssignQuestFetchRequest,
+  DeleteRepeatQuestFetchRequest,
   RepeatQuestListResponse,
-  UpdateAssignQuestOrderRequest,
-  UpdateAssignQuestRequest,
-  UpdateRepeatQuestOrderRequest,
-  UpdateRepeatQuestRequest,
+  UpdateAssignQuestFetchRequest,
+  UpdateAssignQuestOrderFetchRequest,
+  UpdateRepeatQuestFetchRequest,
+  UpdateRepeatQuestOrderFetchRequest,
 } from '@/api/types'
 
 export const quest = {
   createAssignQuest: async (
-    request: CreateAssignQuestRequest
+    params: CreateAssignQuestFetchRequest
   ): Promise<CreateAssignQuestResponse> => {
     return axiosStatus(
-      () => AXIOS.post<CreateAssignQuestResponse>(endpoints.quest.createAssignQuest, request),
+      () => AXIOS.post<CreateAssignQuestResponse>(endpoints.quest.createAssignQuest, params.body),
       {
         onSuccess: (data) => data,
       }
@@ -32,34 +35,40 @@ export const quest = {
     })
   },
 
-  updateAssignQuest: async (request: UpdateAssignQuestRequest, id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.quest.updateAssignQuestWithId(id), request), {
+  updateAssignQuest: async (params: UpdateAssignQuestFetchRequest): Promise<void> => {
+    return axiosStatus(
+      () => AXIOS.put(endpoints.quest.updateAssignQuestWithId(params.id), params.body),
+      {
+        onSuccess: (data) => data,
+      }
+    )
+  },
+
+  deleteAssignQuest: async (params: DeleteAssignQuestFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.delete(endpoints.quest.deleteAssignQuestWithId(params.id)), {
       onSuccess: (data) => data,
     })
   },
 
-  deleteAssignQuest: async (id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.delete(endpoints.quest.deleteAssignQuestWithId(id)), {
+  updateAssignQuestOrder: async (params: UpdateAssignQuestOrderFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.quest.updateAssignQuestOrder, params.body), {
       onSuccess: (data) => data,
     })
   },
 
-  updateAssignQuestOrder: async (request: UpdateAssignQuestOrderRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.quest.updateAssignQuestOrder, request), {
+  confirmAssignQuest: async (params: ConfirmAssignQuestFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.quest.confirmAssignQuestWithId(params.id)), {
       onSuccess: (data) => data,
     })
   },
 
-  confirmAssignQuest: async (id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.quest.confirmAssignQuestWithId(id)), {
-      onSuccess: (data) => data,
-    })
-  },
-
-  completeAssignQuest: async (request: CompleteAssignQuestRequest, id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.quest.completeAssignQuestWithId(id), request), {
-      onSuccess: (data) => data,
-    })
+  completeAssignQuest: async (params: CompleteAssignQuestFetchRequest): Promise<void> => {
+    return axiosStatus(
+      () => AXIOS.put(endpoints.quest.completeAssignQuestWithId(params.id), params.body),
+      {
+        onSuccess: (data) => data,
+      }
+    )
   },
 
   getAssignQuestHistory: async (): Promise<AssignQuestHistoryListResponse> => {
@@ -72,10 +81,10 @@ export const quest = {
   },
 
   createRepeatQuest: async (
-    request: CreateRepeatQuestRequest
+    params: CreateRepeatQuestFetchRequest
   ): Promise<CreateRepeatQuestResponse> => {
     return axiosStatus(
-      () => AXIOS.post<CreateRepeatQuestResponse>(endpoints.quest.createRepeatQuest, request),
+      () => AXIOS.post<CreateRepeatQuestResponse>(endpoints.quest.createRepeatQuest, params.body),
       {
         onSuccess: (data) => data,
       }
@@ -88,20 +97,23 @@ export const quest = {
     })
   },
 
-  updateRepeatQuest: async (request: UpdateRepeatQuestRequest, id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.quest.updateRepeatQuestWithId(id), request), {
+  updateRepeatQuest: async (params: UpdateRepeatQuestFetchRequest): Promise<void> => {
+    return axiosStatus(
+      () => AXIOS.put(endpoints.quest.updateRepeatQuestWithId(params.id), params.body),
+      {
+        onSuccess: (data) => data,
+      }
+    )
+  },
+
+  deleteRepeatQuest: async (params: DeleteRepeatQuestFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.delete(endpoints.quest.deleteRepeatQuestWithId(params.id)), {
       onSuccess: (data) => data,
     })
   },
 
-  deleteRepeatQuest: async (id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.delete(endpoints.quest.deleteRepeatQuestWithId(id)), {
-      onSuccess: (data) => data,
-    })
-  },
-
-  updateRepeatQuestOrder: async (request: UpdateRepeatQuestOrderRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.quest.updateRepeatQuestOrder, request), {
+  updateRepeatQuestOrder: async (params: UpdateRepeatQuestOrderFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.quest.updateRepeatQuestOrder, params.body), {
       onSuccess: (data) => data,
     })
   },

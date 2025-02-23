@@ -1,12 +1,35 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
 import { useMemo } from 'react'
 import { AssignQuest, OrganizedAssignQuest } from '@/entities'
 
 export function useAssignQuest() {
+  const queryClient = useQueryClient()
+
   const { data: assignQuest, isLoading } = useQuery({
     queryKey: ['GET', endpoints.quest.getAssignQuest],
     queryFn: fetches.quest.getAssignQuest,
+  })
+
+  const { mutate: completeQuest } = useMutation({
+    mutationKey: ['PUT', endpoints.quest.completeAssignQuest],
+    mutationFn: fetches.quest.completeAssignQuest,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.quest.getAssignQuest] }),
+  })
+
+  const { mutate: confirmQuest } = useMutation({
+    mutationKey: ['PUT', endpoints.quest.confirmAssignQuest],
+    mutationFn: fetches.quest.confirmAssignQuest,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.quest.getAssignQuest] }),
+  })
+
+  const { mutate: deleteQuest } = useMutation({
+    mutationKey: ['DELETE', endpoints.quest.deleteAssignQuest],
+    mutationFn: fetches.quest.deleteAssignQuest,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.quest.getAssignQuest] }),
   })
 
   const daily = useMemo<OrganizedAssignQuest>(() => {
@@ -24,7 +47,7 @@ export function useAssignQuest() {
     return organizeAssignQuest(quests)
   }, [assignQuest])
 
-  return { daily, weekly, monthly, isLoading }
+  return { daily, weekly, monthly, isLoading, completeQuest, confirmQuest, deleteQuest }
 }
 
 function organizeAssignQuest(quests: AssignQuest[]) {
