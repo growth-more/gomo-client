@@ -55,7 +55,7 @@ jobs:
 
       - name: Copy files to OCI Server
         run: |
-          scp -i oci_key.key -o StrictHostKeyChecking=no -r frontend/build ${{ secrets.OCI_USER }}@${{ secrets.OCI_HOST }}:/home/ubuntu/project/gomo/client/
+          scp -i oci_key.key -o StrictHostKeyChecking=no -r ./dist ${{ secrets.OCI_USER }}@${{ secrets.OCI_HOST }}:/home/ubuntu/project/gomo/client/
       
       - name: SSH into OCI and Restart Container
         run: |
