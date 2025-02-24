@@ -2,15 +2,25 @@ import { Iconify } from '@/components/iconify'
 import { AssignQuest } from '@/entities'
 import { alpha, Box, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 import { QuestScore } from './quest-score'
-import { useCallback, useMemo } from 'react'
+import { RefObject, useCallback, useMemo } from 'react'
 import { useAssignQuest } from '@/api/hooks'
+import { Reorder } from 'motion/react'
 
 interface QuestListProps {
   quest: AssignQuest
   questType: string
+  onDragStart: () => void
+  onDragEnd: () => void
+  constraints: RefObject<HTMLDivElement>
 }
 
-export function QuestList({ quest, questType }: QuestListProps) {
+export function QuestList({
+  quest,
+  questType,
+  onDragStart,
+  onDragEnd,
+  constraints,
+}: QuestListProps) {
   const { completeQuest, confirmQuest, deleteQuest } = useAssignQuest()
 
   const completeHandler = useCallback(() => {
@@ -70,6 +80,13 @@ export function QuestList({ quest, questType }: QuestListProps) {
       border={1}
       borderColor="divider"
       overflow="hidden"
+      sx={{ backdropFilter: 'blur(10px)' }}
+      component={Reorder.Item}
+      value={quest}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+      dragConstraints={constraints}
+      dragElastic={0}
     >
       <Box width="5px" height={1} bgcolor={(theme) => alpha(theme.palette.primary.main, 1)} />
 
