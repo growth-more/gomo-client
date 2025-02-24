@@ -3,6 +3,7 @@ import {
   AssignQuestListResponse,
   CompleteAssignQuestRequest,
   CreateAssignQuestRequest,
+  UpdateAssignQuestRequest,
 } from '@/api/types'
 import { mock } from '@/msw/data'
 import { http, HttpResponse } from 'msw'
@@ -45,4 +46,11 @@ export const quest = [
     //   { status: 422 }
     // )
   }),
+
+  http.put<IdParams, UpdateAssignQuestRequest, never>(
+    endpoints.quest.updateAssignQuest,
+    async () => {
+      return new HttpResponse(null, { status: 204 })
+    }
+  ),
 ]

@@ -1,3 +1,5 @@
+import { QuestType } from '@/entities'
+
 // ===================================
 // QUEST
 // ===================================
@@ -18,7 +20,7 @@ interface AssignQuestListResponse {
   dailyQuests: {
     id: string
     subjectId: string
-    questType: string
+    questType: QuestType
     point: number
     score: number
     subjectName: string
@@ -32,7 +34,7 @@ interface AssignQuestListResponse {
   weeklyQuests: {
     id: string
     subjectId: string
-    questType: string
+    questType: QuestType
     point: number
     score: number
     subjectName: string
@@ -46,7 +48,7 @@ interface AssignQuestListResponse {
   monthlyQuests: {
     id: string
     subjectId: string
-    questType: string
+    questType: QuestType
     point: number
     score: number
     subjectName: string
@@ -62,7 +64,7 @@ interface AssignQuestListResponse {
 interface AssignQuestHistoryListResponse {
   quests: {
     id: string
-    questType: string
+    questType: QuestType
     interestName: string
     content: string
     proofUrl: string
@@ -83,7 +85,7 @@ interface CreateRepeatQuestResponse {
 interface RepeatQuestListResponse {
   repeatQuests: {
     id: string
-    questType: string
+    questType: QuestType
     interestName: string
     content: string
     displayOrder: number

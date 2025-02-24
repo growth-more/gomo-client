@@ -1,25 +1,35 @@
 import { useAssignQuest } from '@/api/hooks'
 import { useWindowStore } from '@/stores'
 import { alpha, Button, Stack, Tab, Tabs, TextField } from '@mui/material'
-import { QUEST_CREATE_PAGE_ID } from '@/constants/window-view'
+import { QUEST_CREATE_PAGE_ID, UPDATE_QUEST_PAGE_ID } from '@/constants/window-view'
 import { useQuestTab } from './hooks'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { AssignQuest } from '@/entities'
 
 // TODO: react-hook-form 적용
 // TODO: 관심사 연결
 
-export function QuestCreatePage() {
-  const { createQuest } = useAssignQuest()
+interface QuestEditPageProps {
+  prevData?: AssignQuest
+}
+
+export function QuestEditPage({ prevData }: QuestEditPageProps) {
+  const { createQuest, updateQuest } = useAssignQuest()
   const { removeView } = useWindowStore()
-  const { tab: questType, tabs, tabHandler } = useQuestTab()
+  const { tab: questType, tabs, tabHandler, setTab } = useQuestTab()
 
   const [content, setContent] = useState('')
 
+  const buttonText = prevData ? '퀘스트 수정' : '퀘스트 추가'
+
   const closeHandler = () => {
-    removeView(QUEST_CREATE_PAGE_ID)
+    removeView(prevData ? UPDATE_QUEST_PAGE_ID(prevData.id) : QUEST_CREATE_PAGE_ID)
   }
 
-  const submitHandler = () => {
+  const createHandler = () => {
+    if (prevData) {
+      return
+    }
     createQuest(
       {
         body: {
@@ -32,6 +42,32 @@ export function QuestCreatePage() {
       { onSuccess: () => closeHandler() }
     )
   }
+
+  const updateHandler = () => {
+    if (!prevData) {
+      return
+    }
+    updateQuest(
+      {
+        body: {
+          subjectId: '1',
+          subjectName: '1',
+          questType,
+          content,
+        },
+        id: prevData.id,
+      },
+      { onSuccess: () => closeHandler() }
+    )
+  }
+
+  useEffect(() => {
+    if (!prevData) {
+      return
+    }
+    setContent(prevData.content)
+    setTab(prevData.questType)
+  }, [prevData, setTab])
 
   return (
     <Stack height={1}>
@@ -56,8 +92,12 @@ export function QuestCreatePage() {
           onChange={(e) => setContent(e.target.value)}
         />
 
-        <Button variant="contained" color="primary" onClick={submitHandler}>
-          퀘스트 추가
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={prevData ? updateHandler : createHandler}
+        >
+          {buttonText}
         </Button>
       </Stack>
     </Stack>

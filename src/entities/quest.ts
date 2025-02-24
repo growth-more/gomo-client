@@ -1,7 +1,7 @@
 interface AssignQuest {
   id: string
   subjectId: string
-  questType: string
+  questType: QuestType
   point: number
   score: number
   subjectName: string

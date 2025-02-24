@@ -5,10 +5,12 @@ import { QuestScore } from './quest-score'
 import { RefObject, useCallback, useMemo } from 'react'
 import { useAssignQuest } from '@/api/hooks'
 import { Reorder } from 'motion/react'
+import { useWindowStore } from '@/stores'
+import { UPDATE_QUEST_PAGE_ID, UPDATE_QUEST_PAGE_VIEW } from '@/constants/window-view'
 
 interface QuestListProps {
   quest: AssignQuest
-  questType: string
+  questTypeLabel: string
   onDragStart: () => void
   onDragEnd: () => void
   constraints: RefObject<HTMLDivElement>
@@ -16,12 +18,13 @@ interface QuestListProps {
 
 export function QuestList({
   quest,
-  questType,
+  questTypeLabel,
   onDragStart,
   onDragEnd,
   constraints,
 }: QuestListProps) {
   const { completeQuest, confirmQuest, deleteQuest } = useAssignQuest()
+  const { addViewWithId } = useWindowStore()
 
   const completeHandler = useCallback(() => {
     completeQuest({ id: quest.id, body: { proof: '' } })
@@ -34,6 +37,10 @@ export function QuestList({
   const deleteHandler = useCallback(() => {
     deleteQuest({ id: quest.id })
   }, [deleteQuest, quest.id])
+
+  const editHandler = useCallback(() => {
+    addViewWithId(UPDATE_QUEST_PAGE_ID(quest.id), UPDATE_QUEST_PAGE_VIEW(quest))
+  }, [addViewWithId, quest])
 
   const actionRender = useMemo(() => {
     if (quest.completed) {
@@ -57,6 +64,11 @@ export function QuestList({
             <Iconify icon="material-symbols:close-rounded" />
           </IconButton>
         </Tooltip>
+        <Tooltip title="퀘스트 수정">
+          <IconButton size="small" onClick={editHandler}>
+            <Iconify icon="lets-icons:edit" />
+          </IconButton>
+        </Tooltip>
         <Tooltip title="퀘스트 수락">
           <IconButton size="small" onClick={confirmHandler}>
             <Iconify icon="mdi:check" />
@@ -64,7 +76,7 @@ export function QuestList({
         </Tooltip>
       </>
     )
-  }, [quest, completeHandler, confirmHandler, deleteHandler])
+  }, [quest, completeHandler, confirmHandler, deleteHandler, editHandler])
 
   return (
     <Stack
@@ -96,7 +108,7 @@ export function QuestList({
             bgcolor={(theme) => alpha(theme.palette.common.black, 0.3)}
             borderRadius={1}
           >
-            {questType}
+            {questTypeLabel}
           </Typography>
         </Stack>
 

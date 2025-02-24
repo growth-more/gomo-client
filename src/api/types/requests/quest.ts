@@ -22,13 +22,14 @@ interface CreateAssignQuestRequest {
 }
 
 interface UpdateAssignQuestRequest {
-  interestId: string
-  questType: string
+  subjectId: string
+  subjectName: string
+  questType: QuestType
   content: string
 }
 
 interface UpdateAssignQuestOrderRequest {
-  questType: string
+  questType: QuestType
   updatedOrders: number[]
 }
 
@@ -42,18 +43,18 @@ interface CompleteAssignQuestRequest {
 
 interface CreateRepeatQuestRequest {
   interestId: string
-  questType: string
+  questType: QuestType
   content: string
 }
 
 interface UpdateRepeatQuestRequest {
   interestId: string
-  questType: string
+  questType: QuestType
   content: string
 }
 
 interface UpdateRepeatQuestOrderRequest {
-  questType: string
+  questType: QuestType
   updatedOrders: number[]
 }
 

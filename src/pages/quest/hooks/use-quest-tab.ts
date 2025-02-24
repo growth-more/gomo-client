@@ -9,5 +9,5 @@ export function useQuestTab() {
     setTab(tab)
   }
 
-  return { tab, tabHandler, tabs: QUEST_TYPE_LABEL }
+  return { tab, tabHandler, tabs: QUEST_TYPE_LABEL, setTab }
 }
