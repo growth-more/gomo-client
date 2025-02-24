@@ -1,28 +1,13 @@
+import { QUEST_TYPE_LABEL } from '@/constants'
+import { QuestType } from '@/entities'
 import { SyntheticEvent, useState } from 'react'
 
-const TABS = [
-  {
-    label: '일일',
-    value: 'DAILY',
-  },
-  {
-    label: '주간',
-    value: 'WEEKLY',
-  },
-  {
-    label: '월간',
-    value: 'MONTHLY',
-  },
-] as const
-
-type TabType = (typeof TABS)[number]['value']
-
 export function useQuestTab() {
-  const [tab, setTab] = useState<TabType>('DAILY')
+  const [tab, setTab] = useState<QuestType>('DAILY')
 
-  const tabHandler = (e: SyntheticEvent, tab: TabType) => {
+  const tabHandler = (e: SyntheticEvent, tab: QuestType) => {
     setTab(tab)
   }
 
-  return { tab, tabHandler, tabs: TABS }
+  return { tab, tabHandler, tabs: QUEST_TYPE_LABEL }
 }

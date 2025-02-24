@@ -1,12 +1,17 @@
 import { useAssignQuest } from '@/api/hooks'
-import { alpha, Divider, IconButton, Stack, Tab, Tabs, Tooltip } from '@mui/material'
+import { alpha, Button, Divider, IconButton, Stack, Tab, Tabs, Tooltip } from '@mui/material'
 import { ScrollContainer } from '@/components/scrollbar'
 import { InvisibleContainer } from '@/components/container'
 import { Iconify } from '@/components/iconify'
 import { useWindowStore } from '@/stores'
 import { QuestSection } from '@/pages/quest/components'
 import { useQuestTab } from '@/pages/quest/hooks'
-import { QUEST_SETTING_PAGE_ID, QUEST_SETTING_PAGE_VIEW } from '@/pages/quest/constants'
+import {
+  QUEST_CREATE_PAGE_ID,
+  QUEST_CREATE_PAGE_VIEW,
+  QUEST_SETTING_PAGE_ID,
+  QUEST_SETTING_PAGE_VIEW,
+} from '@/constants/window-view'
 
 export function QuestPage() {
   const { daily, weekly, monthly } = useAssignQuest()
@@ -15,6 +20,10 @@ export function QuestPage() {
 
   const questSettingPageHandler = () => {
     addViewWithId(QUEST_SETTING_PAGE_ID, QUEST_SETTING_PAGE_VIEW)
+  }
+
+  const questCreatePageHandler = () => {
+    addViewWithId(QUEST_CREATE_PAGE_ID, QUEST_CREATE_PAGE_VIEW)
   }
 
   return (
@@ -54,7 +63,11 @@ export function QuestPage() {
         justifyContent="flex-end"
         alignItems="center"
         bgcolor={(theme) => alpha(theme.palette.background.paper, 0.4)}
+        spacing={1}
       >
+        <Button fullWidth onClick={questCreatePageHandler}>
+          퀘스트 만들기
+        </Button>
         <Tooltip title="퀘스트 설정">
           <IconButton size="small" onClick={questSettingPageHandler}>
             <Iconify icon="solar:settings-bold" />

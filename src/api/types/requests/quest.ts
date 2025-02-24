@@ -1,3 +1,5 @@
+import { QuestType } from '@/entities'
+
 // ===================================
 // QUEST
 // ===================================
@@ -13,9 +15,9 @@ interface CreateQuestRequest {
 // ===================================
 
 interface CreateAssignQuestRequest {
-  memberId: string
-  interestId: string
-  questType: string
+  subjectId: string
+  subjectName: string
+  questType: QuestType
   content: string
 }
 

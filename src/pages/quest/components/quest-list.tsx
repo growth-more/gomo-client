@@ -42,11 +42,6 @@ export function QuestList({
     if (quest.confirmed) {
       return (
         <>
-          <Tooltip title="퀘스트 삭제">
-            <IconButton size="small" onClick={deleteHandler}>
-              <Iconify icon="material-symbols:close-rounded" />
-            </IconButton>
-          </Tooltip>
           <Tooltip title="퀘스트 완료">
             <IconButton size="small" onClick={completeHandler}>
               <Iconify icon="mdi:check" />

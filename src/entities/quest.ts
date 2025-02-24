@@ -25,4 +25,6 @@ interface QuestProperty {
   monthlyThreshold: number
 }
 
-export type { AssignQuest, OrganizedAssignQuest, QuestProperty }
+type QuestType = 'DAILY' | 'WEEKLY' | 'MONTHLY'
+
+export type { AssignQuest, OrganizedAssignQuest, QuestProperty, QuestType }
