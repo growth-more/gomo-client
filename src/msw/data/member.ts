@@ -1,4 +1,4 @@
-import { ProfileResponse } from '@/api/types'
+import { ProfileResponse, QuestPropertyResponse } from '@/api/types'
 
 const profile: ProfileResponse = {
   id: 'a10581ce-d721-11ef-a8a5-2508e2a6438b',
@@ -15,6 +15,13 @@ const profile: ProfileResponse = {
   signUpDateTime: new Date('2025-01-20T20:36:37.591469'),
 }
 
+const questProperty: QuestPropertyResponse = {
+  dailyThreshold: 7,
+  weeklyThreshold: 11,
+  monthlyThreshold: 23,
+}
+
 export const member = {
   profile,
+  questProperty,
 }

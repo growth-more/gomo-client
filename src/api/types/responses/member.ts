@@ -41,7 +41,7 @@ interface UpdateProfileImageResponse {
 interface QuestPropertyResponse {
   dailyThreshold: number
   weeklyThreshold: number
-  monthlyMax: number
+  monthlyThreshold: number
 }
 
 export type {

@@ -1,16 +1,17 @@
-import { AxiosResponse, isAxiosError } from 'axios'
+import { AxiosError, AxiosResponse, isAxiosError } from 'axios'
 
 interface AxiosStatusListener<T, U> {
   onSuccess: (data: T) => U
   on200?: (data: T) => U
   on201?: (data: T) => U
   on204?: (data: T) => U
-  on400?: (data: T) => U
-  on401?: (data: T) => U
-  on403?: (data: T) => U
-  on404?: (data: T) => U
-  on409?: (data: T) => U
-  on500?: (data: T) => U
+  on400?: (data: AxiosError) => U
+  on401?: (data: AxiosError) => U
+  on403?: (data: AxiosError) => U
+  on404?: (data: AxiosError) => U
+  on409?: (data: AxiosError) => U
+  on422?: (data: AxiosError) => U
+  on500?: (data: AxiosError) => U
 }
 
 export async function axiosStatus<T, U>(
@@ -52,6 +53,9 @@ export async function axiosStatus<T, U>(
     }
     if (error.response.status === 409 && listener.on409) {
       return listener.on409(error.response.data)
+    }
+    if (error.response.status === 422 && listener.on422) {
+      return listener.on422(error.response.data)
     }
     if (error.response.status === 500 && listener.on500) {
       return listener.on500(error.response.data)

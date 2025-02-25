@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { alpha, Box, Stack } from '@mui/material'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Rnd } from 'react-rnd'
 import { WindowHeader } from './window-header'
@@ -14,15 +14,21 @@ import {
   MANAGER_PADDING,
 } from './constant'
 import { useWindowStore } from '@/stores'
+import { motion } from 'motion/react'
 
 export function WindowView({
   id,
   title,
   resizable,
+  resizeOption,
   closable,
   defaultPosition,
   defaultSize,
   children,
+  minWidth,
+  minHeight,
+  maxWidth,
+  maxHeight,
 }: WindowViewProps) {
   const { removeView, shiftToTop } = useWindowStore()
 
@@ -81,10 +87,12 @@ export function WindowView({
     <Rnd
       ref={rnd}
       bounds={DEFAULT_MANAGER_SELECTOR}
-      minWidth={DEFAULT_MIN_WIDTH}
-      minHeight={DEFAULT_MIN_HEIGHT}
+      minWidth={minWidth ?? DEFAULT_MIN_WIDTH}
+      minHeight={minHeight ?? DEFAULT_MIN_HEIGHT}
+      maxWidth={maxWidth}
+      maxHeight={maxHeight}
       disableDragging={!draggable.value}
-      enableResizing={resizable ? undefined : DISABLE_RESIZE}
+      enableResizing={resizable ? resizeOption ?? undefined : DISABLE_RESIZE}
       position={position}
       size={size}
       onDragStop={(_, d) => setPosition({ x: d.x, y: d.y })}
@@ -93,15 +101,20 @@ export function WindowView({
         setPosition(position)
       }}
     >
-      <Box
+      <Stack
         width={1}
         height={1}
-        bgcolor={(theme) => theme.palette.background.paper}
+        bgcolor={(theme) => alpha(theme.palette.background.paper, 0.5)}
         overflow="hidden"
         borderRadius={2}
         border={1}
         borderColor="divider"
         onMouseDown={shiftToTopHandler}
+        sx={{ backdropFilter: 'blur(15px)' }}
+        component={motion.div}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, height: 0 }}
       >
         <WindowHeader
           title={title}
@@ -110,8 +123,10 @@ export function WindowView({
           closable={closable}
           onClose={closeHandler}
         />
-        <Box p={2}>{children}</Box>
-      </Box>
+        <Box width={1} flex={1} overflow="hidden">
+          {children}
+        </Box>
+      </Stack>
     </Rnd>
   )
 }

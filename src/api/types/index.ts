@@ -19,3 +19,9 @@ export type * from './responses/quest'
 export type * from './responses/streak'
 export type * from './responses/survey'
 export type * from './responses/auth'
+
+// ===================================
+// FETCH REQUESTS
+// ===================================
+
+export type * from './fetches/requests/quest'
