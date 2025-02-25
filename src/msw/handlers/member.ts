@@ -1,10 +1,11 @@
 import { endpoints } from '@/api'
 import { ProfileResponse, QuestPropertyResponse, UpdateQuestPropertyRequest } from '@/api/types'
 import { mock } from '@/msw/data'
-import { http, HttpResponse } from 'msw'
+import { delay, http, HttpResponse } from 'msw'
 
 export const member = [
   http.get<never, never, ProfileResponse>(endpoints.member.profile, async () => {
+    // await delay(10000) // 딜레이 스켈레톤
     return HttpResponse.json(mock.member.profile, { status: 200 })
   }),
 
