@@ -1,16 +1,22 @@
 import { Box, IconButton, Stack, Tooltip, Typography, TypographyProps } from '@mui/material'
-import { Iconify } from '../iconify'
+import { Iconify } from '../../iconify'
 import { useBoolean } from '@/hooks'
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
-interface EditableTextProps extends TypographyProps {
+interface EditableTextLegacyProps extends TypographyProps {
   text: string
   onEdit?: (value: string) => void
   disableEdit?: boolean
   tooltip?: string
 }
 
-export function EditableText({ onEdit, text, disableEdit, tooltip, ...props }: EditableTextProps) {
+export function EditableTextLegacy({
+  onEdit,
+  text,
+  disableEdit,
+  tooltip,
+  ...props
+}: EditableTextLegacyProps) {
   const isHovered = useBoolean()
   const isEditing = useBoolean()
 

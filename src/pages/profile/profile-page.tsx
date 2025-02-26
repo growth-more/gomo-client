@@ -1,72 +1,125 @@
-import { Box, Stack, Typography } from '@mui/material'
-import { Avatar } from '@/pages/profile/components'
+import { alpha, Box, Divider, IconButton, Stack, Tooltip } from '@mui/material'
 import { useProfile } from '@/api/hooks'
-import { EditableText } from '@/components/input'
 import { Iconify } from '@/components/iconify'
 import { ScrollContainer } from '@/components/scrollbar'
+import { Editable } from '@/components/editable'
+import { useBoolean, useInnerValue } from '@/hooks'
+import { useEffect } from 'react'
 
 export function ProfilePage() {
   const { profile } = useProfile()
 
+  const editable = useBoolean()
+
+  const profileName = useInnerValue(profile?.name)
+  const profileHandle = useInnerValue(profile?.handle)
+  const profileMotto = useInnerValue(profile?.motto)
+  const profileImg = useInnerValue(profile?.profileImageUrl)
+
+  const profilePreviewHandler = (file: File) => {
+    profileImg.setValue(URL.createObjectURL(file))
+  }
+
+  useEffect(() => {
+    if (!editable.value) {
+      profileImg.reset()
+      profileName.reset()
+      profileHandle.reset()
+      profileMotto.reset()
+    }
+  }, [editable, profileImg, profileName, profileHandle, profileMotto])
+
   if (!profile) {
-    return null
+    return null // TODO: 로딩 컴포넌트 추가
   }
 
   return (
-    <Stack p={1} height={1}>
+    <Stack height={1}>
       <ScrollContainer sx={{ overflowX: 'hidden' }}>
-        <Box
-          width={1}
-          sx={{ aspectRatio: 2.5 }}
-          border={1}
-          borderColor="divider"
-          borderRadius={2}
-          component="img"
-          src="./img/profile-bg.jpg"
-        />
-        <Stack alignItems="center" spacing={1} sx={{ translate: '0 -35px' }}>
-          <Avatar img={profile.profileImageUrl} />
-          <Stack alignItems="center" spacing={0.5}>
-            <EditableText
-              fontSize={18}
-              fontWeight={600}
-              color="text.secondary"
-              text={profile.name}
-              tooltip="이름 수정"
+        <Stack p={1}>
+          <Box
+            width={1}
+            sx={{ aspectRatio: 2.5 }}
+            border={1}
+            borderColor="divider"
+            borderRadius={2}
+            component="img"
+            src="./img/profile-bg.jpg"
+          />
+          <Stack alignItems="center" spacing={1} sx={{ translate: '0 -35px' }}>
+            <Editable.Avatar
+              img={profileImg.value}
+              editable={editable.value}
+              onEdit={profilePreviewHandler}
             />
-            <EditableText
-              fontSize={12}
-              fontWeight={500}
-              color="text.secondary"
-              text={profile.handle}
-              tooltip="핸들 수정"
-            />
-          </Stack>
-          <Stack width={1} alignItems="center" spacing={0.5}>
-            <Iconify
-              icon="flowbite:quote-solid"
-              width={15}
-              sx={{
-                color: 'text.secondary',
-              }}
-            />
-            <Typography
-              width={1}
-              fontSize={14}
-              fontWeight={500}
-              color="text.secondary"
-              textAlign="center"
-              textOverflow="ellipsis"
-              overflow="hidden"
-              noWrap
-            >
-              {profile.motto}
-            </Typography>
+            <Stack alignItems="center" spacing={0.5} width={1}>
+              <Editable.Text
+                fontSize={18}
+                fontWeight={600}
+                color="text.secondary"
+                editable={editable.value}
+                value={profileName.value}
+                onEdit={profileName.setValue}
+              />
+              <Editable.Text
+                fontSize={12}
+                fontWeight={500}
+                color="text.secondary"
+                editable={editable.value}
+                value={profileHandle.value}
+                onEdit={profileHandle.setValue}
+              />
+            </Stack>
+            <Stack width={1} alignItems="center" spacing={0.5}>
+              <Iconify icon="flowbite:quote-solid" width={15} sx={{ color: 'text.secondary' }} />
+              <Editable.Text
+                width={1}
+                editable={editable.value}
+                value={profileMotto.value}
+                onEdit={profileMotto.setValue}
+                fontSize={14}
+                fontWeight={500}
+                color="text.secondary"
+                textAlign="center"
+                textOverflow="ellipsis"
+                overflow="hidden"
+                noWrap
+              />
+            </Stack>
           </Stack>
         </Stack>
-
-        {/* <Stack width={1} flex={1} bgcolor="divider" borderRadius={2}></Stack> */}
       </ScrollContainer>
+
+      <Divider />
+      <Stack
+        direction="row"
+        p={1}
+        justifyContent="flex-end"
+        alignItems="center"
+        bgcolor={(theme) => alpha(theme.palette.background.paper, 0.4)}
+        spacing={1}
+      >
+        {editable.value ? (
+          <>
+            <Tooltip title="프로필 수정 취소">
+              <IconButton size="small" onClick={editable.onFalse}>
+                <Iconify icon="material-symbols:close-rounded" />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="프로필 수정 완료">
+              <IconButton size="small" onClick={editable.onFalse}>
+                <Iconify icon="mdi:check" />
+              </IconButton>
+            </Tooltip>
+          </>
+        ) : (
+          <Tooltip title="프로필 수정">
+            <IconButton size="small" onClick={editable.onTrue}>
+              <Iconify icon="lets-icons:edit" />
+            </IconButton>
+          </Tooltip>
+        )}
+      </Stack>
     </Stack>
   )
 }
