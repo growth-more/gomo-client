@@ -25,3 +25,4 @@ export type * from './responses/auth'
 // ===================================
 
 export type * from './fetches/requests/quest'
+export type * from './fetches/requests/member'

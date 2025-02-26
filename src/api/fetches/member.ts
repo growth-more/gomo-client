@@ -1,24 +1,28 @@
 import { AXIOS, endpoints, axiosStatus } from '@/api'
 import {
-  CreateEmailAuthCodeRequest,
+  CheckHandleDuplicateFetchRequest,
+  CreateEmailAuthCodeFetchRequest,
   CreateEmailAuthCodeResponse,
-  CreateMemberRequest,
+  CreateMemberFetchRequest,
   CreateMemberResponse,
   ProfileResponse,
   QuestPropertyResponse,
-  UpdateHandleRequest,
-  UpdateMemberRequest,
-  UpdatePasswordRequest,
-  UpdateProfileImageRequest,
+  UpdateHandleFetchRequest,
+  UpdateMemberFetchRequest,
+  UpdatePasswordFetchRequest,
+  UpdateProfileImageFetchRequest,
   UpdateProfileImageResponse,
-  UpdateQuestPropertyRequest,
+  UpdateQuestPropertyFetchRequest,
 } from '@/api/types'
 
 export const member = {
-  create: async (request: CreateMemberRequest): Promise<CreateMemberResponse> => {
-    return axiosStatus(() => AXIOS.post<CreateMemberResponse>(endpoints.member.create, request), {
-      onSuccess: (data) => data,
-    })
+  create: async (props: CreateMemberFetchRequest): Promise<CreateMemberResponse> => {
+    return axiosStatus(
+      () => AXIOS.post<CreateMemberResponse>(endpoints.member.create, props.body),
+      {
+        onSuccess: (data) => data,
+      }
+    )
   },
 
   profile: async (): Promise<ProfileResponse> => {
@@ -27,8 +31,8 @@ export const member = {
     })
   },
 
-  update: async (request: UpdateMemberRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.member.update, request), {
+  update: async (props: UpdateMemberFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.member.update, props.body), {
       onSuccess: (data) => data,
     })
   },
@@ -40,34 +44,37 @@ export const member = {
   },
 
   createEmailCode: async (
-    request: CreateEmailAuthCodeRequest
+    props: CreateEmailAuthCodeFetchRequest
   ): Promise<CreateEmailAuthCodeResponse> => {
     return axiosStatus(
-      () => AXIOS.post<CreateEmailAuthCodeResponse>(endpoints.member.createEmailCode, request),
+      () => AXIOS.post<CreateEmailAuthCodeResponse>(endpoints.member.createEmailCode, props.body),
       {
         onSuccess: (data) => data,
       }
     )
   },
 
-  checkHandleDuplicate: async (): Promise<void> => {
-    return axiosStatus(() => AXIOS.post(endpoints.member.checkHandleDuplicate), {
-      onSuccess: (data) => data,
-    })
+  checkHandleDuplicate: async (props: CheckHandleDuplicateFetchRequest): Promise<void> => {
+    return axiosStatus(
+      () => AXIOS.post(`${endpoints.member.checkHandleDuplicate}?handle=${props.handle}`),
+      {
+        onSuccess: (data) => data,
+      }
+    )
   },
 
-  updateHandle: async (request: UpdateHandleRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.member.updateHandle, request), {
+  updateHandle: async (props: UpdateHandleFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.member.updateHandle, props.body), {
       onSuccess: (data) => data,
     })
   },
 
   updateProfileImage: async (
-    request: UpdateProfileImageRequest
+    props: UpdateProfileImageFetchRequest
   ): Promise<UpdateProfileImageResponse> => {
     return axiosStatus(
       () =>
-        AXIOS.put(endpoints.member.updateProfileImage, request, {
+        AXIOS.put(endpoints.member.updateProfileImage, props.body, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -78,8 +85,8 @@ export const member = {
     )
   },
 
-  updatePassword: async (request: UpdatePasswordRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.member.updatePassword, request), {
+  updatePassword: async (props: UpdatePasswordFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.member.updatePassword, props.body), {
       onSuccess: (data) => data,
     })
   },
@@ -90,8 +97,8 @@ export const member = {
     })
   },
 
-  updateQuestProperty: async (request: UpdateQuestPropertyRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.member.updateQuestProperty, request), {
+  updateQuestProperty: async (props: UpdateQuestPropertyFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.member.updateQuestProperty, props.body), {
       onSuccess: (data) => data,
     })
   },
