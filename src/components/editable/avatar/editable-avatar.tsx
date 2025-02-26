@@ -66,12 +66,7 @@ export function EditableAvatar({ img, editable, onEdit }: EditableAvatarProps) {
           alignItems="center"
           borderRadius="100%"
           position="absolute"
-          bgcolor={(theme) => alpha(theme.palette.common.black, 0.3)}
-          // sx={{
-          //   '&:hover': {
-          //     bgcolor: (theme) => alpha(theme.palette.common.black, 0.6),
-          //   },
-          // }}
+          bgcolor={(theme) => alpha(theme.palette.common.black, 0.1)}
         >
           <Box
             component={motion.div}

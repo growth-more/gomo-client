@@ -65,9 +65,17 @@ export const member = {
   updateProfileImage: async (
     request: UpdateProfileImageRequest
   ): Promise<UpdateProfileImageResponse> => {
-    return axiosStatus(() => AXIOS.put(endpoints.member.updateProfileImage, request), {
-      onSuccess: (data) => data,
-    })
+    return axiosStatus(
+      () =>
+        AXIOS.put(endpoints.member.updateProfileImage, request, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
+      {
+        onSuccess: (data) => data,
+      }
+    )
   },
 
   updatePassword: async (request: UpdatePasswordRequest): Promise<void> => {
