@@ -1,2 +1,2 @@
 export * from './use-assign-quest'
-export * from './use-member-profile'
+export * from './use-profile'

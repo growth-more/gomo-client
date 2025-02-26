@@ -2,7 +2,7 @@ import { QuestType } from '@/entities'
 
 const QUEST_TYPE: QuestType[] = ['DAILY', 'WEEKLY', 'MONTHLY'] as const
 
-const QUEST_TYPE_LABEL: { value: QuestType; label: string }[] = [
+const QUEST_TYPE_LABEL = [
   {
     value: 'DAILY',
     label: '일일',

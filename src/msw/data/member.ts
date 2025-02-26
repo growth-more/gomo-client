@@ -2,10 +2,10 @@ import { ProfileResponse, QuestPropertyResponse } from '@/api/types'
 
 const profile: ProfileResponse = {
   id: 'a10581ce-d721-11ef-a8a5-2508e2a6438b',
-  email: 'gomotest@naver.com',
-  handle: '@GOMOTEST',
-  name: 'gomotest',
-  motto: 'gomotest fighting!',
+  email: 'gomo@naver.com',
+  handle: '@gorani',
+  name: '쓸쓸한고라니',
+  motto: '매일매일 반복하고 또 반복하자!',
   availablePoints: 1660,
   profileImageUrl: 'https://mini-cloud/gomotest-profile',
   loginProvider: 'EMAIL',
