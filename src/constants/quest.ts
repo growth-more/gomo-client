@@ -2,7 +2,7 @@ import { QuestType } from '@/entities'
 
 const QUEST_TYPE: QuestType[] = ['DAILY', 'WEEKLY', 'MONTHLY'] as const
 
-const QUEST_TYPE_LABEL = [
+const QUEST_TYPE_WITH_LABEL = [
   {
     value: 'DAILY',
     label: '일일',
@@ -17,4 +17,10 @@ const QUEST_TYPE_LABEL = [
   },
 ] as const
 
-export { QUEST_TYPE, QUEST_TYPE_LABEL }
+const QUEST_TYPE_LABEL = {
+  DAILY: '일일',
+  WEEKLY: '주간',
+  MONTHLY: '월간',
+}
+
+export { QUEST_TYPE, QUEST_TYPE_LABEL, QUEST_TYPE_WITH_LABEL }

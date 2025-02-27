@@ -23,7 +23,7 @@ export function DateSelector({ year, month, onChange }: DateSelectorProps) {
       border={1}
       borderColor="divider"
     >
-      <ScrollContainer>
+      <ScrollContainer sx={{ position: 'relative' }}>
         <Box
           component={motion.div}
           p={0.4}
@@ -45,7 +45,7 @@ export function DateSelector({ year, month, onChange }: DateSelectorProps) {
             borderRadius={1}
           />
         </Box>
-        <Stack position="relative">
+        <Stack>
           {_.range(END_YEAR, START_YEAR - 1, -1).map((y, i) => (
             <Button
               key={i}
@@ -66,8 +66,8 @@ export function DateSelector({ year, month, onChange }: DateSelectorProps) {
 
       <Divider orientation="vertical" />
 
-      <ScrollContainer>
-        <Stack position="relative">
+      <ScrollContainer sx={{ position: 'relative' }}>
+        <Stack>
           <Box
             component={motion.div}
             p={0.4}
