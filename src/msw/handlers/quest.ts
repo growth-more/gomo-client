@@ -1,5 +1,6 @@
 import { endpoints } from '@/api'
 import {
+  AssignQuestHistoryListResponse,
   AssignQuestListResponse,
   CompleteAssignQuestRequest,
   CreateAssignQuestRequest,
@@ -51,6 +52,13 @@ export const quest = [
     endpoints.quest.updateAssignQuest,
     async () => {
       return new HttpResponse(null, { status: 204 })
+    }
+  ),
+
+  http.get<never, never, AssignQuestHistoryListResponse>(
+    endpoints.quest.getAssignQuestHistory,
+    async () => {
+      return HttpResponse.json(mock.quest.assignQuestHistory, { status: 200 })
     }
   ),
 ]

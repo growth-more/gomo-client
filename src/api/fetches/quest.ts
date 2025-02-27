@@ -78,7 +78,7 @@ export const quest = {
     return axiosStatus(
       () =>
         AXIOS.get<AssignQuestHistoryListResponse>(
-          `${endpoints.quest.getHistoryAssignQuest}?year=${params.year}&month=${params.month}`
+          `${endpoints.quest.getAssignQuestHistory}?year=${params.year}&month=${params.month}`
         ),
       {
         onSuccess: (data) => data,
