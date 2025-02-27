@@ -62,15 +62,14 @@ interface AssignQuestListResponse {
 }
 
 interface AssignQuestHistoryListResponse {
-  quests: {
+  assignQuests: {
     id: string
     questType: QuestType
-    interestName: string
+    subjectName: string
     content: string
-    proofUrl: string
-    isCompleted: boolean
-    completedDateTime: Date
-    weekOfYear: number
+    proof: string
+    completedDateTime: Date | null
+    completed: boolean
   }[]
 }
 

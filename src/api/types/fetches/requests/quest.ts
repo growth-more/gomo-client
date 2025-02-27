@@ -47,6 +47,11 @@ interface DeleteAssignQuestFetchRequest {
   id: string
 }
 
+interface AssignQuestHistoryFetchRequest {
+  year: number
+  month: number
+}
+
 // ===================================
 // REPEAT QUEST
 // ===================================
@@ -69,6 +74,7 @@ interface DeleteRepeatQuestFetchRequest {
 }
 
 export type {
+  AssignQuestHistoryFetchRequest,
   CompleteAssignQuestFetchRequest,
   ConfirmAssignQuestFetchRequest,
   CreateAssignQuestFetchRequest,

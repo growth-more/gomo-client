@@ -1,5 +1,6 @@
 import { AXIOS, endpoints, axiosStatus } from '@/api'
 import {
+  AssignQuestHistoryFetchRequest,
   AssignQuestHistoryListResponse,
   AssignQuestListResponse,
   CompleteAssignQuestFetchRequest,
@@ -71,9 +72,14 @@ export const quest = {
     )
   },
 
-  getAssignQuestHistory: async (): Promise<AssignQuestHistoryListResponse> => {
+  getAssignQuestHistory: async (
+    params: AssignQuestHistoryFetchRequest
+  ): Promise<AssignQuestHistoryListResponse> => {
     return axiosStatus(
-      () => AXIOS.get<AssignQuestHistoryListResponse>(endpoints.quest.getHistoryAssignQuest),
+      () =>
+        AXIOS.get<AssignQuestHistoryListResponse>(
+          `${endpoints.quest.getHistoryAssignQuest}?year=${params.year}&month=${params.month}`
+        ),
       {
         onSuccess: (data) => data,
       }

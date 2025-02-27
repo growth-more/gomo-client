@@ -1,4 +1,4 @@
-import { AssignQuestListResponse } from '@/api/types'
+import { AssignQuestHistoryListResponse, AssignQuestListResponse } from '@/api/types'
 
 const assignQuest: AssignQuestListResponse = {
   dailyQuests: [
@@ -191,6 +191,39 @@ const assignQuest: AssignQuestListResponse = {
   ],
 }
 
+const assignQuestHistory: AssignQuestHistoryListResponse = {
+  assignQuests: [
+    {
+      id: '0194cbd7-8689-74ec-bd46-dc855f493c3b',
+      questType: 'DAILY',
+      subjectName: 'Java',
+      content: 'daily participating quest',
+      proof: 'no_proof',
+      completedDateTime: null,
+      completed: false,
+    },
+    {
+      id: '0194cbda-6135-79fc-b659-ebaac3684761',
+      questType: 'WEEKLY',
+      subjectName: 'Java',
+      content: 'weekly participating quest',
+      proof: 'no_proof',
+      completedDateTime: null,
+      completed: false,
+    },
+    {
+      id: '0194cbeb-345e-74a6-9199-07bdb402ea36',
+      questType: 'MONTHLY',
+      subjectName: 'Java',
+      content: 'monthly participating quest',
+      proof: 'no_proof',
+      completedDateTime: null,
+      completed: false,
+    },
+  ],
+}
+
 export const quest = {
   assignQuest,
+  assignQuestHistory,
 }
