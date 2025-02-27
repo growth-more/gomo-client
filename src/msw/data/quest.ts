@@ -23,7 +23,8 @@ const assignQuest: AssignQuestListResponse = {
       point: 15,
       score: 3,
       subjectName: 'Python',
-      content: '파이썬 함수 5개 만들어보기',
+      content:
+        '매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트',
       proof: 'no_proof',
       startDateTime: new Date('2025-02-18T23:43:42'),
       displayOrder: 2,
