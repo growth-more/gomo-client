@@ -43,15 +43,15 @@ export function QuestPage() {
       <Stack flex={1} spacing={2} sx={{ overflowY: 'auto' }}>
         <ScrollContainer sx={{ p: 1 }}>
           <InvisibleContainer visible={tab === 'DAILY'}>
-            <QuestSection quest={daily} questTypeLabel="일일" />
+            <QuestSection quest={daily} />
           </InvisibleContainer>
 
           <InvisibleContainer visible={tab === 'WEEKLY'}>
-            <QuestSection quest={weekly} questTypeLabel="주간" />
+            <QuestSection quest={weekly} />
           </InvisibleContainer>
 
           <InvisibleContainer visible={tab === 'MONTHLY'}>
-            <QuestSection quest={monthly} questTypeLabel="월간" />
+            <QuestSection quest={monthly} />
           </InvisibleContainer>
         </ScrollContainer>
       </Stack>

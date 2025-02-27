@@ -7,7 +7,7 @@ export const quest = {
   deleteAssignQuestWithId: (id: string) => `/quests/assigns/${id}`,
   updateAssignQuestOrder: '/quests/assigns/orders',
 
-  getHistoryAssignQuest: `/quests/assigns/histories`,
+  getAssignQuestHistory: `/quests/assigns/histories`,
   confirmAssignQuest: `/quests/assigns/:id/confirm`,
   confirmAssignQuestWithId: (id: string) => `/quests/assigns/${id}/confirm`,
   completeAssignQuest: `/quests/assigns/:id/complete`,

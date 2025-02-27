@@ -8,10 +8,9 @@ import { useRef } from 'react'
 
 interface QuestSectionProps {
   quest: OrganizedAssignQuest
-  questTypeLabel: string
 }
 
-export function QuestSection({ quest, questTypeLabel }: QuestSectionProps) {
+export function QuestSection({ quest }: QuestSectionProps) {
   const unconfirmedCollapse = useBoolean(true)
   const confirmedCollapse = useBoolean()
   const completedCollapse = useBoolean()
@@ -44,7 +43,6 @@ export function QuestSection({ quest, questTypeLabel }: QuestSectionProps) {
               <QuestList
                 key={quest.id}
                 quest={quest}
-                questTypeLabel={questTypeLabel}
                 onDragStart={unconfirmedQuest.onDragStart}
                 onDragEnd={unconfirmedQuest.onDragEnd}
                 constraints={unconfirmedRef}
@@ -74,7 +72,6 @@ export function QuestSection({ quest, questTypeLabel }: QuestSectionProps) {
               <QuestList
                 key={quest.id}
                 quest={quest}
-                questTypeLabel={questTypeLabel}
                 onDragStart={confirmedQuest.onDragStart}
                 onDragEnd={confirmedQuest.onDragEnd}
                 constraints={confirmedRef}
@@ -104,7 +101,6 @@ export function QuestSection({ quest, questTypeLabel }: QuestSectionProps) {
               <QuestList
                 key={quest.id}
                 quest={quest}
-                questTypeLabel={questTypeLabel}
                 onDragStart={completedQuest.onDragStart}
                 onDragEnd={completedQuest.onDragEnd}
                 constraints={completedRef}
