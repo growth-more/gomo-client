@@ -8,3 +8,5 @@ export * from './quest/quest-page'
 export * from './quest/quest-setting-page'
 
 export * from './profile/profile-page'
+
+export * from './history/history-page'

@@ -4,3 +4,5 @@ export * from './quest-window-view'
 export * from './quest-update-window-view'
 
 export * from './profile-window-view'
+
+export * from './history-window-view'
