@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
 import { QuestProperty } from '@/entities'
 import { useCallback, useMemo } from 'react'
-import { UpdateQuestPropertyRequest } from '../types'
+import { UpdateQuestPropertyFetchRequest } from '@/api/types'
 
 export function useQuestSetting() {
   const queryClient = useQueryClient()
@@ -20,7 +20,7 @@ export function useQuestSetting() {
   })
 
   const update = useCallback(
-    (request: UpdateQuestPropertyRequest, onSuccess?: () => void, onError?: () => void) => {
+    (request: UpdateQuestPropertyFetchRequest, onSuccess?: () => void, onError?: () => void) => {
       mutate(request, {
         onSuccess: () => onSuccess?.(),
         onError: () => onError?.(),

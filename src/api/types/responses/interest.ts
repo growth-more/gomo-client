@@ -4,12 +4,13 @@
 
 interface InterestResponse {
   interestId: string
-  memberId: string
-  level: number
-  score: number
-  totalScore: number
+  registrantId: string
   name: string
   logoUrl: string
+  level: number
+  score: number
+  scoreThreshold: number
+  totalScore: number
 }
 
 interface InterestListResponse {
@@ -60,14 +61,17 @@ interface CreateMajorInterestResponse {
 interface InterestGraphResponse {
   interests: {
     id: string
+    registrantId: string
     name: string
     logoUrl: string
     level: number
     score: number
+    scoreThreshold: number
     totalScore: number
   }[]
-  edges: {
+  relations: {
     id: string
+    registrantId: string
     parentInterestId: string
     childInterestId: string
   }[]

@@ -16,9 +16,9 @@ import {
 } from '@/api/types'
 
 export const member = {
-  create: async (props: CreateMemberFetchRequest): Promise<CreateMemberResponse> => {
+  create: async (params: CreateMemberFetchRequest): Promise<CreateMemberResponse> => {
     return axiosStatus(
-      () => AXIOS.post<CreateMemberResponse>(endpoints.member.create, props.body),
+      () => AXIOS.post<CreateMemberResponse>(endpoints.member.create, params.body),
       {
         onSuccess: (data) => data,
       }
@@ -31,8 +31,8 @@ export const member = {
     })
   },
 
-  update: async (props: UpdateMemberFetchRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.member.update, props.body), {
+  update: async (params: UpdateMemberFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.member.update, params.body), {
       onSuccess: (data) => data,
     })
   },
@@ -44,37 +44,37 @@ export const member = {
   },
 
   createEmailCode: async (
-    props: CreateEmailAuthCodeFetchRequest
+    params: CreateEmailAuthCodeFetchRequest
   ): Promise<CreateEmailAuthCodeResponse> => {
     return axiosStatus(
-      () => AXIOS.post<CreateEmailAuthCodeResponse>(endpoints.member.createEmailCode, props.body),
+      () => AXIOS.post<CreateEmailAuthCodeResponse>(endpoints.member.createEmailCode, params.body),
       {
         onSuccess: (data) => data,
       }
     )
   },
 
-  checkHandleDuplicate: async (props: CheckHandleDuplicateFetchRequest): Promise<void> => {
+  checkHandleDuplicate: async (params: CheckHandleDuplicateFetchRequest): Promise<void> => {
     return axiosStatus(
-      () => AXIOS.post(`${endpoints.member.checkHandleDuplicate}?handle=${props.handle}`),
+      () => AXIOS.post(`${endpoints.member.checkHandleDuplicate}?handle=${params.handle}`),
       {
         onSuccess: (data) => data,
       }
     )
   },
 
-  updateHandle: async (props: UpdateHandleFetchRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.member.updateHandle, props.body), {
+  updateHandle: async (params: UpdateHandleFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.member.updateHandle, params.body), {
       onSuccess: (data) => data,
     })
   },
 
   updateProfileImage: async (
-    props: UpdateProfileImageFetchRequest
+    params: UpdateProfileImageFetchRequest
   ): Promise<UpdateProfileImageResponse> => {
     return axiosStatus(
       () =>
-        AXIOS.put(endpoints.member.updateProfileImage, props.body, {
+        AXIOS.put(endpoints.member.updateProfileImage, params.body, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -85,8 +85,8 @@ export const member = {
     )
   },
 
-  updatePassword: async (props: UpdatePasswordFetchRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.member.updatePassword, props.body), {
+  updatePassword: async (params: UpdatePasswordFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.member.updatePassword, params.body), {
       onSuccess: (data) => data,
     })
   },
@@ -97,8 +97,8 @@ export const member = {
     })
   },
 
-  updateQuestProperty: async (props: UpdateQuestPropertyFetchRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.member.updateQuestProperty, props.body), {
+  updateQuestProperty: async (params: UpdateQuestPropertyFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.member.updateQuestProperty, params.body), {
       onSuccess: (data) => data,
     })
   },
