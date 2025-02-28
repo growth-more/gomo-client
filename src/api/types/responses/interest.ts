@@ -14,15 +14,14 @@ interface InterestResponse {
 
 interface InterestListResponse {
   interests: {
-    interestId: string
-    memberId: string
-    proficiency: {
-      level: number
-      score: number
-      totalScore: number
-    }
+    id: string
+    registrantId: string
     name: string
     logoUrl: string
+    level: number
+    score: number
+    scoreThreshold: number
+    totalScore: number
   }[]
 }
 
