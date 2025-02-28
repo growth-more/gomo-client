@@ -33,4 +33,14 @@ interface WindowViewSize {
   height: number
 }
 
-export type { WindowViewState, WindowViewProps, WindowViewPosition, WindowViewSize }
+interface WindowViewContextProps {
+  viewSize: WindowViewSize
+}
+
+export type {
+  WindowViewState,
+  WindowViewProps,
+  WindowViewPosition,
+  WindowViewSize,
+  WindowViewContextProps,
+}

@@ -15,6 +15,7 @@ import {
 } from './constant'
 import { useWindowStore } from '@/stores'
 import { motion } from 'motion/react'
+import { WindowViewContext } from './context'
 
 export function WindowView({
   id,
@@ -124,7 +125,9 @@ export function WindowView({
           onClose={closeHandler}
         />
         <Box width={1} flex={1} overflow="hidden">
-          {children}
+          <WindowViewContext.Provider value={{ viewSize: size }}>
+            {children}
+          </WindowViewContext.Provider>
         </Box>
       </Stack>
     </Rnd>
