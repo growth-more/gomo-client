@@ -10,3 +10,5 @@ export * from './quest/quest-setting-page'
 export * from './profile/profile-page'
 
 export * from './history/history-page'
+
+export * from './interest/interest-page'

@@ -8,6 +8,8 @@ import {
   QUEST_PAGE_VIEW,
   HISTORY_PAGE_ID,
   HISTORY_PAGE_VIEW,
+  INTEREST_PAGE_ID,
+  INTEREST_PAGE_VIEW,
 } from '@/constants/window-view'
 
 export function ControlPanel() {
@@ -15,6 +17,10 @@ export function ControlPanel() {
 
   const questViewHandler = () => {
     toggleViewWithId(QUEST_PAGE_ID, QUEST_PAGE_VIEW)
+  }
+
+  const interestViewHandler = () => {
+    toggleViewWithId(INTEREST_PAGE_ID, INTEREST_PAGE_VIEW)
   }
 
   const profileViewHandler = () => {
@@ -27,7 +33,12 @@ export function ControlPanel() {
 
   return (
     <Stack position="fixed" direction="row" left={0} bottom={0} p={4} spacing={2}>
-      <ControlButton title="퀘스트" icon="solar:star-bold" onClick={questViewHandler} />
+      <ControlButton
+        title="퀘스트"
+        icon="solar:lightbulb-minimalistic-bold"
+        onClick={questViewHandler}
+      />
+      <ControlButton title="관심사" icon="solar:star-bold" onClick={interestViewHandler} />
       <ControlButton title="프로필" icon="solar:user-bold" onClick={profileViewHandler} />
       <ControlButton title="기록" icon="solar:history-bold" onClick={historyViewHandler} />
     </Stack>
