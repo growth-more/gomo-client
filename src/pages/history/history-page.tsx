@@ -1,7 +1,7 @@
 import { alpha, Stack } from '@mui/material'
 import { DateSelector, Timeline } from './components'
 import { useState } from 'react'
-import { useHistory } from '@/api/hooks/use-history'
+import { useHistory } from '@/api/hooks'
 import { ScrollContainer } from '@/components/scrollbar'
 
 export function HistoryPage() {

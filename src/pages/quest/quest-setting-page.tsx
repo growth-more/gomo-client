@@ -1,6 +1,6 @@
 import { Button, Stack } from '@mui/material'
 import { QuestSettingList } from './components/quest-setting-list'
-import { useQuestSetting } from '@/api/hooks/use-quest-setting'
+import { useQuestSetting } from '@/api/hooks'
 import { useEffect, useMemo, useState } from 'react'
 
 export function QuestSettingPage() {

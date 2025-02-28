@@ -46,6 +46,13 @@ export function useAssignQuest() {
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.quest.getAssignQuest] }),
   })
 
+  const { mutate: reorderQuest } = useMutation({
+    mutationKey: ['PUT', endpoints.quest.updateAssignQuestOrder],
+    mutationFn: fetches.quest.updateAssignQuestOrder,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.quest.getAssignQuest] }),
+  })
+
   const daily = useMemo<OrganizedAssignQuest>(() => {
     const quests = assignQuest?.dailyQuests ?? []
     return organizeAssignQuest(quests)
@@ -71,6 +78,7 @@ export function useAssignQuest() {
     deleteQuest,
     createQuest,
     updateQuest,
+    reorderQuest,
   }
 }
 

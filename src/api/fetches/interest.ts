@@ -36,7 +36,7 @@ export const interest = {
     })
   },
 
-  list: async (): Promise<InterestListResponse> => {
+  getList: async (): Promise<InterestListResponse> => {
     return axiosStatus(() => AXIOS.get<InterestListResponse>(endpoints.interest.getList), {
       onSuccess: (data) => data,
     })
@@ -56,7 +56,12 @@ export const interest = {
 
   updateLogo: async (params: UpdateInterestLogoFetchRequest): Promise<void> => {
     return axiosStatus(
-      () => AXIOS.put(endpoints.interest.updateLogoWithId(params.id), params.body),
+      () =>
+        AXIOS.put(endpoints.interest.updateLogoWithId(params.id), params.body, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
       {
         onSuccess: (data) => data,
       }
