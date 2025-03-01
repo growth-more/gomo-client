@@ -4,6 +4,7 @@ interface InterestVertex extends Vertex {
   id: string
   name: string
   size: number
+  interest: Interest
 }
 
 interface InterestEdge extends Edge<InterestVertex> {

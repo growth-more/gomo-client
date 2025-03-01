@@ -48,6 +48,7 @@ export function useInterestGraph() {
           id: interest.id,
           name: interest.name,
           size: getNodeSize(interest.level),
+          interest,
         })) ?? [],
       edge:
         interestGraphData.relations?.map((relation) => ({

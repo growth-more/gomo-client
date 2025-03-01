@@ -6,9 +6,13 @@ import { Graph, Vertex, Edge } from './types'
 
 interface ForceDirectedGraphProps<V extends Vertex> {
   data: Graph<V>
+  onSelect?: (interest: V | null) => void
 }
 
-export function ForceDirectedGraph<V extends Vertex>({ data }: ForceDirectedGraphProps<V>) {
+export function ForceDirectedGraph<V extends Vertex>({
+  data,
+  onSelect,
+}: ForceDirectedGraphProps<V>) {
   const { viewSize } = useWindowViewContext()
 
   const svgRef = useRef<SVGSVGElement>(null)
@@ -56,7 +60,7 @@ export function ForceDirectedGraph<V extends Vertex>({ data }: ForceDirectedGrap
       .data(data.vertex)
       .join('g')
       .call(drag(simulation))
-      .on('click', (e, d) => console.log(d))
+      .on('click', (e, d) => onSelect?.(d))
 
     vertex
       .append('circle')
@@ -84,6 +88,7 @@ export function ForceDirectedGraph<V extends Vertex>({ data }: ForceDirectedGrap
 
       vertex.attr('transform', (d) => `translate(${d.x},${d.y})`)
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, viewSize])
 
   return <Box component="svg" ref={svgRef} width={1} height={1} />

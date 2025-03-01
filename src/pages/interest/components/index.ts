@@ -1,3 +1,5 @@
 export * from './create-interest'
 export * from './select-interest'
 export * from './select-interest-icon'
+export * from './interest-indicator'
+export * from './score-bar'

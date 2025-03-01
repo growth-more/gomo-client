@@ -26,7 +26,14 @@ export function SelectInterestIcon({ file, onChange }: SelectInterestIconProps) 
       justifyContent="center"
     >
       <IconButton
-        sx={{ borderRadius: 1, width: 1, height: 1, color: 'white', p: 0.5, overflow: 'hidden' }}
+        sx={{
+          borderRadius: 1,
+          width: 1,
+          height: 1,
+          color: (theme) => theme.palette.grey[400],
+          p: 0.5,
+          overflow: 'hidden',
+        }}
         onClick={upload}
       >
         {file ? (
