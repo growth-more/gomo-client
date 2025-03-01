@@ -712,7 +712,12 @@ const graph: InterestGraphResponse = {
   ],
 }
 
+const create = {
+  id: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
+}
+
 export const interest = {
   list,
   graph,
+  create,
 }

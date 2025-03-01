@@ -1,10 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
+import { useMemo } from 'react'
+import { Interest } from '@/entities/interest'
 
 export function useInterest() {
   const queryClient = useQueryClient()
 
-  const { data: interestList, isLoading } = useQuery({
+  const { data: interestListData, isLoading } = useQuery({
     queryKey: ['GET', endpoints.interest.getList],
     queryFn: fetches.interest.getList,
   })
@@ -40,6 +42,13 @@ export function useInterest() {
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getList] })
     },
   })
+
+  const interestList = useMemo<Interest[]>(() => {
+    if (!interestListData) {
+      return []
+    }
+    return interestListData.interests
+  }, [interestListData])
 
   return {
     interestList,

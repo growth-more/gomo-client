@@ -1,5 +1,10 @@
 import { endpoints } from '@/api'
-import { InterestGraphResponse, InterestListResponse } from '@/api/types'
+import {
+  CreateInterestRequest,
+  CreateInterestResponse,
+  InterestGraphResponse,
+  InterestListResponse,
+} from '@/api/types'
 import { http, HttpResponse } from 'msw'
 import { mock } from '@/msw/data'
 
@@ -11,4 +16,11 @@ export const interest = [
   http.get<never, never, InterestGraphResponse>(endpoints.interest.getGraph, async () => {
     return HttpResponse.json(mock.interest.graph, { status: 200 })
   }),
+
+  http.post<never, CreateInterestRequest, CreateInterestResponse>(
+    endpoints.interest.create,
+    async () => {
+      return HttpResponse.json(mock.interest.create, { status: 200 })
+    }
+  ),
 ]

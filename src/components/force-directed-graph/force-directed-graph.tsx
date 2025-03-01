@@ -1,5 +1,5 @@
 import { useWindowViewContext } from '@/components/window'
-import { alpha, Box } from '@mui/material'
+import { Box } from '@mui/material'
 import * as d3 from 'd3'
 import { useEffect, useRef } from 'react'
 import { Graph, Vertex, Edge } from './types'
@@ -50,7 +50,13 @@ export function ForceDirectedGraph<V extends Vertex>({ data }: ForceDirectedGrap
       .join('line')
       .attr('stroke-width', 1.5)
 
-    const vertex = svg.append('g').selectAll().data(data.vertex).join('g').call(drag(simulation))
+    const vertex = svg
+      .append('g')
+      .selectAll()
+      .data(data.vertex)
+      .join('g')
+      .call(drag(simulation))
+      .on('click', (e, d) => console.log(d))
 
     vertex
       .append('circle')
@@ -80,11 +86,7 @@ export function ForceDirectedGraph<V extends Vertex>({ data }: ForceDirectedGrap
     })
   }, [data, viewSize])
 
-  return (
-    <Box width={1} height={1} p={2} bgcolor={(theme) => alpha(theme.palette.common.black, 0.5)}>
-      <Box component="svg" ref={svgRef} width={1} height={1} />
-    </Box>
-  )
+  return <Box component="svg" ref={svgRef} width={1} height={1} />
 }
 
 function drag<V extends Vertex>(simulation: d3.Simulation<V, Edge<V>>) {
@@ -103,7 +105,6 @@ function drag<V extends Vertex>(simulation: d3.Simulation<V, Edge<V>>) {
     if (!event.active) simulation.alphaTarget(0)
     event.subject.fx = null
     event.subject.fy = null
-    console.log(event.subject)
   }
 
   return (selection: d3.Selection<SVGGElement | null, V, SVGElement, unknown>) => {

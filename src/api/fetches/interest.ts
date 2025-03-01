@@ -23,7 +23,12 @@ import {
 export const interest = {
   create: async (params: CreateInterestFetchRequest): Promise<CreateInterestResponse> => {
     return axiosStatus(
-      () => AXIOS.post<CreateInterestResponse>(endpoints.interest.create, params.body),
+      () =>
+        AXIOS.post<CreateInterestResponse>(endpoints.interest.create, params.body, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
       {
         onSuccess: (data) => data,
       }

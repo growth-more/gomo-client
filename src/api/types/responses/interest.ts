@@ -27,7 +27,7 @@ interface InterestListResponse {
 }
 
 interface CreateInterestResponse {
-  interestId: string
+  id: string
 }
 
 interface RecommendInterestResponse {

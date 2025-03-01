@@ -1,5 +1,6 @@
 import {
   CreateInterestEdgeRequest,
+  CreateInterestRequest,
   UpdateInterestLogoRequest,
   UpdateInterestRequest,
   UpdateMajorInterestOrderRequest,
@@ -14,7 +15,7 @@ interface GetInterestFetchRequest {
 }
 
 interface CreateInterestFetchRequest {
-  body: CreateInterestEdgeRequest
+  body: CreateInterestRequest
 }
 
 interface UpdateInterestFetchRequest {

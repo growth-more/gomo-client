@@ -16,4 +16,15 @@ interface InterestGraph extends Graph<InterestVertex> {
   edge: InterestEdge[]
 }
 
-export type { InterestGraph, InterestVertex, InterestEdge }
+interface Interest {
+  id: string
+  registrantId: string
+  name: string
+  logoUrl: string
+  level: number
+  score: number
+  scoreThreshold: number
+  totalScore: number
+}
+
+export type { InterestGraph, InterestVertex, InterestEdge, Interest }
