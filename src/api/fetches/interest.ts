@@ -1,59 +1,76 @@
 import { AXIOS, endpoints, axiosStatus } from '@/api'
 import {
-  CreateInterestEdgeRequest,
+  CreateInterestEdgeFetchRequest,
   CreateInterestEdgeResponse,
-  CreateInterestRequest,
+  CreateInterestFetchRequest,
   CreateInterestResponse,
-  CreateMajorInterestRequest,
+  CreateMajorInterestFetchRequest,
   CreateMajorInterestResponse,
+  DeleteInterestEdgeFetchRequest,
+  DeleteInterestFetchRequest,
+  DeleteMajorInterestFetchRequest,
+  GetInterestFetchRequest,
   InterestGraphResponse,
   InterestListResponse,
   InterestResponse,
   MajorInterestResponse,
   RecommendInterestResponse,
-  UpdateInterestLogoRequest,
-  UpdateInterestRequest,
-  UpdateMajorInterestOrderRequest,
+  UpdateInterestFetchRequest,
+  UpdateInterestLogoFetchRequest,
+  UpdateMajorInterestOrderFetchRequest,
 } from '@/api/types'
 
 export const interest = {
-  create: async (request: CreateInterestRequest): Promise<CreateInterestResponse> => {
+  create: async (params: CreateInterestFetchRequest): Promise<CreateInterestResponse> => {
     return axiosStatus(
-      () => AXIOS.post<CreateInterestResponse>(endpoints.interest.create, request),
+      () =>
+        AXIOS.post<CreateInterestResponse>(endpoints.interest.create, params.body, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
       {
         onSuccess: (data) => data,
       }
     )
   },
 
-  get: async (id: string): Promise<InterestResponse> => {
-    return axiosStatus(() => AXIOS.get<InterestResponse>(endpoints.interest.getWithId(id)), {
+  get: async (params: GetInterestFetchRequest): Promise<InterestResponse> => {
+    return axiosStatus(() => AXIOS.get<InterestResponse>(endpoints.interest.getWithId(params.id)), {
       onSuccess: (data) => data,
     })
   },
 
-  list: async (): Promise<InterestListResponse> => {
-    return axiosStatus(() => AXIOS.get<InterestListResponse>(endpoints.interest.get), {
+  getList: async (): Promise<InterestListResponse> => {
+    return axiosStatus(() => AXIOS.get<InterestListResponse>(endpoints.interest.getList), {
       onSuccess: (data) => data,
     })
   },
 
-  update: async (request: UpdateInterestRequest, id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.interest.updateWithId(id), request), {
+  update: async (params: UpdateInterestFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.interest.updateWithId(params.id), params.body), {
       onSuccess: (data) => data,
     })
   },
 
-  delete: async (id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.delete(endpoints.interest.deleteWithId(id)), {
+  delete: async (params: DeleteInterestFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.delete(endpoints.interest.deleteWithId(params.id)), {
       onSuccess: (data) => data,
     })
   },
 
-  updateLogo: async (request: UpdateInterestLogoRequest, id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.interest.updateLogoWithId(id), request), {
-      onSuccess: (data) => data,
-    })
+  updateLogo: async (params: UpdateInterestLogoFetchRequest): Promise<void> => {
+    return axiosStatus(
+      () =>
+        AXIOS.put(endpoints.interest.updateLogoWithId(params.id), params.body, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
+      {
+        onSuccess: (data) => data,
+      }
+    )
   },
 
   getGraph: async (): Promise<InterestGraphResponse> => {
@@ -62,30 +79,30 @@ export const interest = {
     })
   },
 
-  createEdge: async (request: CreateInterestEdgeRequest): Promise<CreateInterestEdgeResponse> => {
+  createEdge: async (
+    params: CreateInterestEdgeFetchRequest
+  ): Promise<CreateInterestEdgeResponse> => {
     return axiosStatus(
-      () => AXIOS.post<CreateInterestEdgeResponse>(endpoints.interest.createEdge, request),
+      () => AXIOS.post<CreateInterestEdgeResponse>(endpoints.interest.createEdge, params.body),
       {
         onSuccess: (data) => data,
       }
     )
   },
 
-  deleteEdge: async (id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.delete(endpoints.interest.deleteEdgeWithId(id)), {
+  deleteEdge: async (params: DeleteInterestEdgeFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.delete(endpoints.interest.deleteEdgeWithId(params.id)), {
       onSuccess: (data) => data,
     })
   },
 
   createMajorInterest: async (
-    request: CreateMajorInterestRequest,
-    id: string
+    params: CreateMajorInterestFetchRequest
   ): Promise<CreateMajorInterestResponse> => {
     return axiosStatus(
       () =>
         AXIOS.post<CreateMajorInterestResponse>(
-          endpoints.interest.createMajorIntrestWithId(id),
-          request
+          endpoints.interest.createMajorInterestWithId(params.id)
         ),
       {
         onSuccess: (data) => data,
@@ -93,10 +110,13 @@ export const interest = {
     )
   },
 
-  deleteMajorInterest: async (id: string): Promise<void> => {
-    return axiosStatus(() => AXIOS.delete(endpoints.interest.deleteMajorIntrestWithId(id)), {
-      onSuccess: (data) => data,
-    })
+  deleteMajorInterest: async (params: DeleteMajorInterestFetchRequest): Promise<void> => {
+    return axiosStatus(
+      () => AXIOS.delete(endpoints.interest.deleteMajorInterestWithId(params.id)),
+      {
+        onSuccess: (data) => data,
+      }
+    )
   },
 
   getMajorInterest: async (): Promise<MajorInterestResponse> => {
@@ -108,15 +128,15 @@ export const interest = {
     )
   },
 
-  updateMajorInterestOrder: async (request: UpdateMajorInterestOrderRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.interest.updateMajorIntrestOrder, request), {
+  updateMajorInterestOrder: async (params: UpdateMajorInterestOrderFetchRequest): Promise<void> => {
+    return axiosStatus(() => AXIOS.put(endpoints.interest.updateMajorInterestOrder, params.body), {
       onSuccess: (data) => data,
     })
   },
 
   getRecommend: async (): Promise<RecommendInterestResponse> => {
     return axiosStatus(
-      () => AXIOS.get<RecommendInterestResponse>(endpoints.interest.getRocommend),
+      () => AXIOS.get<RecommendInterestResponse>(endpoints.interest.getRecommended),
       {
         onSuccess: (data) => data,
       }

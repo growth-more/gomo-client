@@ -19,10 +19,6 @@ interface UpdateInterestLogoRequest {
 // MAJOR INTEREST
 // ===================================
 
-interface CreateMajorInterestRequest {
-  interestId: string
-}
-
 interface UpdateMajorInterestOrderRequest {
   updatedOrders: number[]
 }
@@ -40,7 +36,6 @@ interface CreateInterestEdgeRequest {
 export type {
   CreateInterestEdgeRequest,
   CreateInterestRequest,
-  CreateMajorInterestRequest,
   UpdateInterestLogoRequest,
   UpdateInterestRequest,
   UpdateMajorInterestOrderRequest,

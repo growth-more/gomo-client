@@ -1,6 +1,6 @@
 import { Button, Stack } from '@mui/material'
 import { QuestSettingList } from './components/quest-setting-list'
-import { useQuestSetting } from '@/api/hooks/use-quest-setting'
+import { useQuestSetting } from '@/api/hooks'
 import { useEffect, useMemo, useState } from 'react'
 
 export function QuestSettingPage() {
@@ -11,7 +11,7 @@ export function QuestSettingPage() {
   const [monthlyThreshold, setMonthlyThreshold] = useState(questProperty.monthlyThreshold)
 
   const updateHandler = () => {
-    update({ dailyThreshold, weeklyThreshold, monthlyThreshold })
+    update({ body: { dailyThreshold, weeklyThreshold, monthlyThreshold } })
   }
 
   const isUpdated = useMemo(() => {

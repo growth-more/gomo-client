@@ -1,2 +1,7 @@
 export * from './use-assign-quest'
+export * from './use-history'
+export * from './use-interest-graph'
+export * from './use-interest'
+export * from './use-major-interest'
 export * from './use-profile'
+export * from './use-quest-setting'

@@ -4,30 +4,30 @@
 
 interface InterestResponse {
   interestId: string
-  memberId: string
-  level: number
-  score: number
-  totalScore: number
+  registrantId: string
   name: string
   logoUrl: string
+  level: number
+  score: number
+  scoreThreshold: number
+  totalScore: number
 }
 
 interface InterestListResponse {
   interests: {
-    interestId: string
-    memberId: string
-    proficiency: {
-      level: number
-      score: number
-      totalScore: number
-    }
+    id: string
+    registrantId: string
     name: string
     logoUrl: string
+    level: number
+    score: number
+    scoreThreshold: number
+    totalScore: number
   }[]
 }
 
 interface CreateInterestResponse {
-  interestId: string
+  id: string
 }
 
 interface RecommendInterestResponse {
@@ -61,14 +61,17 @@ interface CreateMajorInterestResponse {
 interface InterestGraphResponse {
   interests: {
     id: string
+    registrantId: string
     name: string
     logoUrl: string
     level: number
     score: number
+    scoreThreshold: number
     totalScore: number
   }[]
-  edges: {
+  relations: {
     id: string
+    registrantId: string
     parentInterestId: string
     childInterestId: string
   }[]
