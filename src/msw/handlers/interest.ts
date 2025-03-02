@@ -8,6 +8,10 @@ import {
 import { http, HttpResponse } from 'msw'
 import { mock } from '@/msw/data'
 
+interface IdParams {
+  id: string
+}
+
 export const interest = [
   http.get<never, never, InterestListResponse>(endpoints.interest.getList, async () => {
     return HttpResponse.json(mock.interest.list, { status: 200 })
@@ -23,4 +27,8 @@ export const interest = [
       return HttpResponse.json(mock.interest.create, { status: 200 })
     }
   ),
+
+  http.delete<IdParams>(endpoints.interest.delete, async () => {
+    return new HttpResponse(null, { status: 204 })
+  }),
 ]
