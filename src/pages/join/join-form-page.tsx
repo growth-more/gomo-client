@@ -11,6 +11,7 @@ export interface Form {
   passwordConfirm: string
   name: string
   handle: string
+  motto: string
 }
 
 interface JoinFormPageProps {
@@ -43,7 +44,7 @@ export function JoinFormPage({ onNext }: JoinFormPageProps) {
           name: form.name,
           password: form.password,
           handle: `@${form.handle}`,
-          motto: '',
+          motto: form.motto,
         },
       },
       {

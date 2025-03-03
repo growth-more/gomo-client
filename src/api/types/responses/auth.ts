@@ -1,5 +1,6 @@
 interface LoginResponse {
-  accessToken: string
+  id: string
+  token: string
 }
 
 interface ReissueResponse {

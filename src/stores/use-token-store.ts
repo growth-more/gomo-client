@@ -25,7 +25,7 @@ export const useTokenStore = create<TokenState>()(
         name: STORAGE_KEY,
         onRehydrateStorage: () => (state) => {
           if (state) {
-            useTokenStore.getState().setIsHydrated()
+            state.setIsHydrated()
           }
         },
       }
