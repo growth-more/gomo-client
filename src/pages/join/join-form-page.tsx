@@ -2,6 +2,7 @@ import { Button, Stack, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { EmailVerifyForm, PasswordForm, PersonalForm } from './components'
 import { useBoolean } from '@/hooks'
+import { useJoin } from '@/api/hooks/use-join'
 
 export interface Form {
   email: string
@@ -17,6 +18,8 @@ interface JoinFormPageProps {
 }
 
 export function JoinFormPage({ onNext }: JoinFormPageProps) {
+  const { join } = useJoin()
+
   const emailVerified = useBoolean()
   const handleVerified = useBoolean()
 
@@ -33,8 +36,20 @@ export function JoinFormPage({ onNext }: JoinFormPageProps) {
   })
 
   const submitHandler = handleSubmit((form) => {
-    console.log(form)
-    onNext?.()
+    join(
+      {
+        body: {
+          email: form.email,
+          name: form.name,
+          password: form.password,
+          handle: `@${form.handle}`,
+          motto: '',
+        },
+      },
+      {
+        onSuccess: () => onNext?.(),
+      }
+    )
   })
 
   return (
@@ -45,9 +60,19 @@ export function JoinFormPage({ onNext }: JoinFormPageProps) {
 
       <form onSubmit={submitHandler} noValidate style={{ width: '100%' }}>
         <Stack spacing={4}>
-          <EmailVerifyForm control={control} watch={watch} />
+          <EmailVerifyForm
+            control={control}
+            watch={watch}
+            onVerified={emailVerified.onTrue}
+            onUnverified={emailVerified.onFalse}
+          />
           <PasswordForm control={control} watch={watch} />
-          <PersonalForm control={control} watch={watch} />
+          <PersonalForm
+            control={control}
+            watch={watch}
+            onVerified={handleVerified.onTrue}
+            onUnverified={handleVerified.onFalse}
+          />
           <Button
             size="large"
             type="submit"

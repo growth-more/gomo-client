@@ -4,16 +4,47 @@ import { Control, UseFormWatch } from 'react-hook-form'
 import { Form } from '@/pages/join/join-form-page'
 import { JoinFieldInfo } from './join-field-info'
 import { useBoolean } from '@/hooks'
+import { useJoin } from '@/api/hooks/use-join'
+import { useEffect, useState } from 'react'
 
 interface PersonalFormProps {
   control: Control<Form>
   watch: UseFormWatch<Form>
+  onVerified?: () => void
+  onUnverified?: () => void
 }
 
-export function PersonalForm({ control, watch }: PersonalFormProps) {
-  const handleDuplicate = useBoolean()
+export function PersonalForm({ control, watch, onVerified, onUnverified }: PersonalFormProps) {
+  const { checkHandleDuplicate } = useJoin()
 
+  const [verifiedHandle, setVerifiedHandle] = useState<string | null>(null)
+  const verifiedDuplicate = useBoolean()
   const handle = watch('handle')
+
+  const checkDuplicate = () => {
+    checkHandleDuplicate(
+      { handle },
+      {
+        onSuccess: () => {
+          verifiedDuplicate.onTrue()
+          setVerifiedHandle(handle)
+          onVerified?.()
+        },
+        onError: () => {
+          verifiedDuplicate.onFalse()
+          setVerifiedHandle(null)
+          onUnverified?.()
+        },
+      }
+    )
+  }
+
+  useEffect(() => {
+    if (verifiedDuplicate.value && verifiedHandle !== handle) {
+      setVerifiedHandle(null)
+      verifiedDuplicate.onFalse()
+    }
+  }, [handle, verifiedDuplicate, verifiedHandle])
 
   return (
     <Stack spacing={1.5}>
@@ -52,8 +83,12 @@ export function PersonalForm({ control, watch }: PersonalFormProps) {
             },
           }}
         />
-        <Button sx={{ flexShrink: 0, height: 40 }} disabled={!handle}>
-          중복확인
+        <Button
+          sx={{ flexShrink: 0, height: 40 }}
+          disabled={!handle || verifiedDuplicate.value}
+          onClick={checkDuplicate}
+        >
+          {verifiedDuplicate.value ? '중복확인완료' : '중복확인'}
         </Button>
         <JoinFieldInfo
           info={[

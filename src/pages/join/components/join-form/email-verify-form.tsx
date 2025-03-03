@@ -7,6 +7,7 @@ import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { JoinFieldInfo } from './join-field-info'
 import { Form } from '@/pages/join/join-form-page'
+import { useJoin } from '@/api/hooks/use-join'
 
 dayjs.extend(duration)
 
@@ -18,25 +19,44 @@ type VerifyCodeStatus = 'none' | 'pending' | 'verified'
 interface EmailVerifyFormProps {
   control: Control<Form>
   watch: UseFormWatch<Form>
+  onVerified?: () => void
+  onUnverified?: () => void
 }
 
-export function EmailVerifyForm({ control, watch }: EmailVerifyFormProps) {
+export function EmailVerifyForm({
+  control,
+  watch,
+  onVerified,
+  onUnverified,
+}: EmailVerifyFormProps) {
+  const { createEmailAuthCode, verifyEmailCode } = useJoin()
+
   const [verifyCodeStatus, setVerifyCodeStatus] = useState<VerifyCodeStatus>('none')
 
   const verifyCodeTimer = useTimer(VERIFY_CODE_TIME)
 
+  const email = watch('email')
+
   const requestVerifyCode = () => {
     setVerifyCodeStatus('pending')
+    createEmailAuthCode({ body: { email } })
     verifyCodeTimer.restart()
+    onUnverified?.()
   }
 
   const checkVerifyCode = () => {
-    const verifyCode = watch('verifyCode')
-    setVerifyCodeStatus('verified')
-    verifyCodeTimer.stop()
+    const code = watch('verifyCode')
+    verifyEmailCode(
+      { email, code },
+      {
+        onSuccess: () => {
+          setVerifyCodeStatus('verified')
+          verifyCodeTimer.stop()
+          onVerified?.()
+        },
+      }
+    )
   }
-
-  const email = watch('email')
 
   return (
     <Stack spacing={1.5}>

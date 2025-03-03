@@ -13,6 +13,7 @@ import {
   UpdateProfileImageFetchRequest,
   UpdateProfileImageResponse,
   UpdateQuestPropertyFetchRequest,
+  VerifyEmailCodeFetchRequest,
 } from '@/api/types'
 
 export const member = {
@@ -54,9 +55,19 @@ export const member = {
     )
   },
 
+  verifyEmailCode: async (params: VerifyEmailCodeFetchRequest): Promise<void> => {
+    return axiosStatus(
+      () =>
+        AXIOS.get(`${endpoints.member.verifyEmailCode}?email=${params.email}&code=${params.code}`),
+      {
+        onSuccess: (data) => data,
+      }
+    )
+  },
+
   checkHandleDuplicate: async (params: CheckHandleDuplicateFetchRequest): Promise<void> => {
     return axiosStatus(
-      () => AXIOS.post(`${endpoints.member.checkHandleDuplicate}?handle=${params.handle}`),
+      () => AXIOS.get(`${endpoints.member.checkHandleDuplicate}?handle=@${params.handle}`),
       {
         onSuccess: (data) => data,
       }

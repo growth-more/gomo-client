@@ -1,7 +1,3 @@
-// ===================================
-// JOIN
-// ===================================
-
 import {
   CreateEmailAuthCodeRequest,
   CreateMemberRequest,
@@ -12,12 +8,21 @@ import {
   UpdateQuestPropertyRequest,
 } from '@/api/types'
 
+// ===================================
+// JOIN
+// ===================================
+
 interface CreateMemberFetchRequest {
   body: CreateMemberRequest
 }
 
 interface CreateEmailAuthCodeFetchRequest {
   body: CreateEmailAuthCodeRequest
+}
+
+interface VerifyEmailCodeFetchRequest {
+  email: string
+  code: string
 }
 
 // ===================================
@@ -61,4 +66,5 @@ export type {
   UpdatePasswordFetchRequest,
   UpdateProfileImageFetchRequest,
   UpdateQuestPropertyFetchRequest,
+  VerifyEmailCodeFetchRequest,
 }

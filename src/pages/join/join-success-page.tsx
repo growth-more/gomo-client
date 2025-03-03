@@ -1,7 +1,9 @@
 import { Iconify } from '@/components/iconify'
+import { paths } from '@/routes'
 import { Button, Typography } from '@mui/material'
 
 import { Stack } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 interface JoinSuccessPageProps {
   onSurvey?: () => void
@@ -37,7 +39,13 @@ export function JoinSuccessPage({ onSurvey, onSkip }: JoinSuccessPageProps) {
           <Button size="large" sx={{ width: 300 }} onClick={onSurvey}>
             초기설정하기
           </Button>
-          <Button color="secondary" sx={{ width: 300 }} onClick={onSkip}>
+          <Button
+            component={Link}
+            to={paths.root}
+            color="secondary"
+            sx={{ width: 300 }}
+            onClick={onSkip}
+          >
             다음에 할래요
           </Button>
         </Stack>
