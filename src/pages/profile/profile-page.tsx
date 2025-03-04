@@ -5,6 +5,7 @@ import { ScrollContainer } from '@/components/scrollbar'
 import { Editable } from '@/components/editable'
 import { useBoolean, useInnerValue } from '@/hooks'
 import { useEffect } from 'react'
+import { StreakSection } from '@/pages/profile/components'
 
 export function ProfilePage() {
   const { profile } = useProfile()
@@ -88,6 +89,8 @@ export function ProfilePage() {
             </Stack>
           </Stack>
         </Stack>
+
+        <StreakSection />
       </ScrollContainer>
 
       <Divider />

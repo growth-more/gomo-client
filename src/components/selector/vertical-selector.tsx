@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 
 const SELECTOR_HEIGHT = 36
 
-interface VerticalSelectorOption<T> {
+export interface VerticalSelectorOption<T> {
   label: string
   value: T
 }
@@ -23,7 +23,7 @@ export function VerticalSelector<T>({ options, value, onChange }: VerticalSelect
   }, [options, value])
 
   return (
-    <ScrollContainer sx={{ position: 'relative' }}>
+    <ScrollContainer sx={{ position: 'relative', height: 1 }}>
       <Box
         component={motion.div}
         p={0.4}
