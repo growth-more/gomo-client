@@ -92,7 +92,7 @@ export function CalendarHeatmap({
       if (customFn) {
         return customFn(count)
       }
-      const color = lighten(customColor ?? theme.palette.primary.main, 0.5)
+      const color = lighten(customColor ?? theme.palette.primary.main, 0.2)
       for (let i = 0; i < thresholds.length; i++) {
         const next = i === thresholds.length - 1 || count < thresholds[i + 1]
         if (count >= thresholds[i] && next) {
