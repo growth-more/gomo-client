@@ -15,7 +15,7 @@ export interface Form {
 }
 
 interface JoinFormPageProps {
-  onNext?: () => void
+  onNext?: (email: string, password: string) => void
 }
 
 export function JoinFormPage({ onNext }: JoinFormPageProps) {
@@ -47,9 +47,7 @@ export function JoinFormPage({ onNext }: JoinFormPageProps) {
           motto: form.motto,
         },
       },
-      {
-        onSuccess: () => onNext?.(),
-      }
+      { onSuccess: () => onNext?.(form.email, form.password) }
     )
   })
 
