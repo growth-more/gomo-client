@@ -7,4 +7,15 @@ export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://gomo.nurdykim.me',
+        changeOrigin: true,
+        cookiePathRewrite: {
+          '/members/refresh': 'api/members/refresh',
+        },
+      },
+    },
+  },
 })

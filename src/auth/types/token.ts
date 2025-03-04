@@ -1,6 +1,7 @@
 interface AccessToken {
-  id: string
+  sub: string
   exp: number
+  iat: number
 }
 
 export type { AccessToken }

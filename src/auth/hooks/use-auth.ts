@@ -1,26 +1,37 @@
 import { fetches } from '@/api'
-import { LoginRequest } from '@/api/types'
 import { useAuthStore, useTokenStore } from '@/stores'
-import { useCallback, useMemo } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { useMemo } from 'react'
+
+export type AuthenticateStatus = 'LOADING' | 'AUTHENTICATED' | 'UNAUTHENTICATED'
 
 export function useAuth() {
-  const { auth } = useAuthStore()
+  const { auth, isLoading } = useAuthStore()
   const { setAccessToken, clearAccessToken } = useTokenStore()
 
-  const isLogin = useMemo(() => auth !== null, [auth])
-
-  const login = useCallback(
-    async (request: LoginRequest) => {
-      const { accessToken } = await fetches.auth.login(request)
-      setAccessToken(accessToken)
+  const { mutate: login } = useMutation({
+    mutationFn: fetches.auth.login,
+    onSuccess: (data) => {
+      setAccessToken(data.token)
     },
-    [setAccessToken]
-  )
+  })
 
-  const logout = useCallback(async () => {
-    await fetches.auth.logout()
-    clearAccessToken()
-  }, [clearAccessToken])
+  const { mutate: logout } = useMutation({
+    mutationFn: fetches.auth.logout,
+    onSuccess: () => {
+      clearAccessToken()
+    },
+  })
+
+  const isLogin = useMemo<AuthenticateStatus>(() => {
+    if (isLoading) {
+      return 'LOADING'
+    }
+    if (auth === null) {
+      return 'UNAUTHENTICATED'
+    }
+    return 'AUTHENTICATED'
+  }, [auth, isLoading])
 
   return { isLogin, login, logout }
 }

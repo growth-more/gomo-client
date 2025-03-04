@@ -10,7 +10,7 @@ interface OnlyAuthProps {
 export function OnlyAuth({ children }: OnlyAuthProps) {
   const { isLogin } = useAuth()
 
-  if (!isLogin) {
+  if (isLogin === 'UNAUTHENTICATED') {
     return <Navigate to={paths.login} />
   }
 

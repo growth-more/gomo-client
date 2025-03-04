@@ -1,6 +1,6 @@
 export const auth = {
   login: '/members/login',
-  reissue: '/members/login/refresh',
+  reissue: '/members/refresh',
   logout: '/members/logout',
-  check: '/members/check',
+  check: '/members',
 }

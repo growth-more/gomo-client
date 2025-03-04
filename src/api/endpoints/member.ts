@@ -5,6 +5,7 @@ export const member = {
   delete: '/members',
 
   createEmailCode: '/members/emails/codes/auth',
+  verifyEmailCode: '/members/emails/codes/auth',
   checkHandleDuplicate: '/members/handles/duplicate',
 
   updateHandle: '/members/handles',

@@ -4,16 +4,48 @@ import { Control, UseFormWatch } from 'react-hook-form'
 import { Form } from '@/pages/join/join-form-page'
 import { JoinFieldInfo } from './join-field-info'
 import { useBoolean } from '@/hooks'
+import { useJoin } from '@/api/hooks/use-join'
+import { useEffect, useState } from 'react'
 
 interface PersonalFormProps {
   control: Control<Form>
   watch: UseFormWatch<Form>
+  onVerified?: () => void
+  onUnverified?: () => void
 }
 
-export function PersonalForm({ control, watch }: PersonalFormProps) {
-  const handleDuplicate = useBoolean()
+export function PersonalForm({ control, watch, onVerified, onUnverified }: PersonalFormProps) {
+  const { checkHandleDuplicate } = useJoin()
 
+  const [verifiedHandle, setVerifiedHandle] = useState<string | null>(null)
+  const verifiedDuplicate = useBoolean()
   const handle = watch('handle')
+
+  const checkDuplicate = () => {
+    checkHandleDuplicate(
+      { handle },
+      {
+        onSuccess: () => {
+          verifiedDuplicate.onTrue()
+          setVerifiedHandle(handle)
+          onVerified?.()
+        },
+        onError: () => {
+          verifiedDuplicate.onFalse()
+          setVerifiedHandle(null)
+          onUnverified?.()
+        },
+      }
+    )
+  }
+
+  useEffect(() => {
+    if (verifiedDuplicate.value && verifiedHandle !== handle) {
+      setVerifiedHandle(null)
+      onUnverified?.()
+      verifiedDuplicate.onFalse()
+    }
+  }, [handle, verifiedDuplicate, verifiedHandle, onUnverified])
 
   return (
     <Stack spacing={1.5}>
@@ -52,13 +84,35 @@ export function PersonalForm({ control, watch }: PersonalFormProps) {
             },
           }}
         />
-        <Button sx={{ flexShrink: 0, height: 40 }} disabled={!handle}>
-          중복확인
+        <Button
+          sx={{ flexShrink: 0, height: 40 }}
+          disabled={!handle || verifiedDuplicate.value}
+          onClick={checkDuplicate}
+        >
+          {verifiedDuplicate.value ? '중복확인완료' : '중복확인'}
         </Button>
         <JoinFieldInfo
           info={[
             '핸들은 본인을 구분할 수 있는 고유식별자입니다',
             '자신을 잘 드러낼 수 있는 키워드를 사용하세요',
+          ]}
+        />
+      </Stack>
+
+      <Stack position="relative">
+        <FormInput
+          label="슬로건"
+          name="motto"
+          control={control}
+          rules={{
+            required: { value: true, message: '슬로건을 입력해주세요' },
+            maxLength: { value: 30, message: '슬로건은 30자 이하여야 합니다' },
+          }}
+        />
+        <JoinFieldInfo
+          info={[
+            '슬로건은 본인을 표현하는 짧은 글 한 줄입니다',
+            '평소 생각하던 좌우명, 다짐 등 나만의 슬로건을 작성해보세요.',
           ]}
         />
       </Stack>

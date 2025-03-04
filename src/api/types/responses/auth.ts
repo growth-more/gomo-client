@@ -1,9 +1,11 @@
 interface LoginResponse {
-  accessToken: string
+  id: string
+  token: string
 }
 
 interface ReissueResponse {
-  accessToken: string
+  id: string
+  token: string
 }
 
 export type { LoginResponse, ReissueResponse }
