@@ -9,7 +9,7 @@ export const auth = {
   },
 
   reissue: async (): Promise<ReissueResponse> => {
-    return axiosStatus(() => AXIOS.get<ReissueResponse>(endpoints.auth.reissue), {
+    return axiosStatus(() => AXIOS.post<ReissueResponse>(endpoints.auth.reissue), {
       onSuccess: (data) => data,
     })
   },

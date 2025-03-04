@@ -100,7 +100,15 @@ export function PersonalForm({ control, watch, onVerified, onUnverified }: Perso
       </Stack>
 
       <Stack position="relative">
-        <FormInput label="슬로건" name="motto" control={control} />
+        <FormInput
+          label="슬로건"
+          name="motto"
+          control={control}
+          rules={{
+            required: { value: true, message: '슬로건을 입력해주세요' },
+            maxLength: { value: 30, message: '슬로건은 30자 이하여야 합니다' },
+          }}
+        />
         <JoinFieldInfo
           info={[
             '슬로건은 본인을 표현하는 짧은 글 한 줄입니다',

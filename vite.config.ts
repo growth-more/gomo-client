@@ -8,6 +8,14 @@ export default defineConfig({
     alias: [{ find: '@', replacement: '/src' }],
   },
   server: {
-    port: 63342,
+    proxy: {
+      '/api': {
+        target: 'https://gomo.nurdykim.me',
+        changeOrigin: true,
+        cookiePathRewrite: {
+          '/members/refresh': 'api/members/refresh',
+        },
+      },
+    },
   },
 })

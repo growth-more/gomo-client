@@ -1,6 +1,7 @@
 import { fetches } from '@/api'
 import { AccessToken } from '@/auth/types'
 import { WindowManager } from '@/components/window'
+import { useEffectOnce } from '@/hooks'
 import { useAuthStore, useTokenStore } from '@/stores'
 import { theme } from '@/themes'
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
@@ -24,7 +25,7 @@ export function MainLayout() {
     }
   }, [clearAccessToken])
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (isHydrated) {
       checkAuth()
     }
