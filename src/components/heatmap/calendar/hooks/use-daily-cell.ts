@@ -1,4 +1,4 @@
-import { CalenderHeatmapData, CellData } from '@/components/heatmap/calendar/types'
+import type { CalenderHeatmapData, CellData } from '@/components/heatmap/calendar'
 import dayjs from 'dayjs'
 import _ from 'lodash'
 import { useMemo } from 'react'

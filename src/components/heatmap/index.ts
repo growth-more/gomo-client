@@ -1,1 +1,1 @@
-export * from './calendar/calendar-heatmap'
+export * from './calendar'

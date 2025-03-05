@@ -1,4 +1,4 @@
-import { getCellColor } from '@/components/heatmap/calendar/cell-color'
+import { getCellColor } from '@/components/heatmap/calendar/utils'
 import { useHeatmapCalendarContext } from '@/components/heatmap/calendar/context'
 import { CellData } from '@/components/heatmap/calendar/types'
 import { Box, Tooltip } from '@mui/material'

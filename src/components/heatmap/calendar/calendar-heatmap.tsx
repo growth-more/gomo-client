@@ -1,7 +1,7 @@
 import { CalendarCell } from '@/components/heatmap/calendar/calendar-cell'
-import { CalendarContext } from '@/components/heatmap/calendar/context'
+import { HeatmapCalendarProvider } from '@/components/heatmap/calendar/context'
+import { useDailyCell } from '@/components/heatmap/calendar/hooks'
 import { CalenderHeatmapData } from '@/components/heatmap/calendar/types'
-import { useDailyCell } from '@/components/heatmap/calendar/use-daily-cell'
 import { ScrollContainer } from '@/components/scrollbar'
 import { Stack, SxProps, Theme, Typography, useTheme } from '@mui/material'
 
@@ -57,8 +57,8 @@ export function CalendarHeatmap({
         </Stack>
 
         {/* Cell area */}
-        <CalendarContext.Provider
-          value={{
+        <HeatmapCalendarProvider
+          context={{
             cellSize,
             color: customColor ?? theme.palette.primary.main,
             thresholds,
@@ -77,7 +77,7 @@ export function CalendarHeatmap({
               ))}
             </Stack>
           </ScrollContainer>
-        </CalendarContext.Provider>
+        </HeatmapCalendarProvider>
       </Stack>
     </Stack>
   )
