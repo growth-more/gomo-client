@@ -5,6 +5,7 @@ import {
   IHeatmapCalendarContext,
 } from '@/components/heatmap/calendar/context'
 import { useDailyCell, useWeeklyCell } from '@/components/heatmap/calendar/hooks'
+import { useMonthlyCell } from '@/components/heatmap/calendar/hooks/use-monthly-cell'
 import { CalendarHeatmapType, CalenderHeatmapData } from '@/components/heatmap/calendar/types'
 import { ScrollContainer } from '@/components/scrollbar'
 import { Stack, SxProps, Theme, Typography, useTheme } from '@mui/material'
@@ -37,8 +38,10 @@ export function CalendarHeatmap({
   sx,
 }: CalendarHeatmapProps) {
   const theme = useTheme()
+
   const { cells: dailyCells } = useDailyCell(data, endDate)
   const { cells: weeklyCells } = useWeeklyCell(data, endDate)
+  const { cells: monthlyCells } = useMonthlyCell(data, endDate)
 
   const cells = useMemo(() => {
     if (type === 'DAILY') {
@@ -48,10 +51,10 @@ export function CalendarHeatmap({
       return weeklyCells
     }
     if (type === 'MONTHLY') {
-      return dailyCells
+      return monthlyCells
     }
     return dailyCells
-  }, [dailyCells, weeklyCells, type])
+  }, [dailyCells, monthlyCells, weeklyCells, type])
 
   const context = useMemo(() => {
     const context: IHeatmapCalendarContext = {

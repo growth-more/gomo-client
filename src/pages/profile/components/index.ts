@@ -1,3 +1,5 @@
-export * from './streak-selector'
+export * from './streak-date-selector'
+export * from './streak-type-selector'
 export * from './daily-streak'
 export * from './weekly-streak'
+export * from './streak'

@@ -9,4 +9,6 @@ interface OrganizedStreak {
   monthly: Streak[]
 }
 
-export type { Streak, OrganizedStreak }
+type StreakType = 'ALL' | 'DAILY' | 'WEEKLY' | 'MONTHLY'
+
+export type { Streak, OrganizedStreak, StreakType }

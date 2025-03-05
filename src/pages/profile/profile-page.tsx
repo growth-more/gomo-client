@@ -1,11 +1,11 @@
-import { alpha, Box, Divider, IconButton, Stack, Tooltip, Typography } from '@mui/material'
+import { alpha, Box, Divider, IconButton, Stack, Tooltip } from '@mui/material'
 import { useProfile } from '@/api/hooks'
 import { Iconify } from '@/components/iconify'
 import { ScrollContainer } from '@/components/scrollbar'
 import { Editable } from '@/components/editable'
 import { useBoolean, useInnerValue } from '@/hooks'
 import { useEffect } from 'react'
-import { DailyStreak, WeeklyStreak } from '@/pages/profile/components'
+import { Streak } from '@/pages/profile/components'
 
 export function ProfilePage() {
   const { profile } = useProfile()
@@ -90,19 +90,9 @@ export function ProfilePage() {
           </Stack>
         </Stack>
 
-        <Stack p={1}>
-          <Typography fontSize={14} fontWeight={600} p={1}>
-            일일 퀘스트 진행
-          </Typography>
-          <DailyStreak />
-        </Stack>
-
-        <Stack p={1}>
-          <Typography fontSize={14} fontWeight={600} p={1}>
-            주간 퀘스트 진행
-          </Typography>
-          <WeeklyStreak />
-        </Stack>
+        <Box p={1}>
+          <Streak />
+        </Box>
       </ScrollContainer>
 
       <Divider />

@@ -1,17 +1,17 @@
 import { VerticalSelector, VerticalSelectorOption } from '@/components/selector'
 import { START_YEAR } from '@/constants'
-import { Box, SxProps, Theme } from '@mui/material'
+import { SxProps, Theme } from '@mui/material'
 import dayjs from 'dayjs'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
-interface StreakSelectorProps {
+interface StreakDateSelectorProps {
   value: Date
   onChange?: (date: Date) => void
   sx?: SxProps<Theme>
 }
 
-export function StreakSelector({ value, onChange, sx }: StreakSelectorProps) {
+export function StreakDateSelector({ value, onChange, sx }: StreakDateSelectorProps) {
   const selectedDate = useMemo(() => dayjs(value).endOf('day').unix(), [value])
 
   const options = useMemo<VerticalSelectorOption<number>[]>(() => {
@@ -35,8 +35,6 @@ export function StreakSelector({ value, onChange, sx }: StreakSelectorProps) {
   }
 
   return (
-    <Box sx={{ ...sx }}>
-      <VerticalSelector options={options} value={selectedDate} onChange={onChangeHandler} />
-    </Box>
+    <VerticalSelector options={options} value={selectedDate} onChange={onChangeHandler} sx={sx} />
   )
 }

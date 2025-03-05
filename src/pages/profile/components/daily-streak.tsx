@@ -1,6 +1,6 @@
 import { useStreak } from '@/api/hooks'
 import { CalendarHeatmap } from '@/components/heatmap'
-import { StreakSelector } from '@/pages/profile/components/streak-selector'
+import { StreakDateSelector } from '@/pages/profile/components/streak-date-selector'
 import { alpha, Divider, Stack } from '@mui/material'
 import dayjs from 'dayjs'
 import { useMemo, useState } from 'react'
@@ -30,7 +30,7 @@ export function DailyStreak() {
         type="DAILY"
       />
       <Divider orientation="vertical" />
-      <StreakSelector value={endDate} onChange={setEndDate} sx={{ width: 80, p: 0.5 }} />
+      <StreakDateSelector value={endDate} onChange={setEndDate} sx={{ width: 80, p: 0.5 }} />
     </Stack>
   )
 }
