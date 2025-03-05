@@ -1,2 +1,2 @@
-export * from './streak-section'
+export * from './daily-streak'
 export * from './streak-selector'
