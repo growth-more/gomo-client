@@ -8,4 +8,6 @@ interface CellData {
   count: number
 }
 
-export type { CalenderHeatmapData, CellData }
+type CalendarHeatmapType = 'DAILY' | 'WEEKLY' | 'MONTHLY'
+
+export type { CalenderHeatmapData, CellData, CalendarHeatmapType }

@@ -5,7 +5,7 @@ import { ScrollContainer } from '@/components/scrollbar'
 import { Editable } from '@/components/editable'
 import { useBoolean, useInnerValue } from '@/hooks'
 import { useEffect } from 'react'
-import { DailyStreak } from '@/pages/profile/components'
+import { DailyStreak, WeeklyStreak } from '@/pages/profile/components'
 
 export function ProfilePage() {
   const { profile } = useProfile()
@@ -95,6 +95,13 @@ export function ProfilePage() {
             일일 퀘스트 진행
           </Typography>
           <DailyStreak />
+        </Stack>
+
+        <Stack p={1}>
+          <Typography fontSize={14} fontWeight={600} p={1}>
+            주간 퀘스트 진행
+          </Typography>
+          <WeeklyStreak />
         </Stack>
       </ScrollContainer>
 

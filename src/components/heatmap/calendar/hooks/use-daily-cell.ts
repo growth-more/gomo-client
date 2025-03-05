@@ -4,20 +4,20 @@ import _ from 'lodash'
 import { useMemo } from 'react'
 
 export function useDailyCell(data: CalenderHeatmapData[], endDate: Date) {
-  const startDate = dayjs(endDate).subtract(1, 'year')
+  const startDate = dayjs(endDate).subtract(1, 'year').add(1, 'day').startOf('day')
 
   const cells = useMemo(() => {
     const repeatCount = dayjs(endDate).diff(startDate, 'day') + 1
     const rawCells = _.times<CellData>(repeatCount, (i) => ({
       count: 0,
-      date: startDate.add(i, 'day').toDate(),
+      date: startDate.add(i, 'day').startOf('day').toDate(),
     }))
 
     data.forEach((curr) => {
       const isBefore = dayjs(curr.date).isBefore(startDate, 'day')
       const isAfter = dayjs(curr.date).isAfter(endDate, 'day')
       if (!isBefore && !isAfter) {
-        const idx = dayjs(curr.date).endOf('day').diff(startDate, 'day')
+        const idx = dayjs(curr.date).startOf('day').diff(startDate, 'day')
         rawCells[idx].count += curr.count
       }
     })
@@ -32,7 +32,7 @@ export function useDailyCell(data: CalenderHeatmapData[], endDate: Date) {
         acc[Math.floor(i / 7)].push(curr)
         return acc
       },
-      _.times(Math.floor(totalCells.length / 7), () => [])
+      _.times(Math.ceil(totalCells.length / 7), () => [])
     )
   }, [data, endDate, startDate])
 
