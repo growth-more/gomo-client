@@ -26,7 +26,7 @@ export function Streak() {
     if (streakType === 'MONTHLY') {
       return streak.monthly
     }
-    return streak.daily
+    return streak.all
   }, [streak, streakType])
 
   const type = useMemo(() => {

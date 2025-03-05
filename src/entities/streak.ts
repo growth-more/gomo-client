@@ -4,6 +4,7 @@ interface Streak {
 }
 
 interface OrganizedStreak {
+  all: Streak[]
   daily: Streak[]
   weekly: Streak[]
   monthly: Streak[]

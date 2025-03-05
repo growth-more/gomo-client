@@ -11,22 +11,27 @@ export function useStreak(startDate: Date, endDate: Date) {
 
   const streak = useMemo<OrganizedStreak>(() => {
     if (!streakData) {
-      return { daily: [], weekly: [], monthly: [] }
+      return { all: [], daily: [], weekly: [], monthly: [] }
     }
-    return {
-      daily: streakData.dailyStreaks.map((streak) => ({
-        date: streak.filledDate,
-        count: streak.completedQuestCount,
-      })),
-      weekly: streakData.weeklyStreaks.map((streak) => ({
-        date: streak.filledDate,
-        count: streak.completedQuestCount,
-      })),
-      monthly: streakData.monthlyStreaks.map((streak) => ({
-        date: streak.filledDate,
-        count: streak.completedQuestCount,
-      })),
-    }
+
+    const daily = streakData.dailyStreaks.map((streak) => ({
+      date: streak.filledDate,
+      count: streak.completedQuestCount,
+    }))
+
+    const weekly = streakData.weeklyStreaks.map((streak) => ({
+      date: streak.filledDate,
+      count: streak.completedQuestCount,
+    }))
+
+    const monthly = streakData.monthlyStreaks.map((streak) => ({
+      date: streak.filledDate,
+      count: streak.completedQuestCount,
+    }))
+
+    const all = [...daily, ...weekly, ...monthly]
+
+    return { all, daily, weekly, monthly }
   }, [streakData])
 
   return { streak, isLoading }
