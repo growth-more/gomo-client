@@ -1,4 +1,4 @@
-import { Container, Stack } from '@mui/material'
+import { Container, Stack, GlobalStyles } from '@mui/material'
 import { useRef, useState } from 'react'
 import { JoinStepper } from './components'
 import { InvisibleContainer } from '@/components/container'
@@ -37,6 +37,7 @@ export function JoinPage() {
 
   return (
     <OnlyGuest>
+      <GlobalStyles styles={{ body: { overflow: 'initial' } }} />
       <Container
         sx={{ p: 4, height: '100vh', display: 'flex', flexDirection: 'column' }}
         maxWidth="md"
