@@ -17,8 +17,11 @@ export function ProfilePage() {
   const profileMotto = useInnerValue(profile?.motto)
   const profileImg = useInnerValue(profile?.profileImageUrl)
 
-  const profilePreviewHandler = (file: File) => {
-    profileImg.setValue(URL.createObjectURL(file))
+  const profilePreviewHandler = (file: File | null) => {
+    if (file) {
+      console.log(file)
+      profileImg.setValue(URL.createObjectURL(file))
+    }
   }
 
   useEffect(() => {
@@ -48,11 +51,7 @@ export function ProfilePage() {
             src="./img/profile-bg.jpg"
           />
           <Stack alignItems="center" spacing={1} sx={{ translate: '0 -35px' }}>
-            <Editable.Avatar
-              img={profileImg.value}
-              editable={editable.value}
-              onEdit={profilePreviewHandler}
-            />
+            <Editable.Avatar img={profileImg.value} onEdit={profilePreviewHandler} />
             <Stack alignItems="center" spacing={0.5} width={1}>
               <Editable.Text
                 fontSize={18}

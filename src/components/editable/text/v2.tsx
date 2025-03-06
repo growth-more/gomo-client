@@ -66,7 +66,7 @@ export function EditableText({
   if (assignedId !== null) {
     return (
       <Stack width={1} maxWidth={inputMaxWidth} spacing={0}>
-        <Box
+        <Stack
           width={1}
           p={0.5}
           bgcolor="divider"
@@ -81,7 +81,7 @@ export function EditableText({
             sx={{ textAlign: 'center', ...inputSx }}
             autoFocus
           />
-        </Box>
+        </Stack>
         <Stack
           direction="row"
           border={1}
