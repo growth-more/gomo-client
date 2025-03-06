@@ -14,17 +14,17 @@ export function useStreak(startDate: Date, endDate: Date) {
       return { all: [], daily: [], weekly: [], monthly: [] }
     }
 
-    const daily = streakData.dailyStreaks.map((streak) => ({
+    const daily = streakData.dailyStreaks?.map((streak) => ({
       date: streak.filledDate,
       count: streak.completedQuestCount,
     }))
 
-    const weekly = streakData.weeklyStreaks.map((streak) => ({
+    const weekly = streakData.weeklyStreaks?.map((streak) => ({
       date: streak.filledDate,
       count: streak.completedQuestCount,
     }))
 
-    const monthly = streakData.monthlyStreaks.map((streak) => ({
+    const monthly = streakData.monthlyStreaks?.map((streak) => ({
       date: streak.filledDate,
       count: streak.completedQuestCount,
     }))
