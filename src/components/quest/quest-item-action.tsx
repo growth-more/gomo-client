@@ -24,9 +24,9 @@ export function QuestITemAction({
   onEdit,
   onComplete,
 }: QuestItemActionProps) {
-  const actionBtn = (tooltip: string, icon: string, clickHandler?: () => void) => {
+  const actionBtn = (tooltip: string, icon: string, key: string, clickHandler?: () => void) => {
     return (
-      <Tooltip title={tooltip}>
+      <Tooltip title={tooltip} key={key}>
         <IconButton size="small" onClick={clickHandler}>
           <Iconify icon={icon} />
         </IconButton>
@@ -36,17 +36,17 @@ export function QuestITemAction({
 
   const actionRender = useMemo(() => {
     const result = []
-    if (useDelete) {
-      result.push(actionBtn('퀘스트 삭제', 'material-symbols:close-rounded', onDelete))
-    }
     if (useEdit) {
-      result.push(actionBtn('퀘스트 수정', 'lets-icons:edit', onEdit))
+      result.push(actionBtn('퀘스트 수정', 'lets-icons:edit', 'EDIT', onEdit))
+    }
+    if (useDelete) {
+      result.push(actionBtn('퀘스트 삭제', 'material-symbols:close-rounded', 'DELETE', onDelete))
     }
     if (useConfirm) {
-      result.push(actionBtn('퀘스트 수락', 'mdi:check', onConfirm))
+      result.push(actionBtn('퀘스트 수락', 'mdi:check', 'CONFIRM', onConfirm))
     }
     if (useComplete) {
-      result.push(actionBtn('퀘스트 완료', 'mdi:check', onComplete))
+      result.push(actionBtn('퀘스트 완료', 'mdi:check', 'COMPLETE', onComplete))
     }
     return result
   }, [onComplete, onConfirm, onDelete, onEdit, useComplete, useConfirm, useDelete, useEdit])

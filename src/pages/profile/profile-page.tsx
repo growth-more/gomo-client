@@ -58,24 +58,23 @@ export function ProfilePage() {
                 fontSize={18}
                 fontWeight={600}
                 color="text.secondary"
-                editable={editable.value}
                 value={profileName.value}
                 onEdit={profileName.setValue}
+                inputMaxWidth={200}
               />
               <Editable.Text
                 fontSize={12}
                 fontWeight={500}
                 color="text.secondary"
-                editable={editable.value}
                 value={profileHandle.value}
                 onEdit={profileHandle.setValue}
+                inputMaxWidth={150}
               />
             </Stack>
             <Stack width={1} alignItems="center" spacing={0.5}>
               <Iconify icon="flowbite:quote-solid" width={15} sx={{ color: 'text.secondary' }} />
               <Editable.Text
                 width={1}
-                editable={editable.value}
                 value={profileMotto.value}
                 onEdit={profileMotto.setValue}
                 fontSize={14}

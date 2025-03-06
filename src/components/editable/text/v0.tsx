@@ -10,7 +10,7 @@ interface EditableTextLegacyProps extends TypographyProps {
   tooltip?: string
 }
 
-export function EditableTextLegacy({
+export function EditableText({
   onEdit,
   text,
   disableEdit,

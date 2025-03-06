@@ -1,5 +1,5 @@
+import { EditableText } from '@/components/editable/text/v2'
 import { EditableAvatar } from './avatar'
-import { EditableText } from './text'
 
 export const Editable = {
   Text: EditableText,
