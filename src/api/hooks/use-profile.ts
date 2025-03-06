@@ -60,9 +60,18 @@ export function useProfile() {
     [checkHandleDuplicateMutate, updateHandleMutate]
   )
 
-  const profile = useMemo<Profile | null>(() => {
+  const profile = useMemo<Profile>(() => {
     if (!profileData) {
-      return null
+      return {
+        id: '',
+        email: '',
+        handle: '',
+        name: '',
+        motto: '',
+        availablePoint: 0,
+        profileImageUrl: '',
+        subscriptionPlan: '',
+      }
     }
     return {
       id: profileData.id,

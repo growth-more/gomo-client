@@ -2,7 +2,7 @@ import { useStreak } from '@/api/hooks'
 import { CalendarHeatmap } from '@/components/heatmap'
 import { StreakType } from '@/entities'
 import { StreakDateSelector, StreakTypeSelector } from '@/pages/profile/components'
-import { alpha, Divider, Stack } from '@mui/material'
+import { alpha, Box, Divider, Stack } from '@mui/material'
 import dayjs from 'dayjs'
 import { useMemo, useState } from 'react'
 
@@ -37,28 +37,35 @@ export function Streak() {
   }, [streakType])
 
   return (
-    <Stack
-      direction="row"
-      bgcolor={(theme) => alpha(theme.palette.common.white, 0.2)}
-      border={1}
-      borderColor="divider"
-      borderRadius={2}
-      overflow="hidden"
-      height={150}
-    >
-      <StreakTypeSelector value={streakType} onChange={setStreakType} sx={{ width: 80, p: 0.5 }} />
-      <Divider orientation="vertical" />
+    <Box p={1}>
+      <Stack
+        p={1}
+        direction="row"
+        bgcolor={(theme) => alpha(theme.palette.common.white, 0.2)}
+        border={1}
+        borderColor="divider"
+        borderRadius={2}
+        overflow="hidden"
+        height={150}
+      >
+        <StreakTypeSelector
+          value={streakType}
+          onChange={setStreakType}
+          sx={{ width: 80, p: 0.5 }}
+        />
+        <Divider orientation="vertical" />
 
-      <CalendarHeatmap
-        data={data}
-        endDate={endDate}
-        sx={{ flex: 1, overflow: 'hidden', p: 1, alignSelf: 'center' }}
-        color="#00a63e"
-        type={type}
-      />
+        <CalendarHeatmap
+          data={data}
+          endDate={endDate}
+          sx={{ flex: 1, overflow: 'hidden', p: 1, alignSelf: 'center' }}
+          color="#00a63e"
+          type={type}
+        />
 
-      <Divider orientation="vertical" />
-      <StreakDateSelector value={endDate} onChange={setEndDate} sx={{ width: 80, p: 0.5 }} />
-    </Stack>
+        <Divider orientation="vertical" />
+        <StreakDateSelector value={endDate} onChange={setEndDate} sx={{ width: 80, p: 0.5 }} />
+      </Stack>
+    </Box>
   )
 }

@@ -3,3 +3,8 @@ export * from './streak/streak-type-selector'
 export * from './streak/daily-streak'
 export * from './streak/weekly-streak'
 export * from './streak/streak'
+
+export * from './header/profile-name'
+export * from './header/profile-motto'
+export * from './header/profile-handle'
+export * from './header/profile-header'
