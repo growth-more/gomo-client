@@ -5,6 +5,7 @@ import { useBoolean } from '@/hooks'
 import { useEditableStore } from '@/stores'
 import {
   Box,
+  CircularProgress,
   Divider,
   IconButton,
   Stack,
@@ -34,7 +35,7 @@ export function EditableText({
   const [assignedId, setAssignedId] = useState<string | null>(null)
 
   const isHovered = useBoolean()
-
+  const isPending = useBoolean()
   const isChanged = useMemo(() => value !== inputValue, [value, inputValue])
 
   const startEditHandler = () => {
@@ -47,8 +48,16 @@ export function EditableText({
   }
 
   const submitHandler = () => {
-    onEdit?.(inputValue)
-    endEditHandler()
+    isPending.onTrue()
+    onEdit?.(inputValue, {
+      onSuccess: () => {
+        endEditHandler()
+        isPending.onFalse()
+      },
+      onError: () => {
+        isPending.onFalse()
+      },
+    })
   }
 
   useEffect(() => {
@@ -80,6 +89,7 @@ export function EditableText({
             typographyProps={typographyProps}
             sx={{ textAlign: 'center', ...inputSx }}
             autoFocus
+            disabled={isPending.value}
           />
         </Stack>
         <Stack
@@ -94,9 +104,15 @@ export function EditableText({
             <Iconify icon="mdi:close" width={15} />
           </IconButton>
           <Divider orientation="vertical" flexItem />
-          <IconButton size="small" sx={{ borderRadius: 1 }} onClick={submitHandler}>
-            <Iconify icon="mdi:check" width={15} />
-          </IconButton>
+          {isPending.value ? (
+            <Stack width={25} height={25} alignItems="center" justifyContent="center">
+              <CircularProgress size={15} color="inherit" />
+            </Stack>
+          ) : (
+            <IconButton size="small" sx={{ borderRadius: 1 }} onClick={submitHandler}>
+              <Iconify icon="mdi:check" width={15} />
+            </IconButton>
+          )}
         </Stack>
       </Stack>
     )

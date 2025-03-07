@@ -1,7 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { MutateOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
 import { useCallback, useMemo } from 'react'
 import { Profile } from '@/entities'
+import { UpdateHandleFetchRequest } from '@/api/types'
 
 export function useProfile() {
   const queryClient = useQueryClient()
@@ -11,7 +12,7 @@ export function useProfile() {
     queryFn: fetches.member.profile,
   })
 
-  const { mutate: updateProfileMutate } = useMutation({
+  const { mutate: updateProfile } = useMutation({
     mutationKey: ['PUT', endpoints.member.update],
     mutationFn: fetches.member.update,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['GET', endpoints.member.profile] }),
@@ -23,7 +24,7 @@ export function useProfile() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['GET', endpoints.member.profile] }),
   })
 
-  const { mutate: updateProfileImageMutate } = useMutation({
+  const { mutate: updateProfileImage } = useMutation({
     mutationKey: ['PUT', endpoints.member.updateProfileImage],
     mutationFn: fetches.member.updateProfileImage,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['GET', endpoints.member.profile] }),
@@ -34,35 +35,30 @@ export function useProfile() {
     mutationFn: fetches.member.checkHandleDuplicate,
   })
 
-  const updateProfile = useCallback(
-    (name: string, motto: string) => {
-      updateProfileMutate({ body: { name, motto } })
-    },
-    [updateProfileMutate]
-  )
-
-  const updateProfileImage = useCallback(
-    (profileImage: File) => {
-      updateProfileImageMutate({ body: { profileImage } })
-    },
-    [updateProfileImageMutate]
-  )
-
   const updateHandle = useCallback(
-    (handle: string) => {
+    (handle: string, options?: MutateOptions<void, Error, UpdateHandleFetchRequest, unknown>) => {
       checkHandleDuplicateMutate(
         { handle },
         {
-          onSuccess: () => updateHandleMutate({ body: { handle } }),
+          onSuccess: () => updateHandleMutate({ body: { handle } }, options),
         }
       )
     },
     [checkHandleDuplicateMutate, updateHandleMutate]
   )
 
-  const profile = useMemo<Profile | null>(() => {
+  const profile = useMemo<Profile>(() => {
     if (!profileData) {
-      return null
+      return {
+        id: '',
+        email: '',
+        handle: '',
+        name: '',
+        motto: '',
+        availablePoint: 0,
+        profileImageUrl: '',
+        subscriptionPlan: '',
+      }
     }
     return {
       id: profileData.id,

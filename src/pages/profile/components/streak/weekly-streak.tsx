@@ -1,6 +1,6 @@
 import { useStreak } from '@/api/hooks'
 import { CalendarHeatmap } from '@/components/heatmap'
-import { StreakDateSelector } from '@/pages/profile/components/streak-date-selector'
+import { StreakDateSelector } from '@/pages/profile/components/streak/streak-date-selector'
 import { alpha, Divider, Stack } from '@mui/material'
 import dayjs from 'dayjs'
 import { useMemo, useState } from 'react'

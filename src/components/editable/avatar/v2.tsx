@@ -1,7 +1,6 @@
 import { Iconify } from '@/components/iconify'
-import { useBoolean, useUpload } from '@/hooks'
+import { useUpload } from '@/hooks'
 import { alpha, IconButton, Stack } from '@mui/material'
-import { useEffect } from 'react'
 import { EditableProps } from '../types'
 import { motion } from 'motion/react'
 import { Avatar } from '@/components/editable/avatar/avatar'
@@ -11,8 +10,6 @@ interface EditableAvatarProps extends EditableProps<File | null> {
 }
 
 export function EditableAvatar({ img, onEdit }: EditableAvatarProps) {
-  const isFallback = useBoolean()
-
   const { upload } = useUpload({
     onSuccess: (files) => onEdit?.(files[0]),
     onError: (error) => console.error(error),
@@ -21,15 +18,6 @@ export function EditableAvatar({ img, onEdit }: EditableAvatarProps) {
   const deleteHandler = () => {
     onEdit?.(null)
   }
-
-  useEffect(() => {
-    if (img) {
-      isFallback.onFalse()
-      return
-    }
-    isFallback.onTrue()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [img])
 
   return (
     <Stack position="relative">

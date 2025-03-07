@@ -1,6 +1,11 @@
-interface EditableProps<T> {
-  editable?: boolean
-  onEdit?: (value: T) => void
+interface OnEditHandler {
+  onSuccess?: () => void
+  onError?: () => void
 }
 
-export type { EditableProps }
+interface EditableProps<T> {
+  editable?: boolean
+  onEdit?: (value: T, handler?: OnEditHandler) => void
+}
+
+export type { EditableProps, OnEditHandler }
