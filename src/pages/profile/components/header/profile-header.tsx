@@ -1,26 +1,27 @@
 import { useProfile } from '@/api/hooks'
 import { Editable } from '@/components/editable'
+import { OnEditHandler } from '@/components/editable/types'
 import { ProfileHandle, ProfileMotto, ProfileName } from '@/pages/profile/components'
 import { Stack } from '@mui/material'
 
 export function ProfileHeader() {
   const { profile, updateHandle, updateProfile, updateProfileImage } = useProfile()
 
-  const updateNameHandler = (name: string) => {
-    updateProfile(name, profile.motto)
+  const updateNameHandler = (name: string, handler?: OnEditHandler) => {
+    updateProfile({ body: { name, motto: profile.motto } }, handler)
   }
 
-  const updateMottoHandler = (motto: string) => {
-    updateProfile(profile.name, motto)
+  const updateMottoHandler = (motto: string, handler?: OnEditHandler) => {
+    updateProfile({ body: { name: profile.name, motto } }, handler)
   }
 
-  const updateHandleHandler = (handle: string) => {
-    updateHandle(handle)
+  const updateHandleHandler = (handle: string, handler?: OnEditHandler) => {
+    updateHandle(handle, handler)
   }
 
   const updateProfileImageHandler = (image: File | null) => {
     if (image !== null) {
-      updateProfileImage(image)
+      updateProfileImage({ body: { profileImage: image } })
       return
     }
     // deleteProfileImage()

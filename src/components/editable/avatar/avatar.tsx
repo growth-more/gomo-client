@@ -3,6 +3,7 @@ import { Stack } from '@mui/material'
 import { Iconify } from '@/components/iconify'
 import { useBoolean } from '@/hooks'
 import { alpha, Box, SxProps, Theme } from '@mui/material'
+import { useEffect } from 'react'
 
 interface AvatarProps {
   src?: string
@@ -28,6 +29,11 @@ const avatarSx: SxProps<Theme> = {
 
 export function Avatar({ src }: AvatarProps) {
   const isFallback = useBoolean()
+
+  useEffect(() => {
+    isFallback.onFalse()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src])
 
   if (!src || isFallback.value) {
     return (

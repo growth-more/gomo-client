@@ -13,35 +13,42 @@ import { delay, http, HttpResponse } from 'msw'
 
 export const member = [
   http.get<never, never, ProfileResponse>(endpoints.member.profile, async () => {
-    // await delay(10000) // 딜레이 스켈레톤
+    await delay(1000)
     return HttpResponse.json(mock.member.profile, { status: 200 })
   }),
 
   http.put<never, UpdateMemberRequest>(endpoints.member.update, async () => {
+    await delay(1000)
     return new HttpResponse(null, { status: 204 })
   }),
 
   http.put<never, UpdateHandleRequest>(endpoints.member.updateHandle, async () => {
+    await delay(1000)
     return new HttpResponse(null, { status: 204 })
   }),
 
   http.put<never, UpdatePasswordRequest>(endpoints.member.updatePassword, async () => {
+    await delay(1000)
     return new HttpResponse(null, { status: 204 })
   }),
 
   http.get<never, never>(endpoints.member.checkHandleDuplicate, async () => {
+    await delay(1000)
     return new HttpResponse(null, { status: 200 })
   }),
 
   http.put<never, UpdateProfileImageRequest>(endpoints.member.updateProfileImage, async () => {
+    await delay(1000)
     return new HttpResponse(null, { status: 204 })
   }),
 
   http.get<never, never, QuestPropertyResponse>(endpoints.member.getQuestProperty, async () => {
+    await delay(1000)
     return HttpResponse.json(mock.member.questProperty, { status: 200 })
   }),
 
   http.put<never, UpdateQuestPropertyRequest>(endpoints.member.updateQuestProperty, async () => {
+    await delay(1000)
     return new HttpResponse(null, { status: 204 })
   }),
 ]
