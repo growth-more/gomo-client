@@ -4,23 +4,14 @@ import { ForceDirectedGraph } from '@/components/force-directed-graph'
 import { CreateInterest, InterestIndicator } from './components'
 import { useState } from 'react'
 import { Interest, InterestVertex } from '@/entities/interest'
+import { OnEditHandler } from '@/components/editable/types'
 
 export function InterestPage() {
-  const { interestList, deleteInterest } = useInterest()
-  const { interestGraph } = useInterestGraph()
+  const { interestList, deleteInterest, updateInterest } = useInterest()
+  const { interestGraph, createEdge, deleteEdge } = useInterestGraph()
 
   const [selectedInterest, setSelectedInterest] = useState<Interest | null>(null)
-
-  const onSelectInterest = (vertex: InterestVertex | null) => {
-    setSelectedInterest(vertex?.interest ?? null)
-  }
-
-  const onDeleteInterest = () => {
-    if (selectedInterest) {
-      deleteInterest({ id: selectedInterest.id })
-      setSelectedInterest(null)
-    }
-  }
+  const [upperInterest, setUpperInterest] = useState<Interest | null>(null)
 
   const getUpperInterest = (interest: Interest) => {
     const vertex = interestGraph.edge.find((edge) => {
@@ -30,6 +21,56 @@ export function InterestPage() {
       return null
     }
     return interestList.find((interest) => interest.id === vertex.source) ?? null
+  }
+
+  const updateInterestHandler = (name: string, handler?: OnEditHandler) => {
+    if (selectedInterest === null) {
+      return
+    }
+    updateInterest({ id: selectedInterest.id, body: { name } }, handler)
+  }
+
+  const updateUpperInterestHandler = (newUpperId: string | null) => {
+    if (selectedInterest === null) {
+      return
+    }
+
+    if (upperInterest === null) {
+      if (newUpperId !== null) {
+        createEdge({ body: { parentInterestId: newUpperId, childInterestId: selectedInterest.id } })
+      }
+      return
+    }
+
+    const prevEdgeId =
+      interestGraph.edge.find(
+        (edge) => edge.target === selectedInterest.id && edge.source === upperInterest.id
+      )?.id ?? null
+
+    if (prevEdgeId === null) {
+      return
+    }
+    deleteEdge({ id: prevEdgeId })
+    if (newUpperId !== null) {
+      createEdge({ body: { parentInterestId: newUpperId, childInterestId: selectedInterest.id } })
+    }
+  }
+
+  const onSelectInterest = (vertex: InterestVertex | null) => {
+    if (vertex === null) {
+      setSelectedInterest(null)
+      setUpperInterest(null)
+      return
+    }
+    setSelectedInterest(vertex.interest)
+    setUpperInterest(getUpperInterest(vertex.interest))
+  }
+
+  const onDeleteInterest = () => {
+    if (selectedInterest) {
+      deleteInterest({ id: selectedInterest.id })
+      setSelectedInterest(null)
+    }
   }
 
   return (
@@ -42,8 +83,10 @@ export function InterestPage() {
       <Stack width={250} height={1} p={1} spacing={1}>
         <InterestIndicator
           interest={selectedInterest}
+          upperInterest={upperInterest}
           onDelete={onDeleteInterest}
-          getUpperInterest={getUpperInterest}
+          onChangeUpperInterest={updateUpperInterestHandler}
+          onChangeInterestName={updateInterestHandler}
         />
         <CreateInterest />
       </Stack>

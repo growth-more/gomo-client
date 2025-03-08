@@ -2,26 +2,34 @@ import { Interest } from '@/entities/interest'
 import { alpha, Button, Stack, Typography } from '@mui/material'
 import { ScoreBar } from './score-bar'
 import { SelectInterest } from '@/pages/interest/components/select-interest'
-import { useEffect, useState } from 'react'
+import { useInnerValue } from '@/hooks'
+import { Editable } from '@/components/editable'
+import { OnEditHandler } from '@/components/editable/types'
 
 interface InterestIndicatorProps {
   interest: Interest | null
+  upperInterest: Interest | null
   onDelete?: () => void
-  getUpperInterest: (interest: Interest) => Interest | null
+  onChangeUpperInterest?: (id: string | null) => void
+  onChangeInterestName?: (name: string, handler?: OnEditHandler) => void
 }
 
 export function InterestIndicator({
   interest,
+  upperInterest,
   onDelete,
-  getUpperInterest,
+  onChangeUpperInterest,
+  onChangeInterestName,
 }: InterestIndicatorProps) {
-  const [upperInterest, setUpperInterest] = useState<Interest | null>(null)
+  const { value, setValue, isChanged } = useInnerValue<Interest | null>(upperInterest)
 
-  useEffect(() => {
-    if (interest) {
-      setUpperInterest(getUpperInterest(interest))
+  const changeUpperInterestHandler = () => {
+    if (value === null) {
+      onChangeUpperInterest?.(null)
+      return
     }
-  }, [interest, getUpperInterest])
+    onChangeUpperInterest?.(value.id)
+  }
 
   return (
     <Stack
@@ -40,19 +48,32 @@ export function InterestIndicator({
               pl={0.5}
               direction="row"
               justifyContent="space-between"
-              alignItems="center"
+              alignItems="flex-start"
               spacing={1}
             >
-              <Typography fontSize={16} fontWeight={600} noWrap>
-                {interest.name}
-              </Typography>
+              <Editable.Text
+                value={interest.name}
+                onEdit={onChangeInterestName}
+                fontSize={16}
+                fontWeight={600}
+                inputSx={{
+                  color: 'white',
+                  textAlign: 'left',
+                }}
+                iconSx={{
+                  color: 'white',
+                }}
+                noWrap
+              />
               <Typography
                 fontSize={12}
                 fontWeight={400}
+                flexShrink={0}
                 px={1}
                 py={0.5}
                 bgcolor={(theme) => theme.palette.grey[900]}
                 borderRadius={1}
+                noWrap
               >
                 LV {interest.level}
               </Typography>
@@ -63,7 +84,15 @@ export function InterestIndicator({
               <Typography fontSize={14} fontWeight={600} pl={0.5}>
                 상위 관심사
               </Typography>
-              <SelectInterest value={upperInterest} onSelect={setUpperInterest} />
+              <SelectInterest value={value} onSelect={setValue} placeholder="상위 관심사 없음" />
+              <Button
+                size="small"
+                disabled={!isChanged}
+                fullWidth
+                onClick={changeUpperInterestHandler}
+              >
+                상위 관심사 수정하기
+              </Button>
             </Stack>
           </Stack>
           <Stack direction="row" justifyContent="flex-end">

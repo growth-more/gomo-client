@@ -1,7 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 export function useInnerValue<T>(initialValue: T) {
   const [value, setValue] = useState<T>(initialValue)
+
+  const isChanged = useMemo(() => {
+    return value !== initialValue
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
 
   const reset = () => {
     setValue(initialValue)
@@ -11,5 +16,5 @@ export function useInnerValue<T>(initialValue: T) {
     setValue(initialValue)
   }, [initialValue])
 
-  return { value, setValue, reset }
+  return { value, isChanged, setValue, reset }
 }

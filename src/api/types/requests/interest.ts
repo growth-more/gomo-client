@@ -28,7 +28,6 @@ interface UpdateMajorInterestOrderRequest {
 // ===================================
 
 interface CreateInterestEdgeRequest {
-  memeberId: string
   parentInterestId: string
   childInterestId: string
 }
