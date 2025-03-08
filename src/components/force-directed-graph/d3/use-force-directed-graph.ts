@@ -1,5 +1,5 @@
 import { useWindowViewContext } from '@/components/window'
-import { MouseEvent, useCallback, useEffect, useRef } from 'react'
+import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
 import {
   createEdge,
@@ -10,6 +10,7 @@ import {
   useForceDirectedGraphSelect,
 } from '@/components/force-directed-graph/d3'
 import { Graph, Vertex } from '@/components/force-directed-graph/types'
+import { cloneDeep } from 'lodash'
 
 export function useForceDirectedGraph<V extends Vertex>(
   data: Graph<V>,
@@ -19,6 +20,8 @@ export function useForceDirectedGraph<V extends Vertex>(
 
   const svgRef = useRef<SVGSVGElement>(null)
   const { setSelectedVertexId } = useForceDirectedGraphSelect(svgRef)
+
+  const [graphData, setGraphData] = useState<Graph<V>>(cloneDeep(data))
 
   const onSelectHandler = useCallback(
     (interest: V) => {
@@ -45,6 +48,10 @@ export function useForceDirectedGraph<V extends Vertex>(
   )
 
   useEffect(() => {
+    setGraphData(cloneDeep(data))
+  }, [data])
+
+  useEffect(() => {
     if (!svgRef.current) {
       return
     }
@@ -56,9 +63,9 @@ export function useForceDirectedGraph<V extends Vertex>(
     svg.selectAll('*').remove()
     svg.append('defs').call(createGlowFilter)
 
-    const edge = createEdge(svg, data.edge)
-    const vertex = createVertex(svg, data.vertex)
-    const simulation = createSimulation(data, width, height)
+    const edge = createEdge(svg, graphData.edge)
+    const vertex = createVertex(svg, graphData.vertex)
+    const simulation = createSimulation(graphData, width, height)
 
     vertex.call(drag(simulation, onSelectHandler))
 
@@ -71,7 +78,7 @@ export function useForceDirectedGraph<V extends Vertex>(
       vertex.attr('transform', (d) => `translate(${d.x},${d.y})`)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, viewSize])
+  }, [graphData, viewSize])
 
   return { svgRef, onSvgClickHandler }
 }

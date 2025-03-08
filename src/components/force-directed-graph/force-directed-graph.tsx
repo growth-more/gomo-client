@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import { Graph, Vertex } from './types'
 import { useForceDirectedGraph } from '@/components/force-directed-graph/d3'
+
 interface ForceDirectedGraphProps<V extends Vertex> {
   data: Graph<V>
   onSelect?: (interest: V | null) => void
