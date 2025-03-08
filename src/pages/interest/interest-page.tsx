@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { Interest, InterestVertex } from '@/entities/interest'
 
 export function InterestPage() {
-  const { deleteInterest } = useInterest()
+  const { interestList, deleteInterest } = useInterest()
   const { interestGraph } = useInterestGraph()
 
   const [selectedInterest, setSelectedInterest] = useState<Interest | null>(null)
@@ -22,6 +22,16 @@ export function InterestPage() {
     }
   }
 
+  const getUpperInterest = (interest: Interest) => {
+    const vertex = interestGraph.edge.find((edge) => {
+      return edge.target === interest.id
+    })
+    if (vertex === undefined) {
+      return null
+    }
+    return interestList.find((interest) => interest.id === vertex.source) ?? null
+  }
+
   return (
     <Stack
       width={1}
@@ -30,7 +40,11 @@ export function InterestPage() {
       bgcolor={(theme) => alpha(theme.palette.common.black, 0.5)}
     >
       <Stack width={250} height={1} p={1} spacing={1}>
-        <InterestIndicator interest={selectedInterest} onDelete={onDeleteInterest} />
+        <InterestIndicator
+          interest={selectedInterest}
+          onDelete={onDeleteInterest}
+          getUpperInterest={getUpperInterest}
+        />
         <CreateInterest />
       </Stack>
       <Box flex={1} height={1} p={1}>
