@@ -52,6 +52,7 @@ export function useInterestGraph() {
         })) ?? [],
       edge:
         interestGraphData.relations?.map((relation) => ({
+          id: relation.id,
           source: relation.parentInterestId,
           target: relation.childInterestId,
         })) ?? [],
