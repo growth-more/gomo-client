@@ -1186,7 +1186,7 @@ const major: MajorInterestResponse = {
     {
       id: '3bd1b3f7-d7c6-11ef-abb8-a7e09b2a499c',
       name: 'Backend',
-      logoUrl: 'https://mini-cloud/backend-logo.png',
+      logoUrl: 'https://cdn-icons-png.flaticon.com/512/8010/8010472.png',
       level: 100,
       score: 45,
       scoreThreshold: 60,
@@ -1195,7 +1195,7 @@ const major: MajorInterestResponse = {
     {
       id: '90a387a7-d7c5-11ef-b4d7-079c7dc41274',
       name: 'Spring',
-      logoUrl: 'https://mini-cloud/spring-logo.png',
+      logoUrl: 'https://static-00.iconduck.com/assets.00/spring-icon-2048x2045-yufnoc34.png',
       level: 5,
       score: 20,
       scoreThreshold: 40,
@@ -1204,7 +1204,7 @@ const major: MajorInterestResponse = {
     {
       id: 'f8c51811-d7c5-11ef-82dc-4322ccc3e338',
       name: 'Java',
-      logoUrl: 'https://mini-cloud/java-logo.png',
+      logoUrl: 'https://cdn.iconscout.com/icon/free/png-256/free-java-60-1174953.png?f=webp',
       level: 1,
       score: 30,
       scoreThreshold: 40,
@@ -1213,7 +1213,7 @@ const major: MajorInterestResponse = {
     {
       id: '4cd2b3f7-d7c6-11ef-abb8-a7e09b2a499d',
       name: 'Node.js',
-      logoUrl: 'https://mini-cloud/nodejs-logo.png',
+      logoUrl: 'https://static-00.iconduck.com/assets.00/nodejs-icon-2048x1254-fc24w6ld.png',
       level: 15,
       score: 25,
       scoreThreshold: 50,
@@ -1222,7 +1222,8 @@ const major: MajorInterestResponse = {
     {
       id: '5ef3b3f7-d7c6-11ef-abb8-a7e09b2a499e',
       name: 'React',
-      logoUrl: 'https://mini-cloud/react-logo.png',
+      logoUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
       level: 45,
       score: 35,
       scoreThreshold: 70,
@@ -1231,7 +1232,8 @@ const major: MajorInterestResponse = {
     {
       id: '6fg4b3f7-d7c6-11ef-abb8-a7e09b2a499f',
       name: 'TypeScript',
-      logoUrl: 'https://mini-cloud/typescript-logo.png',
+      logoUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2_979C0CYjHp3QH53N8pLqEI2Ku6g5fLTwA&s',
       level: 75,
       score: 55,
       scoreThreshold: 80,

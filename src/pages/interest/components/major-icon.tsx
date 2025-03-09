@@ -1,5 +1,5 @@
 import { Iconify } from '@/components/iconify'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 
 interface MajorIconProps {
   isMajor: boolean
@@ -10,15 +10,19 @@ interface MajorIconProps {
 export function MajorIcon({ isMajor, onRegist, onUnregist }: MajorIconProps) {
   if (isMajor) {
     return (
-      <IconButton onClick={onUnregist}>
-        <Iconify icon="solar:star-bold" sx={{ color: '#ffba00' }} />
-      </IconButton>
+      <Tooltip title="주요 관심사 해제">
+        <IconButton onClick={onUnregist}>
+          <Iconify icon="solar:star-bold" sx={{ color: '#ffba00' }} />
+        </IconButton>
+      </Tooltip>
     )
   }
 
   return (
-    <IconButton onClick={onRegist}>
-      <Iconify icon="solar:star-linear" sx={{ color: 'grey.400' }} />
-    </IconButton>
+    <Tooltip title="주요 관심사 등록">
+      <IconButton onClick={onRegist}>
+        <Iconify icon="solar:star-linear" sx={{ color: 'grey.400' }} />
+      </IconButton>
+    </Tooltip>
   )
 }
