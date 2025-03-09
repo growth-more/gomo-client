@@ -3,7 +3,9 @@
 // ===================================
 
 interface CreateInterestRequest {
-  name: string
+  request: {
+    name: string
+  }
   logo: File
 }
 
