@@ -1,13 +1,12 @@
-import { useAssignQuest } from '@/api/hooks'
+import { useAssignQuest, useInterest } from '@/api/hooks'
 import { useWindowStore } from '@/stores'
 import { alpha, Button, Stack, Tab, Tabs, TextField } from '@mui/material'
 import { QUEST_CREATE_PAGE_ID, UPDATE_QUEST_PAGE_ID } from '@/constants/window-view'
 import { useQuestTab } from './hooks'
 import { useEffect, useState } from 'react'
 import { AssignQuest } from '@/entities'
-
-// TODO: react-hook-form 적용
-// TODO: 관심사 연결
+import { SelectInterest } from '@/pages/interest/components'
+import { Interest } from '@/entities/interest'
 
 interface QuestEditPageProps {
   prevData?: AssignQuest
@@ -15,10 +14,13 @@ interface QuestEditPageProps {
 
 export function QuestEditPage({ prevData }: QuestEditPageProps) {
   const { createQuest, updateQuest } = useAssignQuest()
+  const { interestList } = useInterest()
+
   const { removeView } = useWindowStore()
   const { tab: questType, tabs, tabHandler, setTab } = useQuestTab()
 
   const [content, setContent] = useState('')
+  const [interest, setInterest] = useState<Interest | null>(null)
 
   const buttonText = prevData ? '퀘스트 수정' : '퀘스트 추가'
 
@@ -27,14 +29,14 @@ export function QuestEditPage({ prevData }: QuestEditPageProps) {
   }
 
   const createHandler = () => {
-    if (prevData) {
+    if (prevData || !interest) {
       return
     }
     createQuest(
       {
         body: {
-          subjectId: '1',
-          subjectName: '1',
+          subjectId: interest.id,
+          subjectName: interest.name,
           questType,
           content,
         },
@@ -44,14 +46,14 @@ export function QuestEditPage({ prevData }: QuestEditPageProps) {
   }
 
   const updateHandler = () => {
-    if (!prevData) {
+    if (!prevData || !interest) {
       return
     }
     updateQuest(
       {
         body: {
-          subjectId: '1',
-          subjectName: '1',
+          subjectId: interest.id,
+          subjectName: interest.name,
           questType,
           content,
         },
@@ -67,7 +69,12 @@ export function QuestEditPage({ prevData }: QuestEditPageProps) {
     }
     setContent(prevData.content)
     setTab(prevData.questType)
-  }, [prevData, setTab])
+
+    const interest = interestList.find((interest) => interest.id === prevData.subjectId)
+    if (interest) {
+      setInterest(interest)
+    }
+  }, [prevData, setTab, interestList])
 
   return (
     <Stack height={1}>
@@ -91,10 +98,12 @@ export function QuestEditPage({ prevData }: QuestEditPageProps) {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
+        <SelectInterest value={interest} onSelect={setInterest} placeholder="관심사 선택" />
 
         <Button
           variant="contained"
           color="primary"
+          disabled={!interest || content.trim() === ''}
           onClick={prevData ? updateHandler : createHandler}
         >
           {buttonText}
