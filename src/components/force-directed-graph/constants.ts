@@ -2,7 +2,7 @@ export const VERTEX = {
   ID_PREFIX: 'vertex-',
 
   FILL_COLOR: '#4F39F6',
-  FILL_DESATURATION: 0.6,
+  FILL_DESATURATION: 0.3,
   FILL_OPACITY: 0.3,
 
   STROKE_COLOR: '#FFF',

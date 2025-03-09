@@ -1,4 +1,9 @@
-import { InterestGraphResponse, InterestListResponse } from '@/api/types'
+import {
+  CreateMajorInterestResponse,
+  InterestGraphResponse,
+  InterestListResponse,
+  MajorInterestResponse,
+} from '@/api/types'
 
 const list: InterestListResponse = {
   interests: [
@@ -1176,8 +1181,75 @@ const create = {
   id: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
 }
 
+const major: MajorInterestResponse = {
+  majorInterests: [
+    {
+      id: '3bd1b3f7-d7c6-11ef-abb8-a7e09b2a499c',
+      name: 'Backend',
+      logoUrl: 'https://cdn-icons-png.flaticon.com/512/8010/8010472.png',
+      level: 100,
+      score: 45,
+      scoreThreshold: 60,
+      displayOrder: 0,
+    },
+    {
+      id: '90a387a7-d7c5-11ef-b4d7-079c7dc41274',
+      name: 'Spring',
+      logoUrl: 'https://static-00.iconduck.com/assets.00/spring-icon-2048x2045-yufnoc34.png',
+      level: 5,
+      score: 20,
+      scoreThreshold: 40,
+      displayOrder: 0,
+    },
+    {
+      id: 'f8c51811-d7c5-11ef-82dc-4322ccc3e338',
+      name: 'Java',
+      logoUrl: 'https://cdn.iconscout.com/icon/free/png-256/free-java-60-1174953.png?f=webp',
+      level: 1,
+      score: 30,
+      scoreThreshold: 40,
+      displayOrder: 0,
+    },
+    {
+      id: '4cd2b3f7-d7c6-11ef-abb8-a7e09b2a499d',
+      name: 'Node.js',
+      logoUrl: 'https://static-00.iconduck.com/assets.00/nodejs-icon-2048x1254-fc24w6ld.png',
+      level: 15,
+      score: 25,
+      scoreThreshold: 50,
+      displayOrder: 0,
+    },
+    {
+      id: '5ef3b3f7-d7c6-11ef-abb8-a7e09b2a499e',
+      name: 'React',
+      logoUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
+      level: 45,
+      score: 35,
+      scoreThreshold: 70,
+      displayOrder: 0,
+    },
+    {
+      id: '6fg4b3f7-d7c6-11ef-abb8-a7e09b2a499f',
+      name: 'TypeScript',
+      logoUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2_979C0CYjHp3QH53N8pLqEI2Ku6g5fLTwA&s',
+      level: 75,
+      score: 55,
+      scoreThreshold: 80,
+      displayOrder: 0,
+    },
+  ],
+}
+
+const createMajor: CreateMajorInterestResponse = {
+  majorInterestId: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
+}
+
 export const interest = {
   list,
   graph,
   create,
+  major,
+  createMajor,
 }

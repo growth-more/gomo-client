@@ -2,8 +2,10 @@ import { endpoints } from '@/api'
 import {
   CreateInterestRequest,
   CreateInterestResponse,
+  CreateMajorInterestResponse,
   InterestGraphResponse,
   InterestListResponse,
+  MajorInterestResponse,
 } from '@/api/types'
 import { http, HttpResponse } from 'msw'
 import { mock } from '@/msw/data'
@@ -29,6 +31,21 @@ export const interest = [
   ),
 
   http.delete<IdParams>(endpoints.interest.delete, async () => {
+    return new HttpResponse(null, { status: 204 })
+  }),
+
+  http.get<never, never, MajorInterestResponse>(endpoints.interest.getMajorInterest, async () => {
+    return HttpResponse.json(mock.interest.major, { status: 200 })
+  }),
+
+  http.post<never, IdParams, CreateMajorInterestResponse>(
+    endpoints.interest.createMajorInterest,
+    async () => {
+      return HttpResponse.json(mock.interest.createMajor, { status: 200 })
+    }
+  ),
+
+  http.delete<IdParams>(endpoints.interest.deleteMajorInterest, async () => {
     return new HttpResponse(null, { status: 204 })
   }),
 ]

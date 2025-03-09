@@ -5,6 +5,7 @@ export interface UseBooleanReturn {
   onTrue: () => void
   onFalse: () => void
   toggle: () => void
+  setValue: (value: boolean) => void
 }
 
 export function useBoolean(defaultValue: boolean = false): UseBooleanReturn {
@@ -27,9 +28,10 @@ export function useBoolean(defaultValue: boolean = false): UseBooleanReturn {
       value,
       onTrue,
       onFalse,
+      setValue,
       toggle,
     }),
-    [value, onTrue, onFalse, toggle]
+    [value, onTrue, onFalse, setValue, toggle]
   )
 
   return memoizedValue

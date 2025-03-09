@@ -65,11 +65,18 @@ export function useInterest() {
 }
 
 export function useOneInterest(id: string) {
-  const { data: interest, isLoading } = useQuery({
+  const { data: interestData, isLoading } = useQuery({
     queryKey: ['GET', endpoints.interest.get, id],
     queryFn: () => fetches.interest.get({ id }),
     enabled: !!id,
   })
+
+  const interest = useMemo<Interest | null>(() => {
+    if (!interestData) {
+      return null
+    }
+    return interestData
+  }, [interestData])
 
   return { interest, isLoading }
 }

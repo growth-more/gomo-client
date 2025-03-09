@@ -6,7 +6,7 @@ import { alpha, Box, Divider, Stack } from '@mui/material'
 import dayjs from 'dayjs'
 import { useMemo, useState } from 'react'
 
-export function Streak() {
+export function StreakSection() {
   const [streakType, setStreakType] = useState<StreakType>('ALL')
   const [endDate, setEndDate] = useState(new Date())
 

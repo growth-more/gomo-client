@@ -1,14 +1,17 @@
 import { Interest } from '@/entities/interest'
 import { alpha, Button, Stack, Typography } from '@mui/material'
-import { ScoreBar } from './score-bar'
 import { SelectInterest } from '@/pages/interest/components/select-interest'
 import { useInnerValue } from '@/hooks'
 import { Editable } from '@/components/editable'
 import { OnEditHandler } from '@/components/editable/types'
+import { MajorIcon } from '@/pages/interest/components/major-icon'
+import { useMajorInterest } from '@/api/hooks'
+import { InterestLevelLabel, InterestScoreBar } from '@/components/interest'
 
 interface InterestIndicatorProps {
   interest: Interest | null
   upperInterest: Interest | null
+  isMajor: boolean
   onDelete?: () => void
   onChangeUpperInterest?: (id: string | null) => void
   onChangeInterestName?: (name: string, handler?: OnEditHandler) => void
@@ -17,11 +20,32 @@ interface InterestIndicatorProps {
 export function InterestIndicator({
   interest,
   upperInterest,
+  isMajor,
   onDelete,
   onChangeUpperInterest,
   onChangeInterestName,
 }: InterestIndicatorProps) {
+  const { createMajorInterest, deleteMajorInterest, majorInterest } = useMajorInterest()
+
   const { value, setValue, isChanged } = useInnerValue<Interest | null>(upperInterest)
+
+  const registMajorHandler = () => {
+    if (interest === null) {
+      return
+    }
+    createMajorInterest({ id: interest.id })
+  }
+
+  const unregistMajorHandler = () => {
+    if (interest === null) {
+      return
+    }
+    const major = majorInterest.find((major) => major.name === interest.name) ?? null
+    if (major === null) {
+      return
+    }
+    deleteMajorInterest({ id: major.id })
+  }
 
   const changeUpperInterestHandler = () => {
     if (value === null) {
@@ -65,20 +89,17 @@ export function InterestIndicator({
                 }}
                 noWrap
               />
-              <Typography
-                fontSize={12}
-                fontWeight={400}
-                flexShrink={0}
-                px={1}
-                py={0.5}
-                bgcolor={(theme) => theme.palette.grey[900]}
-                borderRadius={1}
-                noWrap
-              >
-                LV {interest.level}
-              </Typography>
+              <InterestLevelLabel level={interest.level} />
             </Stack>
-            <ScoreBar score={interest.score} scoreThreshold={interest.scoreThreshold} />
+            <InterestScoreBar score={interest.score} scoreThreshold={interest.scoreThreshold} />
+
+            <Stack direction="row" justifyContent="flex-end">
+              <MajorIcon
+                isMajor={isMajor}
+                onRegist={registMajorHandler}
+                onUnregist={unregistMajorHandler}
+              />
+            </Stack>
 
             <Stack spacing={1} pt={2}>
               <Typography fontSize={14} fontWeight={600} pl={0.5}>
@@ -95,6 +116,7 @@ export function InterestIndicator({
               </Button>
             </Stack>
           </Stack>
+
           <Stack direction="row" justifyContent="flex-end">
             <Button size="small" fullWidth color="error" onClick={onDelete}>
               삭제

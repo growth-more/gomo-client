@@ -4,7 +4,7 @@ import { OnEditHandler } from '@/components/editable/types'
 import { ProfileHandle, ProfileMotto, ProfileName } from '@/pages/profile/components'
 import { Stack } from '@mui/material'
 
-export function ProfileHeader() {
+export function HeaderSection() {
   const { profile, updateHandle, updateProfile, updateProfileImage } = useProfile()
 
   const updateNameHandler = (name: string, handler?: OnEditHandler) => {
