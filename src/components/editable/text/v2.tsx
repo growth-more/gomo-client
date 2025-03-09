@@ -10,6 +10,7 @@ import {
   IconButton,
   Stack,
   SxProps,
+  Theme,
   Typography,
   TypographyProps,
 } from '@mui/material'
@@ -18,13 +19,15 @@ import { useEffect, useMemo, useState } from 'react'
 
 interface EditableTextProps extends EditableProps<string>, TypographyProps {
   value?: string
-  inputSx?: SxProps
+  inputSx?: SxProps<Theme>
+  iconSx?: SxProps<Theme>
   inputMaxWidth?: number
 }
 
 export function EditableText({
   value,
   inputSx,
+  iconSx,
   inputMaxWidth,
   onEdit,
   ...typographyProps
@@ -58,6 +61,11 @@ export function EditableText({
         isPending.onFalse()
       },
     })
+  }
+
+  const closeHandler = () => {
+    endEditHandler()
+    isPending.onFalse()
   }
 
   useEffect(() => {
@@ -100,8 +108,8 @@ export function EditableText({
           alignSelf="flex-end"
           sx={{ borderRadius: 1, borderTopLeftRadius: 0, borderTopRightRadius: 0, borderTop: 0 }}
         >
-          <IconButton size="small" sx={{ borderRadius: 1 }} onClick={endEditHandler}>
-            <Iconify icon="mdi:close" width={15} />
+          <IconButton size="small" sx={{ borderRadius: 1 }} onClick={closeHandler}>
+            <Iconify icon="mdi:close" width={15} sx={{ ...iconSx }} />
           </IconButton>
           <Divider orientation="vertical" flexItem />
           {isPending.value ? (
@@ -110,7 +118,7 @@ export function EditableText({
             </Stack>
           ) : (
             <IconButton size="small" sx={{ borderRadius: 1 }} onClick={submitHandler}>
-              <Iconify icon="mdi:check" width={15} />
+              <Iconify icon="mdi:check" width={15} sx={{ ...iconSx }} />
             </IconButton>
           )}
         </Stack>

@@ -16,6 +16,7 @@ export function useInterest() {
     mutationFn: fetches.interest.create,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getList] })
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getGraph] })
     },
   })
 
@@ -24,6 +25,7 @@ export function useInterest() {
     mutationFn: fetches.interest.update,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getList] })
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getGraph] })
     },
   })
 
@@ -32,6 +34,7 @@ export function useInterest() {
     mutationFn: fetches.interest.delete,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getList] })
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getGraph] })
     },
   })
 
@@ -40,6 +43,7 @@ export function useInterest() {
     mutationFn: fetches.interest.updateLogo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getList] })
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getGraph] })
     },
   })
 

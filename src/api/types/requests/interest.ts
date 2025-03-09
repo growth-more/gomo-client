@@ -3,7 +3,9 @@
 // ===================================
 
 interface CreateInterestRequest {
-  name: string
+  request: {
+    name: string
+  }
   logo: File
 }
 
@@ -28,7 +30,6 @@ interface UpdateMajorInterestOrderRequest {
 // ===================================
 
 interface CreateInterestEdgeRequest {
-  memeberId: string
   parentInterestId: string
   childInterestId: string
 }
