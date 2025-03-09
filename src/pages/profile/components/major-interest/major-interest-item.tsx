@@ -46,7 +46,8 @@ export function MajorInterestItem({ interest }: MajorInterestItemProps) {
       >
         <FallbackImage
           src={interest.logoUrl}
-          sx={{ width: 1, height: 1, objectFit: 'contain' }}
+          sx={{ width: 1, height: 1, objectFit: 'contain', userSelect: 'none' }}
+          draggable={false}
           fallback={<Box></Box>}
         />
       </Stack>
