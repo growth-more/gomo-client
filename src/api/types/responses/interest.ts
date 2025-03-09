@@ -3,7 +3,7 @@
 // ===================================
 
 interface InterestResponse {
-  interestId: string
+  id: string
   registrantId: string
   name: string
   logoUrl: string
@@ -42,10 +42,12 @@ interface RecommendInterestResponse {
 
 interface MajorInterestResponse {
   majorInterests: {
+    id: string
     name: string
     logoUrl: string
     level: number
     score: number
+    scoreThreshold: number
     displayOrder: number
   }[]
 }

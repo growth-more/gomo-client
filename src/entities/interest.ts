@@ -19,7 +19,6 @@ interface InterestGraph extends Graph<InterestVertex> {
 
 interface Interest {
   id: string
-  registrantId: string
   name: string
   logoUrl: string
   level: number
@@ -28,4 +27,13 @@ interface Interest {
   totalScore: number
 }
 
-export type { InterestGraph, InterestVertex, InterestEdge, Interest }
+interface MajorInterest {
+  id: string
+  name: string
+  logoUrl: string
+  level: number
+  score: number
+  scoreThreshold: number
+}
+
+export type { InterestGraph, InterestVertex, InterestEdge, Interest, MajorInterest }

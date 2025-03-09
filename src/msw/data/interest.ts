@@ -1,4 +1,9 @@
-import { InterestGraphResponse, InterestListResponse } from '@/api/types'
+import {
+  CreateMajorInterestResponse,
+  InterestGraphResponse,
+  InterestListResponse,
+  MajorInterestResponse,
+} from '@/api/types'
 
 const list: InterestListResponse = {
   interests: [
@@ -1176,8 +1181,73 @@ const create = {
   id: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
 }
 
+const major: MajorInterestResponse = {
+  majorInterests: [
+    {
+      id: '3bd1b3f7-d7c6-11ef-abb8-a7e09b2a499c',
+      name: 'Backend',
+      logoUrl: 'https://mini-cloud/backend-logo.png',
+      level: 100,
+      score: 45,
+      scoreThreshold: 60,
+      displayOrder: 0,
+    },
+    {
+      id: '90a387a7-d7c5-11ef-b4d7-079c7dc41274',
+      name: 'Spring',
+      logoUrl: 'https://mini-cloud/spring-logo.png',
+      level: 5,
+      score: 20,
+      scoreThreshold: 40,
+      displayOrder: 0,
+    },
+    {
+      id: 'f8c51811-d7c5-11ef-82dc-4322ccc3e338',
+      name: 'Java',
+      logoUrl: 'https://mini-cloud/java-logo.png',
+      level: 1,
+      score: 30,
+      scoreThreshold: 40,
+      displayOrder: 0,
+    },
+    {
+      id: '4cd2b3f7-d7c6-11ef-abb8-a7e09b2a499d',
+      name: 'Node.js',
+      logoUrl: 'https://mini-cloud/nodejs-logo.png',
+      level: 15,
+      score: 25,
+      scoreThreshold: 50,
+      displayOrder: 0,
+    },
+    {
+      id: '5ef3b3f7-d7c6-11ef-abb8-a7e09b2a499e',
+      name: 'React',
+      logoUrl: 'https://mini-cloud/react-logo.png',
+      level: 45,
+      score: 35,
+      scoreThreshold: 70,
+      displayOrder: 0,
+    },
+    {
+      id: '6fg4b3f7-d7c6-11ef-abb8-a7e09b2a499f',
+      name: 'TypeScript',
+      logoUrl: 'https://mini-cloud/typescript-logo.png',
+      level: 75,
+      score: 55,
+      scoreThreshold: 80,
+      displayOrder: 0,
+    },
+  ],
+}
+
+const createMajor: CreateMajorInterestResponse = {
+  majorInterestId: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
+}
+
 export const interest = {
   list,
   graph,
   create,
+  major,
+  createMajor,
 }

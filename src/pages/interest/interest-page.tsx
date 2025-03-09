@@ -1,17 +1,21 @@
 import { alpha, Box, Stack } from '@mui/material'
-import { useInterest, useInterestGraph } from '@/api/hooks'
+import { useInterest, useInterestGraph, useMajorInterest } from '@/api/hooks'
 import { ForceDirectedGraph } from '@/components/force-directed-graph'
 import { CreateInterest, InterestIndicator } from './components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Interest, InterestVertex } from '@/entities/interest'
 import { OnEditHandler } from '@/components/editable/types'
+import { useBoolean } from '@/hooks'
 
 export function InterestPage() {
   const { interestList, deleteInterest, updateInterest } = useInterest()
   const { interestGraph, createEdge, deleteEdge } = useInterestGraph()
+  const { majorInterest } = useMajorInterest()
 
   const [selectedInterest, setSelectedInterest] = useState<Interest | null>(null)
   const [upperInterest, setUpperInterest] = useState<Interest | null>(null)
+
+  const isMajor = useBoolean()
 
   const getUpperInterest = (interest: Interest) => {
     const vertex = interestGraph.edge.find((edge) => {
@@ -60,10 +64,12 @@ export function InterestPage() {
     if (vertex === null) {
       setSelectedInterest(null)
       setUpperInterest(null)
+      isMajor.onFalse()
       return
     }
     setSelectedInterest(vertex.interest)
     setUpperInterest(getUpperInterest(vertex.interest))
+    isMajor.setValue(majorInterest?.some((interest) => interest.id === vertex.interest.id) ?? false)
   }
 
   const onDeleteInterest = () => {
@@ -72,6 +78,15 @@ export function InterestPage() {
       setSelectedInterest(null)
     }
   }
+
+  useEffect(() => {
+    if (selectedInterest === null) {
+      return
+    }
+    isMajor.setValue(
+      majorInterest?.some((interest) => interest.name === selectedInterest?.name) ?? false
+    )
+  }, [isMajor, majorInterest, selectedInterest])
 
   return (
     <Stack
@@ -84,6 +99,7 @@ export function InterestPage() {
         <InterestIndicator
           interest={selectedInterest}
           upperInterest={upperInterest}
+          isMajor={isMajor.value}
           onDelete={onDeleteInterest}
           onChangeUpperInterest={updateUpperInterestHandler}
           onChangeInterestName={updateInterestHandler}
