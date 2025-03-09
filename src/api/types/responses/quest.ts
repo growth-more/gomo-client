@@ -82,10 +82,33 @@ interface CreateRepeatQuestResponse {
 }
 
 interface RepeatQuestListResponse {
-  repeatQuests: {
+  dailyQuests: {
     id: string
+    subjectId: string
     questType: QuestType
-    interestName: string
+    point: number
+    score: number
+    subjectName: string
+    content: string
+    displayOrder: number
+  }[]
+  weeklyQuests: {
+    id: string
+    subjectId: string
+    questType: QuestType
+    point: number
+    score: number
+    subjectName: string
+    content: string
+    displayOrder: number
+  }[]
+  monthlyQuests: {
+    id: string
+    subjectId: string
+    questType: QuestType
+    point: number
+    score: number
+    subjectName: string
     content: string
     displayOrder: number
   }[]
