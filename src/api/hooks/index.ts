@@ -1,4 +1,5 @@
 export * from './use-assign-quest'
+export * from './use-repeat-quest'
 export * from './use-history'
 export * from './use-interest-graph'
 export * from './use-interest'

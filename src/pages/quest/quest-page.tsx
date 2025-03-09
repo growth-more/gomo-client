@@ -1,11 +1,11 @@
-import { useAssignQuest } from '@/api/hooks'
+import { useAssignQuest, useRepeatQuest } from '@/api/hooks'
 import { alpha, Button, Divider, IconButton, Stack, Tab, Tabs, Tooltip } from '@mui/material'
 import { ScrollContainer } from '@/components/scrollbar'
 import { InvisibleContainer } from '@/components/container'
 import { Iconify } from '@/components/iconify'
 import { useWindowStore } from '@/stores'
-import { QuestSection } from '@/pages/quest/components'
-import { useQuestTab } from '@/pages/quest/hooks'
+import { QuestSection, RepeatQuestSection } from '@/pages/quest/components'
+import { useQuestTabWithRepeat } from '@/pages/quest/hooks'
 import {
   QUEST_CREATE_PAGE_ID,
   QUEST_CREATE_PAGE_VIEW,
@@ -15,7 +15,9 @@ import {
 
 export function QuestPage() {
   const { daily, weekly, monthly } = useAssignQuest()
-  const { tabs, tab, tabHandler } = useQuestTab()
+  const { repeatQuest } = useRepeatQuest()
+
+  const { tabs, tab, tabHandler } = useQuestTabWithRepeat()
   const { addViewWithId } = useWindowStore()
 
   const questSettingPageHandler = () => {
@@ -35,7 +37,7 @@ export function QuestPage() {
         sx={{ bgcolor: (theme) => alpha(theme.palette.background.paper, 0.4) }}
       >
         {tabs.map((tab, i) => (
-          <Tab key={i} label={tab.label} value={tab.value} />
+          <Tab key={i} label={tab.label} value={tab.value} sx={{ minWidth: 50 }} />
         ))}
       </Tabs>
 
@@ -52,6 +54,10 @@ export function QuestPage() {
 
           <InvisibleContainer visible={tab === 'MONTHLY'}>
             <QuestSection quest={monthly} />
+          </InvisibleContainer>
+
+          <InvisibleContainer visible={tab === 'REPEAT'}>
+            <RepeatQuestSection quest={repeatQuest} />
           </InvisibleContainer>
         </ScrollContainer>
       </Stack>
