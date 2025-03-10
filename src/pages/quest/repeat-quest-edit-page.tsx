@@ -1,19 +1,19 @@
-import { useAssignQuest, useInterest } from '@/api/hooks'
+import { useInterest, useRepeatQuest } from '@/api/hooks'
 import { useWindowStore } from '@/stores'
 import { alpha, Button, Stack, Tab, Tabs, TextField } from '@mui/material'
-import { QUEST_CREATE_PAGE_ID, UPDATE_QUEST_PAGE_ID } from '@/constants/window-view'
 import { useQuestTab } from './hooks'
 import { useEffect, useState } from 'react'
-import { AssignQuest } from '@/entities'
 import { SelectInterest } from '@/pages/interest/components'
 import { Interest } from '@/entities/interest'
+import { REPEAT_QUEST_CREATE_PAGE_ID, REPEAT_QUEST_UPDATE_PAGE_ID } from '@/constants/window-view'
+import { RepeatQuest } from '@/entities'
 
-interface QuestEditPageProps {
-  prevData?: AssignQuest
+interface RepeatQuestEditPageProps {
+  prevData?: RepeatQuest
 }
 
-export function QuestEditPage({ prevData }: QuestEditPageProps) {
-  const { createQuest, updateQuest } = useAssignQuest()
+export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
+  const { createRepeatQuest, updateRepeatQuest } = useRepeatQuest()
   const { interestList } = useInterest()
 
   const { removeView } = useWindowStore()
@@ -22,17 +22,17 @@ export function QuestEditPage({ prevData }: QuestEditPageProps) {
   const [content, setContent] = useState('')
   const [interest, setInterest] = useState<Interest | null>(null)
 
-  const buttonText = prevData ? '퀘스트 수정' : '퀘스트 추가'
+  const buttonText = prevData ? '반복 퀘스트 수정' : '반복 퀘스트 추가'
 
   const closeHandler = () => {
-    removeView(prevData ? UPDATE_QUEST_PAGE_ID(prevData.id) : QUEST_CREATE_PAGE_ID)
+    removeView(prevData ? REPEAT_QUEST_UPDATE_PAGE_ID(prevData.id) : REPEAT_QUEST_CREATE_PAGE_ID)
   }
 
   const createHandler = () => {
     if (prevData || !interest) {
       return
     }
-    createQuest(
+    createRepeatQuest(
       {
         body: {
           subjectId: interest.id,
@@ -49,7 +49,7 @@ export function QuestEditPage({ prevData }: QuestEditPageProps) {
     if (!prevData || !interest) {
       return
     }
-    updateQuest(
+    updateRepeatQuest(
       {
         body: {
           subjectId: interest.id,

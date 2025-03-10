@@ -42,13 +42,15 @@ interface CompleteAssignQuestRequest {
 // ===================================
 
 interface CreateRepeatQuestRequest {
-  interestId: string
+  subjectId: string
+  subjectName: string
   questType: QuestType
   content: string
 }
 
 interface UpdateRepeatQuestRequest {
-  interestId: string
+  subjectId: string
+  subjectName: string
   questType: QuestType
   content: string
 }

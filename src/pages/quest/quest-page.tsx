@@ -1,21 +1,37 @@
-import { useAssignQuest } from '@/api/hooks'
-import { alpha, Button, Divider, IconButton, Stack, Tab, Tabs, Tooltip } from '@mui/material'
+import { useAssignQuest, useRepeatQuest } from '@/api/hooks'
+import {
+  alpha,
+  Button,
+  Divider,
+  IconButton,
+  Stack,
+  Tab,
+  Tabs,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { ScrollContainer } from '@/components/scrollbar'
 import { InvisibleContainer } from '@/components/container'
 import { Iconify } from '@/components/iconify'
 import { useWindowStore } from '@/stores'
-import { QuestSection } from '@/pages/quest/components'
-import { useQuestTab } from '@/pages/quest/hooks'
+import { QuestSection, RepeatQuestSection } from '@/pages/quest/components'
+import { useQuestTabWithRepeat } from '@/pages/quest/hooks'
 import {
   QUEST_CREATE_PAGE_ID,
   QUEST_CREATE_PAGE_VIEW,
   QUEST_SETTING_PAGE_ID,
   QUEST_SETTING_PAGE_VIEW,
 } from '@/constants/window-view'
+import {
+  REPEAT_QUEST_CREATE_PAGE_ID,
+  REPEAT_QUEST_CREATE_PAGE_VIEW,
+} from '@/constants/window-view/repeat-quest-create-window-view'
 
 export function QuestPage() {
   const { daily, weekly, monthly } = useAssignQuest()
-  const { tabs, tab, tabHandler } = useQuestTab()
+  const { repeatQuest } = useRepeatQuest()
+
+  const { tabs, tab, tabHandler } = useQuestTabWithRepeat()
   const { addViewWithId } = useWindowStore()
 
   const questSettingPageHandler = () => {
@@ -24,6 +40,10 @@ export function QuestPage() {
 
   const questCreatePageHandler = () => {
     addViewWithId(QUEST_CREATE_PAGE_ID, QUEST_CREATE_PAGE_VIEW)
+  }
+
+  const repeatQuestCreatePageHandler = () => {
+    addViewWithId(REPEAT_QUEST_CREATE_PAGE_ID, REPEAT_QUEST_CREATE_PAGE_VIEW)
   }
 
   return (
@@ -35,7 +55,7 @@ export function QuestPage() {
         sx={{ bgcolor: (theme) => alpha(theme.palette.background.paper, 0.4) }}
       >
         {tabs.map((tab, i) => (
-          <Tab key={i} label={tab.label} value={tab.value} />
+          <Tab key={i} label={tab.label} value={tab.value} sx={{ minWidth: 50 }} />
         ))}
       </Tabs>
 
@@ -53,6 +73,10 @@ export function QuestPage() {
           <InvisibleContainer visible={tab === 'MONTHLY'}>
             <QuestSection quest={monthly} />
           </InvisibleContainer>
+
+          <InvisibleContainer visible={tab === 'REPEAT'}>
+            <RepeatQuestSection quest={repeatQuest} />
+          </InvisibleContainer>
         </ScrollContainer>
       </Stack>
 
@@ -66,7 +90,14 @@ export function QuestPage() {
         spacing={1}
       >
         <Button fullWidth onClick={questCreatePageHandler}>
-          퀘스트 만들기
+          <Typography fontSize={13} fontWeight={600} noWrap>
+            퀘스트 만들기
+          </Typography>
+        </Button>
+        <Button fullWidth onClick={repeatQuestCreatePageHandler}>
+          <Typography fontSize={13} fontWeight={600} noWrap>
+            반복 퀘스트 만들기
+          </Typography>
         </Button>
         <Tooltip title="퀘스트 설정">
           <IconButton size="small" onClick={questSettingPageHandler}>

@@ -4,7 +4,10 @@ import {
   AssignQuestListResponse,
   CompleteAssignQuestRequest,
   CreateAssignQuestRequest,
+  CreateRepeatQuestRequest,
+  RepeatQuestListResponse,
   UpdateAssignQuestRequest,
+  UpdateRepeatQuestRequest,
 } from '@/api/types'
 import { mock } from '@/msw/data'
 import { http, HttpResponse } from 'msw'
@@ -18,12 +21,9 @@ export const quest = [
     return HttpResponse.json(mock.quest.assignQuest, { status: 200 })
   }),
 
-  http.put<IdParams, CompleteAssignQuestRequest, never>(
-    endpoints.quest.completeAssignQuest,
-    async () => {
-      return new HttpResponse(null, { status: 204 })
-    }
-  ),
+  http.put<IdParams, CompleteAssignQuestRequest>(endpoints.quest.completeAssignQuest, async () => {
+    return new HttpResponse(null, { status: 204 })
+  }),
 
   http.put<IdParams>(endpoints.quest.confirmAssignQuest, async () => {
     return new HttpResponse(null, { status: 204 })
@@ -34,7 +34,7 @@ export const quest = [
   }),
 
   // TODO: 환경변수 사용하여 에러 조작
-  http.post<never, CreateAssignQuestRequest, never>(endpoints.quest.createAssignQuest, async () => {
+  http.post<never, CreateAssignQuestRequest>(endpoints.quest.createAssignQuest, async () => {
     return HttpResponse.json({ id: '01951984-3d19-7bda-a5db-e7a7cde96941' }, { status: 201 })
     // return HttpResponse.json(
     //   {
@@ -48,12 +48,9 @@ export const quest = [
     // )
   }),
 
-  http.put<IdParams, UpdateAssignQuestRequest, never>(
-    endpoints.quest.updateAssignQuest,
-    async () => {
-      return new HttpResponse(null, { status: 204 })
-    }
-  ),
+  http.put<IdParams, UpdateAssignQuestRequest>(endpoints.quest.updateAssignQuest, async () => {
+    return new HttpResponse(null, { status: 204 })
+  }),
 
   http.get<never, never, AssignQuestHistoryListResponse>(
     endpoints.quest.getAssignQuestHistory,
@@ -61,4 +58,20 @@ export const quest = [
       return HttpResponse.json(mock.quest.assignQuestHistory, { status: 200 })
     }
   ),
+
+  http.get<never, never, RepeatQuestListResponse>(endpoints.quest.getRepeatQuest, async () => {
+    return HttpResponse.json(mock.quest.repeatQuest, { status: 200 })
+  }),
+
+  http.post<never, CreateRepeatQuestRequest>(endpoints.quest.createRepeatQuest, async () => {
+    return HttpResponse.json({ id: '01951984-3d19-7bda-a5db-e7a7cde96941' }, { status: 201 })
+  }),
+
+  http.put<IdParams, UpdateRepeatQuestRequest>(endpoints.quest.updateRepeatQuest, async () => {
+    return new HttpResponse(null, { status: 204 })
+  }),
+
+  http.delete<IdParams>(endpoints.quest.deleteRepeatQuest, async () => {
+    return new HttpResponse(null, { status: 204 })
+  }),
 ]

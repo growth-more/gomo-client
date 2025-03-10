@@ -1,9 +1,12 @@
-import { AssignQuest } from '@/entities'
 import { useEffect, useMemo, useState } from 'react'
 
-export function useQuestOrder(quests: AssignQuest[]) {
-  const [value, setValue] = useState<AssignQuest[]>([])
-  const [prev, setPrev] = useState<AssignQuest[]>([])
+interface IdProps {
+  id: string
+}
+
+export function useQuestOrder<T extends IdProps>(quests: T[]) {
+  const [value, setValue] = useState<T[]>([])
+  const [prev, setPrev] = useState<T[]>([])
 
   const onDragStart = () => {
     setPrev([...value])
