@@ -1,8 +1,11 @@
 import { RepeatQuest } from '@/entities'
 import { alpha, Stack } from '@mui/material'
-import { RefObject } from 'react'
+import { RefObject, useCallback } from 'react'
 import { Reorder } from 'motion/react'
 import { QuestItem } from '@/components/quest'
+import { useRepeatQuest } from '@/api/hooks'
+import { useWindowStore } from '@/stores'
+import { REPEAT_QUEST_UPDATE_PAGE_ID, REPEAT_QUEST_UPDATE_PAGE_VIEW } from '@/constants/window-view'
 
 interface RepeatQuestListProps {
   quest: RepeatQuest
@@ -17,16 +20,16 @@ export function RepeatQuestList({
   onDragEnd,
   constraints,
 }: RepeatQuestListProps) {
-  // const { deleteQuest } = useAssignQuest()
-  // const { addViewWithId } = useWindowStore()
+  const { deleteRepeatQuest } = useRepeatQuest()
+  const { addViewWithId } = useWindowStore()
 
-  // const deleteHandler = useCallback(() => {
-  //   deleteQuest({ id: quest.id })
-  // }, [deleteQuest, quest.id])
+  const deleteHandler = useCallback(() => {
+    deleteRepeatQuest({ id: quest.id })
+  }, [deleteRepeatQuest, quest.id])
 
-  // const editHandler = useCallback(() => {
-  //   addViewWithId(UPDATE_QUEST_PAGE_ID(quest.id), UPDATE_QUEST_PAGE_VIEW(quest))
-  // }, [addViewWithId, quest])
+  const editHandler = useCallback(() => {
+    addViewWithId(REPEAT_QUEST_UPDATE_PAGE_ID(quest.id), REPEAT_QUEST_UPDATE_PAGE_VIEW(quest))
+  }, [addViewWithId, quest])
 
   return (
     <Stack
@@ -43,10 +46,10 @@ export function RepeatQuestList({
         labelColor={(theme) => alpha(theme.palette.primary.main, 1)}
         point={quest.point}
         score={quest.score}
-        // onDelete={deleteHandler}
-        // onEdit={editHandler}
-        // useDelete
-        // useEdit
+        onDelete={deleteHandler}
+        onEdit={editHandler}
+        useDelete
+        useEdit
       />
     </Stack>
   )

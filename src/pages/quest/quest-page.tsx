@@ -1,5 +1,15 @@
 import { useAssignQuest, useRepeatQuest } from '@/api/hooks'
-import { alpha, Button, Divider, IconButton, Stack, Tab, Tabs, Tooltip } from '@mui/material'
+import {
+  alpha,
+  Button,
+  Divider,
+  IconButton,
+  Stack,
+  Tab,
+  Tabs,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { ScrollContainer } from '@/components/scrollbar'
 import { InvisibleContainer } from '@/components/container'
 import { Iconify } from '@/components/iconify'
@@ -12,6 +22,10 @@ import {
   QUEST_SETTING_PAGE_ID,
   QUEST_SETTING_PAGE_VIEW,
 } from '@/constants/window-view'
+import {
+  REPEAT_QUEST_CREATE_PAGE_ID,
+  REPEAT_QUEST_CREATE_PAGE_VIEW,
+} from '@/constants/window-view/repeat-quest-create-window-view'
 
 export function QuestPage() {
   const { daily, weekly, monthly } = useAssignQuest()
@@ -26,6 +40,10 @@ export function QuestPage() {
 
   const questCreatePageHandler = () => {
     addViewWithId(QUEST_CREATE_PAGE_ID, QUEST_CREATE_PAGE_VIEW)
+  }
+
+  const repeatQuestCreatePageHandler = () => {
+    addViewWithId(REPEAT_QUEST_CREATE_PAGE_ID, REPEAT_QUEST_CREATE_PAGE_VIEW)
   }
 
   return (
@@ -72,7 +90,14 @@ export function QuestPage() {
         spacing={1}
       >
         <Button fullWidth onClick={questCreatePageHandler}>
-          퀘스트 만들기
+          <Typography fontSize={13} fontWeight={600} noWrap>
+            퀘스트 만들기
+          </Typography>
+        </Button>
+        <Button fullWidth onClick={repeatQuestCreatePageHandler}>
+          <Typography fontSize={13} fontWeight={600} noWrap>
+            반복 퀘스트 만들기
+          </Typography>
         </Button>
         <Tooltip title="퀘스트 설정">
           <IconButton size="small" onClick={questSettingPageHandler}>
