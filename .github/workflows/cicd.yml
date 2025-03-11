@@ -33,7 +33,7 @@ jobs:
         with:
           name: frontend-build
           path: ./dist
-  
+
   deploy:
     name: Deploy to Server
     runs-on: ubuntu-latest
