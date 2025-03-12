@@ -1,0 +1,70 @@
+name: CI/CD for Growth More Frontend
+
+on:
+  push:
+    branches:
+      - develop
+      - feature-45/ci-cd
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    env:
+      TZ: Asia/Seoul
+    
+    steps:
+      - name: checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 23
+
+      - name: install npm dependencies
+        run: npm install
+      
+      - name: Build Project
+        run: npm run build
+      
+      - name: Upload Frontend Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: ./dist
+
+  deploy:
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Download Frontend Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+          path: ./dist
+
+      - name: Debug Artifact Path
+        run: ls -R
+
+      - name: Create SSH Key
+        run: |
+          echo "${{ secrets.OCI_PRIVATE_KEY }}" > oci_key.key
+          chmod 600 oci_key.key
+
+      - name: Copy files to OCI Server
+        run: |
+          scp -i oci_key.key -o StrictHostKeyChecking=no -r ./dist ${{ secrets.OCI_USER }}@${{ secrets.OCI_HOST }}:/home/ubuntu/project/gomo/client/
+
+      - name: SSH into OCI and Restart Container
+        run: |
+          ssh -i oci_key.key -o StrictHostKeyChecking=no ${{ secrets.OCI_USER }}@${{ secrets.OCI_HOST }} << 'EOF'
+            cd /home/ubuntu/project/gomo/client
+            docker compose down || true
+            docker compose build --no-cache || true
+            docker compose up -d
+          EOF
