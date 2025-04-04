@@ -2,6 +2,15 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
 import { useMemo } from 'react'
 import { AssignQuest, OrganizedAssignQuest } from '@/entities'
+import { CreateAssignQuestRequest } from '@/api/types'
+import { ApiError, errorCode } from '@/api/error'
+
+interface CreateQuestCallback {
+  onSuccess?: () => void
+  onThresholdExceeded?: () => void
+  onInvalidParameter?: () => void
+  onError?: () => void
+}
 
 export function useAssignQuest() {
   const queryClient = useQueryClient()
@@ -32,7 +41,7 @@ export function useAssignQuest() {
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.quest.getAssignQuest] }),
   })
 
-  const { mutate: createQuest } = useMutation({
+  const { mutate: createQuestMutation } = useMutation({
     mutationKey: ['POST', endpoints.quest.createAssignQuest],
     mutationFn: fetches.quest.createAssignQuest,
     onSuccess: () =>
@@ -52,6 +61,32 @@ export function useAssignQuest() {
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.quest.getAssignQuest] }),
   })
+
+  const createQuest = (body: CreateAssignQuestRequest, callback: CreateQuestCallback) => {
+    createQuestMutation(
+      { body },
+      {
+        onSuccess: () => {
+          callback.onSuccess?.()
+        },
+        onError: (error) => {
+          if (!ApiError.isApiError(error)) {
+            callback.onError?.()
+            return
+          }
+          if (error.name === errorCode.quest.create.THRESHOLD_EXCEEDED) {
+            callback.onThresholdExceeded?.()
+            return
+          }
+          if (error.name === errorCode.quest.create.INVALID_PARAMETER) {
+            callback.onInvalidParameter?.()
+            return
+          }
+          callback.onError?.()
+        },
+      }
+    )
+  }
 
   const daily = useMemo<OrganizedAssignQuest>(() => {
     const quests = assignQuest?.dailyQuests ?? []

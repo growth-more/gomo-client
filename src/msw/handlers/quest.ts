@@ -35,17 +35,17 @@ export const quest = [
 
   // TODO: 환경변수 사용하여 에러 조작
   http.post<never, CreateAssignQuestRequest>(endpoints.quest.createAssignQuest, async () => {
-    return HttpResponse.json({ id: '01951984-3d19-7bda-a5db-e7a7cde96941' }, { status: 201 })
-    // return HttpResponse.json(
-    //   {
-    //     timestamp: '2025-02-18T23:44:11.5129535',
-    //     httpStatus: 422,
-    //     code: 'THRESHOLD_EXCEEDED',
-    //     message: 'Assign quest threshold exceeded',
-    //     path: '/quests/assigns',
-    //   },
-    //   { status: 422 }
-    // )
+    // return HttpResponse.json({ id: '01951984-3d19-7bda-a5db-e7a7cde96941' }, { status: 201 })
+    return HttpResponse.json(
+      {
+        timestamp: '2025-02-18T23:44:11.5129535',
+        httpStatus: 422,
+        code: 'THRESHOLD_EXCEEDED',
+        message: 'Assign quest threshold exceeded',
+        path: '/quests/assigns',
+      },
+      { status: 422 }
+    )
   }),
 
   http.put<IdParams, UpdateAssignQuestRequest>(endpoints.quest.updateAssignQuest, async () => {

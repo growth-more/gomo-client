@@ -1,4 +1,5 @@
 import { AXIOS, endpoints, axiosStatus } from '@/api'
+import { ApiError, apiErrorCode, errorCode } from '@/api/error'
 import {
   AssignQuestHistoryFetchRequest,
   AssignQuestHistoryListResponse,
@@ -26,6 +27,12 @@ export const quest = {
       () => AXIOS.post<CreateAssignQuestResponse>(endpoints.quest.createAssignQuest, params.body),
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.THRESHOLD_EXCEEDED]: () =>
+            new ApiError(errorCode.quest.create.THRESHOLD_EXCEEDED),
+          [apiErrorCode.INVALID_PARAMETER]: () =>
+            new ApiError(errorCode.quest.create.INVALID_PARAMETER),
+        },
       }
     )
   },
