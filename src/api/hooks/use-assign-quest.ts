@@ -3,14 +3,9 @@ import { endpoints, fetches } from '@/api'
 import { useMemo } from 'react'
 import { AssignQuest, OrganizedAssignQuest } from '@/entities'
 import { CreateAssignQuestRequest } from '@/api/types'
-import { ApiError, errorCode } from '@/api/error'
-
-interface CreateQuestCallback {
-  onSuccess?: () => void
-  onThresholdExceeded?: () => void
-  onInvalidParameter?: () => void
-  onError?: () => void
-}
+import { errorCode } from '@/api/error'
+import { apiErrorHandler } from '@/api/hooks/error-handler'
+import { toast } from '@/components/toast'
 
 export function useAssignQuest() {
   const queryClient = useQueryClient()
@@ -62,28 +57,38 @@ export function useAssignQuest() {
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.quest.getAssignQuest] }),
   })
 
+  interface CreateQuestCallback {
+    onSuccess?: () => void
+    onThresholdExceeded?: () => void
+    onInvalidParameter?: () => void
+    onError?: () => void
+  }
+
   const createQuest = (body: CreateAssignQuestRequest, callback: CreateQuestCallback) => {
     createQuestMutation(
       { body },
       {
         onSuccess: () => {
+          toast.success('퀘스트가 추가되었습니다.')
           callback.onSuccess?.()
         },
-        onError: (error) => {
-          if (!ApiError.isApiError(error)) {
-            callback.onError?.()
-            return
-          }
-          if (error.name === errorCode.quest.create.THRESHOLD_EXCEEDED) {
-            callback.onThresholdExceeded?.()
-            return
-          }
-          if (error.name === errorCode.quest.create.INVALID_PARAMETER) {
-            callback.onInvalidParameter?.()
-            return
-          }
-          callback.onError?.()
-        },
+        onError: (err) =>
+          apiErrorHandler(err, {
+            onError: () => {
+              toast.error('퀘스트 생성에 실패했습니다.')
+              callback.onError?.()
+            },
+            onCode: {
+              [errorCode.quest.create.THRESHOLD_EXCEEDED]: () => {
+                toast.warning('퀘스트 생성 횟수가 초과되었습니다.')
+                callback.onThresholdExceeded?.()
+              },
+              [errorCode.quest.create.INVALID_PARAMETER]: () => {
+                toast.warning('퀘스트 이름에 사용할 수 없는 단어가 사용되었습니다.')
+                callback.onInvalidParameter?.()
+              },
+            },
+          }),
       }
     )
   }

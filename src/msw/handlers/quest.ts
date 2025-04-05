@@ -41,6 +41,7 @@ export const quest = [
         timestamp: '2025-02-18T23:44:11.5129535',
         httpStatus: 422,
         code: 'THRESHOLD_EXCEEDED',
+        // code: 'INVALID_PARAMETER',
         message: 'Assign quest threshold exceeded',
         path: '/quests/assigns',
       },

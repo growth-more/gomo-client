@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 import { AssignQuest } from '@/entities'
 import { SelectInterest } from '@/pages/interest/components'
 import { Interest } from '@/entities/interest'
-import { toast } from '@/components/toast'
 
 interface QuestEditPageProps {
   prevData?: AssignQuest
@@ -40,21 +39,7 @@ export function QuestEditPage({ prevData }: QuestEditPageProps) {
         questType,
         content,
       },
-      {
-        onSuccess: () => {
-          closeHandler()
-          toast.success('퀘스트가 추가되었습니다.')
-        },
-        onThresholdExceeded() {
-          toast.warning('퀘스트 생성 횟수가 초과되었습니다.')
-        },
-        onInvalidParameter() {
-          toast.warning('퀘스트 이름에 사용할 수 없는 단어가 사용되었습니다.')
-        },
-        onError() {
-          toast.error('퀘스트 생성에 실패했습니다.')
-        },
-      }
+      { onSuccess: () => closeHandler() }
     )
   }
 
