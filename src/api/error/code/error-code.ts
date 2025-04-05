@@ -1,3 +1,4 @@
+import { interestCode, InterestCode } from '@/api/error/code/interest'
 import { questCode, QuestCode } from '@/api/error/code/quest'
 
 export const errorCode = {
@@ -22,6 +23,20 @@ export const errorCode = {
       },
     },
   },
+
+  interest: {
+    create: {
+      INVALID_PARAMETER: interestCode.CREATE_INTEREST_INVALID_PARAMETER,
+      IMAGE_TOO_LARGE: interestCode.CREATE_INTEREST_IMAGE_TOO_LARGE,
+    },
+    update: {
+      INVALID_PARAMETER: interestCode.UPDATE_INTEREST_INVALID_PARAMETER,
+      IMAGE_TOO_LARGE: interestCode.UPDATE_INTEREST_IMAGE_TOO_LARGE,
+    },
+    major: {
+      DUPLICATED: interestCode.CREATE_MAJOR_INTEREST_DUPLICATED,
+    },
+  },
 } as const
 
-export type ErrorCode = QuestCode
+export type ErrorCode = QuestCode | InterestCode

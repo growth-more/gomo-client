@@ -31,7 +31,7 @@ export function InterestPage() {
     if (selectedInterest === null) {
       return
     }
-    updateInterest({ id: selectedInterest.id, body: { name } }, handler)
+    updateInterest(selectedInterest.id, { name }, handler)
   }
 
   const updateUpperInterestHandler = (newUpperId: string | null) => {
@@ -41,7 +41,7 @@ export function InterestPage() {
 
     if (upperInterest === null) {
       if (newUpperId !== null) {
-        createEdge({ body: { parentInterestId: newUpperId, childInterestId: selectedInterest.id } })
+        createEdge({ parentInterestId: newUpperId, childInterestId: selectedInterest.id })
       }
       return
     }
@@ -54,9 +54,9 @@ export function InterestPage() {
     if (prevEdgeId === null) {
       return
     }
-    deleteEdge({ id: prevEdgeId })
+    deleteEdge(prevEdgeId)
     if (newUpperId !== null) {
-      createEdge({ body: { parentInterestId: newUpperId, childInterestId: selectedInterest.id } })
+      createEdge({ parentInterestId: newUpperId, childInterestId: selectedInterest.id })
     }
   }
 
@@ -74,7 +74,7 @@ export function InterestPage() {
 
   const onDeleteInterest = () => {
     if (selectedInterest) {
-      deleteInterest({ id: selectedInterest.id })
+      deleteInterest(selectedInterest.id)
       setSelectedInterest(null)
     }
   }
