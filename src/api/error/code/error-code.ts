@@ -1,3 +1,4 @@
+import { AuthCode, authCode } from '@/api/error/code/auth'
 import { interestCode, InterestCode } from '@/api/error/code/interest'
 import { profileCode, ProfileCode } from '@/api/error/code/profile'
 import { questCode, QuestCode } from '@/api/error/code/quest'
@@ -51,6 +52,16 @@ export const errorCode = {
       INVALID_PARAMETER: profileCode.UPDATE_MOTTO_INVALID_PARAMETER,
     },
   },
+
+  auth: {
+    login: {
+      NOT_FOUND: authCode.LOGIN_NOT_FOUND,
+    },
+    join: {
+      EMAIL_DUPLICATED: authCode.EMAIL_DUPLICATED,
+      PASSWORD_INVALID_PARAMETER: authCode.PASSWORD_INVALID_PARAMETER,
+    },
+  },
 } as const
 
-export type ErrorCode = QuestCode | InterestCode | ProfileCode
+export type ErrorCode = QuestCode | InterestCode | ProfileCode | AuthCode

@@ -39,13 +39,11 @@ export function JoinFormPage({ onNext }: JoinFormPageProps) {
   const submitHandler = handleSubmit((form) => {
     join(
       {
-        body: {
-          email: form.email,
-          name: form.name,
-          password: form.password,
-          handle: `@${form.handle}`,
-          motto: form.motto,
-        },
+        email: form.email,
+        name: form.name,
+        password: form.password,
+        handle: `@${form.handle}`,
+        motto: form.motto,
       },
       { onSuccess: () => onNext?.(form.email, form.password) }
     )

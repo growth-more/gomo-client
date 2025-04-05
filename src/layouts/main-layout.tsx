@@ -20,8 +20,9 @@ export function MainLayout() {
   const { setAuth, clearAuth } = useAuthStore()
 
   const checkAuth = useCallback(async () => {
-    const isLogin = await fetches.auth.check()
-    if (!isLogin) {
+    try {
+      await fetches.auth.check()
+    } catch {
       clearAccessToken()
     }
   }, [clearAccessToken])

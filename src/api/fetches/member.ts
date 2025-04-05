@@ -23,6 +23,10 @@ export const member = {
       () => AXIOS.post<CreateMemberResponse>(endpoints.member.create, params.body),
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.INVALID_PARAMETER]: () =>
+            new ApiError(errorCode.auth.join.PASSWORD_INVALID_PARAMETER),
+        },
       }
     )
   },
@@ -56,6 +60,9 @@ export const member = {
       () => AXIOS.post<CreateEmailAuthCodeResponse>(endpoints.member.createEmailCode, params.body),
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.EMAIL_DUPLICATED]: () => new ApiError(errorCode.auth.join.EMAIL_DUPLICATED),
+        },
       }
     )
   },

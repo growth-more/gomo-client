@@ -22,21 +22,18 @@ export function PersonalForm({ control, watch, onVerified, onUnverified }: Perso
   const handle = watch('handle')
 
   const checkDuplicate = () => {
-    checkHandleDuplicate(
-      { handle },
-      {
-        onSuccess: () => {
-          verifiedDuplicate.onTrue()
-          setVerifiedHandle(handle)
-          onVerified?.()
-        },
-        onError: () => {
-          verifiedDuplicate.onFalse()
-          setVerifiedHandle(null)
-          onUnverified?.()
-        },
-      }
-    )
+    checkHandleDuplicate(handle, {
+      onSuccess: () => {
+        verifiedDuplicate.onTrue()
+        setVerifiedHandle(handle)
+        onVerified?.()
+      },
+      onError: () => {
+        verifiedDuplicate.onFalse()
+        setVerifiedHandle(null)
+        onUnverified?.()
+      },
+    })
   }
 
   useEffect(() => {

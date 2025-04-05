@@ -39,7 +39,7 @@ export function EmailVerifyForm({
 
   const requestVerifyCode = () => {
     setVerifyCodeStatus('pending')
-    createEmailAuthCode({ body: { email } })
+    createEmailAuthCode({ email })
     verifyCodeTimer.restart()
     onUnverified?.()
   }

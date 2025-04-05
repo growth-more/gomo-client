@@ -1,7 +1,5 @@
 import { endpoints } from '@/api'
 import {
-  ProfileResponse,
-  QuestPropertyResponse,
   UpdateHandleRequest,
   UpdateMemberRequest,
   UpdatePasswordRequest,
@@ -12,9 +10,10 @@ import { mock } from '@/msw/data'
 import { delay, http, HttpResponse } from 'msw'
 
 export const member = [
-  http.get<never, never, ProfileResponse>(endpoints.member.profile, async () => {
+  http.get<never, never>(endpoints.member.profile, async () => {
     await delay(1000)
-    return HttpResponse.json(mock.member.profile, { status: 200 })
+    // return HttpResponse.json(mock.member.profile, { status: 200 })
+    return new HttpResponse(null, { status: 400 })
   }),
 
   http.put<never, UpdateMemberRequest>(endpoints.member.update, async () => {
@@ -95,7 +94,7 @@ export const member = [
     // )
   }),
 
-  http.get<never, never, QuestPropertyResponse>(endpoints.member.getQuestProperty, async () => {
+  http.get<never, never>(endpoints.member.getQuestProperty, async () => {
     await delay(1000)
     return HttpResponse.json(mock.member.questProperty, { status: 200 })
   }),
