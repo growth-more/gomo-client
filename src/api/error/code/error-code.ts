@@ -1,4 +1,5 @@
 import { interestCode, InterestCode } from '@/api/error/code/interest'
+import { profileCode, ProfileCode } from '@/api/error/code/profile'
 import { questCode, QuestCode } from '@/api/error/code/quest'
 
 export const errorCode = {
@@ -37,6 +38,19 @@ export const errorCode = {
       DUPLICATED: interestCode.CREATE_MAJOR_INTEREST_DUPLICATED,
     },
   },
+
+  profile: {
+    image: {
+      IMAGE_TOO_LARGE: profileCode.UPDATE_IMAGE_TOO_LARGE,
+    },
+    handle: {
+      INVALID_PARAMETER: profileCode.UPDATE_HANDLE_INVALID_PARAMETER,
+      DUPLICATED: profileCode.UPDATE_HANDLE_DUPLICATED,
+    },
+    motto: {
+      INVALID_PARAMETER: profileCode.UPDATE_MOTTO_INVALID_PARAMETER,
+    },
+  },
 } as const
 
-export type ErrorCode = QuestCode | InterestCode
+export type ErrorCode = QuestCode | InterestCode | ProfileCode
