@@ -50,5 +50,16 @@ export const member = [
   http.put<never, UpdateQuestPropertyRequest>(endpoints.member.updateQuestProperty, async () => {
     await delay(1000)
     return new HttpResponse(null, { status: 204 })
+    // return new HttpResponse(null, { status: 400 })
+    // return HttpResponse.json(
+    //   {
+    //     timestamp: '2025-02-18T23:44:11.9820056',
+    //     httpStatus: 422,
+    //     code: 'INVALID_PARAMETER',
+    //     message: 'Quest property content cannot be blank',
+    //     path: '/members/quest-properties',
+    //   },
+    //   { status: 422 }
+    // )
   }),
 ]

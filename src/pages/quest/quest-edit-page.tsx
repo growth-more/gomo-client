@@ -48,14 +48,12 @@ export function QuestEditPage({ prevData }: QuestEditPageProps) {
       return
     }
     updateQuest(
+      prevData.id,
       {
-        body: {
-          subjectId: interest.id,
-          subjectName: interest.name,
-          questType,
-          content,
-        },
-        id: prevData.id,
+        subjectId: interest.id,
+        subjectName: interest.name,
+        questType,
+        content,
       },
       { onSuccess: () => closeHandler() }
     )

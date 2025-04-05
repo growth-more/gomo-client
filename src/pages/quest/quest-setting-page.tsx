@@ -11,7 +11,7 @@ export function QuestSettingPage() {
   const [monthlyThreshold, setMonthlyThreshold] = useState(questProperty.monthlyThreshold)
 
   const updateHandler = () => {
-    update({ body: { dailyThreshold, weeklyThreshold, monthlyThreshold } })
+    update({ dailyThreshold, weeklyThreshold, monthlyThreshold })
   }
 
   const isUpdated = useMemo(() => {

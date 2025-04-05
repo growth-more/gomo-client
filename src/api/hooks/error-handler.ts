@@ -24,3 +24,10 @@ export function apiErrorHandler(error: Error, listener: ApiErrorHandlerListener)
   }
   listener.onError?.()
 }
+
+interface QueryCallback {
+  onSuccess?: () => void
+  onError?: () => void
+}
+
+export type { QueryCallback }

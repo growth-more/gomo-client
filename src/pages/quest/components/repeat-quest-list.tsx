@@ -24,7 +24,7 @@ export function RepeatQuestList({
   const { addViewWithId } = useWindowStore()
 
   const deleteHandler = useCallback(() => {
-    deleteRepeatQuest({ id: quest.id })
+    deleteRepeatQuest(quest.id)
   }, [deleteRepeatQuest, quest.id])
 
   const editHandler = useCallback(() => {
