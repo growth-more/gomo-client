@@ -16,4 +16,9 @@ export const auth = [
     //   { status: 404 }
     // )
   }),
+
+  http.post(endpoints.auth.reissue, async () => {
+    return HttpResponse.json(null, { status: 200 })
+    // return HttpResponse.json(null, { status: 401 })
+  }),
 ]

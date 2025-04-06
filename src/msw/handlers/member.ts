@@ -12,8 +12,9 @@ import { delay, http, HttpResponse } from 'msw'
 export const member = [
   http.get<never, never>(endpoints.member.profile, async () => {
     await delay(1000)
-    // return HttpResponse.json(mock.member.profile, { status: 200 })
-    return new HttpResponse(null, { status: 400 })
+    return HttpResponse.json(mock.member.profile, { status: 200 })
+    // return new HttpResponse(null, { status: 400 })
+    // return new HttpResponse(null, { status: 401 })
   }),
 
   http.put<never, UpdateMemberRequest>(endpoints.member.update, async () => {
