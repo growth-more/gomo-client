@@ -6,6 +6,8 @@ import { useWindowStore } from '@/stores'
 import { WindowView } from './window-view'
 import { AnimatePresence } from 'motion/react'
 
+const WINDOW_MANAGER_Z_INDEX = 500
+
 export function WindowManager() {
   const { views } = useWindowStore()
 
@@ -28,6 +30,7 @@ export function WindowManager() {
           justifyContent: 'center',
           alignItems: 'center',
           pointerEvents: 'none',
+          zIndex: WINDOW_MANAGER_Z_INDEX,
         }}
       >
         <Box id="window-manager" width={1} height={1}>
