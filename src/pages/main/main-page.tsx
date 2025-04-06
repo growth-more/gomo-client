@@ -2,6 +2,7 @@ import { FullContainer } from '@/components/container'
 import { SxProps, Theme } from '@mui/material'
 import { ControlPanel } from './components/control-panel'
 import { OnlyAuth } from '@/auth/guard'
+import { WindowManager } from '@/components/window'
 
 const backgroundSx: SxProps<Theme> = {
   backgroundImage: 'url("/img/room.png")',
@@ -16,6 +17,7 @@ export function MainPage() {
       <FullContainer sx={{ ...backgroundSx, position: 'relative' }}>
         <ControlPanel />
       </FullContainer>
+      <WindowManager />
     </OnlyAuth>
   )
 }

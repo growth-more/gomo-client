@@ -1,7 +1,6 @@
 import { fetches } from '@/api'
 import { AccessToken } from '@/auth/types'
 import { Toaster } from '@/components/toast'
-import { WindowManager } from '@/components/window'
 import { useEffectOnce } from '@/hooks'
 import { useAuthStore, useTokenStore } from '@/stores'
 import { theme } from '@/themes'
@@ -50,7 +49,6 @@ export function MainLayout() {
       <ThemeProvider theme={selectedTheme}>
         <CssBaseline />
         <Toaster />
-        <WindowManager />
         <Outlet />
       </ThemeProvider>
     </QueryClientProvider>
