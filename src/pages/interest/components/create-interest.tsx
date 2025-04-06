@@ -19,12 +19,10 @@ export function CreateInterest() {
       return
     }
     createInterest({
-      body: {
-        request: {
-          name: interestName,
-        },
-        logo: interestLogo,
+      request: {
+        name: interestName,
       },
+      logo: interestLogo,
     })
   }
 

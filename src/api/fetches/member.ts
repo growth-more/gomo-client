@@ -1,4 +1,5 @@
 import { AXIOS, endpoints, axiosStatus } from '@/api'
+import { ApiError, apiErrorCode, errorCode } from '@/api/error'
 import {
   CheckHandleDuplicateFetchRequest,
   CreateEmailAuthCodeFetchRequest,
@@ -22,6 +23,10 @@ export const member = {
       () => AXIOS.post<CreateMemberResponse>(endpoints.member.create, params.body),
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.INVALID_PARAMETER]: () =>
+            new ApiError(errorCode.auth.join.PASSWORD_INVALID_PARAMETER),
+        },
       }
     )
   },
@@ -35,6 +40,10 @@ export const member = {
   update: async (params: UpdateMemberFetchRequest): Promise<void> => {
     return axiosStatus(() => AXIOS.put(endpoints.member.update, params.body), {
       onSuccess: (data) => data,
+      onCode: {
+        [apiErrorCode.INVALID_PARAMETER]: () =>
+          new ApiError(errorCode.profile.motto.INVALID_PARAMETER),
+      },
     })
   },
 
@@ -51,6 +60,9 @@ export const member = {
       () => AXIOS.post<CreateEmailAuthCodeResponse>(endpoints.member.createEmailCode, params.body),
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.EMAIL_DUPLICATED]: () => new ApiError(errorCode.auth.join.EMAIL_DUPLICATED),
+        },
       }
     )
   },
@@ -70,6 +82,11 @@ export const member = {
       () => AXIOS.get(`${endpoints.member.checkHandleDuplicate}?handle=@${params.handle}`),
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.INVALID_PARAMETER]: () =>
+            new ApiError(errorCode.profile.handle.INVALID_PARAMETER),
+          [apiErrorCode.DUPLICATED]: () => new ApiError(errorCode.profile.handle.DUPLICATED),
+        },
       }
     )
   },
@@ -77,6 +94,11 @@ export const member = {
   updateHandle: async (params: UpdateHandleFetchRequest): Promise<void> => {
     return axiosStatus(() => AXIOS.put(endpoints.member.updateHandle, params.body), {
       onSuccess: (data) => data,
+      onCode: {
+        [apiErrorCode.INVALID_PARAMETER]: () =>
+          new ApiError(errorCode.profile.handle.INVALID_PARAMETER),
+        [apiErrorCode.DUPLICATED]: () => new ApiError(errorCode.profile.handle.DUPLICATED),
+      },
     })
   },
 
@@ -92,6 +114,10 @@ export const member = {
         }),
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.IMAGE_TOO_LARGE]: () =>
+            new ApiError(errorCode.profile.image.IMAGE_TOO_LARGE),
+        },
       }
     )
   },

@@ -1,0 +1,8 @@
+export const authCode = {
+  NOT_AUTHENTICATED: 'NOT_AUTHENTICATED',
+  LOGIN_NOT_FOUND: 'LOGIN_NOT_FOUND',
+  EMAIL_DUPLICATED: 'EMAIL_DUPLICATED',
+  PASSWORD_INVALID_PARAMETER: 'PASSWORD_INVALID_PARAMETER',
+}
+
+export type AuthCode = (typeof authCode)[keyof typeof authCode]

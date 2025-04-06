@@ -19,15 +19,15 @@ export function QuestList({ quest, onDragStart, onDragEnd, constraints }: QuestL
   const { addViewWithId } = useWindowStore()
 
   const completeHandler = useCallback(() => {
-    completeQuest({ id: quest.id, body: { proof: '' } })
+    completeQuest(quest.id, { proof: '' })
   }, [completeQuest, quest.id])
 
   const confirmHandler = useCallback(() => {
-    confirmQuest({ id: quest.id })
+    confirmQuest(quest.id)
   }, [confirmQuest, quest.id])
 
   const deleteHandler = useCallback(() => {
-    deleteQuest({ id: quest.id })
+    deleteQuest(quest.id)
   }, [deleteQuest, quest.id])
 
   const editHandler = useCallback(() => {

@@ -1,5 +1,6 @@
 import { fetches } from '@/api'
 import { AccessToken } from '@/auth/types'
+import { Toaster } from '@/components/toast'
 import { WindowManager } from '@/components/window'
 import { useEffectOnce } from '@/hooks'
 import { useAuthStore, useTokenStore } from '@/stores'
@@ -19,8 +20,9 @@ export function MainLayout() {
   const { setAuth, clearAuth } = useAuthStore()
 
   const checkAuth = useCallback(async () => {
-    const isLogin = await fetches.auth.check()
-    if (!isLogin) {
+    try {
+      await fetches.auth.check()
+    } catch {
       clearAccessToken()
     }
   }, [clearAccessToken])
@@ -47,6 +49,7 @@ export function MainLayout() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={selectedTheme}>
         <CssBaseline />
+        <Toaster />
         <WindowManager />
         <Outlet />
       </ThemeProvider>

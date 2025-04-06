@@ -34,12 +34,10 @@ export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
     }
     createRepeatQuest(
       {
-        body: {
-          subjectId: interest.id,
-          subjectName: interest.name,
-          questType,
-          content,
-        },
+        subjectId: interest.id,
+        subjectName: interest.name,
+        questType,
+        content,
       },
       { onSuccess: () => closeHandler() }
     )
@@ -50,14 +48,12 @@ export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
       return
     }
     updateRepeatQuest(
+      prevData.id,
       {
-        body: {
-          subjectId: interest.id,
-          subjectName: interest.name,
-          questType,
-          content,
-        },
-        id: prevData.id,
+        subjectId: interest.id,
+        subjectName: interest.name,
+        questType,
+        content,
       },
       { onSuccess: () => closeHandler() }
     )

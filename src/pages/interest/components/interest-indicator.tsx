@@ -44,7 +44,7 @@ export function InterestIndicator({
     if (major === null) {
       return
     }
-    deleteMajorInterest({ id: major.id })
+    deleteMajorInterest(major.id)
   }
 
   const changeUpperInterestHandler = () => {

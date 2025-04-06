@@ -1,4 +1,5 @@
 import { AXIOS, endpoints, axiosStatus } from '@/api'
+import { ApiError, apiErrorCode, errorCode } from '@/api/error'
 import {
   CreateInterestEdgeFetchRequest,
   CreateInterestEdgeResponse,
@@ -35,6 +36,12 @@ export const interest = {
       },
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.INVALID_PARAMETER]: () =>
+            new ApiError(errorCode.interest.create.INVALID_PARAMETER),
+          [apiErrorCode.IMAGE_TOO_LARGE]: () =>
+            new ApiError(errorCode.interest.create.IMAGE_TOO_LARGE),
+        },
       }
     )
   },
@@ -54,6 +61,10 @@ export const interest = {
   update: async (params: UpdateInterestFetchRequest): Promise<void> => {
     return axiosStatus(() => AXIOS.put(endpoints.interest.updateWithId(params.id), params.body), {
       onSuccess: (data) => data,
+      onCode: {
+        [apiErrorCode.INVALID_PARAMETER]: () =>
+          new ApiError(errorCode.interest.update.INVALID_PARAMETER),
+      },
     })
   },
 
@@ -73,6 +84,10 @@ export const interest = {
         }),
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.IMAGE_TOO_LARGE]: () =>
+            new ApiError(errorCode.interest.update.IMAGE_TOO_LARGE),
+        },
       }
     )
   },
@@ -110,6 +125,9 @@ export const interest = {
         ),
       {
         onSuccess: (data) => data,
+        onCode: {
+          [apiErrorCode.DUPLICATED]: () => new ApiError(errorCode.interest.major.DUPLICATED),
+        },
       }
     )
   },
