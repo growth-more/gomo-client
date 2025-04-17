@@ -25,6 +25,11 @@ const basePalette: PaletteOptions = {
 const lightPalette: PaletteOptions = {
   ...basePalette,
   action: { ...baseAction },
+  border: {
+    main: colors.grey[300],
+    light: colors.grey[200],
+    dark: colors.grey[400],
+  },
   background: {
     default: colors.common.white,
     paper: colors.grey[100],

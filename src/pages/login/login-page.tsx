@@ -1,15 +1,8 @@
 import { FullContainer } from '@/components/container'
-import { alpha, Box, SxProps, Theme } from '@mui/material'
+import { Box } from '@mui/material'
 import { Form, LoginForm, OAuthDivider, OAuthForm } from './components'
 import { useAuth } from '@/auth/hooks'
 import { OnlyGuest } from '@/auth/guard'
-
-const backgroundSx: SxProps<Theme> = {
-  backgroundImage: 'url("/img/cover.webp")',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
-}
 
 export function LoginPage() {
   const { login } = useAuth()
@@ -23,14 +16,16 @@ export function LoginPage() {
 
   return (
     <OnlyGuest>
-      <FullContainer sx={backgroundSx}>
+      <FullContainer>
         <Box
           sx={{
-            width: 350,
-            p: 2,
-            bgcolor: (theme) => alpha(theme.palette.background.paper, 0.5),
-            backdropFilter: 'blur(10px)',
+            width: 320,
+            px: 2,
+            py: 3,
+            border: 1,
             borderRadius: 2,
+            bgcolor: (theme) => theme.palette.background.default,
+            borderColor: (theme) => theme.palette.border.main,
           }}
         >
           <LoginForm onSubmit={submitHandler} autoReset={false} />

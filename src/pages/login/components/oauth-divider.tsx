@@ -4,7 +4,7 @@ import { Stack } from '@mui/material'
 
 export function OAuthDivider() {
   return (
-    <Stack width={1} direction="row" spacing={1} justifyContent="center" alignItems="center" p={2}>
+    <Stack width={1} direction="row" spacing={1} justifyContent="center" alignItems="center" py={2}>
       <Divider sx={{ flex: 1 }} />
       <Typography variant="caption" color="text.secondary">
         또는
