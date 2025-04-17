@@ -18,6 +18,8 @@ declare module '@mui/material/styles' {
   }
 
   interface TypeBackground {
-    widget: string
+    main: string
+    light: string
+    dark: string
   }
 }

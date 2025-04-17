@@ -32,7 +32,9 @@ const lightPalette: PaletteOptions = {
   },
   background: {
     default: colors.common.white,
-    paper: colors.grey[100],
+    main: colors.grey[100],
+    light: colors.grey[50],
+    dark: colors.grey[200],
   },
 }
 
