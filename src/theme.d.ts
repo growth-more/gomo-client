@@ -4,6 +4,7 @@ import { PaletteColor, PaletteColorOptions } from '@mui/material/styles'
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
+    plainText: true
     plain: true
   }
 }

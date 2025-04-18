@@ -36,6 +36,10 @@ const lightPalette: PaletteOptions = {
     light: colors.grey[50],
     dark: colors.grey[200],
   },
+  text: {
+    primary: colors.grey[700],
+    secondary: colors.grey[600],
+  },
 }
 
 const darkPalette: PaletteOptions = {
