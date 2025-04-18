@@ -44,7 +44,7 @@ export function WidgetTitle({ title, subtitle, onTitle, onAdd }: WidgetTitleProp
       </Stack>
 
       {/* button area */}
-      <Stack direction="row">{onAdd && <IconButton.Add />}</Stack>
+      <Stack direction="row">{onAdd && <IconButton.Add onClick={onAdd} />}</Stack>
     </Stack>
   )
 }
