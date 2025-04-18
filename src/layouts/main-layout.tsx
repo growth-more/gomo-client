@@ -13,7 +13,20 @@ import { Outlet } from 'react-router-dom'
 export function MainLayout() {
   const selectedTheme = createTheme(theme.light)
 
-  const queryClient = useMemo(() => new QueryClient(), [])
+  const queryClient = useMemo(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: Infinity,
+            gcTime: Infinity,
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
+          },
+        },
+      }),
+    []
+  )
 
   const { isHydrated, clearAccessToken, accessToken } = useTokenStore()
   const { setAuth, clearAuth } = useAuthStore()
