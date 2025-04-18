@@ -5,7 +5,7 @@ import {
   WIDGET_WIDTH,
 } from '@/components/widget/constant'
 import { WidgetTitle } from '@/components/widget/widget-title'
-import { Box, Stack } from '@mui/material'
+import { Box, Stack, SxProps, Theme } from '@mui/material'
 import { colord } from 'colord'
 import { ReactNode } from 'react'
 
@@ -17,6 +17,7 @@ interface WidgetProps {
   height?: number
   onAdd?: () => void
   onTitle?: () => void
+  sx?: SxProps<Theme>
 }
 
 export function Widget({
@@ -27,6 +28,7 @@ export function Widget({
   height = 1,
   onAdd,
   onTitle,
+  sx,
 }: WidgetProps) {
   const calculateWidgetWidth = (width: number) => {
     return WIDGET_WIDTH * width + WIDGET_COLUMN_SPACING * (width - 1)
@@ -49,7 +51,7 @@ export function Widget({
       }
     >
       <WidgetTitle title={title} subtitle={subtitle} onAdd={onAdd} onTitle={onTitle} />
-      <Box flex={1} width={1} bgcolor={(theme) => theme.palette.background.default}>
+      <Box flex={1} width={1} bgcolor={(theme) => theme.palette.background.default} sx={sx}>
         {children}
       </Box>
     </Stack>
