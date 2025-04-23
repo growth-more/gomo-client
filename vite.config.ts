@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://gomo.nurdykim.me',
+        target: 'https://dev.gomo.ai.kr',
         changeOrigin: true,
         cookiePathRewrite: {
           '/members/refresh': 'api/members/refresh',
