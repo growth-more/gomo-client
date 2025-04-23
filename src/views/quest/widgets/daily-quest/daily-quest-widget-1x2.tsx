@@ -3,6 +3,7 @@ import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
 import { QuestList } from '@/views/quest/components'
+import { useCancelableCheck } from '@/views/quest/hooks/use-cancelable-check'
 import { CREATE_QUEST_MODAL_ID, CreateQuestModal } from '@/views/quest/modals'
 import { Box, Stack } from '@mui/material'
 import _ from 'lodash'
@@ -30,12 +31,9 @@ export function DailyQuestWidget1x2() {
     return [daily.completed.length, daily.confirmed.length + daily.completed.length]
   }, [daily])
 
-  const checkHandler = (id: string, checked: boolean) => {
-    if (checked) {
-      // TODO: proof 페이지 추가
-      completeQuest(id, { proof: '' }, { onError: () => initHash.toggle() })
-    }
-  }
+  const checkHandler = useCancelableCheck((id) => {
+    completeQuest(id, { proof: '' }, { onError: () => initHash.toggle() })
+  })
 
   const createQuestHandler = () => {
     addModal(CREATE_QUEST_MODAL_ID, <CreateQuestModal type="DAILY" />)

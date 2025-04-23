@@ -2,6 +2,7 @@ import { useAssignQuest } from '@/api/hooks'
 import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { QuestList } from '@/views/quest/components'
+import { useCancelableCheck } from '@/views/quest/hooks/use-cancelable-check'
 import { Box, Stack } from '@mui/material'
 import _ from 'lodash'
 import { useMemo } from 'react'
@@ -19,11 +20,9 @@ export function UnconfirmedQuestWidget1x2() {
     return [_.filter(sorted, (_, i) => i % 2 === 0), _.filter(sorted, (_, i) => i % 2 === 1)]
   }, [daily, weekly, monthly])
 
-  const checkHandler = (id: string, checked: boolean) => {
-    if (checked) {
-      confirmQuest(id, { onError: () => initHash.toggle() })
-    }
-  }
+  const checkHandler = useCancelableCheck((id) => {
+    confirmQuest(id, { onError: () => initHash.toggle() })
+  })
 
   const unconfimedCount = quests[0].length + quests[1].length
 

@@ -52,7 +52,7 @@ export function QuestItem({
         <Checkbox
           checked={checked}
           onChanged={checkHandler}
-          disableUncheck={checked}
+          disableUncheck={selected}
           onDisabled={onDisabled}
         />
         <Typography fontSize={15} fontWeight={500} noWrap>

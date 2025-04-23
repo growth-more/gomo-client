@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 
-export function useCancelableCheck(onComplete: (id: string) => void) {
+export function useCancelableCheck(callback: (id: string) => void) {
   const cancelTimer = useRef<Map<string, NodeJS.Timeout>>(new Map())
 
   const completeQuest = (id: string) => {
     cancelTimer.current.delete(id)
-    onComplete(id)
+    callback(id)
   }
 
   const checkHandler = (id: string, checked: boolean) => {
@@ -23,5 +23,5 @@ export function useCancelableCheck(onComplete: (id: string) => void) {
     }
   }
 
-  return { checkHandler }
+  return checkHandler
 }
