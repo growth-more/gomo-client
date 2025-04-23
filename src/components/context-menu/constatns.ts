@@ -1,0 +1,3 @@
+export const CONTEXT_MENU_WIDTH = 200
+export const CONTEXT_MENU_ITEM_HEIGHT = 34
+export const CONTEXT_MENU_PADDING = 5

@@ -1,5 +1,6 @@
 import { fetches } from '@/api'
 import { AccessToken } from '@/auth/types'
+import { ContextMenuManager } from '@/components/context-menu'
 import { ModalManager } from '@/components/modal-manager'
 import { Toaster } from '@/components/toast'
 import { useEffectOnce } from '@/hooks'
@@ -65,6 +66,7 @@ export function MainLayout() {
         <Toaster />
         <Outlet />
         <ModalManager />
+        <ContextMenuManager />
       </ThemeProvider>
     </QueryClientProvider>
   )
