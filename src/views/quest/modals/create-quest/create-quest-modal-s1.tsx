@@ -1,5 +1,4 @@
 import { Button } from '@/components/button'
-import { useEnter } from '@/hooks'
 import { CreateQuestModalStep } from '@/views/quest/modals/create-quest/create-quest-modal'
 import { Stack, TextField, Typography } from '@mui/material'
 
@@ -9,12 +8,6 @@ interface CreateQuestModalS1Props extends CreateQuestModalStep {
 }
 
 export function CreateQuestModalS1({ onCancel, onNext, name, setName }: CreateQuestModalS1Props) {
-  useEnter(() => {
-    if (name.trim().length > 0) {
-      onNext?.()
-    }
-  })
-
   return (
     <Stack height={1} justifyContent="space-between" spacing={2}>
       <Stack spacing={3}>
@@ -23,6 +16,7 @@ export function CreateQuestModalS1({ onCancel, onNext, name, setName }: CreateQu
         </Typography>
         <TextField
           fullWidth
+          autoFocus
           label="퀘스트 이름"
           placeholder="퀘스트 이름을 입력해주세요"
           variant="standard"

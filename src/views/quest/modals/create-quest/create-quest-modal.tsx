@@ -3,6 +3,7 @@ import { InvisibleContainer } from '@/components/container'
 import { Stepper } from '@/components/stepper'
 import { QuestType } from '@/entities'
 import { Interest } from '@/entities/interest'
+import { useEnter } from '@/hooks'
 import { useModalStore } from '@/stores/use-modal-store'
 import { CreateQuestModalS1 } from '@/views/quest/modals/create-quest/create-quest-modal-s1'
 import { CreateQuestModalS2 } from '@/views/quest/modals/create-quest/create-quest-modal-s2'
@@ -37,6 +38,17 @@ export function CreateQuestModal({ type, id: propsId }: CreateQuestModalProps) {
   const closeModal = () => {
     removeModal(modalId)
   }
+
+  useEnter(() => {
+    if (step === 0 && name.trim().length > 0) {
+      setStep(1)
+      return
+    }
+    if (step === 1 && interest !== null) {
+      submit()
+      return
+    }
+  })
 
   const submit = () => {
     if (interest === null) {
@@ -75,7 +87,7 @@ export function CreateQuestModal({ type, id: propsId }: CreateQuestModalProps) {
           <CreateQuestModalS1
             name={name}
             setName={setName}
-            onNext={() => setStep((prev) => prev + 1)}
+            onNext={() => setStep(1)}
             onCancel={closeModal}
           />
         </InvisibleContainer>
