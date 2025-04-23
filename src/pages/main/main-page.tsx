@@ -1,6 +1,7 @@
 import { Box, Stack, SxProps, Theme } from '@mui/material'
 import { OnlyAuth } from '@/auth/guard'
 import DailyQuestWidget from '@/views/quest/widgets/daily-quest'
+import UnconfirmedQuestWidget from '@/views/quest/widgets/unconfirmed-quest'
 
 const backgroundSx: SxProps<Theme> = {
   backgroundImage: 'url("/img/bg.jpg")',
@@ -17,6 +18,8 @@ export function MainPage() {
         <Box display="flex" gap="40px" flexWrap="wrap">
           <DailyQuestWidget.S1x1 />
           <DailyQuestWidget.S1x2 />
+          <UnconfirmedQuestWidget.S1x1 />
+          <UnconfirmedQuestWidget.S1x2 />
         </Box>
       </Stack>
     </OnlyAuth>
