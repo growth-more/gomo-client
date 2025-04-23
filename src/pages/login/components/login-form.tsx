@@ -1,7 +1,9 @@
 import { FormInput } from '@/components/form/form-input'
-import { alpha, Box, Button, Stack } from '@mui/material'
+import { Box, Button, Stack } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { FormOptions } from './form-options'
+
+const LOGO_SIZE = 50
 
 interface LoginFormProps {
   onSubmit?: (form: Form) => void
@@ -36,12 +38,7 @@ export function LoginForm({ onSubmit, autoReset = true }: LoginFormProps) {
     <form onSubmit={submitHandler} noValidate>
       <Stack spacing={1} alignItems="center">
         <Stack p={2} justifyContent="center" alignItems="center">
-          <Box
-            width={130}
-            height={130}
-            borderRadius={1}
-            bgcolor={(theme) => alpha(theme.palette.common.black, 0.1)}
-          />
+          <Box component="img" src="/img/logo.png" width={LOGO_SIZE} height={LOGO_SIZE} />
         </Stack>
 
         <Stack width={1} spacing={1.5} alignItems="center">

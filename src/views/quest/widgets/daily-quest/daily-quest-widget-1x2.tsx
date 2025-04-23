@@ -1,0 +1,68 @@
+import { useAssignQuest } from '@/api/hooks'
+import { Widget } from '@/components/widget'
+import { useToggleSignal } from '@/hooks/use-toggle-signal'
+import { useModalStore } from '@/stores/use-modal-store'
+import { QuestList } from '@/views/quest/components'
+import { useCancelableCheck } from '@/views/quest/hooks/use-cancelable-check'
+import { CREATE_QUEST_MODAL_ID, CreateQuestModal } from '@/views/quest/modals'
+import { Box, Stack } from '@mui/material'
+import _ from 'lodash'
+import { useMemo } from 'react'
+
+export function DailyQuestWidget1x2() {
+  const { daily, completeQuest } = useAssignQuest()
+  const { addModal } = useModalStore()
+  const initHash = useToggleSignal()
+
+  const quests = useMemo(() => {
+    const sorted = _([...daily.confirmed, ...daily.completed])
+      .sortBy('displayOrder')
+      .sortBy((quest) => (quest.completed ? 1 : 0))
+      .take(6)
+      .value()
+
+    return {
+      left: _.filter(sorted, (_, i) => i % 2 === 0),
+      right: _.filter(sorted, (_, i) => i % 2 === 1),
+    }
+  }, [daily])
+
+  const completeCount = useMemo(() => {
+    return [daily.completed.length, daily.confirmed.length + daily.completed.length]
+  }, [daily])
+
+  const checkHandler = useCancelableCheck((id) => {
+    completeQuest(id, { proof: '' }, { onError: () => initHash.toggle() })
+  })
+
+  const createQuestHandler = () => {
+    addModal(CREATE_QUEST_MODAL_ID, <CreateQuestModal type="DAILY" />)
+  }
+
+  return (
+    <Widget
+      width={2}
+      title="일일퀘스트"
+      subtitle={`${completeCount[1]}개 중 ${completeCount[0]}개 완료`}
+      onAdd={createQuestHandler}
+    >
+      <Stack
+        direction="row"
+        divider={<Box my={1} borderRight={1} borderColor={(theme) => theme.palette.border.main} />}
+      >
+        <QuestList
+          quests={quests.left}
+          checkHandler={checkHandler}
+          sx={{ width: '50%' }}
+          initHash={initHash.value}
+        />
+        <QuestList
+          quests={quests.right}
+          checkHandler={checkHandler}
+          sx={{ width: '50%' }}
+          initHash={initHash.value}
+        />
+      </Stack>
+    </Widget>
+  )
+}

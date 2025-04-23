@@ -17,8 +17,8 @@ const assignQuest: AssignQuestListResponse = {
       proof: 'no_proof',
       startDateTime: new Date('2025-02-18T23:43:42'),
       displayOrder: 1,
-      completed: false,
-      confirmed: false,
+      completed: true,
+      confirmed: true,
     },
     {
       id: '0194cbd7-9571-74ec-bd46-dc855f493c4c',
@@ -47,7 +47,7 @@ const assignQuest: AssignQuestListResponse = {
       startDateTime: new Date('2025-02-18T23:43:42'),
       displayOrder: 3,
       completed: false,
-      confirmed: false,
+      confirmed: true,
     },
     {
       id: '0194cbd7-5678-74ec-bd46-dc855f493c6e',
@@ -75,7 +75,7 @@ const assignQuest: AssignQuestListResponse = {
       startDateTime: new Date('2025-02-18T23:43:42'),
       displayOrder: 5,
       completed: false,
-      confirmed: false,
+      confirmed: true,
     },
   ],
   weeklyQuests: [

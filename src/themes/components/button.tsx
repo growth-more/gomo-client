@@ -9,7 +9,7 @@ const MuiButton: Components<Theme>['MuiButton'] = {
     variant: 'contained',
   },
   styleOverrides: {
-    root: ({ ownerState, theme }) => ({
+    root: () => ({
       boxShadow: 'none',
       '&:hover': {
         boxShadow: 'none',
@@ -38,7 +38,7 @@ const MuiButton: Components<Theme>['MuiButton'] = {
   },
   variants: [
     {
-      props: { variant: 'plain' },
+      props: { variant: 'plainText' },
       style: ({ theme }) => ({
         width: 'unset',
         minWidth: 'unset',
@@ -50,6 +50,16 @@ const MuiButton: Components<Theme>['MuiButton'] = {
           backgroundColor: 'transparent',
           textDecoration: 'underline',
           color: theme.palette.primary.main,
+        },
+      }),
+    },
+    {
+      props: { variant: 'plain' },
+      style: ({ theme }) => ({
+        color: theme.palette.text.secondary,
+        backgroundColor: theme.palette.grey[200],
+        '&:hover': {
+          backgroundColor: theme.palette.grey[300],
         },
       }),
     },

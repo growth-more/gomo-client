@@ -1,5 +1,6 @@
 import { fetches } from '@/api'
 import { AccessToken } from '@/auth/types'
+import { ModalManager } from '@/components/modal-manager'
 import { Toaster } from '@/components/toast'
 import { useEffectOnce } from '@/hooks'
 import { useAuthStore, useTokenStore } from '@/stores'
@@ -13,7 +14,20 @@ import { Outlet } from 'react-router-dom'
 export function MainLayout() {
   const selectedTheme = createTheme(theme.light)
 
-  const queryClient = useMemo(() => new QueryClient(), [])
+  const queryClient = useMemo(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: Infinity,
+            gcTime: Infinity,
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
+          },
+        },
+      }),
+    []
+  )
 
   const { isHydrated, clearAccessToken, accessToken } = useTokenStore()
   const { setAuth, clearAuth } = useAuthStore()
@@ -50,6 +64,7 @@ export function MainLayout() {
         <CssBaseline />
         <Toaster />
         <Outlet />
+        <ModalManager />
       </ThemeProvider>
     </QueryClientProvider>
   )

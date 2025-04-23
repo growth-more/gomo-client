@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom'
 import { paths } from '@/routes'
 
 interface OnlyAuthProps {
-  children: ReactNode
+  children?: ReactNode
 }
 
 export function OnlyAuth({ children }: OnlyAuthProps) {

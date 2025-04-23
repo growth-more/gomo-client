@@ -15,6 +15,7 @@ interface IdParams {
 export const interest = [
   http.get<never, never>(endpoints.interest.getList, async () => {
     return HttpResponse.json(mock.interest.list, { status: 200 })
+    // return HttpResponse.json({ interests: [] }, { status: 200 })
   }),
 
   http.get<never, never>(endpoints.interest.getGraph, async () => {
