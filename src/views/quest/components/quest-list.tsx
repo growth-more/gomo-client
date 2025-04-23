@@ -6,9 +6,10 @@ interface QuestListProps {
   sx?: SxProps<Theme>
   quests: AssignQuest[]
   checkHandler: (id: string, checked: boolean) => void
+  initHash?: number
 }
 
-export function QuestList({ quests, checkHandler, sx }: QuestListProps) {
+export function QuestList({ quests, checkHandler, sx, initHash }: QuestListProps) {
   return (
     <Stack
       p={1}
@@ -25,6 +26,7 @@ export function QuestList({ quests, checkHandler, sx }: QuestListProps) {
           questType={quest.questType}
           selected={quest.completed}
           onChanged={(checked) => checkHandler(quest.id, checked)}
+          initHash={initHash}
         />
       ))}
     </Stack>

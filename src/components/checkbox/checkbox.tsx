@@ -6,15 +6,17 @@ import { useMemo } from 'react'
 interface CheckboxProps {
   checked?: boolean
   onChanged?: (checked: boolean) => void
+  onDisabled?: () => void
   defaultChecked?: boolean
-  disableCancel?: boolean
+  disableUncheck?: boolean
 }
 
 export function Checkbox({
   checked: propsChecked,
   onChanged,
+  onDisabled,
   defaultChecked,
-  disableCancel,
+  disableUncheck,
 }: CheckboxProps) {
   const innerChecked = useBoolean(defaultChecked)
 
@@ -26,11 +28,12 @@ export function Checkbox({
   }, [propsChecked, innerChecked.value])
 
   const clickHandler = () => {
+    if (disableUncheck && checked) {
+      onDisabled?.()
+      return
+    }
     if (propsChecked === undefined) {
       onChanged?.(!innerChecked.value)
-      if (disableCancel && checked) {
-        return
-      }
       innerChecked.toggle()
       return
     }

@@ -1,5 +1,6 @@
 import { useAssignQuest } from '@/api/hooks'
 import { Widget } from '@/components/widget'
+import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
 import { QuestList } from '@/views/quest/components'
 import { CREATE_QUEST_MODAL_ID, CreateQuestModal } from '@/views/quest/modals'
@@ -10,6 +11,7 @@ import { useMemo } from 'react'
 export function WeeklyQuestWidget1x2() {
   const { weekly, completeQuest } = useAssignQuest()
   const { addModal } = useModalStore()
+  const initHash = useToggleSignal()
 
   const quests = useMemo(() => {
     const sorted = _([...weekly.confirmed, ...weekly.completed])
@@ -28,7 +30,7 @@ export function WeeklyQuestWidget1x2() {
   const checkHandler = (id: string, checked: boolean) => {
     if (checked) {
       // TODO: proof 페이지 추가
-      completeQuest(id, { proof: '' })
+      completeQuest(id, { proof: '' }, { onError: () => initHash.toggle() })
     }
   }
 
@@ -47,8 +49,18 @@ export function WeeklyQuestWidget1x2() {
         direction="row"
         divider={<Box my={1} borderRight={1} borderColor={(theme) => theme.palette.border.main} />}
       >
-        <QuestList quests={quests[0]} checkHandler={checkHandler} sx={{ width: '50%' }} />
-        <QuestList quests={quests[1]} checkHandler={checkHandler} sx={{ width: '50%' }} />
+        <QuestList
+          quests={quests[0]}
+          checkHandler={checkHandler}
+          sx={{ width: '50%' }}
+          initHash={initHash.value}
+        />
+        <QuestList
+          quests={quests[1]}
+          checkHandler={checkHandler}
+          sx={{ width: '50%' }}
+          initHash={initHash.value}
+        />
       </Stack>
     </Widget>
   )

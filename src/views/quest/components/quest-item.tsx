@@ -3,6 +3,7 @@ import { Iconify } from '@/components/iconify'
 import { QUEST_TYPE_LABEL } from '@/constants'
 import { QuestType } from '@/entities'
 import { Box, Stack, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 
 interface QuestListItemProps {
   questName: string
@@ -10,7 +11,9 @@ interface QuestListItemProps {
   interestName: string
   interestPoint: number
   selected: boolean
+  initHash?: number
   onChanged?: (checked: boolean) => void
+  onDisabled?: () => void
 }
 
 export function QuestItem({
@@ -20,11 +23,38 @@ export function QuestItem({
   interestPoint,
   selected,
   onChanged,
+  onDisabled,
+  initHash,
 }: QuestListItemProps) {
+  const [hash, setHash] = useState(initHash)
+  const [checked, setChecked] = useState(selected)
+
+  const checkHandler = (checked: boolean) => {
+    setChecked(checked)
+    onChanged?.(checked)
+  }
+
+  useEffect(() => {
+    if (hash === initHash) {
+      setChecked(selected)
+      return
+    }
+    setHash(initHash)
+  }, [initHash, hash, selected])
+
+  useEffect(() => {
+    setChecked(selected)
+  }, [selected])
+
   return (
     <Stack p={1}>
       <Stack direction="row" alignItems="center" gap={1}>
-        <Checkbox defaultChecked={selected} onChanged={onChanged} disableCancel={selected} />
+        <Checkbox
+          checked={checked}
+          onChanged={checkHandler}
+          disableUncheck={checked}
+          onDisabled={onDisabled}
+        />
         <Typography fontSize={15} fontWeight={500} noWrap>
           {questName}
         </Typography>
