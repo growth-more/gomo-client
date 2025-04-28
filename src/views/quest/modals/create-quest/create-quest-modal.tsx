@@ -1,5 +1,6 @@
 import { useAssignQuest } from '@/api/hooks'
 import { InvisibleContainer } from '@/components/container'
+import { ModalView } from '@/components/modal'
 import { Stepper } from '@/components/stepper'
 import { QuestType } from '@/entities'
 import { Interest } from '@/entities/interest'
@@ -7,7 +8,7 @@ import { useEnter } from '@/hooks'
 import { useModalStore } from '@/stores/use-modal-store'
 import { CreateQuestModalS1 } from '@/views/quest/modals/create-quest/create-quest-modal-s1'
 import { CreateQuestModalS2 } from '@/views/quest/modals/create-quest/create-quest-modal-s2'
-import { Dialog, Stack } from '@mui/material'
+import { Stack } from '@mui/material'
 import { useState } from 'react'
 
 const CREATE_QUEST_STEPS = ['이름 정하기', '관심사 정하기']
@@ -69,18 +70,7 @@ export function CreateQuestModal({ type, id: propsId }: CreateQuestModalProps) {
   }
 
   return (
-    <Dialog
-      open
-      sx={{ p: 4 }}
-      PaperProps={{
-        sx: {
-          width: 1,
-          height: 1,
-          maxWidth: '450px',
-          maxHeight: '600px',
-        },
-      }}
-    >
+    <ModalView>
       <Stack p={2} width={1} height={1} spacing={4} overflow="hidden">
         <Stepper step={step} steps={CREATE_QUEST_STEPS} navigable onNavigate={setStep} />
         <InvisibleContainer visible={step === 0} sx={{ height: 1, overflow: 'hidden' }}>
@@ -100,6 +90,6 @@ export function CreateQuestModal({ type, id: propsId }: CreateQuestModalProps) {
           />
         </InvisibleContainer>
       </Stack>
-    </Dialog>
+    </ModalView>
   )
 }

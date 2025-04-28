@@ -4,6 +4,7 @@ import {
   CONTEXT_MENU_WIDTH,
 } from '@/components/context-menu/constatns'
 import { IContextMenuItem, useContextMenuStore } from '@/stores/use-context-menu-store'
+import { MouseEvent } from 'react'
 
 export function useContextMenu(contextMenu: IContextMenuItem[][]) {
   const { openContextMenu } = useContextMenuStore()
@@ -27,7 +28,7 @@ export function useContextMenu(contextMenu: IContextMenuItem[][]) {
     return { x, y }
   }
 
-  const onContextMenu = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const onContextMenu = (e: MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
     openContextMenu({ ...caculatePosition(e.clientX, e.clientY), items: contextMenu })

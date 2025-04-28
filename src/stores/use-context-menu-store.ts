@@ -7,6 +7,7 @@ export interface IContextMenuItem {
   icon?: string
   type?: ContextMenuType
   onClick?: () => void
+  disabled?: boolean
 }
 
 export interface IContextMenu {

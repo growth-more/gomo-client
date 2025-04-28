@@ -32,10 +32,7 @@ export function QuestList({
       {quests.map((quest) => (
         <QuestListItem
           key={quest.id}
-          questName={quest.content}
-          interestName={quest.subjectName}
-          interestPoint={10}
-          questType={quest.questType}
+          quest={quest}
           selected={quest.completed}
           onChanged={(checked) => checkHandler(quest.id, checked)}
           initHash={initHash}

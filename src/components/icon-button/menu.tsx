@@ -1,9 +1,10 @@
 import { IconButton } from '@mui/material'
 import { IconButtonSx } from '@/components/icon-button/style'
 import { Iconify } from '@/components/iconify'
+import { MouseEvent } from 'react'
 
 interface MenuProps {
-  onClick?: () => void
+  onClick?: (e: MouseEvent) => void
 }
 
 export function Menu({ onClick }: MenuProps) {

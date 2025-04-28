@@ -1,16 +1,21 @@
+import { useAssignQuest } from '@/api/hooks'
 import { Checkbox } from '@/components/checkbox'
+import { useContextMenu } from '@/components/context-menu'
 import { IconButton } from '@/components/icon-button'
 import { Iconify } from '@/components/iconify'
 import { QUEST_TYPE_LABEL } from '@/constants'
-import { QuestType } from '@/entities'
+import { AssignQuest } from '@/entities'
+import { IContextMenuItem } from '@/stores/use-context-menu-store'
+import { useModalStore } from '@/stores/use-modal-store'
+import {
+  UPDATE_QUEST_NAME_MODAL_ID,
+  UpdateQuestName,
+} from '@/views/quest/modals/update-quest/update-quest-name'
 import { Box, Stack, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 interface QuestListItemProps {
-  questName: string
-  questType: QuestType
-  interestName: string
-  interestPoint: number
+  quest: AssignQuest
   selected: boolean
   initHash?: number
   onChanged?: (checked: boolean) => void
@@ -19,18 +24,72 @@ interface QuestListItemProps {
 }
 
 export function QuestListItem({
-  questName,
-  questType,
-  interestName,
-  interestPoint,
+  quest,
   selected,
   onChanged,
   onDisabled,
   initHash,
   enableMenu,
 }: QuestListItemProps) {
+  const { addModal } = useModalStore()
+  const { confirmQuest, completeQuest, deleteQuest } = useAssignQuest()
+
   const [hash, setHash] = useState(initHash)
   const [checked, setChecked] = useState(selected)
+
+  const contextMenu = useMemo(() => {
+    const context: IContextMenuItem[][] = [
+      [],
+      [
+        {
+          label: '퀘스트 이름 변경',
+          onClick: () => {
+            addModal(UPDATE_QUEST_NAME_MODAL_ID, <UpdateQuestName quest={quest} />)
+          },
+          disabled: quest.confirmed,
+        },
+        { label: '퀘스트 관심사 변경', onClick: () => {}, disabled: quest.confirmed },
+      ],
+      [
+        {
+          label: '퀘스트 포기',
+          type: 'danger',
+          onClick: () => deleteQuest(quest.id),
+          disabled: quest.confirmed,
+        },
+      ],
+    ]
+
+    // 대기중인 퀘스트
+    if (!quest.confirmed) {
+      context[0] = [
+        {
+          label: '퀘스트 수락',
+          onClick: () => confirmQuest(quest.id),
+        },
+      ]
+    }
+
+    // 진행중인 퀘스트
+    if (quest.confirmed && !quest.completed) {
+      context[0].push({
+        label: '퀘스트 완료',
+        onClick: () => completeQuest(quest.id, { proof: '테스트' }),
+      })
+    }
+
+    // 완료한 퀘스트
+    if (quest.completed) {
+      context[0].push({
+        label: '퀘스트 완료',
+        disabled: true,
+      })
+    }
+
+    return context
+  }, [addModal, confirmQuest, completeQuest, deleteQuest, quest])
+
+  const onContextMenu = useContextMenu(contextMenu)
 
   const checkHandler = (checked: boolean) => {
     setChecked(checked)
@@ -56,6 +115,7 @@ export function QuestListItem({
       justifyContent="space-between"
       borderRadius={1}
       sx={{ '&:hover': { bgcolor: (theme) => theme.palette.background.main }, cursor: 'pointer' }}
+      onContextMenu={onContextMenu}
     >
       <Stack overflow="hidden">
         <Stack direction="row" alignItems="center" gap={1}>
@@ -66,26 +126,26 @@ export function QuestListItem({
             onDisabled={onDisabled}
           />
           <Typography fontSize={15} fontWeight={500} noWrap>
-            {questName}
+            {quest.content}
           </Typography>
         </Stack>
         <Stack direction="row" alignItems="center" gap={1}>
           <Box width={30} />
           <Stack direction="row" alignItems="center">
-            <Typography variant="caption">{QUEST_TYPE_LABEL[questType]}퀘스트</Typography>
+            <Typography variant="caption">{QUEST_TYPE_LABEL[quest.questType]}퀘스트</Typography>
             <Iconify icon="mdi:dot" sx={{ width: 15 }} width={15} />
-            <Typography variant="caption">{interestName}</Typography>
+            <Typography variant="caption">{quest.subjectName}</Typography>
             <Typography
               variant="caption"
               fontWeight={500}
               sx={{ ml: 0.5, color: (theme) => theme.palette.primary.main }}
             >
-              +{interestPoint}
+              +{quest.score}
             </Typography>
           </Stack>
         </Stack>
       </Stack>
-      {enableMenu && <IconButton.Menu />}
+      {enableMenu && <IconButton.Menu onClick={onContextMenu} />}
     </Stack>
   )
 }
