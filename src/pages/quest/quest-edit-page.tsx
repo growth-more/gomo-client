@@ -4,7 +4,7 @@ import { alpha, Button, Stack, Tab, Tabs, TextField } from '@mui/material'
 import { QUEST_CREATE_PAGE_ID, UPDATE_QUEST_PAGE_ID } from '@/constants/window-view'
 import { useQuestTab } from './hooks'
 import { useEffect, useState } from 'react'
-import { AssignQuest } from '@/entities'
+import { AssignQuest } from '@/entities/quest'
 import { SelectInterest } from '@/pages/interest/components'
 import { Interest } from '@/entities/interest'
 

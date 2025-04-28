@@ -1,4 +1,4 @@
-import { OrganizedAssignQuest } from '@/entities'
+import { OrganizedAssignQuest } from '@/entities/quest'
 import { Box, Collapse, Divider, IconButton, Stack, Typography } from '@mui/material'
 import { QuestList } from './quest-list'
 import { useBoolean } from '@/hooks'

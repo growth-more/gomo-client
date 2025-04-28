@@ -1,4 +1,4 @@
-import { QuestType } from './quest'
+import { QuestType } from '@/entities/quest'
 
 interface AssignQuestHistory {
   id: string

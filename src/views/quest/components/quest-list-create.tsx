@@ -1,5 +1,5 @@
 import { Button } from '@/components/button'
-import { QuestType } from '@/entities/quests'
+import { QuestType } from '@/entities/quest'
 import { useModalStore } from '@/stores/use-modal-store'
 import { CREATE_QUEST_MODAL_ID, CreateQuestModal } from '@/views/quest/modals'
 

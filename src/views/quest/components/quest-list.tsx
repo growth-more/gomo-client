@@ -1,4 +1,4 @@
-import { AssignQuest } from '@/entities'
+import { AssignQuest } from '@/entities/quest'
 import { QuestListItem } from '@/views/quest/components'
 import { Box, Stack, SxProps, Theme } from '@mui/material'
 

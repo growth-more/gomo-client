@@ -1,7 +1,7 @@
 import { Checkbox } from '@/components/checkbox'
 import { IconButtons } from '@/components/icon-button'
-import { QuestType } from '@/entities'
-import { QUEST_STATUS, QUEST_TYPE, QuestStatus } from '@/entities/quests'
+import { QuestType } from '@/entities/quest'
+import { QUEST_STATUS, QUEST_TYPE, QuestStatus } from '@/entities/quest'
 import { Box, Stack, Typography } from '@mui/material'
 
 interface QuestListEmptyProps {

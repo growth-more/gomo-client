@@ -1,4 +1,4 @@
-import { QuestType } from '@/entities'
+import { QuestType } from '@/entities/quest'
 
 // ===================================
 // QUEST

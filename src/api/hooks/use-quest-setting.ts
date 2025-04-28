@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
-import { QuestProperty } from '@/entities'
+import { QuestProperty } from '@/entities/quest'
 import { useMemo } from 'react'
 import { UpdateQuestPropertyRequest } from '@/api/types'
 import { QueryCallback, apiErrorHandler } from '@/api/hooks/error-handler'

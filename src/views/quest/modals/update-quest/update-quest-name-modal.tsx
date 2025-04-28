@@ -1,7 +1,7 @@
 import { useAssignQuest } from '@/api/hooks'
 import { Button } from '@/components/button'
 import { ModalView } from '@/components/modal'
-import { AssignQuest } from '@/entities'
+import { AssignQuest } from '@/entities/quest'
 import { useModalStore } from '@/stores/use-modal-store'
 import { Stack, TextField, Typography } from '@mui/material'
 import { useState } from 'react'

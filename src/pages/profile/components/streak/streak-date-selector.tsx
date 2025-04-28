@@ -1,9 +1,10 @@
 import { VerticalSelector, VerticalSelectorOption } from '@/components/selector'
-import { START_YEAR } from '@/constants'
 import { SxProps, Theme } from '@mui/material'
 import dayjs from 'dayjs'
 import _ from 'lodash'
 import { useMemo } from 'react'
+
+export const START_YEAR = 2020
 
 interface StreakDateSelectorProps {
   value: Date

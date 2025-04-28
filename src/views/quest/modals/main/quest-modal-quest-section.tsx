@@ -1,5 +1,5 @@
 import { useAssignQuest } from '@/api/hooks'
-import { OrganizedAssignQuest, QuestType } from '@/entities'
+import { OrganizedAssignQuest, QuestType } from '@/entities/quest'
 import { QuestModalQuestList } from '@/views/quest/modals/main/quest-modal-quest-list'
 import { Box, Stack } from '@mui/material'
 

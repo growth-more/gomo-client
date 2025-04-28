@@ -1,5 +1,4 @@
-import { AssignQuest, QuestType } from '@/entities'
-import { QuestStatus } from '@/entities/quests'
+import { AssignQuest, QuestType, QuestStatus } from '@/entities/quest'
 import { QuestList } from '@/views/quest/components'
 import { QuestListCreate } from '@/views/quest/components/quest-list-create'
 import { QuestListEmpty } from '@/views/quest/components/quest-list-empty'

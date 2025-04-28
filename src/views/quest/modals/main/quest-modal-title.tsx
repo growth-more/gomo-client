@@ -1,4 +1,4 @@
-import { QUEST_STATUS, QuestStatus } from '@/entities/quests'
+import { QUEST_STATUS, QuestStatus } from '@/entities/quest'
 import { Stack, Typography } from '@mui/material'
 
 interface QuestModalTitleProps {

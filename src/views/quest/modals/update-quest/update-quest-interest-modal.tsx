@@ -1,7 +1,7 @@
 import { useAssignQuest, useInterest } from '@/api/hooks'
 import { Button } from '@/components/button'
 import { ModalView } from '@/components/modal'
-import { AssignQuest } from '@/entities'
+import { AssignQuest } from '@/entities/quest'
 import { Interest } from '@/entities/interest'
 import { useModalStore } from '@/stores/use-modal-store'
 import { SelectInterest } from '@/views/interest/components'
