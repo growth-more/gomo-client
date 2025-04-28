@@ -4,25 +4,28 @@ import {
 } from '@/components/modal/main-view/main-view-sidebar'
 import { MainViewTitle } from '@/components/modal/main-view/main-view-title'
 import { useModalStore } from '@/stores/use-modal-store'
-import { Dialog, Stack } from '@mui/material'
+import { Box, Dialog, Stack } from '@mui/material'
+import { ReactNode } from 'react'
 
-interface MainViewProps {
+interface MainViewProps<T> {
   modalId: string
   title: string
   subtitle?: string
-  sidebar: MainViewSidebarMenuGroup[]
-  selectedMenuId?: string | null
-  onSelected?: (id: string) => void
+  sidebar: MainViewSidebarMenuGroup<T>[]
+  selectedMenuId?: T | null
+  onSelected?: (id: T) => void
+  children?: ReactNode
 }
 
-export function MainView({
+export function MainView<T>({
   title,
   subtitle,
   modalId,
   sidebar,
   selectedMenuId,
   onSelected,
-}: MainViewProps) {
+  children,
+}: MainViewProps<T>) {
   const { removeModal } = useModalStore()
 
   return (
@@ -42,8 +45,11 @@ export function MainView({
     >
       <Stack width={1} height={1}>
         <MainViewTitle title={title} subtitle={subtitle} onClose={() => removeModal(modalId)} />
-        <Stack direction="row" height={1}>
+        <Stack direction="row" width={1} height={1} overflow="hidden">
           <MainViewSidebar menu={sidebar} selectedMenuId={selectedMenuId} onSelected={onSelected} />
+          <Box flex={1} sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
+            {children}
+          </Box>
         </Stack>
       </Stack>
     </Dialog>

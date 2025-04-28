@@ -4,26 +4,26 @@ import { Box, Stack, Typography } from '@mui/material'
 
 export const MAIN_VIEW_SIDEBAR_WIDTH = 200
 
-export interface MainViewSidebarMenuGroup {
+export interface MainViewSidebarMenuGroup<T> {
   title?: string
-  menu: MainViewSidebarMenu[]
+  menu: MainViewSidebarMenu<T>[]
 }
 
-export interface MainViewSidebarMenu {
-  id: string
+export interface MainViewSidebarMenu<T> {
+  id: T
   label: string
   icon?: string
   onClick?: () => void
 }
 
-interface MainViewSidebarProps {
-  menu: MainViewSidebarMenuGroup[]
-  selectedMenuId?: string | null
-  onSelected?: (id: string) => void
+interface MainViewSidebarProps<T> {
+  menu: MainViewSidebarMenuGroup<T>[]
+  selectedMenuId?: T | null
+  onSelected?: (id: T) => void
 }
 
-export function MainViewSidebar({ menu, selectedMenuId, onSelected }: MainViewSidebarProps) {
-  const menuClickHandler = (id: string, onClick?: () => void) => {
+export function MainViewSidebar<T>({ menu, selectedMenuId, onSelected }: MainViewSidebarProps<T>) {
+  const menuClickHandler = (id: T, onClick?: () => void) => {
     if (onClick) {
       onClick()
       return
@@ -37,6 +37,7 @@ export function MainViewSidebar({ menu, selectedMenuId, onSelected }: MainViewSi
       borderRight={1}
       borderColor={(theme) => theme.palette.border.main}
       bgcolor={(theme) => theme.palette.background.main}
+      flexShrink={0}
     >
       <Stack p={0.5} borderBottom={1} borderColor={(theme) => theme.palette.border.main}>
         <IconButton.Sidebar />
