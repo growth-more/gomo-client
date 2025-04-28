@@ -15,6 +15,8 @@ interface MainViewProps<T> {
   selectedMenuId?: T | null
   onSelected?: (id: T) => void
   children?: ReactNode
+  width?: number
+  height?: number
 }
 
 export function MainView<T>({
@@ -25,18 +27,21 @@ export function MainView<T>({
   selectedMenuId,
   onSelected,
   children,
+  width = 1000,
+  height = 700,
 }: MainViewProps<T>) {
   const { removeModal } = useModalStore()
 
   return (
     <Dialog
       open
+      sx={{ py: 4 }}
       PaperProps={{
         sx: {
           width: 1,
           height: 1,
-          maxWidth: '800px',
-          maxHeight: '600px',
+          maxWidth: `${width}px`,
+          maxHeight: `${height}px`,
           border: 1,
           borderRadius: 2,
           borderColor: (theme) => theme.palette.border.main,
