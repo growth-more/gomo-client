@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '@mui/material'
+import { Button, ButtonProps, Typography } from '@mui/material'
 
 interface PlainButtonProps extends ButtonProps {
   label: string
@@ -19,7 +19,9 @@ export function PlainButton({ label, onClick, ...buttonProps }: PlainButtonProps
       }}
       {...buttonProps}
     >
-      {label}
+      <Typography fontSize={13} fontWeight={700} noWrap>
+        {label}
+      </Typography>
     </Button>
   )
 }

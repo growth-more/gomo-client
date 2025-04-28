@@ -12,7 +12,7 @@ interface UpdateQuestNameProps {
   quest: AssignQuest
 }
 
-export function UpdateQuestName({ quest }: UpdateQuestNameProps) {
+export function UpdateQuestNameModal({ quest }: UpdateQuestNameProps) {
   const { removeModal } = useModalStore()
   const { updateQuest } = useAssignQuest()
 

@@ -8,9 +8,13 @@ import { AssignQuest } from '@/entities'
 import { IContextMenuItem } from '@/stores/use-context-menu-store'
 import { useModalStore } from '@/stores/use-modal-store'
 import {
+  UPDATE_QUEST_INTEREST_MODAL_ID,
+  UpdateQuestInterestModal,
+} from '@/views/quest/modals/update-quest/update-quest-interest-modal'
+import {
   UPDATE_QUEST_NAME_MODAL_ID,
-  UpdateQuestName,
-} from '@/views/quest/modals/update-quest/update-quest-name'
+  UpdateQuestNameModal,
+} from '@/views/quest/modals/update-quest/update-quest-name-modal'
 import { Box, Stack, Typography } from '@mui/material'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -43,12 +47,16 @@ export function QuestListItem({
       [
         {
           label: '퀘스트 이름 변경',
-          onClick: () => {
-            addModal(UPDATE_QUEST_NAME_MODAL_ID, <UpdateQuestName quest={quest} />)
-          },
+          onClick: () =>
+            addModal(UPDATE_QUEST_NAME_MODAL_ID, <UpdateQuestNameModal quest={quest} />),
           disabled: quest.confirmed,
         },
-        { label: '퀘스트 관심사 변경', onClick: () => {}, disabled: quest.confirmed },
+        {
+          label: '퀘스트 관심사 변경',
+          onClick: () =>
+            addModal(UPDATE_QUEST_INTEREST_MODAL_ID, <UpdateQuestInterestModal quest={quest} />),
+          disabled: quest.confirmed,
+        },
       ],
       [
         {
