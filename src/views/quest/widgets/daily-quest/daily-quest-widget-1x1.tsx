@@ -6,6 +6,7 @@ import { QuestList } from '@/views/quest/components'
 import { useCancelableCheck } from '@/views/quest/hooks/use-cancelable-check'
 import { CREATE_QUEST_MODAL_ID, CreateQuestModal } from '@/views/quest/modals'
 import { QUEST_MODAL_ID, QuestModal } from '@/views/quest/modals/main/quest-modal'
+import { Box } from '@mui/material'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
@@ -46,7 +47,9 @@ export function DailyQuestWidget1x1() {
       onAdd={createQuestHandler}
       onTitle={openQuestHandler}
     >
-      <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
+      <Box p={1}>
+        <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
+      </Box>
     </Widget>
   )
 }

@@ -29,6 +29,8 @@ export function UnconfirmedQuestWidget1x2() {
   return (
     <Widget width={2} title="대기중인 퀘스트" subtitle={`${unconfimedCount}개 퀘스트 대기 중`}>
       <Stack
+        p={1}
+        spacing={0.5}
         direction="row"
         divider={<Box my={1} borderRight={1} borderColor={(theme) => theme.palette.border.main} />}
       >

@@ -47,6 +47,8 @@ export function DailyQuestWidget1x2() {
       onAdd={createQuestHandler}
     >
       <Stack
+        p={1}
+        spacing={0.5}
         direction="row"
         divider={<Box my={1} borderRight={1} borderColor={(theme) => theme.palette.border.main} />}
       >

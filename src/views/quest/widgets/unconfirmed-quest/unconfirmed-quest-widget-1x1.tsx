@@ -3,6 +3,7 @@ import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { QuestList } from '@/views/quest/components'
 import { useCancelableCheck } from '@/views/quest/hooks/use-cancelable-check'
+import { Box } from '@mui/material'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
@@ -25,7 +26,9 @@ export function UnconfirmedQuestWidget1x1() {
 
   return (
     <Widget width={1} title="대기중인 퀘스트" subtitle={`${unconfimedCount}개 퀘스트 대기 중`}>
-      <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
+      <Box p={1}>
+        <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
+      </Box>
     </Widget>
   )
 }

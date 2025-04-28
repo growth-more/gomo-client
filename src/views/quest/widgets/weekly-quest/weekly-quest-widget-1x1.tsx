@@ -5,6 +5,7 @@ import { useModalStore } from '@/stores/use-modal-store'
 import { QuestList } from '@/views/quest/components'
 import { useCancelableCheck } from '@/views/quest/hooks/use-cancelable-check'
 import { CREATE_QUEST_MODAL_ID, CreateQuestModal } from '@/views/quest/modals'
+import { Box } from '@mui/material'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
@@ -40,7 +41,9 @@ export function WeeklyQuestWidget1x1() {
       subtitle={`${completeCount[1]}개 중 ${completeCount[0]}개 완료`}
       onAdd={createQuestHandler}
     >
-      <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
+      <Box p={1}>
+        <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
+      </Box>
     </Widget>
   )
 }
