@@ -1,5 +1,5 @@
 import { AssignQuest } from '@/entities'
-import { QuestItem } from '@/views/quest/components'
+import { QuestListItem } from '@/views/quest/components'
 import { Box, Stack, SxProps, Theme } from '@mui/material'
 
 interface QuestListProps {
@@ -7,18 +7,30 @@ interface QuestListProps {
   quests: AssignQuest[]
   checkHandler: (id: string, checked: boolean) => void
   initHash?: number
+  enableMenu?: boolean
+  disableDivider?: boolean
 }
 
-export function QuestList({ quests, checkHandler, sx, initHash }: QuestListProps) {
+export function QuestList({
+  quests,
+  checkHandler,
+  sx,
+  initHash,
+  enableMenu,
+  disableDivider,
+}: QuestListProps) {
   return (
     <Stack
-      p={1}
-      divider={<Box mx={1} borderBottom={1} borderColor={(theme) => theme.palette.border.main} />}
+      divider={
+        disableDivider ? undefined : (
+          <Box mx={1} borderBottom={1} borderColor={(theme) => theme.palette.border.main} />
+        )
+      }
       gap={0.5}
       sx={sx}
     >
       {quests.map((quest) => (
-        <QuestItem
+        <QuestListItem
           key={quest.id}
           questName={quest.content}
           interestName={quest.subjectName}
@@ -27,6 +39,7 @@ export function QuestList({ quests, checkHandler, sx, initHash }: QuestListProps
           selected={quest.completed}
           onChanged={(checked) => checkHandler(quest.id, checked)}
           initHash={initHash}
+          enableMenu={enableMenu}
         />
       ))}
     </Stack>
