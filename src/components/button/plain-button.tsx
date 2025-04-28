@@ -1,11 +1,12 @@
-import { Button, ButtonProps, Typography } from '@mui/material'
+import { Button, ButtonProps, SxProps, Theme, Typography } from '@mui/material'
 
 interface PlainButtonProps extends ButtonProps {
   label: string
   onClick?: () => void
+  sx?: SxProps<Theme>
 }
 
-export function PlainButton({ label, onClick, ...buttonProps }: PlainButtonProps) {
+export function PlainButton({ label, onClick, sx, ...buttonProps }: PlainButtonProps) {
   return (
     <Button
       variant="contained"
@@ -16,6 +17,7 @@ export function PlainButton({ label, onClick, ...buttonProps }: PlainButtonProps
         '&:hover': {
           backgroundColor: (theme) => theme.palette.grey[300],
         },
+        ...sx,
       }}
       {...buttonProps}
     >

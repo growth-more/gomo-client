@@ -5,7 +5,7 @@ import { Box, Stack, SxProps, Theme } from '@mui/material'
 interface QuestListProps {
   sx?: SxProps<Theme>
   quests: AssignQuest[]
-  checkHandler: (id: string, checked: boolean) => void
+  checkHandler?: (id: string, checked: boolean) => void
   initHash?: number
   enableMenu?: boolean
   disableDivider?: boolean
@@ -34,7 +34,7 @@ export function QuestList({
           key={quest.id}
           quest={quest}
           selected={quest.completed}
-          onChanged={(checked) => checkHandler(quest.id, checked)}
+          onChanged={(checked) => checkHandler?.(quest.id, checked)}
           initHash={initHash}
           enableMenu={enableMenu}
         />

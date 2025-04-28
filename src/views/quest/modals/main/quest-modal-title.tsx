@@ -2,15 +2,15 @@ import { QUEST_STATUS, QuestStatus } from '@/entities/quests'
 import { Stack, Typography } from '@mui/material'
 
 interface QuestModalTitleProps {
-  questType: QuestStatus
+  questStatus: QuestStatus
   count: number
 }
 
-export function QuestModalTitle({ questType, count }: QuestModalTitleProps) {
+export function QuestModalTitle({ questStatus, count }: QuestModalTitleProps) {
   return (
     <Stack direction="row" alignItems="center" spacing={1}>
       <Typography fontSize={15} fontWeight={600}>
-        {QUEST_STATUS[questType].label}
+        {QUEST_STATUS[questStatus].label}
       </Typography>
       <Typography
         fontSize={18}

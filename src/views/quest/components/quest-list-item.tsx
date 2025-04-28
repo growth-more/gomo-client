@@ -1,7 +1,7 @@
 import { useAssignQuest } from '@/api/hooks'
 import { Checkbox } from '@/components/checkbox'
 import { useContextMenu } from '@/components/context-menu'
-import { IconButton } from '@/components/icon-button'
+import { IconButtons } from '@/components/icon-button'
 import { Iconify } from '@/components/iconify'
 import { QUEST_TYPE_LABEL } from '@/constants'
 import { AssignQuest } from '@/entities'
@@ -153,7 +153,7 @@ export function QuestListItem({
           </Stack>
         </Stack>
       </Stack>
-      {enableMenu && <IconButton.Menu onClick={onContextMenu} />}
+      {enableMenu && <IconButtons.Menu onClick={onContextMenu} />}
     </Stack>
   )
 }

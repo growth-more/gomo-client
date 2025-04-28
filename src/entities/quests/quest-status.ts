@@ -1,7 +1,7 @@
 export const QUEST_STATUS = {
   UNCONFIRMED: {
-    label: '대기중인 퀘스트',
-    shortLabel: '대기중',
+    label: '시작 가능한 퀘스트',
+    shortLabel: '시작가능',
   },
   CONFIRMED: {
     label: '진행중인 퀘스트',
