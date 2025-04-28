@@ -1,4 +1,4 @@
-import { IconButton } from '@/components/icon-button'
+import { IconButtons } from '@/components/icon-button'
 import { Stack, Typography } from '@mui/material'
 
 interface WidgetTitleProps {
@@ -44,7 +44,7 @@ export function WidgetTitle({ title, subtitle, onTitle, onAdd }: WidgetTitleProp
       </Stack>
 
       {/* button area */}
-      <Stack direction="row">{onAdd && <IconButton.Add onClick={onAdd} />}</Stack>
+      <Stack direction="row">{onAdd && <IconButtons.Add onClick={onAdd} />}</Stack>
     </Stack>
   )
 }

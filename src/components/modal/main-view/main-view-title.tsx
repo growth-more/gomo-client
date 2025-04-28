@@ -1,4 +1,4 @@
-import { IconButton } from '@/components/icon-button'
+import { IconButtons } from '@/components/icon-button'
 import { Stack, Typography } from '@mui/material'
 
 interface MainViewTitleProps {
@@ -25,7 +25,7 @@ export function MainViewTitle({ title, subtitle, onClose }: MainViewTitleProps) 
           </Typography>
         )}
       </Stack>
-      <IconButton.Close onClick={onClose} />
+      <IconButtons.Close onClick={onClose} />
     </Stack>
   )
 }

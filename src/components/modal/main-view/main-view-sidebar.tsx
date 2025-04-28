@@ -1,4 +1,4 @@
-import { IconButton } from '@/components/icon-button'
+import { IconButtons } from '@/components/icon-button'
 import { MainViewSidebarItem } from '@/components/modal/main-view/main-view-sidebar-item'
 import { Box, Stack, Typography } from '@mui/material'
 
@@ -40,7 +40,7 @@ export function MainViewSidebar<T>({ menu, selectedMenuId, onSelected }: MainVie
       flexShrink={0}
     >
       <Stack p={0.5} borderBottom={1} borderColor={(theme) => theme.palette.border.main}>
-        <IconButton.Sidebar />
+        <IconButtons.Sidebar />
       </Stack>
       <Stack
         p={1}

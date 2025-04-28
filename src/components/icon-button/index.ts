@@ -3,7 +3,7 @@ import { Add } from './add'
 import { Close } from './close'
 import { Menu } from './menu'
 
-export const IconButton = {
+export const IconButtons = {
   Add,
   Close,
   Sidebar,
