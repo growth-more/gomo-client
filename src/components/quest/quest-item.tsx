@@ -1,5 +1,5 @@
 import { alpha, Box, Stack, Theme, Typography } from '@mui/material'
-import { QuestType } from '@/entities'
+import { QuestType } from '@/entities/quest'
 import { QuestTypeLabel, QuestPointLabel, QuestITemAction } from '@/components/quest'
 
 const DEFAULT_HEIGHT = 100

@@ -1,4 +1,4 @@
-import { AssignQuest } from '@/entities'
+import { AssignQuest } from '@/entities/quest'
 import { alpha, Stack } from '@mui/material'
 import { RefObject, useCallback } from 'react'
 import { useAssignQuest } from '@/api/hooks'

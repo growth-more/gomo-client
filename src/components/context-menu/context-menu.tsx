@@ -35,6 +35,7 @@ export function ContextMenu({ items, x, y }: ContextMenuProps) {
               icon={item.icon}
               type={item.type}
               onClick={item.onClick}
+              disabled={item.disabled}
             />
           ))}
         </Stack>

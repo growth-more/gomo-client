@@ -21,7 +21,7 @@ export function CreateQuestModalS2({
         <Typography fontSize={18} fontWeight={600} noWrap flexShrink={0}>
           퀘스트가 어떤 관심사에 속하나요?
         </Typography>
-        <SelectInterest selected={interest} onChanged={setInterest} />
+        <SelectInterest selected={interest} onChanged={setInterest} sx={{ height: 1 }} />
       </Stack>
 
       <Stack spacing={1}>

@@ -1,5 +1,4 @@
-import { QUEST_TYPE_LABEL } from '@/constants'
-import { QuestType } from '@/entities'
+import { QUEST_TYPE, QuestType } from '@/entities/quest'
 import { alpha, Box, Typography } from '@mui/material'
 
 interface QuestTypeLabelProps {
@@ -16,7 +15,7 @@ export function QuestTypeLabel({ questType }: QuestTypeLabelProps) {
       bgcolor={(theme) => alpha(theme.palette.common.black, 0.3)}
     >
       <Typography fontSize={12} color="white">
-        {QUEST_TYPE_LABEL[questType]}
+        {QUEST_TYPE[questType].shortLabel}
       </Typography>
     </Box>
   )

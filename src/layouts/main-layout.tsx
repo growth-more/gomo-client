@@ -1,7 +1,7 @@
 import { fetches } from '@/api'
 import { AccessToken } from '@/auth/types'
 import { ContextMenuManager } from '@/components/context-menu'
-import { ModalManager } from '@/components/modal-manager'
+import { ModalManager } from '@/components/modal'
 import { Toaster } from '@/components/toast'
 import { useEffectOnce } from '@/hooks'
 import { useAuthStore, useTokenStore } from '@/stores'

@@ -61,7 +61,7 @@ export function Checkbox({
           height={1}
           bgcolor="primary.main"
           borderRadius="2px"
-          initial={{ scale: 0 }}
+          initial={{ scale: checked ? 1 : 0 }}
           animate={{ scale: checked ? 1 : 0 }}
           transition={{ duration: 0.5, type: 'spring', bounce: 0.65 }}
         />

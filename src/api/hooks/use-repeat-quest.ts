@@ -4,7 +4,7 @@ import { fetches } from '@/api/fetches'
 import { apiErrorHandler, QueryCallback } from '@/api/hooks/error-handler'
 import { CreateRepeatQuestRequest, UpdateRepeatQuestRequest } from '@/api/types'
 import { toast } from '@/components/toast'
-import { OrganizedRepeatQuest } from '@/entities'
+import { OrganizedRepeatQuest } from '@/entities/quest'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 

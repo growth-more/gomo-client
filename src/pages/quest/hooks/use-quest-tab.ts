@@ -1,8 +1,41 @@
-import { QUEST_TYPE_WITH_LABEL, QUEST_TYPE_WITH_LABEL_WITH_REPEAT } from '@/constants'
-import { QuestType } from '@/entities'
+import { QuestType } from '@/entities/quest'
 import { SyntheticEvent, useState } from 'react'
 
 type QuestTabType = QuestType | 'REPEAT'
+
+const QUEST_TYPE_WITH_LABEL_WITH_REPEAT = [
+  {
+    value: 'DAILY',
+    label: '일일',
+  },
+  {
+    value: 'WEEKLY',
+    label: '주간',
+  },
+  {
+    value: 'MONTHLY',
+    label: '월간',
+  },
+  {
+    value: 'REPEAT',
+    label: '반복',
+  },
+] as const
+
+const QUEST_TYPE_WITH_LABEL = [
+  {
+    value: 'DAILY',
+    label: '일일',
+  },
+  {
+    value: 'WEEKLY',
+    label: '주간',
+  },
+  {
+    value: 'MONTHLY',
+    label: '월간',
+  },
+] as const
 
 export function useQuestTabWithRepeat() {
   const [tab, setTab] = useState<QuestTabType>('DAILY')

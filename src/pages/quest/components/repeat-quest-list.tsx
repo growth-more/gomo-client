@@ -1,4 +1,4 @@
-import { RepeatQuest } from '@/entities'
+import { RepeatQuest } from '@/entities/quest'
 import { alpha, Stack } from '@mui/material'
 import { RefObject, useCallback } from 'react'
 import { Reorder } from 'motion/react'

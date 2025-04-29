@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
 import { useMemo } from 'react'
-import { AssignQuest, OrganizedAssignQuest } from '@/entities'
+import { AssignQuest, OrganizedAssignQuest } from '@/entities/quest'
 import {
   CompleteAssignQuestRequest,
   CreateAssignQuestRequest,

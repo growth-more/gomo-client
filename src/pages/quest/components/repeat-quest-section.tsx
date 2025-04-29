@@ -1,4 +1,4 @@
-import { OrganizedRepeatQuest } from '@/entities'
+import { OrganizedRepeatQuest } from '@/entities/quest'
 import { Box, Collapse, Divider, IconButton, Stack, Typography } from '@mui/material'
 import { useBoolean } from '@/hooks'
 import { Reorder } from 'motion/react'

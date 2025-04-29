@@ -8,14 +8,16 @@ interface ContextMenuItemProps {
   icon?: string
   type?: ContextMenuType
   onClick?: () => void
+  disabled?: boolean
 }
 
-export function ContextMenuItem({ label, icon, type, onClick }: ContextMenuItemProps) {
+export function ContextMenuItem({ label, icon, type, onClick, disabled }: ContextMenuItemProps) {
   return (
     <IconButton
       onClick={onClick}
       sx={{ p: 1, borderRadius: 1, height: CONTEXT_MENU_ITEM_HEIGHT }}
       color={type === 'danger' ? 'error' : 'default'}
+      disabled={disabled}
     >
       <Stack direction="row" spacing={1} width={1}>
         {icon && <Iconify icon={icon} width={15} />}

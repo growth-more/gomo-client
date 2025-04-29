@@ -1,13 +1,16 @@
-import { Button, ButtonProps } from '@mui/material'
+import { Button, ButtonProps, Typography, TypographyProps } from '@mui/material'
 
 interface PrimaryButtonProps extends ButtonProps {
   label: string
+  fontProps?: TypographyProps
 }
 
-export function PrimaryButton({ label, ...buttonProps }: PrimaryButtonProps) {
+export function PrimaryButton({ label, fontProps, ...buttonProps }: PrimaryButtonProps) {
   return (
     <Button variant="contained" {...buttonProps}>
-      {label}
+      <Typography fontSize={15} fontWeight={700} noWrap {...fontProps}>
+        {label}
+      </Typography>
     </Button>
   )
 }

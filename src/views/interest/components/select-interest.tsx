@@ -2,14 +2,15 @@ import { useInterest } from '@/api/hooks'
 import { ScrollContainer } from '@/components/scrollbar'
 import { Interest } from '@/entities/interest'
 import { SelectInterestItem } from '@/views/interest/components/select-interest-item'
-import { Box, Stack } from '@mui/material'
+import { Box, Stack, SxProps, Theme } from '@mui/material'
 
 interface SelectInterestProps {
   selected?: Interest | null
   onChanged?: (interest: Interest) => void
+  sx?: SxProps<Theme>
 }
 
-export function SelectInterest({ selected, onChanged }: SelectInterestProps) {
+export function SelectInterest({ selected, onChanged, sx }: SelectInterestProps) {
   const { interestList } = useInterest()
 
   return (
@@ -19,6 +20,7 @@ export function SelectInterest({ selected, onChanged }: SelectInterestProps) {
       borderColor={(theme) => theme.palette.border.main}
       bgcolor={(theme) => theme.palette.background.main}
       overflow="hidden"
+      sx={sx}
     >
       <ScrollContainer sx={{ height: 1 }}>
         <Stack p={1} spacing={0.5}>

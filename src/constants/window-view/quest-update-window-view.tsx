@@ -1,6 +1,6 @@
 import { WindowViewProps } from '@/components/window'
 import { QuestEditPage } from '@/pages'
-import { AssignQuest } from '@/entities'
+import { AssignQuest } from '@/entities/quest'
 
 export const UPDATE_QUEST_PAGE_ID = (id: string) => `UPDATE_QUEST_${id}`
 

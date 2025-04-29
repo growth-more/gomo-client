@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { SelectInterest } from '@/pages/interest/components'
 import { Interest } from '@/entities/interest'
 import { REPEAT_QUEST_CREATE_PAGE_ID, REPEAT_QUEST_UPDATE_PAGE_ID } from '@/constants/window-view'
-import { RepeatQuest } from '@/entities'
+import { RepeatQuest } from '@/entities/quest'
 
 interface RepeatQuestEditPageProps {
   prevData?: RepeatQuest
