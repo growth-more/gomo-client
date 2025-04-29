@@ -46,7 +46,7 @@ export function DailyQuestWidget1x1() {
   }
 
   const openQuestHandler = () => {
-    addModal(QUEST_MODAL_ID, <QuestModal />)
+    addModal(QUEST_MODAL_ID, <QuestModal initMenuId="DAILY_QUEST" />)
   }
 
   return (

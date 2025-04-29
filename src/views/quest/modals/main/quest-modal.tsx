@@ -41,10 +41,14 @@ const sidebar: MainViewSidebarMenuGroup<QUEST_MODAL_SIDEBAR_MENU_ID>[] = [
   },
 ]
 
-export function QuestModal() {
+interface QuestModalProps {
+  initMenuId?: QUEST_MODAL_SIDEBAR_MENU_ID
+}
+
+export function QuestModal({ initMenuId = 'DAILY_QUEST' }: QuestModalProps) {
   const { daily, weekly, monthly } = useAssignQuest()
 
-  const [selectedMenuId, setSelectedMenuId] = useState<QUEST_MODAL_SIDEBAR_MENU_ID>('DAILY_QUEST')
+  const [selectedMenuId, setSelectedMenuId] = useState<QUEST_MODAL_SIDEBAR_MENU_ID>(initMenuId)
 
   return (
     <MainView

@@ -6,7 +6,9 @@ import { QuestList } from '@/views/quest/components'
 import {
   CREATE_QUEST_MODAL_ID,
   CreateQuestModal,
+  QUEST_MODAL_ID,
   QUEST_PROOF_MODAL_ID,
+  QuestModal,
   QuestProofModal,
 } from '@/views/quest/modals'
 import { Box } from '@mui/material'
@@ -44,12 +46,17 @@ export function WeeklyQuestWidget1x1() {
     addModal(CREATE_QUEST_MODAL_ID, <CreateQuestModal type="WEEKLY" />)
   }
 
+  const openQuestHandler = () => {
+    addModal(QUEST_MODAL_ID, <QuestModal initMenuId="WEEKLY_QUEST" />)
+  }
+
   return (
     <Widget
       width={1}
       title="주간퀘스트"
       subtitle={`${completeCount[1]}개 중 ${completeCount[0]}개 완료`}
       onAdd={createQuestHandler}
+      onTitle={openQuestHandler}
     >
       <Box p={1}>
         <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
