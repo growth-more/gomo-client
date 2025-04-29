@@ -10,6 +10,7 @@ interface QuestModalQuestListProps {
   questType: QuestType
   questStatus: QuestStatus
   checkHandler?: (id: string, checked: boolean) => void
+  initHash?: number
 }
 
 export function QuestModalQuestList({
@@ -17,12 +18,19 @@ export function QuestModalQuestList({
   questStatus,
   questType,
   checkHandler,
+  initHash,
 }: QuestModalQuestListProps) {
   return (
     <Stack spacing={2}>
       <QuestModalTitle questStatus={questStatus} count={quests.length} />
       {quests.length > 0 ? (
-        <QuestList quests={quests} checkHandler={checkHandler} disableDivider enableMenu />
+        <QuestList
+          quests={quests}
+          checkHandler={checkHandler}
+          disableDivider
+          enableMenu
+          initHash={initHash}
+        />
       ) : (
         <QuestListEmpty questStatus={questStatus} questType={questType} />
       )}

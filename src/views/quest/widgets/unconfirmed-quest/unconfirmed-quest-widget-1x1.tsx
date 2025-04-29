@@ -1,8 +1,9 @@
 import { useAssignQuest } from '@/api/hooks'
+import { DANGER_DIALOG_ID } from '@/components/modal'
 import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
-import { QuestList } from '@/views/quest/components'
+import { QuestConfirmDialog, QuestList } from '@/views/quest/components'
 import { QUEST_MODAL_ID, QuestModal } from '@/views/quest/modals'
 import { Box } from '@mui/material'
 import _ from 'lodash'
@@ -24,7 +25,13 @@ export function UnconfirmedQuestWidget1x1() {
     if (!checked) {
       return
     }
-    confirmQuest(id, { onError: () => initHash.toggle() })
+    addModal(
+      DANGER_DIALOG_ID,
+      <QuestConfirmDialog
+        onSuccess={() => confirmQuest(id, { onError: () => initHash.toggle() })}
+        onCancel={() => initHash.toggle()}
+      />
+    )
   }
 
   const openQuestHandler = () => {

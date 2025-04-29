@@ -3,9 +3,12 @@ import { Checkbox } from '@/components/checkbox'
 import { useContextMenu } from '@/components/context-menu'
 import { IconButtons } from '@/components/icon-button'
 import { Iconify } from '@/components/iconify'
+import { DANGER_DIALOG_ID } from '@/components/modal'
 import { AssignQuest, QUEST_TYPE } from '@/entities/quest'
 import { IContextMenuItem } from '@/stores/use-context-menu-store'
 import { useModalStore } from '@/stores/use-modal-store'
+import { QuestConfirmDialog } from '@/views/quest/components/quest-confirm-dialog'
+import { QuestDeleteDialog } from '@/views/quest/components/quest-delete-dialog'
 import { QUEST_PROOF_MODAL_ID, QuestProofModal } from '@/views/quest/modals'
 import {
   UPDATE_QUEST_INTEREST_MODAL_ID,
@@ -62,7 +65,11 @@ export function QuestListItem({
         {
           label: '퀘스트 포기',
           type: 'danger',
-          onClick: () => deleteQuest(quest.id),
+          onClick: () =>
+            addModal(
+              DANGER_DIALOG_ID,
+              <QuestDeleteDialog onSuccess={() => deleteQuest(quest.id)} />
+            ),
           disabled: quest.confirmed,
         },
       ],
@@ -73,7 +80,11 @@ export function QuestListItem({
       context[0] = [
         {
           label: '퀘스트 수락',
-          onClick: () => confirmQuest(quest.id),
+          onClick: () =>
+            addModal(
+              DANGER_DIALOG_ID,
+              <QuestConfirmDialog onSuccess={() => confirmQuest(quest.id)} />
+            ),
         },
       ]
     }
