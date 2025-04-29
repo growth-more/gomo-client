@@ -3,14 +3,18 @@ import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
 import { QuestList } from '@/views/quest/components'
-import { useCancelableCheck } from '@/views/quest/hooks/use-cancelable-check'
-import { CREATE_QUEST_MODAL_ID, CreateQuestModal } from '@/views/quest/modals'
+import {
+  CREATE_QUEST_MODAL_ID,
+  CreateQuestModal,
+  QUEST_PROOF_MODAL_ID,
+  QuestProofModal,
+} from '@/views/quest/modals'
 import { Box, Stack } from '@mui/material'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
 export function WeeklyQuestWidget1x2() {
-  const { weekly, completeQuest } = useAssignQuest()
+  const { weekly } = useAssignQuest()
   const { addModal } = useModalStore()
   const initHash = useToggleSignal()
 
@@ -28,9 +32,15 @@ export function WeeklyQuestWidget1x2() {
     return [weekly.completed.length, weekly.confirmed.length + weekly.completed.length]
   }, [weekly])
 
-  const checkHandler = useCancelableCheck((id) => {
-    completeQuest(id, { proof: '' }, { onError: () => initHash.toggle() })
-  })
+  const checkHandler = (id: string, checked: boolean) => {
+    if (!checked) {
+      return
+    }
+    addModal(
+      QUEST_PROOF_MODAL_ID,
+      <QuestProofModal id={id} onError={initHash.toggle} onCancel={initHash.toggle} />
+    )
+  }
 
   const createQuestHandler = () => {
     addModal(CREATE_QUEST_MODAL_ID, <CreateQuestModal type="WEEKLY" />)

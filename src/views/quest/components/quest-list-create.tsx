@@ -14,5 +14,5 @@ export function QuestListCreate({ questType }: QuestListCreateProps) {
     addModal(CREATE_QUEST_MODAL_ID, <CreateQuestModal type={questType} />)
   }
 
-  return <Button.Plain label="새 퀘스트 만들기" onClick={createHandler} sx={{ height: 40 }} />
+  return <Button.Light label="새 퀘스트 만들기" onClick={createHandler} sx={{ height: 40 }} />
 }

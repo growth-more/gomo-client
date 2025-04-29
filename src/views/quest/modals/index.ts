@@ -1,1 +1,5 @@
+export * from './main/quest-modal'
+export * from './quest-proof/quest-proof-modal'
 export * from './create-quest/create-quest-modal'
+export * from './update-quest/update-quest-interest-modal'
+export * from './update-quest/update-quest-name-modal'

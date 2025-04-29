@@ -6,6 +6,7 @@ import { Iconify } from '@/components/iconify'
 import { AssignQuest, QUEST_TYPE } from '@/entities/quest'
 import { IContextMenuItem } from '@/stores/use-context-menu-store'
 import { useModalStore } from '@/stores/use-modal-store'
+import { QUEST_PROOF_MODAL_ID, QuestProofModal } from '@/views/quest/modals'
 import {
   UPDATE_QUEST_INTEREST_MODAL_ID,
   UpdateQuestInterestModal,
@@ -35,7 +36,7 @@ export function QuestListItem({
   enableMenu,
 }: QuestListItemProps) {
   const { addModal } = useModalStore()
-  const { confirmQuest, completeQuest, deleteQuest } = useAssignQuest()
+  const { confirmQuest, deleteQuest } = useAssignQuest()
 
   const [hash, setHash] = useState(initHash)
   const [checked, setChecked] = useState(selected)
@@ -81,7 +82,7 @@ export function QuestListItem({
     if (quest.confirmed && !quest.completed) {
       context[0].push({
         label: '퀘스트 완료',
-        onClick: () => completeQuest(quest.id, { proof: '테스트' }),
+        onClick: () => addModal(QUEST_PROOF_MODAL_ID, <QuestProofModal id={quest.id} />),
       })
     }
 
@@ -94,7 +95,7 @@ export function QuestListItem({
     }
 
     return context
-  }, [addModal, confirmQuest, completeQuest, deleteQuest, quest])
+  }, [addModal, confirmQuest, deleteQuest, quest])
 
   const onContextMenu = useContextMenu(contextMenu)
 

@@ -1,6 +1,8 @@
 import { useAssignQuest } from '@/api/hooks'
 import { OrganizedAssignQuest, QuestType } from '@/entities/quest'
+import { useModalStore } from '@/stores/use-modal-store'
 import { QuestModalQuestList } from '@/views/quest/modals/main/quest-modal-quest-list'
+import { QUEST_PROOF_MODAL_ID, QuestProofModal } from '@/views/quest/modals'
 import { Box, Stack } from '@mui/material'
 
 interface QuestModalQuestSectionProps {
@@ -9,13 +11,14 @@ interface QuestModalQuestSectionProps {
 }
 
 export function QuestModalQuestSection({ quests, questType }: QuestModalQuestSectionProps) {
-  const { completeQuest, confirmQuest } = useAssignQuest()
+  const { confirmQuest } = useAssignQuest()
+  const { addModal } = useModalStore()
 
   const completeHandler = (id: string, checked: boolean) => {
     if (!checked) {
       return
     }
-    completeQuest(id, { proof: '테스트' })
+    addModal(QUEST_PROOF_MODAL_ID, <QuestProofModal id={id} />)
   }
 
   const confirmHandler = (id: string, checked: boolean) => {
