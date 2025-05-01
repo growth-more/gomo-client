@@ -58,12 +58,12 @@ jobs:
       - name: Debug Artifact Path
         run: ls -R
 
-      - name: SEtting Env Variable
+      - name: Setting Env Variable
         run: |
           if [[ "${{github.ref_name}}" == "main" ]]; then
-            echo "PROFILE="prod" >> $GITHUB_ENV
+            echo "PROFILE=prod" >> $GITHUB_ENV
           else
-            echo "PROFILE="dev" >> $GITHUB_ENV
+            echo "PROFILE=dev" >> $GITHUB_ENV
           fi
 
       - name: Create SSH Key
