@@ -24,9 +24,9 @@ jobs:
       - name: Create .ENV
         run: |
           if [[ "${{github.ref_name}}" == "main" ]]; then
-            echo "${{ secrets.ENV_PROD }}" > ./
+            echo "${{ secrets.ENV_PROD }}" > .env
           else
-            echo "${{ secrets.ENV_DEV }}" > ./
+            echo "${{ secrets.ENV_DEV }}" > .env
           fi
         shell: bash
 
