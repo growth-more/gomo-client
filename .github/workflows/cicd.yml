@@ -3,24 +3,32 @@ name: CI/CD for Growth More Frontend
 on:
   push:
     branches:
+      - main
       - develop
-      - feature-45/ci-cd
-  workflow_dispatch:
     
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       TZ: Asia/Seoul
     
     steps:
       - name: checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 23
+
+      - name: Create .ENV
+        run: |
+          if [[ "${{github.ref_name}}" == "main" ]]; then
+            echo "${{ secrets.ENV_PROD }}" > ./
+          else
+            echo "${{ secrets.ENV_DEV }}" > ./
+          fi
+        shell: bash
 
       - name: install npm dependencies
         run: npm install
@@ -46,8 +54,17 @@ jobs:
         with:
           name: frontend-build
           path: ./dist
+
       - name: Debug Artifact Path
         run: ls -R
+
+      - name: SEtting Env Variable
+        run: |
+          if [[ "${{github.ref_name}}" == "main" ]]; then
+            echo "PROFILE="prod" >> $GITHUB_ENV
+          else
+            echo "PROFILE="dev" >> $GITHUB_ENV
+          fi
 
       - name: Create SSH Key
         run: |
@@ -56,12 +73,11 @@ jobs:
 
       - name: Copy files to OCI Server
         run: |
-          scp -i oci_key.key -o StrictHostKeyChecking=no -r ./dist ${{ secrets.OCI_USER }}@${{ secrets.OCI_HOST }}:/home/ubuntu/project/gomo/client/
+          scp -i oci_key.key -o StrictHostKeyChecking=no -r ./dist ${{ secrets.OCI_USER }}@${{ secrets.OCI_HOST }}:/home/ubuntu/project/gomo/client/${{env.PROFILE }}/
       - name: SSH into OCI and Restart Container
         run: |
           ssh -i oci_key.key -o StrictHostKeyChecking=no ${{ secrets.OCI_USER }}@${{ secrets.OCI_HOST }} << 'EOF'
             cd /home/ubuntu/project/gomo/client
-            docker compose down || true
-            docker compose build --no-cache || true
-            docker compose up -d
+            docker compose -f docker-compose.${{ env.PROFILE }}.yml down || true
+            docker compose -f docker-compose.${{ env.PROFILE }}.yml up --build -d
           EOF
