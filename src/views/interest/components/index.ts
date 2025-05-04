@@ -1,3 +1,3 @@
-export * from './select-interest'
-export * from './select-interest-color'
-export * from './select-interest-image'
+export * from './select-interest/select-interest'
+export * from './select-interest-color/select-interest-color'
+export * from './select-interest-image/select-interest-image'

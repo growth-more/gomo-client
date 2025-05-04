@@ -1,7 +1,7 @@
 import { useInterest } from '@/api/hooks'
 import { ScrollContainer } from '@/components/scrollbar'
 import { Interest } from '@/entities/interest'
-import { SelectInterestItem } from '@/views/interest/components/select-interest-item'
+import { SelectInterestItem } from '@/views/interest/components/select-interest/select-interest-item'
 import { Box, Stack, SxProps, Theme } from '@mui/material'
 
 interface SelectInterestProps {
