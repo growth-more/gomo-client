@@ -8,9 +8,19 @@ interface SelectInterestProps {
   selected?: Interest | null
   onChanged?: (interest: Interest) => void
   sx?: SxProps<Theme>
+  enableNoneOption?: boolean
+  noneOptionLabel?: string
+  onNoneOption?: () => void
 }
 
-export function SelectInterest({ selected, onChanged, sx }: SelectInterestProps) {
+export function SelectInterest({
+  selected,
+  onChanged,
+  sx,
+  enableNoneOption,
+  noneOptionLabel,
+  onNoneOption,
+}: SelectInterestProps) {
   const { interestList } = useInterest()
 
   return (
@@ -24,6 +34,13 @@ export function SelectInterest({ selected, onChanged, sx }: SelectInterestProps)
     >
       <ScrollContainer sx={{ height: 1 }}>
         <Stack p={1} spacing={0.5}>
+          {enableNoneOption && (
+            <SelectInterestItem
+              name={noneOptionLabel ?? '선택 안함'}
+              selected={selected === null}
+              onClick={onNoneOption}
+            />
+          )}
           {interestList.map((interest) => (
             <SelectInterestItem
               key={interest.id}

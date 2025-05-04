@@ -27,6 +27,7 @@ export function useUpload({
         return
       }
       onSuccess?.(files)
+      inputRef.current.value = ''
     },
     [maxSize, onError, onSuccess]
   )
