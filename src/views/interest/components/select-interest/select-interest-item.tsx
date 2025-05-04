@@ -21,7 +21,11 @@ export function SelectInterestItem({ name, selected, onClick, disable }: SelectI
           fontWeight={selected ? 600 : 400}
           sx={{
             color: (theme) =>
-              selected ? theme.palette.primary.contrastText : theme.palette.text.primary,
+              selected
+                ? theme.palette.primary.contrastText
+                : disable
+                ? theme.palette.text.disabled
+                : theme.palette.text.primary,
           }}
           noWrap
         >
