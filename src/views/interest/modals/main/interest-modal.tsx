@@ -1,5 +1,11 @@
+import { Button } from '@/components/button'
 import { MainView } from '@/components/modal'
 import { MainViewSidebarMenuGroup } from '@/components/modal/main-view/main-view-sidebar'
+import { useModalStore } from '@/stores/use-modal-store'
+import {
+  CREATE_INTEREST_MODAL_ID,
+  CreateInterestModal,
+} from '@/views/interest/modals/create-interest/create-interest-modal'
 import { InterestModalGraphSection } from '@/views/interest/modals/main/interest-modal-graph-section'
 import { useState } from 'react'
 
@@ -27,7 +33,13 @@ interface InterestModalProps {
 }
 
 export function InterestModal({ initMenuId = 'INTEREST_GRAPH' }: InterestModalProps) {
+  const { addModal } = useModalStore()
+
   const [selectedMenuId, setSelectedMenuId] = useState<INTEREST_MODAL_SIDEBAR_MENU_ID>(initMenuId)
+
+  const createInterest = () => {
+    addModal(CREATE_INTEREST_MODAL_ID, <CreateInterestModal />)
+  }
 
   return (
     <MainView
@@ -36,6 +48,7 @@ export function InterestModal({ initMenuId = 'INTEREST_GRAPH' }: InterestModalPr
       modalId={INTEREST_MODAL_ID}
       selectedMenuId={selectedMenuId}
       onSelected={setSelectedMenuId}
+      actions={[<Button.Plain label="관심사 추가" onClick={createInterest} />]}
     >
       {selectedMenuId === 'INTEREST_GRAPH' && <InterestModalGraphSection />}
     </MainView>
