@@ -4,11 +4,12 @@ interface SelectInterestItemProps {
   name: string
   selected?: boolean
   onClick?: () => void
+  disable?: boolean
 }
 
-export function SelectInterestItem({ name, selected, onClick }: SelectInterestItemProps) {
+export function SelectInterestItem({ name, selected, onClick, disable }: SelectInterestItemProps) {
   return (
-    <IconButton onClick={onClick} sx={{ borderRadius: 1, p: 0 }}>
+    <IconButton onClick={onClick} sx={{ borderRadius: 1, p: 0 }} disabled={disable}>
       <Stack
         p={1}
         width={1}
