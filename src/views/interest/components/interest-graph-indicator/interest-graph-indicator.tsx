@@ -1,10 +1,12 @@
 import { useInterestGraph } from '@/api/hooks'
+import { useContextMenu } from '@/components/context-menu'
 import { IconButtons } from '@/components/icon-button'
 import { Interest } from '@/entities/interest'
 import { InterestGraphIndicatorImage } from '@/views/interest/components/interest-graph-indicator/interest-graph-indicator-image'
 import { InterestGraphIndicatorLevel } from '@/views/interest/components/interest-graph-indicator/interest-graph-indicator-level'
 import { InterestGraphIndicatorScoreBar } from '@/views/interest/components/interest-graph-indicator/interest-graph-indicator-score-bar'
 import { InterestGraphIndicatorTag } from '@/views/interest/components/interest-graph-indicator/interest-graph-indicator-tag'
+import { useInterestGraphIndicatorContextMenu } from '@/views/interest/components/interest-graph-indicator/use-interest-graph-indicator-context-menu'
 import { Box, Stack, Typography } from '@mui/material'
 import { useMemo } from 'react'
 
@@ -14,6 +16,9 @@ interface InterestGraphIndicatorProps {
 
 export function InterestGraphIndicator({ interest }: InterestGraphIndicatorProps) {
   const { interestGraph } = useInterestGraph()
+
+  const { contextMenu } = useInterestGraphIndicatorContextMenu(interest)
+  const onContextMenu = useContextMenu(contextMenu)
 
   const upperInterests = useMemo(() => {
     const sources = interestGraph.edge.filter((e) => e.target === interest.id).map((e) => e.source)
@@ -37,6 +42,7 @@ export function InterestGraphIndicator({ interest }: InterestGraphIndicatorProps
       borderColor={(theme) => theme.palette.border.main}
       bgcolor={(theme) => theme.palette.background.light}
       spacing={1}
+      onContextMenu={onContextMenu}
     >
       <Stack direction="row" spacing={1}>
         <InterestGraphIndicatorImage src={interest.logoUrl} />
@@ -49,7 +55,7 @@ export function InterestGraphIndicator({ interest }: InterestGraphIndicatorProps
                 {interest.name}
               </Typography>
             </Stack>
-            <IconButtons.Menu />
+            <IconButtons.Menu onClick={onContextMenu} />
           </Stack>
           <InterestGraphIndicatorScoreBar
             score={interest.score}
