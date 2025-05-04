@@ -1,3 +1,4 @@
+export * from './main/interest-modal'
 export * from './create-interest/create-interest-modal'
 export * from './update-interest/update-interest-name-modal'
 export * from './update-interest/update-interest-upper-modal'
