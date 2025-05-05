@@ -1,5 +1,5 @@
-import { SelectInterestColorCell } from '@/views/interest/components/select-interest-color-cell'
-import { SelectInterestColorCellNone } from '@/views/interest/components/select-interest-color-cell-none'
+import { SelectInterestColorCell } from './select-interest-color-cell'
+import { SelectInterestColorCellNone } from './select-interest-color-cell-none'
 import { Stack } from '@mui/material'
 
 const COLOR_OPTIONS = ['#FB2C36', '#FF6900', '#FE9A00', '#5EA500', '#2B7FFF', '#4F39F6', '#8E51FF']

@@ -4,7 +4,7 @@ import {
 } from '@/components/modal/main-view/main-view-sidebar'
 import { MainViewTitle } from '@/components/modal/main-view/main-view-title'
 import { useModalStore } from '@/stores/use-modal-store'
-import { Box, Dialog, Stack } from '@mui/material'
+import { Box, Dialog, SxProps, Stack, Theme } from '@mui/material'
 import { ReactNode } from 'react'
 
 interface MainViewProps<T> {
@@ -17,6 +17,8 @@ interface MainViewProps<T> {
   children?: ReactNode
   width?: number
   height?: number
+  actions?: ReactNode[]
+  actionSx?: SxProps<Theme>
 }
 
 export function MainView<T>({
@@ -29,6 +31,8 @@ export function MainView<T>({
   children,
   width = 1000,
   height = 700,
+  actions,
+  actionSx,
 }: MainViewProps<T>) {
   const { removeModal } = useModalStore()
 
@@ -51,7 +55,13 @@ export function MainView<T>({
       <Stack width={1} height={1}>
         <MainViewTitle title={title} subtitle={subtitle} onClose={() => removeModal(modalId)} />
         <Stack direction="row" width={1} height={1} overflow="hidden">
-          <MainViewSidebar menu={sidebar} selectedMenuId={selectedMenuId} onSelected={onSelected} />
+          <MainViewSidebar
+            menu={sidebar}
+            selectedMenuId={selectedMenuId}
+            onSelected={onSelected}
+            actions={actions}
+            actionSx={actionSx}
+          />
           <Box flex={1} sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
             {children}
           </Box>

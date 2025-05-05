@@ -1,7 +1,7 @@
 import { useInterest } from '@/api/hooks'
 import { ScrollContainer } from '@/components/scrollbar'
 import { Interest } from '@/entities/interest'
-import { SelectInterestItem } from '@/views/interest/components/select-interest-item'
+import { SelectInterestItem } from '@/views/interest/components/select-interest/select-interest-item'
 import { Box, Stack, SxProps, Theme } from '@mui/material'
 
 interface SelectInterestProps {
@@ -11,6 +11,7 @@ interface SelectInterestProps {
   enableNoneOption?: boolean
   noneOptionLabel?: string
   onNoneOption?: () => void
+  disableInterestIds?: string[]
 }
 
 export function SelectInterest({
@@ -20,6 +21,7 @@ export function SelectInterest({
   enableNoneOption,
   noneOptionLabel,
   onNoneOption,
+  disableInterestIds,
 }: SelectInterestProps) {
   const { interestList } = useInterest()
 
@@ -47,6 +49,7 @@ export function SelectInterest({
               name={interest.name}
               selected={selected?.id === interest.id}
               onClick={() => onChanged?.(interest)}
+              disable={disableInterestIds?.includes(interest.id)}
             />
           ))}
         </Stack>

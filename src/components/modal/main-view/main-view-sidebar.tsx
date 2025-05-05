@@ -1,6 +1,7 @@
 import { IconButtons } from '@/components/icon-button'
 import { MainViewSidebarItem } from '@/components/modal/main-view/main-view-sidebar-item'
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Stack, SxProps, Theme, Typography } from '@mui/material'
+import { Fragment, ReactNode } from 'react'
 
 export const MAIN_VIEW_SIDEBAR_WIDTH = 200
 
@@ -20,9 +21,17 @@ interface MainViewSidebarProps<T> {
   menu: MainViewSidebarMenuGroup<T>[]
   selectedMenuId?: T | null
   onSelected?: (id: T) => void
+  actions?: ReactNode[]
+  actionSx?: SxProps<Theme>
 }
 
-export function MainViewSidebar<T>({ menu, selectedMenuId, onSelected }: MainViewSidebarProps<T>) {
+export function MainViewSidebar<T>({
+  menu,
+  selectedMenuId,
+  onSelected,
+  actions,
+  actionSx,
+}: MainViewSidebarProps<T>) {
   const menuClickHandler = (id: T, onClick?: () => void) => {
     if (onClick) {
       onClick()
@@ -42,11 +51,13 @@ export function MainViewSidebar<T>({ menu, selectedMenuId, onSelected }: MainVie
       <Stack p={0.5} borderBottom={1} borderColor={(theme) => theme.palette.border.main}>
         <IconButtons.Sidebar />
       </Stack>
+
       <Stack
         p={1}
         divider={
           <Box width={1} borderBottom={1} borderColor={(theme) => theme.palette.border.main} />
         }
+        flex={1}
         spacing={1}
       >
         {menu.map((group, i) => (
@@ -68,6 +79,20 @@ export function MainViewSidebar<T>({ menu, selectedMenuId, onSelected }: MainVie
           </Stack>
         ))}
       </Stack>
+
+      {actions && (
+        <Stack
+          p={1}
+          borderTop={1}
+          borderColor={(theme) => theme.palette.border.main}
+          spacing={1}
+          sx={actionSx}
+        >
+          {actions.map((action, i) => (
+            <Fragment key={i}>{action}</Fragment>
+          ))}
+        </Stack>
+      )}
     </Stack>
   )
 }
