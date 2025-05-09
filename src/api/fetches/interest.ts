@@ -26,8 +26,9 @@ export const interest = {
     return axiosStatus(
       () => {
         const formData = new FormData()
-        formData.append('logo', params.body.logo)
-        formData.append('request', JSON.stringify(params.body.request.name))
+        formData.append('name', params.body.request.name)
+        formData.append('colorCode', params.body.request.colorCode)
+        formData.append('logo', params.body.request.logo)
         return AXIOS.post<CreateInterestResponse>(endpoints.interest.create, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',

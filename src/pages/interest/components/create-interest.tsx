@@ -21,8 +21,9 @@ export function CreateInterest() {
     createInterest({
       request: {
         name: interestName,
+        colorCode: '#000000',
+        logo: interestLogo,
       },
-      logo: interestLogo,
     })
   }
 
