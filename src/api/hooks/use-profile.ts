@@ -64,7 +64,7 @@ export function useProfile() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('이름 변경에 실패했습니다.')
               callback?.onError?.()
             },
@@ -94,7 +94,7 @@ export function useProfile() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('모토 변경에 실패했습니다.')
               callback?.onError?.()
             },
@@ -135,7 +135,7 @@ export function useProfile() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('프로필 이미지 변경에 실패했습니다.')
               callback?.onError?.()
             },
@@ -183,7 +183,7 @@ export function useProfile() {
               },
               onError: (err) => {
                 apiErrorHandler(err, {
-                  onError: () => {
+                  onElse: () => {
                     toast.error('핸들 변경에 실패했습니다.')
                     callback?.onError?.()
                   },
@@ -194,7 +194,7 @@ export function useProfile() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('핸들 변경에 실패했습니다.')
               callback?.onError?.()
             },

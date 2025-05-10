@@ -53,7 +53,7 @@ export function useRepeatQuest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('반복퀘스트 추가에 실패했습니다.')
               callback?.onError?.()
             },
@@ -100,7 +100,7 @@ export function useRepeatQuest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('반복퀘스트 수정에 실패했습니다.')
               callback?.onError?.()
             },
@@ -135,7 +135,7 @@ export function useRepeatQuest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('반복퀘스트 삭제에 실패했습니다.')
               callback?.onError?.()
             },

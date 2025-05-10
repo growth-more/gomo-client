@@ -30,7 +30,7 @@ export function useJoin() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('회원가입에 실패했습니다.')
               callback?.onError?.()
             },
@@ -66,7 +66,7 @@ export function useJoin() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('핸들 중복 체크에 실패했습니다.')
               callback?.onError?.()
             },
@@ -105,7 +105,7 @@ export function useJoin() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('이메일 인증 코드 생성에 실패했습니다.')
               callback?.onError?.()
             },
@@ -142,7 +142,7 @@ export function useJoin() {
       },
       onError: (err) => {
         apiErrorHandler(err, {
-          onError: () => {
+          onElse: () => {
             toast.error('이메일 인증 코드가 올바르지 않습니다.')
             callback?.onError?.()
           },

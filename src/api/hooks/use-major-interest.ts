@@ -49,7 +49,7 @@ export function useMajorInterest() {
       },
       onError: (err) => {
         apiErrorHandler(err, {
-          onError: () => {
+          onElse: () => {
             toast.error('주요 관심사 등록에 실패했습니다.')
             callback?.onError?.()
           },
@@ -84,7 +84,7 @@ export function useMajorInterest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('주요 관심사 해제에 실패했습니다.')
               callback?.onError?.()
             },

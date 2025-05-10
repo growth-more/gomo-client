@@ -59,7 +59,7 @@ export function useAssignQuest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('퀘스트 완료에 실패했습니다.')
               callback?.onError?.()
             },
@@ -88,7 +88,7 @@ export function useAssignQuest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('퀘스트 수락에 실패했습니다.')
               callback?.onError?.()
             },
@@ -117,7 +117,7 @@ export function useAssignQuest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('퀘스트 삭제에 실패했습니다.')
               callback?.onError?.()
             },
@@ -151,7 +151,7 @@ export function useAssignQuest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('퀘스트 생성에 실패했습니다.')
               callback?.onError?.()
             },
@@ -198,7 +198,7 @@ export function useAssignQuest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('퀘스트 수정에 실패했습니다.')
               callback?.onError?.()
             },

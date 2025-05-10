@@ -54,7 +54,7 @@ export function useInterest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('관심사 추가에 실패했습니다.')
               callback?.onError?.()
             },
@@ -103,7 +103,7 @@ export function useInterest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('관심사 수정에 실패했습니다.')
               callback?.onError?.()
             },
@@ -140,7 +140,7 @@ export function useInterest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('관심사 삭제에 실패했습니다.')
               callback?.onError?.()
             },
@@ -179,7 +179,7 @@ export function useInterest() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('관심사 로고 수정에 실패했습니다.')
               callback?.onError?.()
             },

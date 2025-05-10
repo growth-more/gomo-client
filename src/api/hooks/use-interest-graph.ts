@@ -68,7 +68,7 @@ export function useInterestGraph() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('관심사 연결에 실패했습니다.')
               callback?.onError?.()
             },
@@ -98,7 +98,7 @@ export function useInterestGraph() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('관심사 연결 삭제에 실패했습니다.')
               callback?.onError?.()
             },

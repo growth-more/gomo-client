@@ -51,7 +51,7 @@ export function useQuestSetting() {
         },
         onError: (err) => {
           apiErrorHandler(err, {
-            onError: () => {
+            onElse: () => {
               toast.error('퀘스트 설정 수정에 실패했습니다.')
               callback?.onError?.()
             },
