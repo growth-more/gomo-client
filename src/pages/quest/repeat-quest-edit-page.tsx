@@ -14,7 +14,7 @@ interface RepeatQuestEditPageProps {
 
 export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
   const { createRepeatQuest, updateRepeatQuest } = useRepeatQuest()
-  const { interestList } = useInterest()
+  const { interests } = useInterest()
 
   const { removeView } = useWindowStore()
   const { tab: questType, tabs, tabHandler, setTab } = useQuestTab()
@@ -66,11 +66,11 @@ export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
     setContent(prevData.content)
     setTab(prevData.questType)
 
-    const interest = interestList.find((interest) => interest.id === prevData.subjectId)
+    const interest = interests.find((interest) => interest.id === prevData.subjectId)
     if (interest) {
       setInterest(interest)
     }
-  }, [prevData, setTab, interestList])
+  }, [prevData, setTab, interests])
 
   return (
     <Stack height={1}>

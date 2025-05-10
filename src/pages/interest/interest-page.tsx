@@ -1,5 +1,5 @@
 import { alpha, Box, Stack } from '@mui/material'
-import { useInterest, useInterestGraph, useMajorInterest } from '@/api/hooks'
+import { useInterest, useMajorInterest } from '@/api/hooks'
 import { ForceDirectedGraph } from '@/components/force-directed-graph'
 import { CreateInterest, InterestIndicator } from './components'
 import { useEffect, useState } from 'react'
@@ -8,8 +8,8 @@ import { OnEditHandler } from '@/components/editable/types'
 import { useBoolean } from '@/hooks'
 
 export function InterestPage() {
-  const { interestList, deleteInterest, updateInterest } = useInterest()
-  const { interestGraph, createEdge, deleteEdge } = useInterestGraph()
+  const { interests, deleteInterest, updateInterest, interestGraph, createEdge, deleteEdge } =
+    useInterest()
   const { majorInterest } = useMajorInterest()
 
   const [selectedInterest, setSelectedInterest] = useState<Interest | null>(null)
@@ -24,7 +24,7 @@ export function InterestPage() {
     if (vertex === undefined) {
       return null
     }
-    return interestList.find((interest) => interest.id === vertex.source) ?? null
+    return interests.find((interest) => interest.id === vertex.source) ?? null
   }
 
   const updateInterestHandler = (name: string, handler?: OnEditHandler) => {

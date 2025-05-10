@@ -14,7 +14,7 @@ interface QuestEditPageProps {
 
 export function QuestEditPage({ prevData }: QuestEditPageProps) {
   const { createQuest, updateQuest } = useAssignQuest()
-  const { interestList } = useInterest()
+  const { interests } = useInterest()
 
   const { removeView } = useWindowStore()
   const { tab: questType, tabs, tabHandler, setTab } = useQuestTab()
@@ -66,11 +66,11 @@ export function QuestEditPage({ prevData }: QuestEditPageProps) {
     setContent(prevData.content)
     setTab(prevData.questType)
 
-    const interest = interestList.find((interest) => interest.id === prevData.subjectId)
+    const interest = interests.find((interest) => interest.id === prevData.subjectId)
     if (interest) {
       setInterest(interest)
     }
-  }, [prevData, setTab, interestList])
+  }, [prevData, setTab, interests])
 
   return (
     <Stack height={1}>

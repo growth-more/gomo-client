@@ -10,11 +10,11 @@ interface SelectInterestProps {
 }
 
 export function SelectInterest({ value, onSelect, placeholder }: SelectInterestProps) {
-  const { interestList } = useInterest()
+  const { interests } = useInterest()
 
   return (
     <Autocomplete
-      options={interestList}
+      options={interests}
       onChange={(_, value) => onSelect?.(value)}
       getOptionLabel={(option) => option.name}
       size="small"

@@ -1,4 +1,4 @@
-import { useInterestGraph } from '@/api/hooks'
+import { useInterest } from '@/api/hooks'
 import { useContextMenu } from '@/components/context-menu'
 import { IconButtons } from '@/components/icon-button'
 import { Interest } from '@/entities/interest'
@@ -15,7 +15,7 @@ interface InterestGraphIndicatorProps {
 }
 
 export function InterestGraphIndicator({ interest }: InterestGraphIndicatorProps) {
-  const { interestGraph } = useInterestGraph()
+  const { interestGraph } = useInterest()
 
   const { contextMenu } = useInterestGraphIndicatorContextMenu(interest)
   const onContextMenu = useContextMenu(contextMenu)

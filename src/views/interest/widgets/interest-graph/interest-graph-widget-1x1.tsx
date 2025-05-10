@@ -1,4 +1,4 @@
-import { useInterestGraph } from '@/api/hooks'
+import { useInterest } from '@/api/hooks'
 import { ForceDirectedGraph } from '@/components/force-directed-graph'
 import { Widget } from '@/components/widget'
 import { useModalStore } from '@/stores/use-modal-store'
@@ -10,7 +10,7 @@ import {
 } from '@/views/interest/modals'
 
 export function InterestGraphWidget1x1() {
-  const { interestGraph } = useInterestGraph()
+  const { interestGraph } = useInterest()
   const { addModal } = useModalStore()
 
   const createInterestHandler = () => {
