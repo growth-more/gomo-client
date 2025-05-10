@@ -5,15 +5,15 @@ import { ProfileHandle, ProfileMotto, ProfileName } from '@/pages/profile/compon
 import { Stack } from '@mui/material'
 
 export function HeaderSection() {
-  const { profile, updateHandle, updateProfileMotto, updateProfileName, updateProfileImage } =
-    useProfile()
+  const { profile, updateHandle, updateMotto, updateName, updateProfileImage } = useProfile()
+  useProfile()
 
   const updateNameHandler = (name: string, handler?: OnEditHandler) => {
-    updateProfileName(name, handler)
+    updateName(name, handler)
   }
 
   const updateMottoHandler = (motto: string, handler?: OnEditHandler) => {
-    updateProfileMotto(motto, handler)
+    updateMotto(motto, handler)
   }
 
   const updateHandleHandler = (handle: string, handler?: OnEditHandler) => {
@@ -22,7 +22,7 @@ export function HeaderSection() {
 
   const updateProfileImageHandler = (image: File | null) => {
     if (image !== null) {
-      updateProfileImage({ profileImage: image })
+      updateProfileImage(image)
       return
     }
     // deleteProfileImage()
