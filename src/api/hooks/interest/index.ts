@@ -40,3 +40,24 @@ export function useInterest() {
     deleteEdge,
   }
 }
+
+import { useGetMajorInterest } from './use-get-major-interest'
+import { useCreateMajorInterest } from './use-create-major-interest'
+import { useDeleteMajorInterest } from './use-delete-major-interest'
+
+export * from './use-get-major-interest'
+export * from './use-create-major-interest'
+export * from './use-delete-major-interest'
+
+export function useMajorInterest() {
+  const { majorInterest, isLoading } = useGetMajorInterest()
+  const { createMajorInterest } = useCreateMajorInterest()
+  const { deleteMajorInterest } = useDeleteMajorInterest()
+
+  return {
+    majorInterest,
+    isLoading,
+    createMajorInterest,
+    deleteMajorInterest,
+  }
+}

@@ -1,5 +1,3 @@
-export * from './use-major-interest'
-
 export * from './history'
 export * from './interest'
 export * from './member'
