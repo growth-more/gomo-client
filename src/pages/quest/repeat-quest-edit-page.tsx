@@ -13,7 +13,7 @@ interface RepeatQuestEditPageProps {
 }
 
 export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
-  const { createRepeatQuest, updateRepeatQuest } = useRepeatQuest()
+  const { createQuest, updateQuest } = useRepeatQuest()
   const { interests } = useInterest()
 
   const { removeView } = useWindowStore()
@@ -32,7 +32,7 @@ export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
     if (prevData || !interest) {
       return
     }
-    createRepeatQuest(
+    createQuest(
       {
         subjectId: interest.id,
         subjectName: interest.name,
@@ -47,7 +47,7 @@ export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
     if (!prevData || !interest) {
       return
     }
-    updateRepeatQuest(
+    updateQuest(
       prevData.id,
       {
         subjectId: interest.id,

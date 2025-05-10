@@ -20,12 +20,12 @@ export function RepeatQuestList({
   onDragEnd,
   constraints,
 }: RepeatQuestListProps) {
-  const { deleteRepeatQuest } = useRepeatQuest()
+  const { deleteQuest } = useRepeatQuest()
   const { addViewWithId } = useWindowStore()
 
   const deleteHandler = useCallback(() => {
-    deleteRepeatQuest(quest.id)
-  }, [deleteRepeatQuest, quest.id])
+    deleteQuest(quest.id)
+  }, [deleteQuest, quest.id])
 
   const editHandler = useCallback(() => {
     addViewWithId(REPEAT_QUEST_UPDATE_PAGE_ID(quest.id), REPEAT_QUEST_UPDATE_PAGE_VIEW(quest))
