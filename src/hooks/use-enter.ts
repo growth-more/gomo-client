@@ -2,14 +2,16 @@ import { useEffect } from 'react'
 
 export function useEnter(onEnter: () => void) {
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const keyboardHandler = (event: KeyboardEvent) => {
+      console.log(event)
       if (event.key === 'Enter') {
         onEnter?.()
+        event.stopPropagation()
       }
     }
-    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', keyboardHandler)
     return () => {
-      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', keyboardHandler)
     }
   }, [onEnter])
 }
