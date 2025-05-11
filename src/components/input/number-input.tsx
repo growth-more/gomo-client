@@ -1,4 +1,4 @@
-import { alpha, IconButton, Stack, Typography } from '@mui/material'
+import { IconButton, Stack, Typography } from '@mui/material'
 import { Iconify } from '@/components/iconify'
 import { useMemo, useState } from 'react'
 
@@ -30,7 +30,7 @@ export function NumberInput({
   const [innerValue, setInnerValue] = useState(defaultValue)
 
   const value = useMemo(() => {
-    if (props.value) {
+    if (props.value !== undefined) {
       return props.value
     }
     return innerValue
@@ -53,10 +53,20 @@ export function NumberInput({
   }
 
   return (
-    <Stack direction="row" alignItems="center" border={1} borderRadius={1} borderColor="divider">
+    <Stack
+      direction="row"
+      alignItems="center"
+      border={1}
+      borderRadius={1}
+      borderColor={(theme) => theme.palette.border.main}
+    >
       {indicator && (
         <IconButton
-          sx={{ borderRadius: 0, borderRight: 1, borderColor: 'divider' }}
+          sx={{
+            borderRadius: 0,
+            borderRight: 1,
+            borderColor: (theme) => theme.palette.border.main,
+          }}
           onClick={subHandler}
           disabled={disabled}
         >
@@ -70,7 +80,7 @@ export function NumberInput({
         alignItems="center"
         direction={unitPosition === 'left' ? 'row-reverse' : 'row'}
         spacing={0.2}
-        bgcolor={(theme) => alpha(theme.palette.background.paper, 0.4)}
+        bgcolor={(theme) => theme.palette.background.light}
       >
         <Typography variant="subtitle2" color={disabled ? 'text.disabled' : 'text.secondary'}>
           {value}
@@ -83,7 +93,11 @@ export function NumberInput({
       </Stack>
       {indicator && (
         <IconButton
-          sx={{ borderRadius: 0, borderLeft: 1, borderColor: 'divider' }}
+          sx={{
+            borderRadius: 0,
+            borderLeft: 1,
+            borderColor: (theme) => theme.palette.border.main,
+          }}
           onClick={addHandler}
           disabled={disabled}
         >
