@@ -1,4 +1,4 @@
-import { useAssignQuest } from '@/api/hooks'
+import { useRepeatQuest } from '@/api/hooks'
 import { ModalView } from '@/components/modal'
 import { Stepper } from '@/components/stepper'
 import { QuestType } from '@/entities/quest'
@@ -11,28 +11,28 @@ import { useState } from 'react'
 
 const CREATE_QUEST_STEPS = ['이름 정하기', '관심사 정하기']
 
-export const CREATE_QUEST_MODAL_ID = 'CREATE_QUEST_MODAL'
+export const CREATE_REPEAT_QUEST_MODAL_ID = 'CREATE_REPEAT_QUEST_MODAL'
 
-export interface CreateQuestModalStep {
+export interface CreateRepeatQuestModalStep {
   onNext?: () => void
   onCancel?: () => void
 }
 
-interface CreateQuestModalProps {
+interface CreateRepeatQuestModalProps {
   id?: string
   type: QuestType
 }
 
-export function CreateQuestModal({ type, id: propsId }: CreateQuestModalProps) {
+export function CreateRepeatQuestModal({ type, id: propsId }: CreateRepeatQuestModalProps) {
   const { removeModal } = useModalStore()
-  const { createQuest } = useAssignQuest()
+  const { createQuest } = useRepeatQuest()
 
   const [step, setStep] = useState(0)
 
   const [name, setName] = useState<string>('')
   const [interest, setInterest] = useState<Interest | null>(null)
 
-  const modalId = propsId ?? CREATE_QUEST_MODAL_ID
+  const modalId = propsId ?? CREATE_REPEAT_QUEST_MODAL_ID
 
   const closeModal = () => {
     removeModal(modalId)
@@ -50,9 +50,7 @@ export function CreateQuestModal({ type, id: propsId }: CreateQuestModalProps) {
         subjectId: interest.id,
         subjectName: interest.name,
       },
-      {
-        onSuccess: () => closeModal(),
-      }
+      { onSuccess: () => closeModal() }
     )
   }
 

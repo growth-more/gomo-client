@@ -1,5 +1,6 @@
 import { QUEST_TYPE, RepeatQuest } from '@/entities/quest'
 import { QuestType } from '@/entities/quest'
+import { RepeatQuestListCreate } from '@/views/quest/components/repeat-quest-list-create'
 import { RepeatQuestListItem } from '@/views/quest/components/repeat-quest-list-item'
 import { Stack, Typography } from '@mui/material'
 
@@ -32,6 +33,7 @@ export function QuestModalRepeatQuestSection({
           ? quests.map((quest) => <RepeatQuestListItem key={quest.id} quest={quest} enableMenu />)
           : undefined}
       </Stack>
+      <RepeatQuestListCreate questType={questType} />
     </Stack>
   )
 }
