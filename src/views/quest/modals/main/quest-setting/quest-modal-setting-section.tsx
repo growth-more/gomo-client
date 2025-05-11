@@ -1,5 +1,5 @@
 import { useQuestSetting } from '@/api/hooks'
-import { QuestModalSettingList } from '@/views/quest/modals/main/quest-modal-setting-list'
+import { QuestModalSettingList } from '@/views/quest/modals/main/quest-setting/quest-modal-setting-list'
 import { Button, Stack } from '@mui/material'
 import { useEffect, useMemo, useState } from 'react'
 

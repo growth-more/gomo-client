@@ -2,7 +2,7 @@ import { AssignQuest, QuestType, QuestStatus } from '@/entities/quest'
 import { QuestList } from '@/views/quest/components'
 import { QuestListCreate } from '@/views/quest/components/quest-list-create'
 import { QuestListEmpty } from '@/views/quest/components/quest-list-empty'
-import { QuestModalTitle } from '@/views/quest/modals/main/quest-modal-title'
+import { QuestModalTitle } from '@/views/quest/modals/main/assign-quest/quest-modal-title'
 import { Stack } from '@mui/material'
 
 interface QuestModalQuestListProps {

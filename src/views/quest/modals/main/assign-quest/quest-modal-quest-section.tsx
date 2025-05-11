@@ -1,7 +1,7 @@
 import { useAssignQuest } from '@/api/hooks'
 import { OrganizedAssignQuest, QuestType } from '@/entities/quest'
 import { useModalStore } from '@/stores/use-modal-store'
-import { QuestModalQuestList } from '@/views/quest/modals/main/quest-modal-quest-list'
+import { QuestModalQuestList } from '@/views/quest/modals/main/assign-quest/quest-modal-quest-list'
 import { QUEST_PROOF_MODAL_ID, QuestProofModal } from '@/views/quest/modals'
 import { Box, Stack } from '@mui/material'
 import { DANGER_DIALOG_ID } from '@/components/modal'
