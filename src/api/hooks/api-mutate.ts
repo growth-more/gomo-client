@@ -2,8 +2,8 @@ import { ErrorCode } from '@/api/error'
 import { apiErrorHandler } from '@/api/hooks/error-handler'
 import { UseMutateFunction } from '@tanstack/react-query'
 
-interface ApiMutateOptions {
-  onSuccess?: () => void
+interface ApiMutateOptions<T> {
+  onSuccess?: (data: T) => void
   onError?: (error: Error) => void
   onElse?: (error: Error) => void
   onCode?: Partial<Record<ErrorCode, (error: Error) => void>>
@@ -12,10 +12,10 @@ interface ApiMutateOptions {
 export function apiMutate<Response, Request>(
   mutate: UseMutateFunction<Response, Error, Request>,
   request: Request,
-  options?: ApiMutateOptions
+  options?: ApiMutateOptions<Response>
 ) {
   mutate(request, {
-    onSuccess: options?.onSuccess,
+    onSuccess: (data) => options?.onSuccess?.(data),
     onError: (err) => {
       options?.onError?.(err)
       apiErrorHandler(err, {
