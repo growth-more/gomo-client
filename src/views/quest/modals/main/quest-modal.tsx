@@ -1,8 +1,8 @@
 import { useAssignQuest } from '@/api/hooks'
 import { MainView } from '@/components/modal'
 import { MainViewSidebarMenuGroup } from '@/components/modal/main-view/main-view-sidebar'
-import { QuestModalQuestSection } from '@/views/quest/modals/main/quest-modal-quest-section'
-import { QuestModalSettingSection } from '@/views/quest/modals/main/quest-modal-setting-section'
+import { QuestModalQuestSection } from '@/views/quest/modals/main/assign-quest/quest-modal-quest-section'
+import { QuestModalSettingSection } from '@/views/quest/modals/main/quest-setting/quest-modal-setting-section'
 import { useState } from 'react'
 
 export const QUEST_MODAL_ID = 'QUEST_MODAL'
