@@ -4,14 +4,14 @@ import { useQuestSetting } from '@/api/hooks'
 import { useEffect, useMemo, useState } from 'react'
 
 export function QuestSettingPage() {
-  const { questProperty, update } = useQuestSetting()
+  const { questProperty, updateQuestProperty } = useQuestSetting()
 
   const [dailyThreshold, setDailyThreshold] = useState(questProperty.dailyThreshold)
   const [weeklyThreshold, setWeeklyThreshold] = useState(questProperty.weeklyThreshold)
   const [monthlyThreshold, setMonthlyThreshold] = useState(questProperty.monthlyThreshold)
 
   const updateHandler = () => {
-    update({ dailyThreshold, weeklyThreshold, monthlyThreshold })
+    updateQuestProperty({ dailyThreshold, weeklyThreshold, monthlyThreshold })
   }
 
   const isUpdated = useMemo(() => {

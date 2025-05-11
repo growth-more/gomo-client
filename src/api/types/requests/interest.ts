@@ -5,8 +5,9 @@
 interface CreateInterestRequest {
   request: {
     name: string
+    colorCode: string
+    logo: File
   }
-  logo: File
 }
 
 interface UpdateInterestRequest {

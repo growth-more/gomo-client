@@ -2,7 +2,7 @@ import { Button, Stack, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { EmailVerifyForm, PasswordForm, PersonalForm } from './components'
 import { useBoolean } from '@/hooks'
-import { useJoin } from '@/api/hooks/use-join'
+import { useJoin } from '@/api/hooks'
 
 export interface Form {
   email: string

@@ -1,12 +1,12 @@
 import { ForceDirectedGraph } from '@/components/force-directed-graph'
 import { Stack } from '@mui/material'
-import { useInterestGraph } from '@/api/hooks'
+import { useInterest } from '@/api/hooks'
 import { Interest } from '@/entities/interest'
 import { useEffect, useState } from 'react'
 import { InterestGraphIndicator } from '@/views/interest/components'
 
 export function InterestModalGraphSection() {
-  const { interestGraph } = useInterestGraph()
+  const { interestGraph } = useInterest()
 
   const [selectedInterest, setSelectedInterest] = useState<Interest | null>(null)
 

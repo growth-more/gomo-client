@@ -4,8 +4,8 @@ import { Control, UseFormWatch } from 'react-hook-form'
 import { Form } from '@/pages/join/join-form-page'
 import { JoinFieldInfo } from './join-field-info'
 import { useBoolean } from '@/hooks'
-import { useJoin } from '@/api/hooks/use-join'
 import { useEffect, useState } from 'react'
+import { useJoin } from '@/api/hooks'
 
 interface PersonalFormProps {
   control: Control<Form>

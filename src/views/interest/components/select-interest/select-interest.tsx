@@ -23,7 +23,7 @@ export function SelectInterest({
   onNoneOption,
   disableInterestIds,
 }: SelectInterestProps) {
-  const { interestList } = useInterest()
+  const { interests } = useInterest()
 
   return (
     <Box
@@ -43,7 +43,7 @@ export function SelectInterest({
               onClick={onNoneOption}
             />
           )}
-          {interestList.map((interest) => (
+          {interests.map((interest) => (
             <SelectInterestItem
               key={interest.id}
               name={interest.name}

@@ -1,22 +1,22 @@
-import { useQuery } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
-import { useMemo } from 'react'
 import { OrganizedAssignQuestHistory } from '@/entities'
+import { useQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import _ from 'lodash'
+import { useMemo } from 'react'
 
-export function useHistory(year: number, month: number) {
-  const { data: historyData, isLoading } = useQuery({
+export function useGetHistory(year: number, month: number) {
+  const { data, isLoading } = useQuery({
     queryKey: ['GET', endpoints.quest.getAssignQuestHistory, year, month],
     queryFn: () => fetches.quest.getAssignQuestHistory({ year, month }),
   })
 
   const history = useMemo<OrganizedAssignQuestHistory[]>(() => {
-    if (!historyData) {
+    if (!data) {
       return []
     }
 
-    return _(historyData.assignQuests)
+    return _(data.assignQuests)
       .filter((quest) => quest.completedDateTime !== null)
       .groupBy((quest) => dayjs(quest.completedDateTime).format('YYYY-MM-DD'))
       .map<OrganizedAssignQuestHistory>((history, key) => ({
@@ -26,7 +26,7 @@ export function useHistory(year: number, month: number) {
       .sortBy((history) => history.date.getTime())
       .reverse()
       .value()
-  }, [historyData])
+  }, [data])
 
   return { history, isLoading }
 }

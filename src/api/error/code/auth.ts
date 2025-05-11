@@ -3,6 +3,6 @@ export const authCode = {
   LOGIN_NOT_FOUND: 'LOGIN_NOT_FOUND',
   EMAIL_DUPLICATED: 'EMAIL_DUPLICATED',
   PASSWORD_INVALID_PARAMETER: 'PASSWORD_INVALID_PARAMETER',
-}
+} as const
 
 export type AuthCode = (typeof authCode)[keyof typeof authCode]

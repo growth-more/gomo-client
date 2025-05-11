@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { JoinFieldInfo } from './join-field-info'
 import { Form } from '@/pages/join/join-form-page'
-import { useJoin } from '@/api/hooks/use-join'
+import { useJoin } from '@/api/hooks'
 
 dayjs.extend(duration)
 
@@ -29,7 +29,7 @@ export function EmailVerifyForm({
   onVerified,
   onUnverified,
 }: EmailVerifyFormProps) {
-  const { createEmailAuthCode, verifyEmailCode } = useJoin()
+  const { createAuthCode, checkAuthCode } = useJoin()
 
   const [verifyCodeStatus, setVerifyCodeStatus] = useState<VerifyCodeStatus>('none')
 
@@ -39,23 +39,20 @@ export function EmailVerifyForm({
 
   const requestVerifyCode = () => {
     setVerifyCodeStatus('pending')
-    createEmailAuthCode({ email })
+    createAuthCode({ email })
     verifyCodeTimer.restart()
     onUnverified?.()
   }
 
   const checkVerifyCode = () => {
     const code = watch('verifyCode')
-    verifyEmailCode(
-      { email, code },
-      {
-        onSuccess: () => {
-          setVerifyCodeStatus('verified')
-          verifyCodeTimer.stop()
-          onVerified?.()
-        },
-      }
-    )
+    checkAuthCode(email, code, {
+      onSuccess: () => {
+        setVerifyCodeStatus('verified')
+        verifyCodeTimer.stop()
+        onVerified?.()
+      },
+    })
   }
 
   return (

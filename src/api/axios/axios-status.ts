@@ -1,20 +1,20 @@
-import { ApiError } from '@/api/error'
-import { AxiosError, AxiosResponse, isAxiosError } from 'axios'
+import { ApiError, ErrorCode } from '@/api/error'
+import { AxiosResponse, isAxiosError } from 'axios'
 
 interface AxiosStatusListener<T, U> {
   onSuccess: (data: T) => U
   on200?: (data: T) => U
   on201?: (data: T) => U
   on204?: (data: T) => U
-  on400?: (data: AxiosError) => ApiError
-  on401?: (data: AxiosError) => ApiError
-  on403?: (data: AxiosError) => ApiError
-  on404?: (data: AxiosError) => ApiError
-  on409?: (data: AxiosError) => ApiError
-  on422?: (data: AxiosError) => ApiError
-  on500?: (data: AxiosError) => ApiError
+  on400?: ErrorCode
+  on401?: ErrorCode
+  on403?: ErrorCode
+  on404?: ErrorCode
+  on409?: ErrorCode
+  on422?: ErrorCode
+  on500?: ErrorCode
   onCode?: {
-    [code: string]: (data: AxiosError) => ApiError
+    [code: string]: ErrorCode
   }
 }
 
@@ -44,25 +44,25 @@ export async function axiosStatus<T, U>(
     }
 
     if (error.response.status === 400 && listener.on400) {
-      throw listener.on400(error.response.data)
+      throw new ApiError(listener.on400)
     }
     if (error.response.status === 401 && listener.on401) {
-      throw listener.on401(error.response.data)
+      throw new ApiError(listener.on401)
     }
     if (error.response.status === 403 && listener.on403) {
-      throw listener.on403(error.response.data)
+      throw new ApiError(listener.on403)
     }
     if (error.response.status === 404 && listener.on404) {
-      throw listener.on404(error.response.data)
+      throw new ApiError(listener.on404)
     }
     if (error.response.status === 409 && listener.on409) {
-      throw listener.on409(error.response.data)
+      throw new ApiError(listener.on409)
     }
     if (error.response.status === 422 && listener.on422) {
-      throw listener.on422(error.response.data)
+      throw new ApiError(listener.on422)
     }
     if (error.response.status === 500 && listener.on500) {
-      throw listener.on500(error.response.data)
+      throw new ApiError(listener.on500)
     }
 
     if (listener.onCode && error.response.data) {
@@ -74,7 +74,7 @@ export async function axiosStatus<T, U>(
         throw error
       }
       if (listener.onCode[errorData.code]) {
-        throw listener.onCode[errorData.code](error)
+        throw new ApiError(listener.onCode[errorData.code])
       }
     }
 

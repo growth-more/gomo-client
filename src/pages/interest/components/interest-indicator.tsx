@@ -33,7 +33,7 @@ export function InterestIndicator({
     if (interest === null) {
       return
     }
-    createMajorInterest({ id: interest.id })
+    createMajorInterest(interest.id)
   }
 
   const unregistMajorHandler = () => {

@@ -1,33 +1,34 @@
 import { ApiError, ErrorCode } from '@/api/error'
 
 interface ApiErrorHandlerListener {
-  onError?: () => void
-  onCode?: Partial<Record<ErrorCode, () => void>>
+  onElse?: (error: Error) => void
+  onCode?: Partial<Record<ErrorCode, (error: Error) => void>>
 }
 
 export function apiErrorHandler(error: Error, listener: ApiErrorHandlerListener) {
   if (!ApiError.isApiError(error)) {
-    listener.onError?.()
+    listener.onElse?.(error)
     return
   }
 
   if (!listener.onCode) {
-    listener.onError?.()
+    listener.onElse?.(error)
     return
   }
 
   for (const code in listener.onCode) {
     if (error.check(code as ErrorCode)) {
-      listener.onCode[code as ErrorCode]?.()
+      listener.onCode[code as ErrorCode]?.(error)
       return
     }
   }
-  listener.onError?.()
+  listener.onElse?.(error)
 }
 
 interface QueryCallback {
   onSuccess?: () => void
   onError?: () => void
+  onElse?: () => void
 }
 
 export type { QueryCallback }

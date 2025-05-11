@@ -1,30 +1,30 @@
-import { useQuery } from '@tanstack/react-query'
 import { endpoints, fetches } from '@/api'
-import { useMemo } from 'react'
 import { OrganizedStreak } from '@/entities'
+import { useQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
 
-export function useStreak(startDate: Date, endDate: Date) {
-  const { data: streakData, isLoading } = useQuery({
+export function useGetStreak(startDate: Date, endDate: Date) {
+  const { data, isLoading } = useQuery({
     queryKey: ['GET', endpoints.streak.getStreak],
     queryFn: () => fetches.streak.getStreak({ startDate, endDate }),
   })
 
   const streak = useMemo<OrganizedStreak>(() => {
-    if (!streakData) {
+    if (!data) {
       return { all: [], daily: [], weekly: [], monthly: [] }
     }
 
-    const daily = streakData.dailyStreaks?.map((streak) => ({
+    const daily = data.dailyStreaks?.map((streak) => ({
       date: streak.filledDate,
       count: streak.completedQuestCount,
     }))
 
-    const weekly = streakData.weeklyStreaks?.map((streak) => ({
+    const weekly = data.weeklyStreaks?.map((streak) => ({
       date: streak.filledDate,
       count: streak.completedQuestCount,
     }))
 
-    const monthly = streakData.monthlyStreaks?.map((streak) => ({
+    const monthly = data.monthlyStreaks?.map((streak) => ({
       date: streak.filledDate,
       count: streak.completedQuestCount,
     }))
@@ -32,7 +32,7 @@ export function useStreak(startDate: Date, endDate: Date) {
     const all = [...daily, ...weekly, ...monthly]
 
     return { all, daily, weekly, monthly }
-  }, [streakData])
+  }, [data])
 
   return { streak, isLoading }
 }

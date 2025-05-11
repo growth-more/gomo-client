@@ -1,4 +1,4 @@
-import { useInterestGraph } from '@/api/hooks'
+import { useInterest } from '@/api/hooks'
 import { Button } from '@/components/button'
 import { ModalView } from '@/components/modal'
 import { Interest } from '@/entities/interest'
@@ -15,7 +15,7 @@ interface UpdateInterestUpperModalProps {
 
 export function UpdateInterestUpperModal({ interest }: UpdateInterestUpperModalProps) {
   const { removeModal } = useModalStore()
-  const { createEdge, deleteEdge, interestGraph } = useInterestGraph()
+  const { createEdge, deleteEdge, interestGraph } = useInterest()
 
   const prevUpperInterest = useMemo(() => {
     const edge = interestGraph.edge.find((edge) => edge.target === interest.id)

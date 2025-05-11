@@ -31,7 +31,7 @@ export function useAuth() {
       },
       onError: (err) => {
         apiErrorHandler(err, {
-          onError: () => {
+          onElse: () => {
             callback?.onError?.()
           },
           onCode: {

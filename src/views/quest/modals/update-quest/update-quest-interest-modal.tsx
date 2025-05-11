@@ -17,7 +17,7 @@ interface UpdateQuestInterestModalProps {
 export function UpdateQuestInterestModal({ quest }: UpdateQuestInterestModalProps) {
   const { removeModal } = useModalStore()
   const { updateQuest } = useAssignQuest()
-  const { interestList } = useInterest()
+  const { interests } = useInterest()
 
   const [interest, setInterest] = useState<Interest | null>(null)
 
@@ -45,8 +45,8 @@ export function UpdateQuestInterestModal({ quest }: UpdateQuestInterestModalProp
   }
 
   useEffect(() => {
-    setInterest(interestList.find((interest) => interest.id === quest.subjectId) ?? null)
-  }, [interestList, quest.subjectId])
+    setInterest(interests.find((interest) => interest.id === quest.subjectId) ?? null)
+  }, [interests, quest.subjectId])
 
   return (
     <ModalView height={500}>

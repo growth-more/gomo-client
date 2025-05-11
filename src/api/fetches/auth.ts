@@ -1,34 +1,29 @@
 import { LoginRequest, LoginResponse, ReissueResponse } from '@/api/types'
-import { AXIOS, endpoints, axiosStatus } from '@/api'
-import { ApiError, apiErrorCode, errorCode } from '@/api/error'
+import { endpoints, axiosFetch } from '@/api'
+import { apiErrorCode, errorCode } from '@/api/error'
 import { authCode } from '@/api/error/code/auth'
 
 export const auth = {
   login: async (request: LoginRequest): Promise<LoginResponse> => {
-    return axiosStatus(() => AXIOS.post<LoginResponse>(endpoints.auth.login, request), {
-      onSuccess: (data) => data,
+    return axiosFetch.post(endpoints.auth.login, request, {
       onCode: {
-        [apiErrorCode.NOT_FOUND]: () => new ApiError(errorCode.auth.login.NOT_FOUND),
+        [apiErrorCode.NOT_FOUND]: errorCode.auth.login.NOT_FOUND,
       },
     })
   },
 
   reissue: async (): Promise<ReissueResponse> => {
-    return axiosStatus(() => AXIOS.post<ReissueResponse>(endpoints.auth.reissue), {
-      onSuccess: (data) => data,
-    })
+    return axiosFetch.post(endpoints.auth.reissue)
   },
 
   logout: async (): Promise<void> => {
-    return axiosStatus(() => AXIOS.get<void>(endpoints.auth.logout), {
-      onSuccess: (data) => data,
-    })
+    return axiosFetch.get(endpoints.auth.logout)
   },
 
   check: async (): Promise<boolean> => {
-    return axiosStatus(() => AXIOS.get<void>(endpoints.auth.check), {
+    return axiosFetch.get(endpoints.auth.check, {
       onSuccess: () => true,
-      on401: () => new ApiError(authCode.NOT_AUTHENTICATED),
+      on401: authCode.NOT_AUTHENTICATED,
     })
   },
 }

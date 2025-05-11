@@ -1,5 +1,5 @@
-import { AXIOS, endpoints, axiosStatus } from '@/api'
-import { ApiError, apiErrorCode, errorCode } from '@/api/error'
+import { endpoints, axiosFetch } from '@/api'
+import { apiErrorCode, errorCode } from '@/api/error'
 import {
   AssignQuestHistoryFetchRequest,
   AssignQuestHistoryListResponse,
@@ -23,125 +23,78 @@ export const quest = {
   createAssignQuest: async (
     params: CreateAssignQuestFetchRequest
   ): Promise<CreateAssignQuestResponse> => {
-    return axiosStatus(
-      () => AXIOS.post<CreateAssignQuestResponse>(endpoints.quest.createAssignQuest, params.body),
-      {
-        onSuccess: (data) => data,
-        onCode: {
-          [apiErrorCode.THRESHOLD_EXCEEDED]: () =>
-            new ApiError(errorCode.quest.create.THRESHOLD_EXCEEDED),
-          [apiErrorCode.INVALID_PARAMETER]: () =>
-            new ApiError(errorCode.quest.create.INVALID_PARAMETER),
-        },
-      }
-    )
+    return axiosFetch.post(endpoints.quest.createAssignQuest, params.body, {
+      onCode: {
+        [apiErrorCode.THRESHOLD_EXCEEDED]: errorCode.quest.create.THRESHOLD_EXCEEDED,
+        [apiErrorCode.INVALID_PARAMETER]: errorCode.quest.create.INVALID_PARAMETER,
+      },
+    })
   },
 
   getAssignQuest: async (): Promise<AssignQuestListResponse> => {
-    return axiosStatus(() => AXIOS.get<AssignQuestListResponse>(endpoints.quest.getAssignQuest), {
-      onSuccess: (data) => data,
-    })
+    return axiosFetch.get(endpoints.quest.getAssignQuest)
   },
 
   updateAssignQuest: async (params: UpdateAssignQuestFetchRequest): Promise<void> => {
-    return axiosStatus(
-      () => AXIOS.put(endpoints.quest.updateAssignQuestWithId(params.id), params.body),
-      {
-        onSuccess: (data) => data,
-        onCode: {
-          [apiErrorCode.INVALID_PARAMETER]: () =>
-            new ApiError(errorCode.quest.update.INVALID_PARAMETER),
-        },
-      }
-    )
+    return axiosFetch.put(endpoints.quest.updateAssignQuestWithId(params.id), params.body, {
+      onCode: {
+        [apiErrorCode.INVALID_PARAMETER]: errorCode.quest.update.INVALID_PARAMETER,
+      },
+    })
   },
 
   deleteAssignQuest: async (params: DeleteAssignQuestFetchRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.delete(endpoints.quest.deleteAssignQuestWithId(params.id)), {
-      onSuccess: (data) => data,
-    })
+    return axiosFetch.delete(endpoints.quest.deleteAssignQuestWithId(params.id))
   },
 
   updateAssignQuestOrder: async (params: UpdateAssignQuestOrderFetchRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.quest.updateAssignQuestOrder, params.body), {
-      onSuccess: (data) => data,
-    })
+    return axiosFetch.put(endpoints.quest.updateAssignQuestOrder, params.body)
   },
 
   confirmAssignQuest: async (params: ConfirmAssignQuestFetchRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.quest.confirmAssignQuestWithId(params.id)), {
-      onSuccess: (data) => data,
-    })
+    return axiosFetch.put(endpoints.quest.confirmAssignQuestWithId(params.id))
   },
 
   completeAssignQuest: async (params: CompleteAssignQuestFetchRequest): Promise<void> => {
-    return axiosStatus(
-      () => AXIOS.put(endpoints.quest.completeAssignQuestWithId(params.id), params.body),
-      {
-        onSuccess: (data) => data,
-      }
-    )
+    return axiosFetch.put(endpoints.quest.completeAssignQuestWithId(params.id), params.body)
   },
 
   getAssignQuestHistory: async (
     params: AssignQuestHistoryFetchRequest
   ): Promise<AssignQuestHistoryListResponse> => {
-    return axiosStatus(
-      () =>
-        AXIOS.get<AssignQuestHistoryListResponse>(
-          `${endpoints.quest.getAssignQuestHistory}?year=${params.year}&month=${params.month}`
-        ),
-      {
-        onSuccess: (data) => data,
-      }
+    return axiosFetch.get(
+      `${endpoints.quest.getAssignQuestHistory}?year=${params.year}&month=${params.month}`
     )
   },
 
   createRepeatQuest: async (
     params: CreateRepeatQuestFetchRequest
   ): Promise<CreateRepeatQuestResponse> => {
-    return axiosStatus(
-      () => AXIOS.post<CreateRepeatQuestResponse>(endpoints.quest.createRepeatQuest, params.body),
-      {
-        onSuccess: (data) => data,
-        onCode: {
-          [apiErrorCode.THRESHOLD_EXCEEDED]: () =>
-            new ApiError(errorCode.quest.repeat.create.THRESHOLD_EXCEEDED),
-          [apiErrorCode.INVALID_PARAMETER]: () =>
-            new ApiError(errorCode.quest.repeat.create.INVALID_PARAMETER),
-        },
-      }
-    )
+    return axiosFetch.post(endpoints.quest.createRepeatQuest, params.body, {
+      onCode: {
+        [apiErrorCode.THRESHOLD_EXCEEDED]: errorCode.quest.repeat.create.THRESHOLD_EXCEEDED,
+        [apiErrorCode.INVALID_PARAMETER]: errorCode.quest.repeat.create.INVALID_PARAMETER,
+      },
+    })
   },
 
   getRepeatQuest: async (): Promise<RepeatQuestListResponse> => {
-    return axiosStatus(() => AXIOS.get<RepeatQuestListResponse>(endpoints.quest.getRepeatQuest), {
-      onSuccess: (data) => data,
-    })
+    return axiosFetch.get(endpoints.quest.getRepeatQuest)
   },
 
   updateRepeatQuest: async (params: UpdateRepeatQuestFetchRequest): Promise<void> => {
-    return axiosStatus(
-      () => AXIOS.put(endpoints.quest.updateRepeatQuestWithId(params.id), params.body),
-      {
-        onSuccess: (data) => data,
-        onCode: {
-          [apiErrorCode.INVALID_PARAMETER]: () =>
-            new ApiError(errorCode.quest.repeat.update.INVALID_PARAMETER),
-        },
-      }
-    )
+    return axiosFetch.put(endpoints.quest.updateRepeatQuestWithId(params.id), params.body, {
+      onCode: {
+        [apiErrorCode.INVALID_PARAMETER]: errorCode.quest.repeat.update.INVALID_PARAMETER,
+      },
+    })
   },
 
   deleteRepeatQuest: async (params: DeleteRepeatQuestFetchRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.delete(endpoints.quest.deleteRepeatQuestWithId(params.id)), {
-      onSuccess: (data) => data,
-    })
+    return axiosFetch.delete(endpoints.quest.deleteRepeatQuestWithId(params.id))
   },
 
   updateRepeatQuestOrder: async (params: UpdateRepeatQuestOrderFetchRequest): Promise<void> => {
-    return axiosStatus(() => AXIOS.put(endpoints.quest.updateRepeatQuestOrder, params.body), {
-      onSuccess: (data) => data,
-    })
+    return axiosFetch.put(endpoints.quest.updateRepeatQuestOrder, params.body)
   },
 }
