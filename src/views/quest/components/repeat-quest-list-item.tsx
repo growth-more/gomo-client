@@ -1,7 +1,19 @@
+import { useRepeatQuest } from '@/api/hooks'
 import { useContextMenu } from '@/components/context-menu'
 import { IconButtons } from '@/components/icon-button'
 import { Iconify } from '@/components/iconify'
+import { DANGER_DIALOG_ID } from '@/components/modal'
 import { QUEST_TYPE, RepeatQuest } from '@/entities/quest'
+import { useModalStore } from '@/stores/use-modal-store'
+import { RepeatQuestDeleteDialog } from '@/views/quest/components/repeat-quest-delete-dialog'
+import {
+  UPDATE_REPEAT_QUEST_INTEREST_MODAL_ID,
+  UpdateRepeatQuestInterestModal,
+} from '@/views/quest/modals/update-quest/update-repeat-quest-interest-modal'
+import {
+  UPDATE_REPEAT_QUEST_NAME_MODAL_ID,
+  UpdateRepeatQuestNameModal,
+} from '@/views/quest/modals/update-quest/update-repeat-quest-name-modal'
 import { Stack, Typography } from '@mui/material'
 
 interface RepeatQuestListItemProps {
@@ -10,19 +22,34 @@ interface RepeatQuestListItemProps {
 }
 
 export function RepeatQuestListItem({ quest, enableMenu }: RepeatQuestListItemProps) {
+  const { addModal } = useModalStore()
+  const { deleteQuest } = useRepeatQuest()
+
   const onContextMenu = useContextMenu([
     [
       {
         label: '반복퀘스트 이름 변경',
+        onClick: () =>
+          addModal(UPDATE_REPEAT_QUEST_NAME_MODAL_ID, <UpdateRepeatQuestNameModal quest={quest} />),
       },
       {
         label: '반복퀘스트 관심사 변경',
+        onClick: () =>
+          addModal(
+            UPDATE_REPEAT_QUEST_INTEREST_MODAL_ID,
+            <UpdateRepeatQuestInterestModal quest={quest} />
+          ),
       },
     ],
     [
       {
         label: '반복퀘스트 삭제',
         type: 'danger',
+        onClick: () =>
+          addModal(
+            DANGER_DIALOG_ID,
+            <RepeatQuestDeleteDialog onSuccess={() => deleteQuest(quest.id)} />
+          ),
       },
     ],
   ])
