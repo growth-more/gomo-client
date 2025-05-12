@@ -44,11 +44,10 @@ export function CreateInterestModal({ id: propsId }: CreateInterestModalProps) {
     }
     createInterest(
       {
-        request: {
-          name: name,
-          colorCode: color ?? '#000000',
-          logo: file,
-        },
+        name: name,
+        colorCode: color ?? '#000000',
+        logo: file,
+        upperInterestId: interest?.id,
       },
       {
         onSuccess: closeModal,

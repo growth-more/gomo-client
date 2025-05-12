@@ -3,11 +3,9 @@
 // ===================================
 
 interface CreateInterestRequest {
-  request: {
-    name: string
-    colorCode: string
-    logo: File
-  }
+  name: string
+  colorCode: string
+  logo: File
 }
 
 interface UpdateInterestRequest {

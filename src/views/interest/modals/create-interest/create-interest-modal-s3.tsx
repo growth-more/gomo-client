@@ -1,4 +1,5 @@
 import { Button } from '@/components/button'
+import { useEnter } from '@/hooks'
 import { SelectInterestColor, SelectInterestImage } from '@/views/interest/components'
 import { CreateInterestModalStep } from '@/views/interest/modals/create-interest/create-interest-modal'
 import { Stack, Typography } from '@mui/material'
@@ -18,6 +19,10 @@ export function CreateInterestModalS3({
   file,
   setFile,
 }: CreateInterestModalS3Props) {
+  useEnter(() => {
+    onNext?.()
+  })
+
   return (
     <Stack height={1} justifyContent="space-between" spacing={2}>
       <Stack spacing={2} flex={1} overflow="hidden">

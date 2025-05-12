@@ -1,5 +1,6 @@
 import { Button } from '@/components/button'
 import { Interest } from '@/entities/interest'
+import { useEnter } from '@/hooks'
 import { SelectInterest } from '@/views/interest/components'
 import { CreateInterestModalStep } from '@/views/interest/modals/create-interest/create-interest-modal'
 import { Stack, Typography } from '@mui/material'
@@ -15,8 +16,12 @@ export function CreateInterestModalS2({
   interest,
   setInterest,
 }: CreateInterestModalS2Props) {
+  useEnter(() => {
+    onNext?.()
+  })
+
   return (
-    <Stack height={1} justifyContent="space-between" spacing={2}>
+    <Stack height={1} justifyContent="space-between" spacing={2} overflow="hidden">
       <Stack spacing={3} flex={1} overflow="hidden">
         <Stack spacing={1}>
           <Typography fontSize={18} fontWeight={600} noWrap flexShrink={0}>

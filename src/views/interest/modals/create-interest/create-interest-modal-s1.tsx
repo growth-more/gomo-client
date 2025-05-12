@@ -1,4 +1,5 @@
 import { Button } from '@/components/button'
+import { useEnter } from '@/hooks'
 import { CreateInterestModalStep } from '@/views/interest/modals/create-interest/create-interest-modal'
 import { Stack, TextField, Typography } from '@mui/material'
 
@@ -13,6 +14,12 @@ export function CreateInterestModalS1({
   name,
   setName,
 }: CreateInterestModalS1Props) {
+  useEnter(() => {
+    if (name.trim().length > 0) {
+      onNext?.()
+    }
+  })
+
   return (
     <Stack height={1} justifyContent="space-between" spacing={2}>
       <Stack spacing={3}>

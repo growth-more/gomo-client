@@ -24,9 +24,9 @@ import {
 export const interest = {
   create: async (params: CreateInterestFetchRequest): Promise<CreateInterestResponse> => {
     const formData = new FormData()
-    formData.append('name', params.body.request.name)
-    formData.append('colorCode', params.body.request.colorCode)
-    formData.append('logo', params.body.request.logo)
+    formData.append('name', params.body.name)
+    formData.append('colorCode', params.body.colorCode)
+    formData.append('logo', params.body.logo)
 
     return axiosFetch.postForm(endpoints.interest.create, formData, {
       onCode: {

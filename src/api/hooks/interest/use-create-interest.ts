@@ -2,17 +2,27 @@ import { fetches, endpoints } from '@/api'
 import { errorCode } from '@/api/error'
 import { apiMutate } from '@/api/hooks/api-mutate'
 import { QueryCallback } from '@/api/hooks/error-handler'
-import { CreateInterestRequest } from '@/api/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from '@/components/toast'
+import { useCreateInterestEdge } from '@/api/hooks/interest/use-create-interest-edge'
+import { CreateInterestResponse } from '@/api/types'
 
 interface CreateInterestCallback extends QueryCallback {
   onInvalidParameter?: () => void
   onImageTooLarge?: () => void
 }
 
+interface CreateInterestParams {
+  name: string
+  colorCode: string
+  logo: File
+  upperInterestId?: string
+}
+
 export function useCreateInterest() {
   const queryClient = useQueryClient()
+
+  const { createEdge } = useCreateInterestEdge()
 
   const { mutate } = useMutation({
     mutationKey: ['POST', endpoints.interest.create],
@@ -23,18 +33,38 @@ export function useCreateInterest() {
     },
   })
 
-  const createInterest = (body: CreateInterestRequest, callback?: CreateInterestCallback) => {
+  const onSuccessHandler = (
+    data: CreateInterestResponse,
+    params: CreateInterestParams,
+    callback?: CreateInterestCallback
+  ) => {
+    toast.success('관심사가 추가되었습니다.')
+    if (!params.upperInterestId) {
+      callback?.onSuccess?.()
+      return
+    }
+    createEdge(
+      {
+        parentInterestId: params.upperInterestId,
+        childInterestId: data.id,
+      },
+      { onSuccess: () => callback?.onSuccess?.() }
+    )
+  }
+
+  const createInterest = (params: CreateInterestParams, callback?: CreateInterestCallback) => {
+    const body = {
+      name: params.name,
+      colorCode: params.colorCode,
+      logo: params.logo,
+    }
+
     apiMutate(
       mutate,
       { body },
       {
-        onSuccess: () => {
-          toast.success('관심사가 추가되었습니다.')
-          callback?.onSuccess?.()
-        },
-        onError: () => {
-          callback?.onError?.()
-        },
+        onSuccess: (data) => onSuccessHandler(data, params, callback),
+        onError: () => callback?.onError?.(),
         onCode: {
           [errorCode.interest.create.INVALID_PARAMETER]: () => {
             toast.warning('관심사 이름에 사용할 수 없는 단어가 사용되었습니다.')

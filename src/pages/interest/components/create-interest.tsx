@@ -19,11 +19,9 @@ export function CreateInterest() {
       return
     }
     createInterest({
-      request: {
-        name: interestName,
-        colorCode: '#000000',
-        logo: interestLogo,
-      },
+      name: interestName,
+      colorCode: '#000000',
+      logo: interestLogo,
     })
   }
 
