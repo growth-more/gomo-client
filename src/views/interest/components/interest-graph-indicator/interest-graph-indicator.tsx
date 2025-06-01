@@ -66,7 +66,7 @@ export function InterestGraphIndicator({ interest }: InterestGraphIndicatorProps
 
       <Box width={1} borderBottom={1} borderColor={(theme) => theme.palette.border.main} />
 
-      <Stack direction="row" spacing={0.5} flexWrap="wrap">
+      <Stack direction="row" gap={0.5} flexWrap="wrap">
         {upperInterests.map((interest) => (
           <InterestGraphIndicatorTag key={interest.id} tag={interest.name} isUpper />
         ))}
