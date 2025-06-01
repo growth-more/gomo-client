@@ -1,4 +1,3 @@
-import { useWindowViewContext } from '@/components/window'
 import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react'
 import * as d3 from 'd3'
 import {
@@ -10,13 +9,14 @@ import {
   useForceDirectedGraphSelect,
 } from '@/components/force-directed-graph/d3'
 import { Graph, Vertex } from '@/components/force-directed-graph/types'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, debounce } from 'lodash'
+import { useToggleSignal } from '@/hooks/use-toggle-signal'
 
 export function useForceDirectedGraph<V extends Vertex>(
   data: Graph<V>,
   onSelect?: (interest: V | null) => void
 ) {
-  const { viewSize } = useWindowViewContext()
+  const { value: resize, toggle: onResize } = useToggleSignal()
 
   const svgRef = useRef<SVGSVGElement>(null)
   const { setSelectedVertexId } = useForceDirectedGraphSelect(svgRef)
@@ -78,7 +78,16 @@ export function useForceDirectedGraph<V extends Vertex>(
       vertex.attr('transform', (d) => `translate(${d.x},${d.y})`)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [graphData, viewSize])
+  }, [graphData, resize])
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(debounce(onResize, 500))
+    resizeObserver.observe(svgRef.current!)
+    return () => {
+      resizeObserver.disconnect()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return { svgRef, onSvgClickHandler }
 }
