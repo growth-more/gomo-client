@@ -1,6 +1,6 @@
 import { fetches } from '@/api'
 import { endpoints } from '@/api'
-import { Profile } from '@/entities'
+import { Profile } from '@/entities/profile'
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
