@@ -1,5 +1,5 @@
 import { Iconify } from '@/components/iconify'
-import { useBoolean } from '@/hooks'
+import { useBoolean, useUpload } from '@/hooks'
 import { Box, IconButton, Stack, SxProps, Theme } from '@mui/material'
 import { colord } from 'colord'
 import { useMemo } from 'react'
@@ -7,6 +7,7 @@ import { useMemo } from 'react'
 interface BannerProps {
   src: string
   editMode?: boolean
+  onUpdate?: (file: File) => void
 }
 
 const bannerSx: SxProps<Theme> = {
@@ -14,8 +15,16 @@ const bannerSx: SxProps<Theme> = {
   aspectRatio: 3.5,
 }
 
-export function Banner({ src, editMode }: BannerProps) {
+export function Banner({ src, editMode, onUpdate }: BannerProps) {
   const isFallback = useBoolean()
+
+  const { upload } = useUpload({
+    onSuccess: (files) => {
+      if (files.length > 0) {
+        onUpdate?.(files[0])
+      }
+    },
+  })
 
   const bannerRender = useMemo(() => {
     if (!src || isFallback.value) {
@@ -34,7 +43,7 @@ export function Banner({ src, editMode }: BannerProps) {
           bgcolor={(theme) => colord(theme.palette.common.black).alpha(0.3).toHex()}
           position="absolute"
         >
-          <IconButton sx={{ borderRadius: 1, width: 1, height: 1 }}>
+          <IconButton sx={{ borderRadius: 1, width: 1, height: 1 }} onClick={upload}>
             <Iconify icon="lets-icons:edit" width={20} color="white" />
           </IconButton>
         </Stack>

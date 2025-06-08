@@ -8,9 +8,17 @@ interface UpdateFieldProps {
   value: string
   onChange: (value: string) => void
   isHandle?: boolean
+  onUpdate?: () => void
 }
 
-export function UpdateField({ label, value, origin, onChange, isHandle }: UpdateFieldProps) {
+export function UpdateField({
+  label,
+  value,
+  origin,
+  onChange,
+  isHandle,
+  onUpdate,
+}: UpdateFieldProps) {
   const refresh = () => {
     onChange(origin)
   }
@@ -43,7 +51,12 @@ export function UpdateField({ label, value, origin, onChange, isHandle }: Update
           disabled={value === origin}
           onClick={refresh}
         />
-        <Button.Primary disabled={value === origin} label="변경하기" sx={{ px: 2 }} />
+        <Button.Primary
+          disabled={value === origin}
+          label="변경하기"
+          sx={{ px: 2 }}
+          onClick={onUpdate}
+        />
       </Stack>
     </Stack>
   )
