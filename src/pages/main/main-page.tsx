@@ -5,6 +5,7 @@ import UnconfirmedQuestWidget from '@/views/quest/widgets/unconfirmed-quest'
 import WeeklyQuestWidget from '@/views/quest/widgets/weekly-quest'
 import MonthlyQuestWidget from '@/views/quest/widgets/monthly-quest'
 import InterestGraphWidget from '@/views/interest/widgets/interest-graph'
+import MyProfileWidget from '@/views/profile/widgets/my-profile'
 
 const backgroundSx: SxProps<Theme> = {
   backgroundImage: 'url("/img/bg.jpg")',
@@ -19,6 +20,7 @@ export function MainPage() {
       <Box width={1} height="100vh" position="fixed" sx={backgroundSx} zIndex={-1} />
       <Stack width={1} alignItems="center" px={4} py={15}>
         <Box display="flex" gap="40px" flexWrap="wrap">
+          <MyProfileWidget.S1x1 />
           <InterestGraphWidget.S1x1 />
           <DailyQuestWidget.S1x1 />
           <DailyQuestWidget.S1x2 />

@@ -12,6 +12,7 @@ export function MainViewTitle({ title, subtitle, onClose }: MainViewTitleProps) 
     <Stack
       direction="row"
       justifyContent="space-between"
+      alignItems="center"
       p={2}
       bgcolor={(theme) => theme.palette.background.main}
       borderBottom={1}

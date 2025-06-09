@@ -1,8 +1,9 @@
 import { Button, ButtonProps, SxProps, Theme, Typography } from '@mui/material'
+import { MouseEvent } from 'react'
 
 interface PlainButtonProps extends ButtonProps {
   label: string
-  onClick?: () => void
+  onClick?: (e: MouseEvent<HTMLElement>) => void
   sx?: SxProps<Theme>
 }
 

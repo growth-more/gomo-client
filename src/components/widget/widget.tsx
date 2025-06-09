@@ -18,6 +18,7 @@ interface WidgetProps {
   onAdd?: () => void
   onTitle?: () => void
   sx?: SxProps<Theme>
+  disableTitle?: boolean
 }
 
 export function Widget({
@@ -29,6 +30,7 @@ export function Widget({
   onAdd,
   onTitle,
   sx,
+  disableTitle = false,
 }: WidgetProps) {
   const calculateWidgetWidth = (width: number) => {
     return WIDGET_WIDTH * width + WIDGET_COLUMN_SPACING * (width - 1)
@@ -50,7 +52,9 @@ export function Widget({
         `0px 5px 20px 0px ${colord(theme.palette.common.black).alpha(0.1).toHex()}`
       }
     >
-      <WidgetTitle title={title} subtitle={subtitle} onAdd={onAdd} onTitle={onTitle} />
+      {!disableTitle && (
+        <WidgetTitle title={title} subtitle={subtitle} onAdd={onAdd} onTitle={onTitle} />
+      )}
       <Box flex={1} width={1} bgcolor={(theme) => theme.palette.background.default} sx={sx}>
         {children}
       </Box>
