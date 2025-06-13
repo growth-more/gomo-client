@@ -15,4 +15,11 @@ interface OrganizedAssignQuestHistory {
   history: AssignQuestHistory[]
 }
 
-export type { AssignQuestHistory, OrganizedAssignQuestHistory }
+interface DailyTotalAssignQuestHistory {
+  date: Date
+  dailyCount: number
+  weeklyCount: number
+  monthlyCount: number
+}
+
+export type { AssignQuestHistory, OrganizedAssignQuestHistory, DailyTotalAssignQuestHistory }
