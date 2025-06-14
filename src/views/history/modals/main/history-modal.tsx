@@ -1,5 +1,6 @@
 import { MainView } from '@/components/modal'
 import { MainViewSidebarMenuGroup } from '@/components/modal/main-view/main-view-sidebar'
+import { ListHistorySection } from '@/views/history/modals/main/list-history-section'
 import { useState } from 'react'
 
 export const HISTORY_MODAL_ID = 'HISTORY_MODAL'
@@ -39,6 +40,8 @@ export function HistoryModal({ initMenuId = 'HISTORY_LIST' }: HistoryModalProps)
       sidebar={SIDEBAR_MENU}
       selectedMenuId={selectedMenuId}
       onSelected={setSelectedMenuId}
-    ></MainView>
+    >
+      {selectedMenuId === 'HISTORY_LIST' && <ListHistorySection />}
+    </MainView>
   )
 }
