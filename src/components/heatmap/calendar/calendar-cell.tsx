@@ -12,9 +12,10 @@ dayjs.extend(weekOfYear)
 interface CalendarCellProps {
   data: CellData
   onClick?: (date: Date) => void
+  unselected?: boolean
 }
 
-export function CalendarCell({ data: cell, onClick }: CalendarCellProps) {
+export function CalendarCell({ data: cell, unselected, onClick }: CalendarCellProps) {
   const { color, emptyColor, thresholds, width, height, type, customFn } =
     useHeatmapCalendarContext()
 
@@ -48,7 +49,7 @@ export function CalendarCell({ data: cell, onClick }: CalendarCellProps) {
         borderRadius={1}
         bgcolor={options.bgcolor}
         onClick={() => onClick?.(cell.date!)}
-        sx={{ cursor: 'pointer', ':hover': { border: 1 } }}
+        sx={{ cursor: 'pointer', opacity: unselected ? 0.3 : 1 }}
       />
     </Tooltip>
   )
