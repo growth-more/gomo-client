@@ -152,7 +152,7 @@ export function QuestListItem({
           <Box width={30} />
           <Stack direction="row" alignItems="center">
             <Typography variant="caption">{QUEST_TYPE[quest.questType].label}</Typography>
-            <Iconify icon="mdi:dot" sx={{ width: 15 }} width={15} />
+            <Iconify icon="mdi:dot" width={15} />
             <Typography variant="caption">{quest.subjectName}</Typography>
             <Typography
               variant="caption"

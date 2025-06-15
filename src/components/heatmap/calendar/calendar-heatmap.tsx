@@ -18,9 +18,11 @@ interface CalendarHeatmapProps {
   color?: string
   thresholds?: number[]
   customFn?: (count: number) => string
+  onSelect?: (date: Date) => void
   onClick?: (date: Date) => void
   sx?: SxProps<Theme>
   type?: CalendarHeatmapType
+  selectedDate?: Date | null
 }
 
 const DEFAULT_CELL_SIZE = 15
@@ -33,7 +35,9 @@ export function CalendarHeatmap({
   color: customColor,
   thresholds = DEFAULT_THREASHOLDS,
   cellSize = DEFAULT_CELL_SIZE,
+  selectedDate,
   customFn,
+  onSelect,
   onClick,
   sx,
 }: CalendarHeatmapProps) {
@@ -55,6 +59,16 @@ export function CalendarHeatmap({
     }
     return dailyCells
   }, [dailyCells, monthlyCells, weeklyCells, type])
+
+  const clickHandler = (date: Date | null, count: number) => {
+    if (date === null) {
+      return
+    }
+    if (count > 0) {
+      onSelect?.(date!)
+    }
+    onClick?.(date)
+  }
 
   const context = useMemo(() => {
     const context: IHeatmapCalendarContext = {
@@ -101,11 +115,16 @@ export function CalendarHeatmap({
         {/* Cell area */}
         <HeatmapCalendarProvider context={context}>
           <ScrollContainer>
-            <Stack spacing="2px" direction="row">
+            <Stack spacing="2px" direction="row" pb={2}>
               {cells.map((column, i) => (
                 <Stack key={i} spacing="2px">
                   {column.map((cell, j) => (
-                    <CalendarCell key={j} data={cell} onClick={onClick} />
+                    <CalendarCell
+                      key={j}
+                      data={cell}
+                      onClick={() => clickHandler(cell.date, cell.count)}
+                      unselected={!!selectedDate && selectedDate.getTime() !== cell.date?.getTime()}
+                    />
                   ))}
                 </Stack>
               ))}
