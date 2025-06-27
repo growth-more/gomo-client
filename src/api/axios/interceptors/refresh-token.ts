@@ -5,7 +5,7 @@ import { useTokenStore } from '@/stores'
 import { endpoints } from '@/api/endpoints'
 
 interface FailedQueue {
-  resolve: (value: unknown) => void
+  resolve: (token: string) => void
   reject: (reason?: unknown) => void
 }
 
