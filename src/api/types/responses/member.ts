@@ -22,6 +22,7 @@ interface ProfileResponse {
   motto: string
   availablePoints: number
   profileImageUrl: string
+  profileBannerUrl: string
   loginProvider: string
   roleType: string
   subscriptionPlan: string

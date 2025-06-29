@@ -40,7 +40,7 @@ export function MyProfileUpdateSection({ profile, onBack }: MyProfileUpdateSecti
 
   return (
     <Stack>
-      <Banner src={profile.profileImageUrl} editMode onUpdate={() => {}} />
+      <Banner src={profile.profileBannerUrl} editMode onUpdate={() => {}} />
 
       <Divider />
 

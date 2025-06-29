@@ -23,7 +23,6 @@ export function QuestModalSettingSection() {
   }, [dailyThreshold, weeklyThreshold, monthlyThreshold, questProperty])
 
   useEffect(() => {
-    console.log(questProperty)
     setDailyThreshold(questProperty.dailyThreshold)
     setWeeklyThreshold(questProperty.weeklyThreshold)
     setMonthlyThreshold(questProperty.monthlyThreshold)

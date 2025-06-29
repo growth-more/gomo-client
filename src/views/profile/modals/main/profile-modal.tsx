@@ -1,4 +1,4 @@
-import { useGetProfile } from '@/api/hooks'
+import { useProfile } from '@/api/hooks'
 import { MainView } from '@/components/modal'
 import { MainViewSidebarMenuGroup } from '@/components/modal/main-view/main-view-sidebar'
 import { MyProfileSection } from '@/views/profile/modals/main/my-profile-section'
@@ -25,7 +25,7 @@ interface ProfileModalProps {
 }
 
 export function ProfileModal({ initMenuId = 'MY_PROFILE' }: ProfileModalProps) {
-  const { profile } = useGetProfile()
+  const { profile } = useProfile()
 
   const [selectedMenuId, setSelectedMenuId] = useState<PROFILE_MODAL_SIDEBAR_MENU_ID>(initMenuId)
 

@@ -11,7 +11,7 @@ interface MyProfileSectionProps {
 export function MyProfileSection({ profile, onEditMode }: MyProfileSectionProps) {
   return (
     <Stack>
-      <Banner src={profile.profileImageUrl} />
+      <Banner src={profile.profileBannerUrl} />
       <Divider />
       <Stack p={2} spacing={4}>
         <Stack direction="row" justifyContent="space-between" alignItems="center">

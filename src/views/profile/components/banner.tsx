@@ -13,6 +13,7 @@ interface BannerProps {
 const bannerSx: SxProps<Theme> = {
   width: 1,
   aspectRatio: 3.5,
+  objectFit: 'cover',
 }
 
 export function Banner({ src, editMode, onUpdate }: BannerProps) {

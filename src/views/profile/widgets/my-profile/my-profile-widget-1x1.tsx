@@ -1,13 +1,13 @@
 import { Widget } from '@/components/widget'
-import { useGetProfile } from '@/api/hooks/member/use-get-profile'
 import { Motto, ProfileInfo } from '@/views/profile/components'
 import { Divider, Stack } from '@mui/material'
 import { PROFILE_MODAL_ID } from '@/views/profile/modals'
 import { useModalStore } from '@/stores/use-modal-store'
 import { ProfileModal } from '@/views/profile/modals'
+import { useProfile } from '@/api/hooks'
 
 export function MyProfileWidget1x1() {
-  const { profile } = useGetProfile()
+  const { profile } = useProfile()
   const { addModal } = useModalStore()
 
   const openProfileModal = () => {
