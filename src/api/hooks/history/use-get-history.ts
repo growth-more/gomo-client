@@ -5,10 +5,12 @@ import dayjs from 'dayjs'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
-export function useGetHistory(year: number, month: number) {
+export function useGetHistory(year: number, month: number, day?: number) {
+  const periodType = day === undefined ? 'MONTH' : 'DAY'
+
   const { data, isLoading } = useQuery({
-    queryKey: ['GET', endpoints.quest.getAssignQuestHistory, year, month],
-    queryFn: () => fetches.quest.getAssignQuestHistory({ year, month }),
+    queryKey: ['GET', endpoints.quest.getAssignQuestHistory, year, month, day ?? 0, periodType],
+    queryFn: () => fetches.quest.getAssignQuestHistory({ year, month, day, periodType }),
   })
 
   const history = useMemo<OrganizedAssignQuestHistory[]>(() => {

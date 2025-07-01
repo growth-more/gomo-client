@@ -63,7 +63,9 @@ export const quest = {
     params: AssignQuestHistoryFetchRequest
   ): Promise<AssignQuestHistoryListResponse> => {
     return axiosFetch.get(
-      `${endpoints.quest.getAssignQuestHistory}?year=${params.year}&month=${params.month}`
+      `${endpoints.quest.getAssignQuestHistory}?year=${params.year}&month=${params.month}&day=${
+        params.day ?? 1
+      }&periodType=${params.periodType}`
     )
   },
 
