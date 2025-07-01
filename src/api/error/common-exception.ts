@@ -31,3 +31,9 @@ export const CommonException = {
   ...QuestException,
   ...SurveyException,
 } as const satisfies CommonErrorMap
+
+export const CommonExceptionMap = Object.keys(CommonException).reduce((acc, curr) => {
+  const key = curr as keyof typeof CommonException
+  acc[CommonException[key].code] = CommonException[key]
+  return acc
+}, {} as Record<string, CommonErrorCode>)

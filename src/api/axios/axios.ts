@@ -1,5 +1,9 @@
 import axios from 'axios'
-import { setupAccessTokenInterceptor, setupRefreshTokenInterceptor } from './interceptors'
+import {
+  setupAccessTokenInterceptor,
+  setupCommonExceptionInterceptor,
+  setupRefreshTokenInterceptor,
+} from './interceptors'
 
 const BASE_URL = import.meta.env.PROD
   ? import.meta.env.VITE_API_URL
@@ -17,3 +21,4 @@ export const AXIOS = axios.create({
 
 setupAccessTokenInterceptor()
 setupRefreshTokenInterceptor()
+setupCommonExceptionInterceptor()
