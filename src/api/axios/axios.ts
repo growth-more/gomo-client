@@ -19,6 +19,6 @@ export const AXIOS = axios.create({
   withCredentials: true,
 })
 
+setupCommonExceptionInterceptor()
 setupAccessTokenInterceptor()
 setupRefreshTokenInterceptor()
-setupCommonExceptionInterceptor()

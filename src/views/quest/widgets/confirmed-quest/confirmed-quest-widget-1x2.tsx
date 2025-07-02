@@ -1,26 +1,41 @@
 import { useAssignQuest } from '@/api/hooks'
-import { DANGER_DIALOG_ID } from '@/components/modal'
 import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
-import { QuestConfirmDialog, QuestList } from '@/views/quest/components'
-import { QUEST_MODAL_ID, QuestModal } from '@/views/quest/modals'
+import { QuestList } from '@/views/quest/components'
+import {
+  QUEST_MODAL_ID,
+  QuestModal,
+  QUEST_PROOF_MODAL_ID,
+  QuestProofModal,
+} from '@/views/quest/modals'
 import { Box, Stack } from '@mui/material'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
-export function UnconfirmedQuestWidget1x2() {
-  const { daily, weekly, monthly, confirmQuest } = useAssignQuest()
+export function ConfirmedQuestWidget1x2() {
+  const { daily, weekly, monthly } = useAssignQuest()
   const { addModal } = useModalStore()
   const initHash = useToggleSignal()
 
   const quests = useMemo(() => {
-    const sorted = _([...daily.unconfirmed, ...weekly.unconfirmed, ...monthly.unconfirmed])
+    const sorted = _([
+      ...daily.confirmed,
+      ...daily.completed,
+      ...weekly.confirmed,
+      ...weekly.completed,
+      ...monthly.confirmed,
+      ...monthly.completed,
+    ])
       .sortBy('displayOrder')
+      .sortBy((quest) => (quest.completed ? 1 : 0))
       .take(6)
       .value()
 
-    return [_.filter(sorted, (_, i) => i % 2 === 0), _.filter(sorted, (_, i) => i % 2 === 1)]
+    return {
+      left: _.filter(sorted, (_, i) => i % 2 === 0),
+      right: _.filter(sorted, (_, i) => i % 2 === 1),
+    }
   }, [daily, weekly, monthly])
 
   const checkHandler = (id: string, checked: boolean) => {
@@ -28,11 +43,8 @@ export function UnconfirmedQuestWidget1x2() {
       return
     }
     addModal(
-      DANGER_DIALOG_ID,
-      <QuestConfirmDialog
-        onSuccess={() => confirmQuest(id, { onError: () => initHash.toggle() })}
-        onCancel={() => initHash.toggle()}
-      />
+      QUEST_PROOF_MODAL_ID,
+      <QuestProofModal id={id} onError={initHash.toggle} onCancel={initHash.toggle} />
     )
   }
 
@@ -40,15 +52,23 @@ export function UnconfirmedQuestWidget1x2() {
     addModal(QUEST_MODAL_ID, <QuestModal initMenuId="DAILY_QUEST" />)
   }
 
-  const unconfirmedCount = useMemo(() => {
-    return daily.unconfirmed.length + weekly.unconfirmed.length + monthly.unconfirmed.length
+  const completeCount = useMemo(() => {
+    return [
+      daily.completed.length + weekly.completed.length + monthly.completed.length,
+      daily.confirmed.length +
+        weekly.confirmed.length +
+        monthly.confirmed.length +
+        daily.completed.length +
+        weekly.completed.length +
+        monthly.completed.length,
+    ]
   }, [daily, weekly, monthly])
 
   return (
     <Widget
       width={2}
-      title="대기중인 퀘스트"
-      subtitle={`${unconfirmedCount}개 퀘스트 대기 중`}
+      title="진행중인 퀘스트"
+      subtitle={`${completeCount[1]}개 중 ${completeCount[0]}개 완료`}
       onTitle={openQuestHandler}
     >
       <Stack
@@ -58,13 +78,13 @@ export function UnconfirmedQuestWidget1x2() {
         divider={<Box my={1} borderRight={1} borderColor={(theme) => theme.palette.border.main} />}
       >
         <QuestList
-          quests={quests[0]}
+          quests={quests.left}
           checkHandler={checkHandler}
           sx={{ width: '50%' }}
           initHash={initHash.value}
         />
         <QuestList
-          quests={quests[1]}
+          quests={quests.right}
           checkHandler={checkHandler}
           sx={{ width: '50%' }}
           initHash={initHash.value}

@@ -25,9 +25,13 @@ export const MemberException = {
     },
   },
 
-  // 인증 정보 없음
+  // 인증 실패
   MEMBER_AUTH_EXCEPTION: {
     code: 'MEM-ROO-003',
+    message: {
+      value: '아이디 또는 비밀번호가 올바르지 않습니다.',
+      type: 'warning',
+    },
   },
 
   /*
