@@ -6,6 +6,7 @@ import InterestGraphWidget from '@/views/interest/widgets/interest-graph'
 import MyProfileWidget from '@/views/profile/widgets/my-profile'
 import QuestHistoryWidget from '@/views/history/widgets/quest-history'
 import QuestStreakWidget from '@/views/history/widgets/quest-streak'
+import ConfirmedQuestWidget from '@/views/quest/widgets/confirmed-quest'
 
 import { Box, useMediaQuery } from '@mui/material'
 
@@ -17,7 +18,7 @@ export function WidgetManager() {
     return (
       <Box display="flex" gap="40px" flexWrap="wrap" width="1130px">
         <MyProfileWidget.S1x1 />
-        <DailyQuestWidget.S1x2 />
+        <ConfirmedQuestWidget.S1x2 />
 
         <UnconfirmedQuestWidget.S1x2 />
         <InterestGraphWidget.S1x1 />
@@ -35,7 +36,7 @@ export function WidgetManager() {
     return (
       <Box display="flex" gap="40px" flexWrap="wrap" width="740px">
         <MyProfileWidget.S1x1 />
-        <DailyQuestWidget.S1x1 />
+        <ConfirmedQuestWidget.S1x1 />
 
         <UnconfirmedQuestWidget.S1x2 />
 
@@ -52,7 +53,7 @@ export function WidgetManager() {
   return (
     <Box display="flex" gap="40px" flexWrap="wrap" width="350px">
       <MyProfileWidget.S1x1 />
-      <DailyQuestWidget.S1x1 />
+      <ConfirmedQuestWidget.S1x1 />
       <UnconfirmedQuestWidget.S1x1 />
       <QuestHistoryWidget.S1x1 />
       <InterestGraphWidget.S1x1 />
