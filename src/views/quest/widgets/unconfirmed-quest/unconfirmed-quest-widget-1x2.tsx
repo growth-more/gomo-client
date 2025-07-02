@@ -36,17 +36,19 @@ export function UnconfirmedQuestWidget1x2() {
     )
   }
 
-  const unconfimedCount = quests[0].length + quests[1].length
-
   const openQuestHandler = () => {
     addModal(QUEST_MODAL_ID, <QuestModal initMenuId="DAILY_QUEST" />)
   }
+
+  const unconfirmedCount = useMemo(() => {
+    return daily.unconfirmed.length + weekly.unconfirmed.length + monthly.unconfirmed.length
+  }, [daily, weekly, monthly])
 
   return (
     <Widget
       width={2}
       title="대기중인 퀘스트"
-      subtitle={`${unconfimedCount}개 퀘스트 대기 중`}
+      subtitle={`${unconfirmedCount}개 퀘스트 대기 중`}
       onTitle={openQuestHandler}
     >
       <Stack

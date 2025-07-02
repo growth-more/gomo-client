@@ -19,9 +19,17 @@ export function ConfirmedQuestWidget1x2() {
   const initHash = useToggleSignal()
 
   const quests = useMemo(() => {
-    const sorted = _([...daily.confirmed, ...weekly.confirmed, ...monthly.confirmed])
+    const sorted = _([
+      ...daily.confirmed,
+      ...daily.completed,
+      ...weekly.confirmed,
+      ...weekly.completed,
+      ...monthly.confirmed,
+      ...monthly.completed,
+    ])
       .sortBy('displayOrder')
-      .take(3)
+      .sortBy((quest) => (quest.completed ? 1 : 0))
+      .take(6)
       .value()
 
     return {
@@ -44,11 +52,23 @@ export function ConfirmedQuestWidget1x2() {
     addModal(QUEST_MODAL_ID, <QuestModal initMenuId="DAILY_QUEST" />)
   }
 
+  const completeCount = useMemo(() => {
+    return [
+      daily.completed.length + weekly.completed.length + monthly.completed.length,
+      daily.confirmed.length +
+        weekly.confirmed.length +
+        monthly.confirmed.length +
+        daily.completed.length +
+        weekly.completed.length +
+        monthly.completed.length,
+    ]
+  }, [daily, weekly, monthly])
+
   return (
     <Widget
       width={2}
       title="진행중인 퀘스트"
-      subtitle={`${quests.left.length + quests.right.length}개 퀘스트 진행 중`}
+      subtitle={`${completeCount[1]}개 중 ${completeCount[0]}개 완료`}
       onTitle={openQuestHandler}
     >
       <Stack
