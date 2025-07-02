@@ -50,6 +50,8 @@ interface DeleteAssignQuestFetchRequest {
 interface AssignQuestHistoryFetchRequest {
   year: number
   month: number
+  day?: number
+  periodType: 'DAY' | 'MONTH'
 }
 
 // ===================================

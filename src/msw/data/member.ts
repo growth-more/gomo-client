@@ -8,6 +8,7 @@ const profile: ProfileResponse = {
   motto: '매일매일 반복하고 또 반복하자!',
   availablePoints: 1660,
   profileImageUrl: 'https://mini-cloud/gomotest-profile',
+  profileBannerUrl: 'https://mini-cloud/gomotest-profile-banner',
   loginProvider: 'EMAIL',
   roleType: 'ROLE_MEMBER',
   subscriptionPlan: 'FREE',

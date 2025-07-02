@@ -4,8 +4,9 @@ interface Profile {
   handle: string
   name: string
   motto: string
-  availablePoint: number
+  availablePoints: number
   profileImageUrl: string
+  profileBannerUrl: string
   subscriptionPlan: string
 }
 

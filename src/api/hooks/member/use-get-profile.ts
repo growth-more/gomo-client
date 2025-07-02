@@ -18,8 +18,9 @@ export function useGetProfile() {
         handle: '',
         name: '',
         motto: '',
-        availablePoint: 0,
+        availablePoints: 0,
         profileImageUrl: '',
+        profileBannerUrl: '',
         subscriptionPlan: '',
       }
     }
@@ -29,8 +30,9 @@ export function useGetProfile() {
       handle: data.handle,
       name: data.name,
       motto: data.motto,
-      availablePoint: data.availablePoints,
+      availablePoints: data.availablePoints,
       profileImageUrl: data.profileImageUrl,
+      profileBannerUrl: data.profileBannerUrl,
       subscriptionPlan: data.subscriptionPlan,
     }
   }, [data])

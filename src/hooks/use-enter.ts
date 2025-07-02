@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 export function useEnter(onEnter: () => void) {
   useEffect(() => {
     const keyboardHandler = (event: KeyboardEvent) => {
-      console.log(event)
       if (event.key === 'Enter') {
         onEnter?.()
         event.stopPropagation()
