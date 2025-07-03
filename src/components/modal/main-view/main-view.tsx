@@ -1,11 +1,14 @@
 import {
+  MAIN_VIEW_SIDEBAR_WIDTH,
   MainViewSidebar,
   MainViewSidebarMenuGroup,
 } from '@/components/modal/main-view/main-view-sidebar'
 import { MainViewTitle } from '@/components/modal/main-view/main-view-title'
+import { useBoolean } from '@/hooks'
 import { useModalStore } from '@/stores/use-modal-store'
 import { Box, Dialog, SxProps, Stack, Theme } from '@mui/material'
-import { ReactNode } from 'react'
+import { motion } from 'motion/react'
+import { ReactNode, useEffect } from 'react'
 
 interface MainViewProps<T> {
   modalId: string
@@ -36,6 +39,18 @@ export function MainView<T>({
 }: MainViewProps<T>) {
   const { removeModal } = useModalStore()
 
+  const isCollapsed = useBoolean()
+  const isPeeking = useBoolean(true)
+
+  useEffect(() => {
+    if (isCollapsed.value) {
+      isPeeking.onTrue()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCollapsed.value])
+
+  useEffect(() => {}, [isPeeking.value])
+
   return (
     <Dialog
       open
@@ -52,17 +67,37 @@ export function MainView<T>({
         },
       }}
     >
+      {isCollapsed.value && !isPeeking.value && (
+        <Box
+          position="absolute"
+          width="50px"
+          height={1}
+          onMouseEnter={isPeeking.onTrue}
+          zIndex={11}
+        />
+      )}
       <Stack width={1} height={1}>
         <MainViewTitle title={title} subtitle={subtitle} onClose={() => removeModal(modalId)} />
-        <Stack direction="row" width={1} height={1} overflow="hidden">
+        <Stack direction="row" width={1} height={1} overflow="hidden" position="relative">
           <MainViewSidebar
             menu={sidebar}
             selectedMenuId={selectedMenuId}
             onSelected={onSelected}
             actions={actions}
             actionSx={actionSx}
+            collapsed={isCollapsed.value}
+            onCollapse={isCollapsed.toggle}
+            isPeeking={isPeeking.value}
+            onPeekingOut={isPeeking.onFalse}
           />
-          <Box flex={1} sx={{ overflowY: 'auto', overflowX: 'hidden' }}>
+          <Box
+            flex={1}
+            component={motion.div}
+            initial={{ marginLeft: isCollapsed.value ? 0 : MAIN_VIEW_SIDEBAR_WIDTH }}
+            animate={{ marginLeft: isCollapsed.value ? 0 : MAIN_VIEW_SIDEBAR_WIDTH }}
+            transition={{ duration: 0.2 }}
+            sx={{ overflowY: 'auto', overflowX: 'hidden' }}
+          >
             {children}
           </Box>
         </Stack>

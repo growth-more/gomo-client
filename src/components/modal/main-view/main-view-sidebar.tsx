@@ -1,6 +1,7 @@
 import { IconButtons } from '@/components/icon-button'
 import { MainViewSidebarItem } from '@/components/modal/main-view/main-view-sidebar-item'
 import { Box, Stack, SxProps, Theme, Typography } from '@mui/material'
+import { motion } from 'motion/react'
 import { Fragment, ReactNode } from 'react'
 
 export const MAIN_VIEW_SIDEBAR_WIDTH = 200
@@ -23,6 +24,10 @@ interface MainViewSidebarProps<T> {
   onSelected?: (id: T) => void
   actions?: ReactNode[]
   actionSx?: SxProps<Theme>
+  collapsed?: boolean
+  onCollapse?: () => void
+  isPeeking?: boolean
+  onPeekingOut?: () => void
 }
 
 export function MainViewSidebar<T>({
@@ -31,6 +36,10 @@ export function MainViewSidebar<T>({
   onSelected,
   actions,
   actionSx,
+  collapsed,
+  onCollapse,
+  isPeeking,
+  onPeekingOut,
 }: MainViewSidebarProps<T>) {
   const menuClickHandler = (id: T, onClick?: () => void) => {
     if (onClick) {
@@ -42,14 +51,26 @@ export function MainViewSidebar<T>({
 
   return (
     <Stack
+      component={motion.div}
       width={MAIN_VIEW_SIDEBAR_WIDTH}
       borderRight={1}
       borderColor={(theme) => theme.palette.border.main}
       bgcolor={(theme) => theme.palette.background.main}
       flexShrink={0}
+      initial={{ transform: collapsed && !isPeeking ? 'translateX(-100%)' : 'translateX(0)' }}
+      animate={{
+        transform: collapsed && !isPeeking ? 'translateX(-100%)' : 'translateX(0)',
+      }}
+      transition={{ duration: 0.2 }}
+      position="absolute"
+      zIndex={10}
+      top={0}
+      left={0}
+      bottom={0}
+      onMouseLeave={isPeeking ? onPeekingOut : undefined}
     >
       <Stack p={0.5} borderBottom={1} borderColor={(theme) => theme.palette.border.main}>
-        <IconButtons.Sidebar />
+        <IconButtons.Sidebar onClick={onCollapse} />
       </Stack>
 
       <Stack
