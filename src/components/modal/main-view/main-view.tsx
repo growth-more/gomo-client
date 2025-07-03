@@ -6,7 +6,7 @@ import {
 import { MainViewTitle } from '@/components/modal/main-view/main-view-title'
 import { useBoolean } from '@/hooks'
 import { useModalStore } from '@/stores/use-modal-store'
-import { Box, Dialog, SxProps, Stack, Theme } from '@mui/material'
+import { Box, Dialog, SxProps, Stack, Theme, useMediaQuery } from '@mui/material'
 import { motion } from 'motion/react'
 import { ReactNode, useEffect } from 'react'
 
@@ -40,11 +40,22 @@ export function MainView<T>({
   const { removeModal } = useModalStore()
 
   const isCollapsed = useBoolean()
-  const isPeeking = useBoolean(true)
+  const isPeeking = useBoolean(false)
+
+  const isAutoCollapse = useMediaQuery('(max-width: 700px)')
+
+  useEffect(() => {
+    if (isAutoCollapse) {
+      isCollapsed.onTrue()
+      return
+    }
+    isCollapsed.onFalse()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAutoCollapse])
 
   useEffect(() => {
     if (isCollapsed.value) {
-      isPeeking.onTrue()
+      isPeeking.onFalse()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCollapsed.value])
