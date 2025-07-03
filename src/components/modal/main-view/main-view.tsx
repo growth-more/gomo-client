@@ -60,8 +60,6 @@ export function MainView<T>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCollapsed.value])
 
-  useEffect(() => {}, [isPeeking.value])
-
   return (
     <Dialog
       open
@@ -77,6 +75,7 @@ export function MainView<T>({
           borderColor: (theme) => theme.palette.border.main,
         },
       }}
+      disableEscapeKeyDown
     >
       {isCollapsed.value && !isPeeking.value && (
         <Box
