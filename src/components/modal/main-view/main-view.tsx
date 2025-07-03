@@ -100,6 +100,7 @@ export function MainView<T>({
             onCollapse={isCollapsed.toggle}
             isPeeking={isPeeking.value}
             onPeekingOut={isPeeking.onFalse}
+            disableCollapse={isAutoCollapse}
           />
           <Box
             flex={1}

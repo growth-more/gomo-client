@@ -28,6 +28,7 @@ interface MainViewSidebarProps<T> {
   onCollapse?: () => void
   isPeeking?: boolean
   onPeekingOut?: () => void
+  disableCollapse?: boolean
 }
 
 export function MainViewSidebar<T>({
@@ -40,6 +41,7 @@ export function MainViewSidebar<T>({
   onCollapse,
   isPeeking,
   onPeekingOut,
+  disableCollapse,
 }: MainViewSidebarProps<T>) {
   const menuClickHandler = (id: T, onClick?: () => void) => {
     if (onClick) {
@@ -70,7 +72,7 @@ export function MainViewSidebar<T>({
       onMouseLeave={isPeeking ? onPeekingOut : undefined}
     >
       <Stack p={0.5} borderBottom={1} borderColor={(theme) => theme.palette.border.main}>
-        <IconButtons.Sidebar onClick={onCollapse} />
+        <IconButtons.Sidebar onClick={onCollapse} disabled={disableCollapse} />
       </Stack>
 
       <Stack
