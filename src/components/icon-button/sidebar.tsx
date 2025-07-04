@@ -4,11 +4,12 @@ import { Iconify } from '@/components/iconify'
 
 interface SidebarProps {
   onClick?: () => void
+  disabled?: boolean
 }
 
-export function Sidebar({ onClick }: SidebarProps) {
+export function Sidebar({ onClick, disabled }: SidebarProps) {
   return (
-    <IconButton sx={IconButtonSx} onClick={onClick}>
+    <IconButton sx={IconButtonSx} onClick={onClick} disabled={disabled}>
       <Iconify icon="material-symbols:side-navigation" width={20} />
     </IconButton>
   )

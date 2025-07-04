@@ -1,8 +1,20 @@
 import { useModalStore } from '@/stores/use-modal-store'
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 
 export function ModalManager() {
-  const { modals } = useModalStore()
+  const { modals, popModal } = useModalStore()
+
+  useEffect(() => {
+    const keyDownHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        popModal()
+      }
+    }
+    document.addEventListener('keydown', keyDownHandler)
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler)
+    }
+  }, [popModal])
 
   return (
     <>

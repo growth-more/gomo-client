@@ -23,6 +23,7 @@ export function ModalView({ width = 450, height = 600, children }: ModalViewProp
           borderColor: (theme) => theme.palette.border.main,
         },
       }}
+      disableEscapeKeyDown
     >
       {children}
     </Dialog>
