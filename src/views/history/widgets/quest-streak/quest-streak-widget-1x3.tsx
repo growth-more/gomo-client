@@ -16,13 +16,13 @@ export function QuestStreakWidget1x3() {
     addModal(HISTORY_MODAL_ID, <HistoryModal initMenuId="HISTORY_STREAK" />)
   }
 
-  const { streak } = useStreak(startDate, endDate)
+  const { streak, achievement } = useStreak(startDate, endDate)
 
   return (
     <Widget
       width={3}
       title="퀘스트 연속 기록"
-      subtitle="XXX일 연속 퀘스트 진행중"
+      subtitle={`${achievement.currentStreakDays}일 연속 퀘스트 진행중`}
       onTitle={openHistoryModal}
     >
       <Stack width={1} height={1} justifyContent="center" alignItems="center">
