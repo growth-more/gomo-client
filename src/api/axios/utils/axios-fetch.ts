@@ -1,5 +1,5 @@
 import { AXIOS } from '@/api/axios/axios'
-import { axiosStatus } from '@/api/axios/axios-status'
+import { axiosStatus } from '@/api/axios/utils/axios-status'
 import { ErrorCode } from '@/api/error'
 import { AxiosRequestConfig } from 'axios'
 
