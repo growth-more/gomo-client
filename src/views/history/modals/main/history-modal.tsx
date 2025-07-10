@@ -1,7 +1,7 @@
 import { MainView } from '@/components/modal'
 import { MainViewSidebarMenuGroup } from '@/components/modal/main-view/main-view-sidebar'
 import { HistoryStreakSection } from '@/views/history/modals/main/history-streak-section'
-import { ListHistorySection } from '@/views/history/modals/main/list-history-section'
+import { HistoryListSection } from '@/views/history/modals/main/history-list-section'
 import { useState } from 'react'
 
 export const HISTORY_MODAL_ID = 'HISTORY_MODAL'
@@ -42,7 +42,7 @@ export function HistoryModal({ initMenuId = 'HISTORY_LIST' }: HistoryModalProps)
       selectedMenuId={selectedMenuId}
       onSelected={setSelectedMenuId}
     >
-      {selectedMenuId === 'HISTORY_LIST' && <ListHistorySection />}
+      {selectedMenuId === 'HISTORY_LIST' && <HistoryListSection />}
       {selectedMenuId === 'HISTORY_STREAK' && <HistoryStreakSection />}
     </MainView>
   )
