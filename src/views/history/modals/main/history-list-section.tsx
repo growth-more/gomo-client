@@ -1,17 +1,34 @@
-import { useHistory } from '@/api/hooks'
+import { useHistory, useProfile } from '@/api/hooks'
 import { MonthSelector, YearSelector } from '@/components/selector'
 import { HistoryListEmpty, HistoryListItem } from '@/views/history/components'
 import { Divider, Stack, Typography } from '@mui/material'
 import dayjs from 'dayjs'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 export function HistoryListSection() {
-  const now = new Date()
+  const now = useMemo(() => new Date(), [])
 
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth() + 1)
 
   const { history } = useHistory(year, month)
+  const {
+    profile: { signUpDateTime },
+  } = useProfile()
+
+  const startMonth = useMemo(() => {
+    if (year !== signUpDateTime.getFullYear()) {
+      return 1
+    }
+    return signUpDateTime.getMonth() + 1
+  }, [year, signUpDateTime])
+
+  const endMonth = useMemo(() => {
+    if (year !== now.getFullYear()) {
+      return 12
+    }
+    return now.getMonth() + 1
+  }, [year, now])
 
   return (
     <Stack minHeight={1}>
@@ -26,8 +43,19 @@ export function HistoryListSection() {
         borderBottom={1}
         borderColor={(theme) => theme.palette.divider}
       >
-        <YearSelector value={year} onChange={setYear} size="small" />
-        <MonthSelector value={month} onChange={setMonth} size="small" />
+        <YearSelector
+          value={year}
+          onChange={setYear}
+          size="small"
+          startYear={signUpDateTime.getFullYear()}
+        />
+        <MonthSelector
+          value={month}
+          onChange={setMonth}
+          size="small"
+          startMonth={startMonth}
+          endMonth={endMonth}
+        />
       </Stack>
       <Stack spacing={2} p={2} divider={<Divider />} flex={1}>
         {history.length === 0 && <HistoryListEmpty />}

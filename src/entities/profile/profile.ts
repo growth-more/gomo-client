@@ -8,6 +8,8 @@ interface Profile {
   profileImageUrl: string
   profileBannerUrl: string
   subscriptionPlan: string
+  signUpDateTime: Date
+  loginProvider: string
 }
 
 export type { Profile }

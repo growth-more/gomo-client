@@ -2,13 +2,20 @@ import { FormControl, FormControlProps, MenuItem, Select } from '@mui/material'
 import range from 'lodash/range'
 
 interface YearSelectorProps extends Omit<FormControlProps, 'onChange'> {
+  startYear?: number
+  endYear?: number
   value: number
   onChange: (value: number) => void
 }
 
-export function YearSelector({ value, onChange, ...formProps }: YearSelectorProps) {
-  const currentYear = new Date().getFullYear()
-  const years = range(currentYear, 2022, -1)
+export function YearSelector({
+  startYear = 2022,
+  endYear = new Date().getFullYear(),
+  value,
+  onChange,
+  ...formProps
+}: YearSelectorProps) {
+  const years = range(endYear, startYear - 1, -1)
 
   return (
     <FormControl {...formProps}>

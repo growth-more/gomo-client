@@ -13,7 +13,7 @@ const profile: ProfileResponse = {
   roleType: 'ROLE_MEMBER',
   subscriptionPlan: 'FREE',
   activateStatus: 'ACTIVE',
-  signUpDateTime: new Date('2025-01-20T20:36:37.591469'),
+  signUpDateTime: new Date('2023-03-20T20:36:37.591469'),
 }
 
 const questProperty: QuestPropertyResponse = {
