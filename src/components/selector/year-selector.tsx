@@ -9,7 +9,7 @@ interface YearSelectorProps extends Omit<FormControlProps, 'onChange'> {
 }
 
 export function YearSelector({
-  startYear = 2022,
+  startYear = 2025,
   endYear = new Date().getFullYear(),
   value,
   onChange,

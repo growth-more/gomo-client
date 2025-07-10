@@ -1,4 +1,4 @@
-import { useStreak } from '@/api/hooks'
+import { useProfile, useStreak } from '@/api/hooks'
 import { CalendarHeatmap } from '@/components/heatmap'
 import { StreakSelector } from '@/components/selector'
 import { Box, Stack, Typography } from '@mui/material'
@@ -23,6 +23,9 @@ export function HistoryStreakSection() {
   }, [endDate])
 
   const { streak } = useStreak(startDate, endDate)
+  const {
+    profile: { signUpDateTime },
+  } = useProfile()
 
   useEffect(() => {
     const clickHandler = (e: MouseEvent) => {
@@ -45,7 +48,13 @@ export function HistoryStreakSection() {
         borderBottom={1}
         borderColor={(theme) => theme.palette.divider}
       >
-        <StreakSelector value={year} onChange={setYear} size="small" sx={{ width: 100 }} />
+        <StreakSelector
+          value={year}
+          onChange={setYear}
+          size="small"
+          startYear={signUpDateTime.getFullYear()}
+          sx={{ width: 100 }}
+        />
       </Stack>
       <Box p={2} ref={streakRef}>
         <CalendarHeatmap

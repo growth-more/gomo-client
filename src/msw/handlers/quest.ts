@@ -10,7 +10,7 @@ import {
   UpdateRepeatQuestRequest,
 } from '@/api/types'
 import { mock } from '@/msw/data'
-import { http, HttpResponse } from 'msw'
+import { delay, http, HttpResponse } from 'msw'
 
 interface IdParams {
   id: string
@@ -70,6 +70,7 @@ export const quest = [
   http.get<never, never, AssignQuestHistoryListResponse>(
     endpoints.quest.getAssignQuestHistory,
     async () => {
+      await delay(2000)
       return HttpResponse.json(mock.quest.assignQuestHistory, { status: 200 })
     }
   ),

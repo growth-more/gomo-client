@@ -1,7 +1,7 @@
 import { useHistory, useProfile } from '@/api/hooks'
 import { MonthSelector, YearSelector } from '@/components/selector'
 import { HistoryListEmpty, HistoryListItem } from '@/views/history/components'
-import { Divider, Stack, Typography } from '@mui/material'
+import { CircularProgress, Divider, Stack, Typography } from '@mui/material'
 import dayjs from 'dayjs'
 import { useMemo, useState } from 'react'
 
@@ -11,7 +11,7 @@ export function HistoryListSection() {
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth() + 1)
 
-  const { history } = useHistory(year, month)
+  const { history, isLoading } = useHistory(year, month)
   const {
     profile: { signUpDateTime },
   } = useProfile()
@@ -58,7 +58,12 @@ export function HistoryListSection() {
         />
       </Stack>
       <Stack spacing={2} p={2} divider={<Divider />} flex={1}>
-        {history.length === 0 && <HistoryListEmpty />}
+        {isLoading && (
+          <Stack alignItems="center" justifyContent="center" flex={1}>
+            <CircularProgress />
+          </Stack>
+        )}
+        {history.length === 0 && !isLoading && <HistoryListEmpty />}
         {history.map((e) => (
           <Stack key={e.date.getTime()} spacing={1}>
             <Typography fontSize={18} fontWeight={600} pl={1} color="primary">
