@@ -16,6 +16,13 @@ interface IdParams {
   id: string
 }
 
+interface AssignQuestHistoryParams {
+  year: number
+  month: number
+  day?: number
+  periodType: 'DAY' | 'MONTH'
+}
+
 export const quest = [
   http.get<never, never, AssignQuestListResponse>(endpoints.quest.getAssignQuest, async () => {
     return HttpResponse.json(mock.quest.assignQuest, { status: 200 })
@@ -67,10 +74,16 @@ export const quest = [
     // )
   }),
 
-  http.get<never, never, AssignQuestHistoryListResponse>(
+  http.get<never, AssignQuestHistoryParams, AssignQuestHistoryListResponse>(
     endpoints.quest.getAssignQuestHistory,
-    async () => {
+    async ({ request }) => {
+      const url = new URL(request.url)
+      const day = url.searchParams.get('day')
+      const periodType = url.searchParams.get('periodType')
       await delay(2000)
+      if (periodType === 'DAY' && day) {
+        return HttpResponse.json(mock.quest.assignQuestHistoryByDay, { status: 200 })
+      }
       return HttpResponse.json(mock.quest.assignQuestHistory, { status: 200 })
     }
   ),
