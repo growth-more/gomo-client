@@ -12,17 +12,17 @@ const SIDEBAR_MENU: MainViewSidebarMenuGroup<HISTORY_MODAL_SIDEBAR_MENU_ID>[] = 
   {
     menu: [
       {
+        id: 'HISTORY_STREAK',
+        label: '퀘스트 기록',
+      },
+      {
         id: 'HISTORY_LIST',
-        label: '리스트 기록',
+        label: '기록 리스트 보기',
       },
       // {
       //   id: 'HISTORY_CALENDAR',
       //   label: '캘린더 기록',
       // },
-      {
-        id: 'HISTORY_STREAK',
-        label: '연속 퀘스트 기록',
-      },
     ],
   },
 ]
@@ -31,7 +31,7 @@ interface HistoryModalProps {
   initMenuId?: HISTORY_MODAL_SIDEBAR_MENU_ID
 }
 
-export function HistoryModal({ initMenuId = 'HISTORY_LIST' }: HistoryModalProps) {
+export function HistoryModal({ initMenuId = 'HISTORY_STREAK' }: HistoryModalProps) {
   const [selectedMenuId, setSelectedMenuId] = useState<HISTORY_MODAL_SIDEBAR_MENU_ID>(initMenuId)
 
   return (
