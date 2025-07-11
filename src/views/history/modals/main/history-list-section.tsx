@@ -1,4 +1,4 @@
-import { useHistory, useProfile } from '@/api/hooks'
+import { useGetHistory, useProfile } from '@/api/hooks'
 import { MonthSelector, YearSelector } from '@/components/selector'
 import { HistoryListEmpty, HistoryListItem } from '@/views/history/components'
 import { CircularProgress, Divider, Stack, Typography } from '@mui/material'
@@ -11,7 +11,7 @@ export function HistoryListSection() {
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth() + 1)
 
-  const { history, isLoading } = useHistory(year, month)
+  const { history, isLoading } = useGetHistory(year, month)
   const {
     profile: { signUpDateTime },
   } = useProfile()

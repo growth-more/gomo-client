@@ -1,4 +1,4 @@
-import { useHistory } from '@/api/hooks'
+import { useGetDailyTotalHistory } from '@/api/hooks'
 import { Widget } from '@/components/widget'
 import { useModalStore } from '@/stores/use-modal-store'
 import { DailyTotalHistoryItem, HistoryWidgetEmpty } from '@/views/history/components'
@@ -11,7 +11,7 @@ export function QuestHistoryWidget1x1() {
   const now = new Date()
   const [year, month] = [now.getFullYear(), now.getMonth() + 1]
 
-  const { dailyTotalHistory } = useHistory(year, month)
+  const { dailyTotalHistory } = useGetDailyTotalHistory(year, month)
   const { addModal } = useModalStore()
 
   const openHistoryModal = () => {
