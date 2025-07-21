@@ -1,14 +1,14 @@
 import { alpha, Stack } from '@mui/material'
 import { DateSelector, Timeline } from './components'
 import { useState } from 'react'
-import { useHistory } from '@/api/hooks'
+import { useGetHistory } from '@/api/hooks'
 import { ScrollContainer } from '@/components/scrollbar'
 
 export function HistoryPage() {
   const [year, setYear] = useState(new Date().getFullYear())
   const [month, setMonth] = useState(new Date().getMonth())
 
-  const { history } = useHistory(year, month)
+  const { history } = useGetHistory(year, month)
 
   const dataHandler = (year: number, month: number) => {
     setYear(year)

@@ -23,4 +23,10 @@ interface StreakListResponse {
   }[]
 }
 
-export type { StreakListResponse }
+interface AchieverResponse {
+  id: string
+  longestStreakDays: number
+  currentStreakDays: number
+}
+
+export type { StreakListResponse, AchieverResponse }

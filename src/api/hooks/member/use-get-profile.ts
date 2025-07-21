@@ -22,6 +22,8 @@ export function useGetProfile() {
         profileImageUrl: '',
         profileBannerUrl: '',
         subscriptionPlan: '',
+        signUpDateTime: new Date(),
+        loginProvider: '',
       }
     }
     return {
@@ -34,6 +36,8 @@ export function useGetProfile() {
       profileImageUrl: data.profileImageUrl,
       profileBannerUrl: data.profileBannerUrl,
       subscriptionPlan: data.subscriptionPlan,
+      signUpDateTime: data.signUpDateTime,
+      loginProvider: data.loginProvider,
     }
   }, [data])
 

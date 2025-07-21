@@ -7137,6 +7137,13 @@ const list: StreakListResponse = {
   ],
 }
 
+const achievement = {
+  id: '01234-5678-11ef-2345-567890123456',
+  longestStreakDays: 725,
+  currentStreakDays: 74,
+}
+
 export const streak = {
   list,
+  achievement,
 }

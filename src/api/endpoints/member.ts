@@ -4,8 +4,8 @@ export const member = {
   update: '/members',
   delete: '/members',
 
-  createEmailCode: '/members/emails/codes/auth',
-  verifyEmailCode: '/members/emails/codes/auth',
+  createEmailCode: '/auth/codes/generate/emails',
+  verifyEmailCode: '/auth/codes/verify',
   checkHandleDuplicate: '/members/handles/duplicate',
 
   updateHandle: '/members/handles',

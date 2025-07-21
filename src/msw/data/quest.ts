@@ -196,6 +196,102 @@ const assignQuest: AssignQuestListResponse = {
   ],
 }
 
+const assignQuestHistoryByDay: AssignQuestHistoryListResponse = {
+  assignQuests: [
+    {
+      id: '0194cbd7-1111-74ec-bd46-dc855f493a1a',
+      questType: 'DAILY',
+      subjectName: '알고리즘',
+      content: '백준 실버 문제 3개 풀기',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-18T10:30:00'),
+      completed: true,
+    },
+    {
+      id: '0194cbd7-2222-74ec-bd46-dc855f493b2b',
+      questType: 'DAILY',
+      subjectName: '프론트엔드',
+      content: 'CSS Grid 레이아웃 실습하기',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-17T16:45:00'),
+      completed: true,
+    },
+    {
+      id: '0194cbd7-3333-74ec-bd46-dc855f493c3c',
+      questType: 'WEEKLY',
+      subjectName: '백엔드',
+      content: 'JPA 성능 최적화 프로젝트 완성',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-16T14:20:00'),
+      completed: true,
+    },
+    {
+      id: '0194cbd7-4444-74ec-bd46-dc855f493d4d',
+      questType: 'WEEKLY',
+      subjectName: '데브옵스',
+      content: 'Docker 컨테이너 배포 자동화하기',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-15T11:10:00'),
+      completed: true,
+    },
+    {
+      id: '0194cbd7-5555-74ec-bd46-dc855f493e5e',
+      questType: 'MONTHLY',
+      subjectName: '프로젝트',
+      content: '팀 프로젝트 MVP 버전 출시',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-14T17:30:00'),
+      completed: true,
+    },
+    {
+      id: '0194cbd7-6666-74ec-bd46-dc855f493f6f',
+      questType: 'DAILY',
+      subjectName: '클린코드',
+      content: '코드 리팩토링 및 문서화',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-13T09:15:00'),
+      completed: true,
+    },
+    {
+      id: '0194cbd7-ddde-74ec-bd46-dc855f493m9m',
+      questType: 'DAILY',
+      subjectName: 'GraphQL',
+      content:
+        '매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트 매우 긴 문자열 테스트',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-02T10:25:00'),
+      completed: true,
+    },
+    {
+      id: '0194cbd7-eeff-74ec-bd46-dc855f493n0n',
+      questType: 'WEEKLY',
+      subjectName: '성능',
+      content: '웹 성능 지표 개선',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-02T15:55:00'),
+      completed: true,
+    },
+    {
+      id: '0194cbd7-ffgg-74ec-bd46-dc855f493o1o',
+      questType: 'DAILY',
+      subjectName: 'TypeScript',
+      content: '제네릭 타입 리팩토링',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-01T09:30:00'),
+      completed: true,
+    },
+    {
+      id: '0194cbd7-gghh-74ec-bd46-dc855f493p2p',
+      questType: 'MONTHLY',
+      subjectName: '아키텍처',
+      content: '헥사고날 아키텍처 적용',
+      proof: 'no_proof',
+      completedDateTime: new Date('2025-02-01T14:50:00'),
+      completed: true,
+    },
+  ],
+}
+
 const assignQuestHistory: AssignQuestHistoryListResponse = {
   assignQuests: [
     {
@@ -724,4 +820,5 @@ export const quest = {
   assignQuest,
   assignQuestHistory,
   repeatQuest,
+  assignQuestHistoryByDay,
 }
