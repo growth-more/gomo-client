@@ -13,6 +13,8 @@ const BASE_URL = import.meta.env.PROD
   ? '/api/'
   : '/'
 
+const ISO_DATETIME_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}$/ // ISO 8601 (Spring LocalDateTime)
+
 export const AXIOS = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -27,7 +29,7 @@ export const AXIOS = axios.create({
       try {
         const parsed = JSON.parse(data)
         return cloneDeepWith(parsed, (value) => {
-          if (typeof value === 'string') {
+          if (typeof value === 'string' && ISO_DATETIME_REGEX.test(value)) {
             const date = dayjs(value)
             if (date.isValid()) {
               return date.toDate()
