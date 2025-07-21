@@ -3,7 +3,7 @@ import { MonthSelector, YearSelector } from '@/components/selector'
 import { HistoryListEmpty, HistoryListItem } from '@/views/history/components'
 import { CircularProgress, Divider, Stack, Typography } from '@mui/material'
 import dayjs from 'dayjs'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 export function HistoryListSection() {
   const now = useMemo(() => new Date(), [])
@@ -29,6 +29,15 @@ export function HistoryListSection() {
     }
     return now.getMonth() + 1
   }, [year, now])
+
+  useEffect(() => {
+    if (month < startMonth) {
+      setMonth(startMonth)
+    }
+    if (month > endMonth) {
+      setMonth(endMonth)
+    }
+  }, [startMonth, endMonth, month])
 
   return (
     <Stack minHeight={1}>
