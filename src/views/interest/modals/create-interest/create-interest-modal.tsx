@@ -39,7 +39,7 @@ export function CreateInterestModal({ id: propsId }: CreateInterestModalProps) {
   }
 
   const submit = () => {
-    if (!file || !name) {
+    if (name.trim() === '') {
       return
     }
     createInterest(

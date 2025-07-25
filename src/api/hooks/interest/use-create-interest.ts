@@ -15,7 +15,7 @@ interface CreateInterestCallback extends QueryCallback {
 interface CreateInterestParams {
   name: string
   colorCode: string
-  logo: File
+  logo?: File | null
   upperInterestId?: string
 }
 

@@ -26,7 +26,10 @@ export const interest = {
     const formData = new FormData()
     formData.append('name', params.body.name)
     formData.append('colorCode', params.body.colorCode)
-    formData.append('logo', params.body.logo)
+
+    if (params.body.logo) {
+      formData.append('logo', params.body.logo)
+    }
 
     return axiosFetch.postForm(endpoints.interest.create, formData, {
       onCode: {
