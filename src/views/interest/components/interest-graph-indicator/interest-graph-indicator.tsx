@@ -64,16 +64,19 @@ export function InterestGraphIndicator({ interest }: InterestGraphIndicatorProps
         </Stack>
       </Stack>
 
-      <Box width={1} borderBottom={1} borderColor={(theme) => theme.palette.border.main} />
-
-      <Stack direction="row" gap={0.5} flexWrap="wrap">
-        {upperInterests.map((interest) => (
-          <InterestGraphIndicatorTag key={interest.id} tag={interest.name} isUpper />
-        ))}
-        {lowerInterests.map((interest) => (
-          <InterestGraphIndicatorTag key={interest.id} tag={interest.name} />
-        ))}
-      </Stack>
+      {upperInterests.length > 0 && lowerInterests.length > 0 && (
+        <>
+          <Box width={1} borderBottom={1} borderColor={(theme) => theme.palette.border.main} />
+          <Stack direction="row" gap={0.5} flexWrap="wrap">
+            {upperInterests.map((interest) => (
+              <InterestGraphIndicatorTag key={interest.id} tag={interest.name} isUpper />
+            ))}
+            {lowerInterests.map((interest) => (
+              <InterestGraphIndicatorTag key={interest.id} tag={interest.name} />
+            ))}
+          </Stack>
+        </>
+      )}
     </Stack>
   )
 }

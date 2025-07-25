@@ -5,8 +5,10 @@ import { IContextMenuItem } from '@/stores/use-context-menu-store'
 import { useModalStore } from '@/stores/use-modal-store'
 import { InterestDeleteDialog } from '@/views/interest/dialog/interest-delete-dialog'
 import {
+  UPDATE_INTEREST_CUSTOM_MODAL_ID,
   UPDATE_INTEREST_NAME_MODAL_ID,
   UPDATE_INTEREST_UPPER_MODAL_ID,
+  UpdateInterestCustomModal,
   UpdateInterestNameModal,
   UpdateInterestUpperModal,
 } from '@/views/interest/modals'
@@ -42,6 +44,11 @@ export function useInterestGraphIndicatorContextMenu(interest: Interest) {
         },
         {
           label: '관심사 커스텀 변경',
+          onClick: () =>
+            addModal(
+              UPDATE_INTEREST_CUSTOM_MODAL_ID,
+              <UpdateInterestCustomModal interest={interest} />
+            ),
         },
       ],
       [
