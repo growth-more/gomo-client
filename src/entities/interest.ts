@@ -21,6 +21,7 @@ interface Interest {
   id: string
   name: string
   logoUrl: string
+  colorCode: string | null
   level: number
   score: number
   scoreThreshold: number

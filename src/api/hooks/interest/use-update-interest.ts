@@ -2,7 +2,6 @@ import { endpoints, fetches } from '@/api'
 import { errorCode } from '@/api/error'
 import { apiMutate } from '@/api/hooks'
 import { QueryCallback } from '@/api/hooks/error-handler'
-import { UpdateInterestRequest } from '@/api/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from '@/components/toast'
 
@@ -24,12 +23,13 @@ export function useUpdateInterest() {
 
   const updateInterest = (
     id: string,
-    body: UpdateInterestRequest,
+    name: string,
+    colorCode: string | null,
     callback?: UpdateInterestCallback
   ) => {
     apiMutate(
       mutate,
-      { id, body },
+      { id, body: { name, colorCode: colorCode ?? '#000000' } },
       {
         onSuccess: () => {
           toast.success('관심사가 수정되었습니다.')

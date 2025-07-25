@@ -10,6 +10,7 @@ interface CreateInterestRequest {
 
 interface UpdateInterestRequest {
   name: string
+  colorCode: string
 }
 
 interface UpdateInterestLogoRequest {

@@ -28,3 +28,9 @@ export type * from './fetches/requests/quest'
 export type * from './fetches/requests/member'
 export type * from './fetches/requests/interest'
 export type * from './fetches/requests/streak'
+
+// ===================================
+// FETCH RESPONSES
+// ===================================
+
+export type * from './fetches/responses/interest'

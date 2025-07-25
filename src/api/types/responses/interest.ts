@@ -7,6 +7,7 @@ interface InterestResponse {
   registrantId: string
   name: string
   logoUrl: string
+  colorCode: string
   level: number
   score: number
   scoreThreshold: number
@@ -19,6 +20,7 @@ interface InterestListResponse {
     registrantId: string
     name: string
     logoUrl: string
+    colorCode: string
     level: number
     score: number
     scoreThreshold: number
@@ -66,6 +68,7 @@ interface InterestGraphResponse {
     registrantId: string
     name: string
     logoUrl: string
+    colorCode: string
     level: number
     score: number
     scoreThreshold: number
