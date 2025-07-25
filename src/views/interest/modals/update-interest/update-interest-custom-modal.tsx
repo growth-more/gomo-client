@@ -24,11 +24,15 @@ export function UpdateInterestCustomModal({ interest }: UpdateInterestCustomModa
     removeModal(UPDATE_INTEREST_CUSTOM_MODAL_ID)
   }
 
+  const isChanged = color !== interest.colorCode || file !== null
+
   const submitHandler = () => {
     if (file !== null) {
-      // updateInterestLogo
+      updateInterestLogo(interest.id, { updatedLogo: file }, { onSuccess: closeModal })
     }
-    updateInterest(interest.id, interest.name, color, { onSuccess: closeModal })
+    if (color !== interest.colorCode) {
+      updateInterest(interest.id, interest.name, color, { onSuccess: closeModal })
+    }
   }
 
   return (
@@ -41,12 +45,23 @@ export function UpdateInterestCustomModal({ interest }: UpdateInterestCustomModa
         </Stack>
 
         <Stack flex={1} spacing={3} alignItems="center" justifyContent="center">
-          <SelectInterestImage file={file} onChange={setFile} color={color} />
+          <SelectInterestImage
+            file={file}
+            onChange={setFile}
+            color={color}
+            defaultImageSrc={interest.logoUrl === 'DEFAULT_IMAGE' ? undefined : interest.logoUrl}
+            disableRemove
+          />
           <SelectInterestColor color={color} onChange={setColor} />
         </Stack>
 
         <Stack spacing={1}>
-          <Button.Primary label="관심사 커스텀 변경하기" size="large" onClick={submitHandler} />
+          <Button.Primary
+            label="관심사 커스텀 변경하기"
+            size="large"
+            onClick={submitHandler}
+            disabled={!isChanged}
+          />
           <Button.Plain label="취소" size="small" onClick={closeModal} />
         </Stack>
       </Stack>

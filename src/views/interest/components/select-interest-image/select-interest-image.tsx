@@ -10,6 +10,8 @@ interface SelectInterestImageProps {
   onChange?: (file: File | null) => void
   size?: number
   color?: string | null
+  disableRemove?: boolean
+  defaultImageSrc?: string
 }
 
 export function SelectInterestImage({
@@ -17,6 +19,8 @@ export function SelectInterestImage({
   onChange,
   size = DEFAULT_SIZE,
   color,
+  disableRemove,
+  defaultImageSrc,
 }: SelectInterestImageProps) {
   const { upload } = useUpload({
     onSuccess: (files) => {
@@ -40,7 +44,14 @@ export function SelectInterestImage({
       position="relative"
     >
       <IconButton sx={{ borderRadius: 0, width: 1, height: 1, p: 0.5 }} onClick={upload}>
-        {file ? (
+        {!file && defaultImageSrc ? (
+          <Box
+            component="img"
+            src={defaultImageSrc}
+            alt="interest icon"
+            sx={{ objectFit: 'cover', width: 1, height: 1, borderRadius: 1 }}
+          />
+        ) : file ? (
           <Box
             component="img"
             src={URL.createObjectURL(file)}
@@ -52,7 +63,7 @@ export function SelectInterestImage({
         )}
       </IconButton>
 
-      {file && (
+      {file && !disableRemove && (
         <IconButtons.Close
           sx={{
             width: 24,
