@@ -8,6 +8,7 @@ export function initializeEdgeStyle(
     .selectAll('line')
     .attr('stroke', EDGE.STROKE_COLOR)
     .attr('stroke-width', EDGE.STROKE_WIDTH)
+    .attr('stroke-opacity', EDGE.STROKE_OPACITY)
     .attr('filter', null)
 
   return edge

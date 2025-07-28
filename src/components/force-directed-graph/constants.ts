@@ -2,7 +2,7 @@ export const VERTEX = {
   ID_PREFIX: 'vertex-',
 
   FILL_COLOR: '#615FFF',
-  FILL_DESATURATION: 0.6,
+  FILL_DESATURATION: 0.8,
   FILL_OPACITY: 0.7,
 
   STROKE_COLOR: '#615FFF',
@@ -47,9 +47,9 @@ export const GLOW_FILTER = {
 
   COLOR_MATRIX: {
     VALUES: `
-        3 1 0 0 0.3
-        1 3 0 0 0.3
-        0 0 1 0 0
+        3 0 0 0 0.3
+        0 3 0 0 0.3
+        0 0 3 0 0.3
         0 0 0 1 0
     `,
     RESULT: 'BRIGHTER',
