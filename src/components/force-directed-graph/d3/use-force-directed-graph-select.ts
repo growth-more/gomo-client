@@ -17,7 +17,7 @@ export function useForceDirectedGraphSelect<V extends Vertex>(svgRef: RefObject<
     const edge = svg.selectAll<SVGLineElement, Edge<V>>('line')
 
     vertex
-      .select('circle')
+      .select('circle.vertex-fill')
       .attr('filter', `url(#${GLOW_FILTER.ID})`)
       .attr('fill', VERTEX.FILL_COLOR)
 

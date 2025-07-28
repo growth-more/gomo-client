@@ -17,9 +17,24 @@ export function createVertex<V extends Vertex>(
 
   vertex
     .append('circle')
+    .attr('class', 'vertex-outline')
+    .attr('r', (d) => d.size + 4)
+    .attr('fill', 'transparent')
+    .attr('stroke', (d) => colord(d.color ?? VERTEX.FILL_COLOR).toHex())
+    .attr('stroke-width', VERTEX.STROKE_WIDTH)
+    .attr('x', (d) => d.x!)
+    .attr('y', (d) => d.y!)
+
+  vertex
+    .append('circle')
+    .attr('class', 'vertex-fill')
     .attr('r', (d) => d.size)
-    .attr('fill', colord(VERTEX.FILL_COLOR).desaturate(VERTEX.FILL_DESATURATION).toHex())
-    .attr('stroke', VERTEX.STROKE_COLOR)
+    .attr('fill', (d) =>
+      colord(d.color ?? VERTEX.FILL_COLOR)
+        // .desaturate(VERTEX.FILL_DESATURATION)
+        .toHex()
+    )
+    .attr('stroke', (d) => colord(d.color ?? VERTEX.STROKE_COLOR).toHex())
     .attr('stroke-width', VERTEX.STROKE_WIDTH)
     .attr('x', (d) => d.x!)
     .attr('y', (d) => d.y!)

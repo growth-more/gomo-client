@@ -1,9 +1,6 @@
 import { Edge, Graph, Vertex } from '@/components/force-directed-graph/types'
 
 interface InterestVertex extends Vertex {
-  id: string
-  name: string
-  size: number
   interest: Interest
 }
 

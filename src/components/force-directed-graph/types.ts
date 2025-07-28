@@ -2,6 +2,7 @@ interface Vertex extends d3.SimulationNodeDatum {
   id: string
   name: string
   size: number
+  color: string | null
 }
 
 interface Edge<V extends Vertex> extends d3.SimulationLinkDatum<V> {

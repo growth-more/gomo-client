@@ -6,7 +6,7 @@ export function initializeVertexStyle(
   selection: d3.Selection<SVGSVGElement, unknown, null, undefined>
 ) {
   selection
-    .selectAll('circle')
+    .selectAll('circle.vertex-fill')
     .attr('fill', colord(VERTEX.FILL_COLOR).desaturate(VERTEX.FILL_DESATURATION).toHex())
     .attr('filter', null)
 
