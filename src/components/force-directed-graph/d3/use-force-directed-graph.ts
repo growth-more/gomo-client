@@ -20,9 +20,59 @@ export function useForceDirectedGraph<V extends Vertex>(
   const { value: resize, toggle: onResize } = useToggleSignal()
 
   const svgRef = useRef<SVGSVGElement>(null)
+  const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null)
+  const containerRef = useRef<d3.Selection<SVGGElement, unknown, null, undefined> | null>(null)
+
   const { setSelectedVertexId } = useForceDirectedGraphSelect(svgRef)
 
   const [graphData, setGraphData] = useState<Graph<V>>(cloneDeep(data))
+
+  const zoomInHandler = useCallback(() => {
+    if (!svgRef.current || !zoomRef.current) {
+      return
+    }
+    d3.select(svgRef.current)
+      .transition()
+      .duration(ZOOM.TRANSITION_DURATION)
+      .call(zoomRef.current.scaleBy, ZOOM.ZOOM_UNIT_SCALE)
+  }, [])
+
+  const zoomOutHandler = useCallback(() => {
+    if (!svgRef.current || !zoomRef.current) {
+      return
+    }
+    d3.select(svgRef.current)
+      .transition()
+      .duration(ZOOM.TRANSITION_DURATION)
+      .call(zoomRef.current.scaleBy, 1 / ZOOM.ZOOM_UNIT_SCALE)
+  }, [])
+
+  const zoomResetHandler = useCallback(() => {
+    if (!svgRef.current || !zoomRef.current) {
+      return
+    }
+    d3.select(svgRef.current)
+      .transition()
+      .duration(ZOOM.TRANSITION_DURATION)
+      .call(zoomRef.current.transform, d3.zoomIdentity.scale(ZOOM.INITIAL_SCALE))
+  }, [])
+
+  const centerGraphHandler = useCallback(() => {
+    if (!svgRef.current || !zoomRef.current) {
+      return
+    }
+    const width = svgRef.current.clientWidth
+    const height = svgRef.current.clientHeight
+
+    const centerTransform = d3.zoomIdentity
+      .translate(width / 2, height / 2)
+      .scale(ZOOM.INITIAL_SCALE)
+
+    d3.select(svgRef.current)
+      .transition()
+      .duration(ZOOM.TRANSITION_DURATION)
+      .call(zoomRef.current.transform, centerTransform)
+  }, [])
 
   const onSelectHandler = useCallback(
     (interest: V) => {
@@ -66,6 +116,7 @@ export function useForceDirectedGraph<V extends Vertex>(
 
     // ZOOM CONTAINER
     const container = svg.append('g').attr('class', 'graph-container')
+    containerRef.current = container
 
     const zoom = d3
       .zoom<SVGSVGElement, unknown>()
@@ -75,6 +126,7 @@ export function useForceDirectedGraph<V extends Vertex>(
       })
 
     svg.call(zoom)
+    zoomRef.current = zoom
 
     const edge = createEdge(container, graphData.edge)
     const vertex = createVertex(container, graphData.vertex)
@@ -102,5 +154,12 @@ export function useForceDirectedGraph<V extends Vertex>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { svgRef, onSvgClickHandler }
+  return {
+    svgRef,
+    onSvgClickHandler,
+    zoomInHandler,
+    zoomOutHandler,
+    zoomResetHandler,
+    centerGraphHandler,
+  }
 }

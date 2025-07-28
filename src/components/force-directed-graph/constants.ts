@@ -80,4 +80,5 @@ export const ZOOM = {
   MAX_SCALE: 3,
   INITIAL_SCALE: 1,
   TRANSITION_DURATION: 50,
+  ZOOM_UNIT_SCALE: 1.5,
 }
