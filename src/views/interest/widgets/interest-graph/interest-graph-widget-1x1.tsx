@@ -2,7 +2,7 @@ import { useInterest } from '@/api/hooks'
 import { ForceDirectedGraph } from '@/components/force-directed-graph'
 import { Widget } from '@/components/widget'
 import { useModalStore } from '@/stores/use-modal-store'
-import { InterestWidgetEmpty } from '@/views/interest/components'
+import { InterestEmpty } from '@/views/interest/components'
 import {
   CREATE_INTEREST_MODAL_ID,
   CreateInterestModal,
@@ -33,7 +33,7 @@ export function InterestGraphWidget1x1() {
     >
       {interestGraph.vertex.length === 0 ? (
         <Box p={1} height={1}>
-          <InterestWidgetEmpty />
+          <InterestEmpty />
         </Box>
       ) : (
         <ForceDirectedGraph data={interestGraph} />

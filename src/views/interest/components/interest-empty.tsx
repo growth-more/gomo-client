@@ -3,7 +3,7 @@ import { useModalStore } from '@/stores/use-modal-store'
 import { CREATE_INTEREST_MODAL_ID, CreateInterestModal } from '@/views/interest/modals'
 import { Button, Stack, Typography } from '@mui/material'
 
-export function InterestWidgetEmpty() {
+export function InterestEmpty() {
   const { addModal } = useModalStore()
 
   const createInterestHandler = () => {
