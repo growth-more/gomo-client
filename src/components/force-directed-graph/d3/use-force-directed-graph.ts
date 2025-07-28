@@ -11,6 +11,7 @@ import {
 import { Graph, Vertex } from '@/components/force-directed-graph/types'
 import { cloneDeep, debounce } from 'lodash'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
+import { ZOOM } from '@/components/force-directed-graph/constants'
 
 export function useForceDirectedGraph<V extends Vertex>(
   data: Graph<V>,
@@ -63,8 +64,20 @@ export function useForceDirectedGraph<V extends Vertex>(
     svg.selectAll('*').remove()
     svg.append('defs').call(createGlowFilter)
 
-    const edge = createEdge(svg, graphData.edge)
-    const vertex = createVertex(svg, graphData.vertex)
+    // ZOOM CONTAINER
+    const container = svg.append('g').attr('class', 'graph-container')
+
+    const zoom = d3
+      .zoom<SVGSVGElement, unknown>()
+      .scaleExtent([ZOOM.MIN_SCALE, ZOOM.MAX_SCALE])
+      .on('zoom', (e) => {
+        container.transition().duration(ZOOM.TRANSITION_DURATION).attr('transform', e.transform)
+      })
+
+    svg.call(zoom)
+
+    const edge = createEdge(container, graphData.edge)
+    const vertex = createVertex(container, graphData.vertex)
     const simulation = createSimulation(graphData, width, height)
 
     vertex.call(drag(simulation, onSelectHandler))

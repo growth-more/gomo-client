@@ -2,7 +2,7 @@ import { EDGE } from '@/components/force-directed-graph/constants'
 import { Edge, Vertex } from '@/components/force-directed-graph/types'
 
 export function createEdge<V extends Vertex>(
-  selection: d3.Selection<SVGSVGElement, unknown, null, undefined>,
+  selection: d3.Selection<SVGGElement, unknown, null, undefined>,
   data: Edge<V>[]
 ) {
   const edge = selection

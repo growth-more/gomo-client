@@ -4,7 +4,7 @@ import { colord } from 'colord'
 import * as d3 from 'd3'
 
 export function createVertex<V extends Vertex>(
-  selection: d3.Selection<SVGSVGElement, unknown, null, undefined>,
+  selection: d3.Selection<SVGGElement, unknown, null, undefined>,
   data: V[]
 ) {
   const vertex = selection
