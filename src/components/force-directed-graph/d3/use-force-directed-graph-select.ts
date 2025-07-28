@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useState } from 'react'
 import * as d3 from 'd3'
-import { initializeEdgeStyle, initializeVertexStyle } from '@/components/force-directed-graph/d3'
+import { unselectEdgeStyle, unselectVertexStyle } from '@/components/force-directed-graph/d3'
 import { EDGE, GLOW_FILTER, VERTEX } from '@/components/force-directed-graph/constants'
 import { Edge, Vertex } from '@/components/force-directed-graph/types'
 
@@ -11,8 +11,11 @@ export function useForceDirectedGraphSelect<V extends Vertex>(svgRef: RefObject<
     if (!svgRef.current) {
       return
     }
+    if (selectedVertexId === null) {
+      return
+    }
 
-    const svg = d3.select(svgRef.current).call(initializeEdgeStyle).call(initializeVertexStyle)
+    const svg = d3.select(svgRef.current).call(unselectEdgeStyle).call(unselectVertexStyle)
     const vertex = svg.select(`#${VERTEX.ID_PREFIX}${selectedVertexId}`)
     const edge = svg.selectAll<SVGLineElement, Edge<V>>('line')
 

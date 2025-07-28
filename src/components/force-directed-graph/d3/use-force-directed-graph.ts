@@ -6,6 +6,8 @@ import {
   createSimulation,
   createVertex,
   drag,
+  initializeEdgeStyle,
+  initializeVertexStyle,
   useForceDirectedGraphSelect,
 } from '@/components/force-directed-graph/d3'
 import { Graph, Vertex } from '@/components/force-directed-graph/types'
@@ -92,6 +94,9 @@ export function useForceDirectedGraph<V extends Vertex>(
       const target = e.target as SVGElement
       if (target !== e.currentTarget) {
         return
+      }
+      if (svgRef.current) {
+        d3.select(svgRef.current).call(initializeVertexStyle).call(initializeEdgeStyle)
       }
       onUnselectHandler()
     },
