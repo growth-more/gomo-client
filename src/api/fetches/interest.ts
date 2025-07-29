@@ -19,6 +19,9 @@ import {
   UpdateInterestFetchRequest,
   UpdateInterestLogoFetchRequest,
   UpdateMajorInterestOrderFetchRequest,
+  InterestListFetchResponse,
+  InterestFetchResponse,
+  InterestGraphFetchResponse,
 } from '@/api/types'
 
 export const interest = {
@@ -26,7 +29,10 @@ export const interest = {
     const formData = new FormData()
     formData.append('name', params.body.name)
     formData.append('colorCode', params.body.colorCode)
-    formData.append('logo', params.body.logo)
+
+    if (params.body.logo) {
+      formData.append('logo', params.body.logo)
+    }
 
     return axiosFetch.postForm(endpoints.interest.create, formData, {
       onCode: {
@@ -36,12 +42,22 @@ export const interest = {
     })
   },
 
-  get: async (params: GetInterestFetchRequest): Promise<InterestResponse> => {
-    return axiosFetch.get(endpoints.interest.getWithId(params.id))
+  get: async (params: GetInterestFetchRequest): Promise<InterestFetchResponse> => {
+    const res = await axiosFetch.get<InterestResponse>(endpoints.interest.getWithId(params.id))
+    return {
+      ...res,
+      colorCode: res.colorCode === '#000000' ? null : res.colorCode,
+    }
   },
 
-  getList: async (): Promise<InterestListResponse> => {
-    return axiosFetch.get(endpoints.interest.getList)
+  getList: async (): Promise<InterestListFetchResponse> => {
+    const res = await axiosFetch.get<InterestListResponse>(endpoints.interest.getList)
+    return {
+      interests: res.interests.map((interest) => ({
+        ...interest,
+        colorCode: interest.colorCode === '#000000' ? null : interest.colorCode,
+      })),
+    }
   },
 
   update: async (params: UpdateInterestFetchRequest): Promise<void> => {
@@ -64,8 +80,15 @@ export const interest = {
     })
   },
 
-  getGraph: async (): Promise<InterestGraphResponse> => {
-    return axiosFetch.get(endpoints.interest.getGraph)
+  getGraph: async (): Promise<InterestGraphFetchResponse> => {
+    const res = await axiosFetch.get<InterestGraphResponse>(endpoints.interest.getGraph)
+    return {
+      ...res,
+      interests: res.interests.map((interest) => ({
+        ...interest,
+        colorCode: interest.colorCode === '#000000' ? null : interest.colorCode,
+      })),
+    }
   },
 
   createEdge: async (

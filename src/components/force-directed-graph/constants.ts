@@ -2,10 +2,10 @@ export const VERTEX = {
   ID_PREFIX: 'vertex-',
 
   FILL_COLOR: '#615FFF',
-  FILL_DESATURATION: 0.3,
-  FILL_OPACITY: 0.3,
+  FILL_DESATURATION: 0.8,
+  FILL_OPACITY: 0.7,
 
-  STROKE_COLOR: '#71717a',
+  STROKE_COLOR: '#615FFF',
   STROKE_WIDTH: 1.5,
 
   TEXT_COLOR: '#3f3f46',
@@ -47,9 +47,9 @@ export const GLOW_FILTER = {
 
   COLOR_MATRIX: {
     VALUES: `
-        3 1 0 0 0.3
-        1 3 0 0 0.3
-        0 0 1 0 0
+        3 0 0 0 0.3
+        0 3 0 0 0.3
+        0 0 3 0 0.3
         0 0 0 1 0
     `,
     RESULT: 'BRIGHTER',
@@ -67,9 +67,18 @@ export const GLOW_FILTER = {
 }
 
 export const SIMULATION = {
-  CHARGE_STRENGTH: -300,
+  CHARGE_STRENGTH: -800,
   FORCE_X_STRENGTH: 0.2,
   FORCE_Y_STRENGTH: 0.2,
   COLLISION_RADIUS: 2,
   COLLISION_STRENGTH: 0.5,
+  LINK_DISTANCE: 100,
+}
+
+export const ZOOM = {
+  MIN_SCALE: 0.3,
+  MAX_SCALE: 3,
+  INITIAL_SCALE: 1,
+  TRANSITION_DURATION: 50,
+  ZOOM_UNIT_SCALE: 1.5,
 }

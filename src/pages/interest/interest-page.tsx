@@ -31,7 +31,7 @@ export function InterestPage() {
     if (selectedInterest === null) {
       return
     }
-    updateInterest(selectedInterest.id, { name }, handler)
+    updateInterest(selectedInterest.id, name, selectedInterest.colorCode, handler)
   }
 
   const updateUpperInterestHandler = (newUpperId: string | null) => {

@@ -5,11 +5,12 @@
 interface CreateInterestRequest {
   name: string
   colorCode: string
-  logo: File
+  logo?: File | null
 }
 
 interface UpdateInterestRequest {
   name: string
+  colorCode: string
 }
 
 interface UpdateInterestLogoRequest {

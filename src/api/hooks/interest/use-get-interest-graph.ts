@@ -1,13 +1,13 @@
 import { fetches, endpoints } from '@/api'
-import { InterestGraph } from '@/entities/interest'
+import { InterestEdge, InterestGraph, InterestVertex } from '@/entities/interest'
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import * as d3 from 'd3'
 
-const NODE_MIN_SIZE = 1
+const NODE_MIN_SIZE = 3
 const NODE_MAX_SIZE = 20
 
-const MIN_LEVEL = 1
+const MIN_LEVEL = 0
 const MAX_LEVEL = 100
 
 export function useGetInterestGraph() {
@@ -24,15 +24,16 @@ export function useGetInterestGraph() {
       }
     }
 
-    const vertex =
+    const vertex: InterestVertex[] =
       data.interests?.map((interest) => ({
         id: interest.id,
         name: interest.name,
         size: getNodeSize(interest.level),
+        color: interest.colorCode,
         interest,
       })) ?? []
 
-    const edge =
+    const edge: InterestEdge[] =
       data.relations?.map((relation) => ({
         id: relation.id,
         source: relation.parentInterestId,
@@ -46,10 +47,11 @@ export function useGetInterestGraph() {
 }
 
 function getNodeSize(level: number) {
-  return d3
-    .scalePow()
-    .exponent(2)
-    .domain([MIN_LEVEL, MAX_LEVEL])
-    .range([NODE_MIN_SIZE, NODE_MAX_SIZE])
-    .clamp(true)(level)
+  const adjustedLevel = level - MIN_LEVEL
+  const levelGroup = Math.ceil(adjustedLevel / 10)
+  const maxGroup = Math.ceil(MAX_LEVEL / 10)
+
+  return d3.scaleLinear().domain([1, maxGroup]).range([NODE_MIN_SIZE, NODE_MAX_SIZE]).clamp(true)(
+    levelGroup
+  )
 }

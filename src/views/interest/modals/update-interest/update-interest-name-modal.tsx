@@ -18,12 +18,17 @@ export function UpdateInterestNameModal({ interest }: UpdateInterestNameModalPro
 
   const [name, setName] = useState(interest.name)
 
+  const isSubmitDisabled = name.trim().length === 0 || name === interest.name
+
   const closeModal = () => {
     removeModal(UPDATE_INTEREST_NAME_MODAL_ID)
   }
 
   const submitHandler = () => {
-    updateInterest(interest.id, { name }, { onSuccess: closeModal })
+    if (isSubmitDisabled) {
+      return
+    }
+    updateInterest(interest.id, name, interest.colorCode, { onSuccess: closeModal })
   }
 
   return (
@@ -51,7 +56,7 @@ export function UpdateInterestNameModal({ interest }: UpdateInterestNameModalPro
             label="관심사 이름 변경하기"
             size="large"
             onClick={submitHandler}
-            disabled={name.trim().length === 0 || name === interest.name}
+            disabled={isSubmitDisabled}
           />
           <Button.Plain label="취소" size="small" onClick={closeModal} />
         </Stack>

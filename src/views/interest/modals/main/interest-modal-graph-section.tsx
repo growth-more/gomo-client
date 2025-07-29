@@ -1,9 +1,9 @@
 import { ForceDirectedGraph } from '@/components/force-directed-graph'
-import { Stack } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import { useInterest } from '@/api/hooks'
 import { Interest } from '@/entities/interest'
 import { useEffect, useState } from 'react'
-import { InterestGraphIndicator } from '@/views/interest/components'
+import { InterestGraphIndicator, InterestEmpty } from '@/views/interest/components'
 
 export function InterestModalGraphSection() {
   const { interestGraph } = useInterest()
@@ -19,11 +19,19 @@ export function InterestModalGraphSection() {
 
   return (
     <Stack width={1} height={1} position="relative">
-      <ForceDirectedGraph
-        data={interestGraph}
-        onSelect={(vertex) => setSelectedInterest(vertex?.interest ?? null)}
-      />
-      {selectedInterest && <InterestGraphIndicator interest={selectedInterest} />}
+      {interestGraph.vertex.length === 0 ? (
+        <Box width={1} height={1} p={2}>
+          <InterestEmpty />
+        </Box>
+      ) : (
+        <>
+          <ForceDirectedGraph
+            data={interestGraph}
+            onSelect={(vertex) => setSelectedInterest(vertex?.interest ?? null)}
+          />
+          {selectedInterest && <InterestGraphIndicator interest={selectedInterest} />}
+        </>
+      )}
     </Stack>
   )
 }

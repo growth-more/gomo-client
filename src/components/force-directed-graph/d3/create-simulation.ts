@@ -7,7 +7,10 @@ export function createSimulation<V extends Vertex>(data: Graph<V>, width: number
     .forceSimulation<V>(data.vertex)
     .force(
       'link',
-      d3.forceLink<V, Edge<V>>(data.edge).id((d) => d.id)
+      d3
+        .forceLink<V, Edge<V>>(data.edge)
+        .id((d) => d.id)
+        .distance(SIMULATION.LINK_DISTANCE)
     )
     .force('charge', d3.forceManyBody().strength(SIMULATION.CHARGE_STRENGTH))
     .force('x', d3.forceX(width / 2).strength(SIMULATION.FORCE_X_STRENGTH))
