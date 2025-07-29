@@ -64,7 +64,7 @@ export function InterestGraphIndicator({ interest }: InterestGraphIndicatorProps
         </Stack>
       </Stack>
 
-      {upperInterests.length > 0 && lowerInterests.length > 0 && (
+      {(upperInterests.length > 0 || lowerInterests.length > 0) && (
         <>
           <Box width={1} borderBottom={1} borderColor={(theme) => theme.palette.border.main} />
           <Stack direction="row" gap={0.5} flexWrap="wrap">
