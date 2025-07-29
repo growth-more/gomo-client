@@ -26,9 +26,17 @@ export function UpdateInterestCustomModal({ interest }: UpdateInterestCustomModa
 
   const isChanged = color !== interest.colorCode || file !== null
 
+  const updateColorCode = () => {
+    if (color !== interest.colorCode) {
+      updateInterest(interest.id, interest.name, color, { onSuccess: closeModal })
+    }
+    closeModal()
+  }
+
   const submitHandler = () => {
     if (file !== null) {
-      updateInterestLogo(interest.id, { updatedLogo: file }, { onSuccess: closeModal })
+      updateInterestLogo(interest.id, { updatedLogo: file }, { onSuccess: updateColorCode })
+      return
     }
     if (color !== interest.colorCode) {
       updateInterest(interest.id, interest.name, color, { onSuccess: closeModal })
