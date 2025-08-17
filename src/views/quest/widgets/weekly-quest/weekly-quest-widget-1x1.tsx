@@ -2,7 +2,7 @@ import { useAssignQuest } from '@/api/hooks'
 import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
-import { QuestList } from '@/views/quest/components'
+import { QuestList, QuestWidgetEmpty } from '@/views/quest/components'
 import {
   CREATE_QUEST_MODAL_ID,
   CreateQuestModal,
@@ -11,7 +11,6 @@ import {
   QuestModal,
   QuestProofModal,
 } from '@/views/quest/modals'
-import { Box } from '@mui/material'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
@@ -57,10 +56,13 @@ export function WeeklyQuestWidget1x1() {
       subtitle={`${completeCount[1]}개 중 ${completeCount[0]}개 완료`}
       onAdd={createQuestHandler}
       onTitle={openQuestHandler}
+      sx={{ height: 1, p: 1 }}
     >
-      <Box p={1}>
+      {quests.length > 0 ? (
         <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
-      </Box>
+      ) : (
+        <QuestWidgetEmpty type="WEEKLY" />
+      )}
     </Widget>
   )
 }
