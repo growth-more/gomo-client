@@ -18,6 +18,7 @@ import {
   UpdateRepeatQuestFetchRequest,
   UpdateRepeatQuestOrderFetchRequest,
 } from '@/api/types'
+import dayjs from 'dayjs'
 
 export const quest = {
   createAssignQuest: async (
@@ -62,10 +63,11 @@ export const quest = {
   getAssignQuestHistory: async (
     params: AssignQuestHistoryFetchRequest
   ): Promise<AssignQuestHistoryListResponse> => {
+    const startDateTime = dayjs(params.start).format('YYYY-MM-DDTHH:mm:ss.SSS')
+    const endDateTime = dayjs(params.end).format('YYYY-MM-DDTHH:mm:ss.SSS')
+
     return axiosFetch.get(
-      `${endpoints.quest.getAssignQuestHistory}?year=${params.year}&month=${params.month}&day=${
-        params.day ?? 1
-      }&periodType=${params.periodType}`
+      `${endpoints.quest.getAssignQuestHistory}?startDateTime=${startDateTime}&endDateTime=${endDateTime}&isCompleted=${params.isCompleted}`
     )
   },
 

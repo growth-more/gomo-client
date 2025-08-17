@@ -1,6 +1,6 @@
 import { ProfileResponse, QuestPropertyResponse } from '@/api/types'
 
-const profile: ProfileResponse = {
+const profile: Omit<ProfileResponse, 'signUpDateTime'> & { signUpDateTime: string } = {
   id: 'a10581ce-d721-11ef-a8a5-2508e2a6438b',
   email: 'gomo@naver.com',
   handle: '@gorani',
@@ -13,7 +13,7 @@ const profile: ProfileResponse = {
   roleType: 'ROLE_MEMBER',
   subscriptionPlan: 'FREE',
   activateStatus: 'ACTIVE',
-  signUpDateTime: new Date('2023-03-20T20:36:37.591469'),
+  signUpDateTime: '2023-03-20T20:36:37.591469',
 }
 
 const questProperty: QuestPropertyResponse = {

@@ -3,9 +3,8 @@ import { DANGER_DIALOG_ID } from '@/components/modal'
 import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
-import { QuestConfirmDialog, QuestList } from '@/views/quest/components'
+import { QuestConfirmDialog, QuestList, QuestWidgetEmpty } from '@/views/quest/components'
 import { QUEST_MODAL_ID, QuestModal } from '@/views/quest/modals'
-import { Box } from '@mui/material'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
@@ -48,10 +47,13 @@ export function UnconfirmedQuestWidget1x1() {
       title="대기중인 퀘스트"
       subtitle={`${unconfirmedCount}개 퀘스트 대기 중`}
       onTitle={openQuestHandler}
+      sx={{ height: 1, p: 1 }}
     >
-      <Box p={1}>
+      {quests.length > 0 ? (
         <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
-      </Box>
+      ) : (
+        <QuestWidgetEmpty type="UNCONFIRMED" />
+      )}
     </Widget>
   )
 }

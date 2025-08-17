@@ -3,7 +3,7 @@ import { DANGER_DIALOG_ID } from '@/components/modal'
 import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
-import { QuestConfirmDialog, QuestList } from '@/views/quest/components'
+import { QuestConfirmDialog, QuestList, QuestWidgetEmpty } from '@/views/quest/components'
 import { QUEST_MODAL_ID, QuestModal } from '@/views/quest/modals'
 import { Box, Stack } from '@mui/material'
 import _ from 'lodash'
@@ -50,26 +50,32 @@ export function UnconfirmedQuestWidget1x2() {
       title="대기중인 퀘스트"
       subtitle={`${unconfirmedCount}개 퀘스트 대기 중`}
       onTitle={openQuestHandler}
+      sx={{ height: 1, p: 1 }}
     >
-      <Stack
-        p={1}
-        spacing={0.5}
-        direction="row"
-        divider={<Box my={1} borderRight={1} borderColor={(theme) => theme.palette.border.main} />}
-      >
-        <QuestList
-          quests={quests[0]}
-          checkHandler={checkHandler}
-          sx={{ width: '50%' }}
-          initHash={initHash.value}
-        />
-        <QuestList
-          quests={quests[1]}
-          checkHandler={checkHandler}
-          sx={{ width: '50%' }}
-          initHash={initHash.value}
-        />
-      </Stack>
+      {quests[0].length > 0 || quests[1].length > 0 ? (
+        <Stack
+          spacing={0.5}
+          direction="row"
+          divider={
+            <Box my={1} borderRight={1} borderColor={(theme) => theme.palette.border.main} />
+          }
+        >
+          <QuestList
+            quests={quests[0]}
+            checkHandler={checkHandler}
+            sx={{ width: '50%' }}
+            initHash={initHash.value}
+          />
+          <QuestList
+            quests={quests[1]}
+            checkHandler={checkHandler}
+            sx={{ width: '50%' }}
+            initHash={initHash.value}
+          />
+        </Stack>
+      ) : (
+        <QuestWidgetEmpty type="UNCONFIRMED" />
+      )}
     </Widget>
   )
 }

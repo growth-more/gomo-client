@@ -2,7 +2,7 @@ import { useAssignQuest } from '@/api/hooks'
 import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
-import { QuestList } from '@/views/quest/components'
+import { QuestList, QuestWidgetEmpty } from '@/views/quest/components'
 import {
   CREATE_QUEST_MODAL_ID,
   CreateQuestModal,
@@ -59,26 +59,32 @@ export function WeeklyQuestWidget1x2() {
       subtitle={`${completeCount[1]}개 중 ${completeCount[0]}개 완료`}
       onAdd={createQuestHandler}
       onTitle={openQuestHandler}
+      sx={{ height: 1, p: 1 }}
     >
-      <Stack
-        p={1}
-        spacing={0.5}
-        direction="row"
-        divider={<Box my={1} borderRight={1} borderColor={(theme) => theme.palette.border.main} />}
-      >
-        <QuestList
-          quests={quests[0]}
-          checkHandler={checkHandler}
-          sx={{ width: '50%' }}
-          initHash={initHash.value}
-        />
-        <QuestList
-          quests={quests[1]}
-          checkHandler={checkHandler}
-          sx={{ width: '50%' }}
-          initHash={initHash.value}
-        />
-      </Stack>
+      {quests[0].length > 0 || quests[1].length > 0 ? (
+        <Stack
+          spacing={0.5}
+          direction="row"
+          divider={
+            <Box my={1} borderRight={1} borderColor={(theme) => theme.palette.border.main} />
+          }
+        >
+          <QuestList
+            quests={quests[0]}
+            checkHandler={checkHandler}
+            sx={{ width: '50%' }}
+            initHash={initHash.value}
+          />
+          <QuestList
+            quests={quests[1]}
+            checkHandler={checkHandler}
+            sx={{ width: '50%' }}
+            initHash={initHash.value}
+          />
+        </Stack>
+      ) : (
+        <QuestWidgetEmpty type="WEEKLY" />
+      )}
     </Widget>
   )
 }

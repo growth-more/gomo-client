@@ -6,9 +6,19 @@ import _ from 'lodash'
 import { useMemo } from 'react'
 
 export function useGetHistory(year: number, month: number) {
+  const date = dayjs()
+    .year(year)
+    .month(month - 1)
+
+  const start = date.startOf('month').toDate()
+  const end = date.endOf('month').toDate()
+
+  const startFormat = dayjs(start).format('YYYY-MM-DD')
+  const endFormat = dayjs(end).format('YYYY-MM-DD')
+
   const { data, isLoading } = useQuery({
-    queryKey: ['GET', endpoints.quest.getAssignQuestHistory, year, month, 0, 'MONTH'],
-    queryFn: () => fetches.quest.getAssignQuestHistory({ year, month, periodType: 'MONTH' }),
+    queryKey: ['GET', endpoints.quest.getAssignQuestHistory, startFormat, endFormat],
+    queryFn: () => fetches.quest.getAssignQuestHistory({ start, end, isCompleted: true }),
   })
 
   const history = useMemo<OrganizedAssignQuestHistory[]>(() => {

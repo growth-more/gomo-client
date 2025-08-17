@@ -2,14 +2,13 @@ import { useAssignQuest } from '@/api/hooks'
 import { Widget } from '@/components/widget'
 import { useToggleSignal } from '@/hooks/use-toggle-signal'
 import { useModalStore } from '@/stores/use-modal-store'
-import { QuestList } from '@/views/quest/components'
+import { QuestList, QuestWidgetEmpty } from '@/views/quest/components'
 import {
   QUEST_MODAL_ID,
   QuestModal,
   QUEST_PROOF_MODAL_ID,
   QuestProofModal,
 } from '@/views/quest/modals'
-import { Box } from '@mui/material'
 import _ from 'lodash'
 import { useMemo } from 'react'
 
@@ -65,10 +64,13 @@ export function ConfirmedQuestWidget1x1() {
       title="진행중인 퀘스트"
       subtitle={`${completeCount[1]}개 중 ${completeCount[0]}개 완료`}
       onTitle={openQuestHandler}
+      sx={{ height: 1, p: 1 }}
     >
-      <Box p={1}>
+      {quests.length > 0 ? (
         <QuestList quests={quests} checkHandler={checkHandler} initHash={initHash.value} />
-      </Box>
+      ) : (
+        <QuestWidgetEmpty type="CONFIRMED" />
+      )}
     </Widget>
   )
 }
