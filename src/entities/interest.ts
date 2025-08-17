@@ -27,11 +27,13 @@ interface Interest {
 
 interface MajorInterest {
   id: string
+  interestId: string
   name: string
   logoUrl: string
   level: number
   score: number
   scoreThreshold: number
+  displayOrder: number
 }
 
 export type { InterestGraph, InterestVertex, InterestEdge, Interest, MajorInterest }

@@ -2,6 +2,7 @@ import {
   CreateMajorInterestResponse,
   InterestGraphResponse,
   InterestListResponse,
+  InterestResponse,
   MajorInterestResponse,
 } from '@/api/types'
 
@@ -1275,6 +1276,18 @@ const graph: InterestGraphResponse = {
   ],
 }
 
+const getOne: InterestResponse = {
+  id: '3bd1b3f7-d7c6-11ef-abb8-a7e09b2a499c',
+  registrantId: 'a10581ce-d721-11ef-a8a5-2508e2a6438b',
+  name: 'Backend',
+  logoUrl: 'https://mini-cloud/backend-logo.png',
+  colorCode: '#FE9A00',
+  level: 100,
+  score: 45,
+  scoreThreshold: 60,
+  totalScore: 445,
+}
+
 const create = {
   id: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
 }
@@ -1283,6 +1296,7 @@ const major: MajorInterestResponse = {
   majorInterests: [
     {
       id: '3bd1b3f7-d7c6-11ef-abb8-a7e09b2a499c',
+      interestId: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
       name: 'Backend',
       logoUrl: 'https://cdn-icons-png.flaticon.com/512/8010/8010472.png',
       level: 100,
@@ -1292,6 +1306,7 @@ const major: MajorInterestResponse = {
     },
     {
       id: '90a387a7-d7c5-11ef-b4d7-079c7dc41274',
+      interestId: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
       name: 'Spring',
       logoUrl: 'https://static-00.iconduck.com/assets.00/spring-icon-2048x2045-yufnoc34.png',
       level: 5,
@@ -1301,6 +1316,7 @@ const major: MajorInterestResponse = {
     },
     {
       id: 'f8c51811-d7c5-11ef-82dc-4322ccc3e338',
+      interestId: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
       name: 'Java',
       logoUrl: 'https://cdn.iconscout.com/icon/free/png-256/free-java-60-1174953.png?f=webp',
       level: 1,
@@ -1310,6 +1326,7 @@ const major: MajorInterestResponse = {
     },
     {
       id: '4cd2b3f7-d7c6-11ef-abb8-a7e09b2a499d',
+      interestId: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
       name: 'Node.js',
       logoUrl: 'https://static-00.iconduck.com/assets.00/nodejs-icon-2048x1254-fc24w6ld.png',
       level: 15,
@@ -1319,6 +1336,7 @@ const major: MajorInterestResponse = {
     },
     {
       id: '5ef3b3f7-d7c6-11ef-abb8-a7e09b2a499e',
+      interestId: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
       name: 'React',
       logoUrl:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
@@ -1329,6 +1347,7 @@ const major: MajorInterestResponse = {
     },
     {
       id: '6fg4b3f7-d7c6-11ef-abb8-a7e09b2a499f',
+      interestId: '110ac5a74-d7eb-11ef-a2bd-1f5e37eb89d8',
       name: 'TypeScript',
       logoUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2_979C0CYjHp3QH53N8pLqEI2Ku6g5fLTwA&s',
@@ -1347,6 +1366,7 @@ const createMajor: CreateMajorInterestResponse = {
 export const interest = {
   list,
   graph,
+  getOne,
   create,
   major,
   createMajor,

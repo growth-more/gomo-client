@@ -7,6 +7,7 @@ import {
   CreateInterestModal,
 } from '@/views/interest/modals/create-interest/create-interest-modal'
 import { InterestModalGraphSection } from '@/views/interest/modals/main/interest-modal-graph-section'
+import { InterestModalMajorSection } from '@/views/interest/modals/main/interest-modal-major-section'
 import { useState } from 'react'
 
 export const INTEREST_MODAL_ID = 'INTEREST_MODAL'
@@ -51,6 +52,7 @@ export function InterestModal({ initMenuId = 'INTEREST_GRAPH' }: InterestModalPr
       actions={[<Button.Plain label="관심사 추가" onClick={createInterest} />]}
     >
       {selectedMenuId === 'INTEREST_GRAPH' && <InterestModalGraphSection />}
+      {selectedMenuId === 'MAJOR_INTEREST' && <InterestModalMajorSection />}
     </MainView>
   )
 }

@@ -45,6 +45,7 @@ interface RecommendInterestResponse {
 interface MajorInterestResponse {
   majorInterests: {
     id: string
+    interestId: string
     name: string
     logoUrl: string
     level: number
