@@ -12,7 +12,7 @@ export function useDeleteMajorInterest() {
     mutationFn: fetches.interest.deleteMajorInterest,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['GET', endpoints.interest.getMajorInterest],
+        queryKey: ['INTEREST'],
       })
     },
   })

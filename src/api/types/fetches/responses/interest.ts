@@ -8,6 +8,7 @@ interface InterestFetchResponse {
   score: number
   scoreThreshold: number
   totalScore: number
+  majorInterestId: string | null
 }
 
 interface InterestListFetchResponse {
@@ -21,6 +22,7 @@ interface InterestListFetchResponse {
     score: number
     scoreThreshold: number
     totalScore: number
+    majorInterestId: string | null
   }[]
 }
 
@@ -35,6 +37,7 @@ interface InterestGraphFetchResponse {
     score: number
     scoreThreshold: number
     totalScore: number
+    majorInterestId: string | null
   }[]
   relations: {
     id: string

@@ -14,7 +14,7 @@ interface MajorInterestItemProps {
 
 export function MajorInterestItem({ majorInterest }: MajorInterestItemProps) {
   const { interest } = useGetOneInterest(majorInterest.interestId)
-  const { contextMenu } = useMajorInterestItemContextMenu(interest)
+  const { contextMenu } = useMajorInterestItemContextMenu(interest, majorInterest.id)
 
   const onContextMenu = useContextMenu(contextMenu)
 

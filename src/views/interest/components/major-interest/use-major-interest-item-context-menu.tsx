@@ -1,4 +1,4 @@
-import { useDeleteInterest } from '@/api/hooks'
+import { useDeleteInterest, useDeleteMajorInterest } from '@/api/hooks'
 import { DANGER_DIALOG_ID } from '@/components/modal'
 import { Interest } from '@/entities/interest'
 import { IContextMenuItem } from '@/stores/use-context-menu-store'
@@ -14,9 +14,13 @@ import {
 } from '@/views/interest/modals'
 import { useCallback, useMemo } from 'react'
 
-export function useMajorInterestItemContextMenu(interest: Interest | null) {
+export function useMajorInterestItemContextMenu(
+  interest: Interest | null,
+  majorInterestId: string
+) {
   const { addModal } = useModalStore()
   const { deleteInterest } = useDeleteInterest()
+  const { deleteMajorInterest } = useDeleteMajorInterest()
 
   const onUpdateInterestName = useCallback(() => {
     if (!interest) {
@@ -51,7 +55,12 @@ export function useMajorInterestItemContextMenu(interest: Interest | null) {
 
   const contextMenu = useMemo<IContextMenuItem[][]>(
     () => [
-      [{ label: '주요 관심사 해제' }],
+      [
+        {
+          label: '주요 관심사 해제',
+          onClick: () => deleteMajorInterest(majorInterestId),
+        },
+      ],
       [
         { label: '관심사 이름 변경', onClick: onUpdateInterestName },
         { label: '상위 관심사 변경', onClick: onUpdateInterestUpper },
@@ -59,7 +68,14 @@ export function useMajorInterestItemContextMenu(interest: Interest | null) {
       ],
       [{ label: '관심사 삭제', type: 'danger', onClick: onDeleteInterest }],
     ],
-    [onDeleteInterest, onUpdateInterestCustom, onUpdateInterestName, onUpdateInterestUpper]
+    [
+      onDeleteInterest,
+      onUpdateInterestCustom,
+      onUpdateInterestName,
+      onUpdateInterestUpper,
+      deleteMajorInterest,
+      majorInterestId,
+    ]
   )
 
   if (!interest) {

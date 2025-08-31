@@ -11,7 +11,7 @@ export function useDeleteInterestEdge() {
     mutationKey: ['DELETE', endpoints.interest.deleteEdge],
     mutationFn: fetches.interest.deleteEdge,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getGraph] })
+      queryClient.invalidateQueries({ queryKey: ['INTEREST'] })
     },
   })
 

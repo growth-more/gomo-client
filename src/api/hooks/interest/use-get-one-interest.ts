@@ -1,11 +1,11 @@
-import { endpoints, fetches } from '@/api'
+import { fetches } from '@/api'
 import { Interest } from '@/entities/interest'
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 export function useGetOneInterest(id: string) {
   const { data, isLoading } = useQuery({
-    queryKey: ['GET', endpoints.interest.getWithId(id)],
+    queryKey: ['INTEREST', id],
     queryFn: () => fetches.interest.get({ id }),
   })
 

@@ -23,6 +23,7 @@ interface Interest {
   score: number
   scoreThreshold: number
   totalScore: number
+  majorInterestId: string | null
 }
 
 interface MajorInterest {

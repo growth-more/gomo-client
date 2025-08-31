@@ -1,4 +1,4 @@
-import { fetches, endpoints } from '@/api'
+import { fetches } from '@/api'
 import { InterestEdge, InterestGraph, InterestVertex } from '@/entities/interest'
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
@@ -12,7 +12,7 @@ const MAX_LEVEL = 100
 
 export function useGetInterestGraph() {
   const { data, isLoading } = useQuery({
-    queryKey: ['GET', endpoints.interest.getGraph],
+    queryKey: ['INTEREST', 'GRAPH'],
     queryFn: fetches.interest.getGraph,
   })
 
