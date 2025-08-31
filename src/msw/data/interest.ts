@@ -18,6 +18,7 @@ const list: InterestListResponse = {
       score: 45,
       scoreThreshold: 60,
       totalScore: 445,
+      majorInterestId: null,
     },
     {
       id: '90a387a7-d7c5-11ef-b4d7-079c7dc41274',
@@ -29,6 +30,7 @@ const list: InterestListResponse = {
       score: 20,
       scoreThreshold: 40,
       totalScore: 220,
+      majorInterestId: null,
     },
     {
       id: 'f8c51811-d7c5-11ef-82dc-4322ccc3e338',
@@ -40,6 +42,7 @@ const list: InterestListResponse = {
       score: 30,
       scoreThreshold: 40,
       totalScore: 270,
+      majorInterestId: null,
     },
     {
       id: '4cd2b3f7-d7c6-11ef-abb8-a7e09b2a499d',
@@ -51,6 +54,7 @@ const list: InterestListResponse = {
       score: 25,
       scoreThreshold: 50,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '5ef3b3f7-d7c6-11ef-abb8-a7e09b2a499e',
@@ -62,6 +66,7 @@ const list: InterestListResponse = {
       score: 35,
       scoreThreshold: 70,
       totalScore: 535,
+      majorInterestId: null,
     },
     {
       id: '6fg4b3f7-d7c6-11ef-abb8-a7e09b2a499f',
@@ -73,6 +78,7 @@ const list: InterestListResponse = {
       score: 55,
       scoreThreshold: 80,
       totalScore: 655,
+      majorInterestId: null,
     },
     {
       id: '7hi5b3f7-d7c6-11ef-abb8-a7e09b2a499g',
@@ -84,6 +90,7 @@ const list: InterestListResponse = {
       score: 40,
       scoreThreshold: 60,
       totalScore: 440,
+      majorInterestId: null,
     },
     {
       id: '8ij6b3f7-d7c6-11ef-abb8-a7e09b2a499h',
@@ -95,6 +102,7 @@ const list: InterestListResponse = {
       score: 65,
       scoreThreshold: 90,
       totalScore: 765,
+      majorInterestId: null,
     },
     {
       id: '9kl7b3f7-d7c6-11ef-abb8-a7e09b2a499i',
@@ -106,6 +114,7 @@ const list: InterestListResponse = {
       score: 15,
       scoreThreshold: 45,
       totalScore: 215,
+      majorInterestId: null,
     },
     {
       id: '10mn8b3f7-d7c6-11ef-abb8-a7e09b2a499j',
@@ -117,6 +126,7 @@ const list: InterestListResponse = {
       score: 45,
       scoreThreshold: 75,
       totalScore: 545,
+      majorInterestId: null,
     },
     {
       id: '11op9b3f7-d7c6-11ef-abb8-a7e09b2a499k',
@@ -128,6 +138,7 @@ const list: InterestListResponse = {
       score: 30,
       scoreThreshold: 55,
       totalScore: 330,
+      majorInterestId: null,
     },
     {
       id: '12qr0b3f7-d7c6-11ef-abb8-a7e09b2a499l',
@@ -139,6 +150,7 @@ const list: InterestListResponse = {
       score: 70,
       scoreThreshold: 85,
       totalScore: 870,
+      majorInterestId: null,
     },
     {
       id: '13st1b3f7-d7c6-11ef-abb8-a7e09b2a499m',
@@ -150,6 +162,7 @@ const list: InterestListResponse = {
       score: 10,
       scoreThreshold: 40,
       totalScore: 110,
+      majorInterestId: null,
     },
     {
       id: '14uv2b3f7-d7c6-11ef-abb8-a7e09b2a499n',
@@ -161,6 +174,7 @@ const list: InterestListResponse = {
       score: 35,
       scoreThreshold: 65,
       totalScore: 435,
+      majorInterestId: null,
     },
     {
       id: '15wx3b3f7-d7c6-11ef-abb8-a7e09b2a499o',
@@ -172,6 +186,7 @@ const list: InterestListResponse = {
       score: 25,
       scoreThreshold: 55,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '16yz4b3f7-d7c6-11ef-abb8-a7e09b2a499p',
@@ -183,6 +198,7 @@ const list: InterestListResponse = {
       score: 60,
       scoreThreshold: 85,
       totalScore: 760,
+      majorInterestId: null,
     },
     {
       id: '17ab5b3f7-d7c6-11ef-abb8-a7e09b2a499q',
@@ -194,6 +210,7 @@ const list: InterestListResponse = {
       score: 40,
       scoreThreshold: 70,
       totalScore: 540,
+      majorInterestId: null,
     },
     {
       id: '18cd6b3f7-d7c6-11ef-abb8-a7e09b2a499r',
@@ -205,6 +222,7 @@ const list: InterestListResponse = {
       score: 20,
       scoreThreshold: 45,
       totalScore: 220,
+      majorInterestId: null,
     },
     {
       id: '19ef7b3f7-d7c6-11ef-abb8-a7e09b2a499s',
@@ -216,6 +234,7 @@ const list: InterestListResponse = {
       score: 50,
       scoreThreshold: 75,
       totalScore: 650,
+      majorInterestId: null,
     },
     {
       id: '20gh8b3f7-d7c6-11ef-abb8-a7e09b2a499t',
@@ -227,6 +246,7 @@ const list: InterestListResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 330,
+      majorInterestId: null,
     },
     {
       id: '21ij9b3f7-d7c6-11ef-abb8-a7e09b2a499u',
@@ -238,6 +258,7 @@ const list: InterestListResponse = {
       score: 35,
       scoreThreshold: 65,
       totalScore: 435,
+      majorInterestId: null,
     },
     {
       id: '22kl0b3f7-d7c6-11ef-abb8-a7e09b2a499v',
@@ -249,6 +270,7 @@ const list: InterestListResponse = {
       score: 25,
       scoreThreshold: 50,
       totalScore: 225,
+      majorInterestId: null,
     },
     {
       id: '23mn1b3f7-d7c6-11ef-abb8-a7e09b2a499w',
@@ -260,6 +282,7 @@ const list: InterestListResponse = {
       score: 45,
       scoreThreshold: 70,
       totalScore: 545,
+      majorInterestId: null,
     },
     {
       id: '24op2b3f7-d7c6-11ef-abb8-a7e09b2a499x',
@@ -271,6 +294,7 @@ const list: InterestListResponse = {
       score: 25,
       scoreThreshold: 55,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '25qr3b3f7-d7c6-11ef-abb8-a7e09b2a499y',
@@ -282,6 +306,7 @@ const list: InterestListResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 430,
+      majorInterestId: null,
     },
     {
       id: '26st4b3f7-d7c6-11ef-abb8-a7e09b2a499z',
@@ -293,6 +318,7 @@ const list: InterestListResponse = {
       score: 60,
       scoreThreshold: 80,
       totalScore: 760,
+      majorInterestId: null,
     },
     {
       id: '27uv5b3f7-d7c6-11ef-abb8-a7e09b2a500a',
@@ -304,6 +330,7 @@ const list: InterestListResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 430,
+      majorInterestId: null,
     },
     {
       id: '28wx6b3f7-d7c6-11ef-abb8-a7e09b2a500b',
@@ -315,6 +342,7 @@ const list: InterestListResponse = {
       score: 65,
       scoreThreshold: 85,
       totalScore: 865,
+      majorInterestId: null,
     },
     {
       id: '29yz7b3f7-d7c6-11ef-abb8-a7e09b2a500c',
@@ -326,6 +354,7 @@ const list: InterestListResponse = {
       score: 35,
       scoreThreshold: 65,
       totalScore: 435,
+      majorInterestId: null,
     },
     {
       id: '30ab8b3f7-d7c6-11ef-abb8-a7e09b2a500d',
@@ -337,6 +366,7 @@ const list: InterestListResponse = {
       score: 40,
       scoreThreshold: 70,
       totalScore: 540,
+      majorInterestId: null,
     },
     {
       id: '31cd9b3f7-d7c6-11ef-abb8-a7e09b2a500e',
@@ -348,6 +378,7 @@ const list: InterestListResponse = {
       score: 25,
       scoreThreshold: 55,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '32ef0b3f7-d7c6-11ef-abb8-a7e09b2a500f',
@@ -359,6 +390,7 @@ const list: InterestListResponse = {
       score: 55,
       scoreThreshold: 80,
       totalScore: 755,
+      majorInterestId: null,
     },
     {
       id: '33gh1b3f7-d7c6-11ef-abb8-a7e09b2a500g',
@@ -370,6 +402,7 @@ const list: InterestListResponse = {
       score: 20,
       scoreThreshold: 50,
       totalScore: 220,
+      majorInterestId: null,
     },
     {
       id: '34ij2b3f7-d7c6-11ef-abb8-a7e09b2a500h',
@@ -381,6 +414,7 @@ const list: InterestListResponse = {
       score: 70,
       scoreThreshold: 90,
       totalScore: 870,
+      majorInterestId: null,
     },
     {
       id: '35kl3b3f7-d7c6-11ef-abb8-a7e09b2a500i',
@@ -392,6 +426,7 @@ const list: InterestListResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 430,
+      majorInterestId: null,
     },
     {
       id: '36mn4b3f7-d7c6-11ef-abb8-a7e09b2a500j',
@@ -403,6 +438,7 @@ const list: InterestListResponse = {
       score: 50,
       scoreThreshold: 75,
       totalScore: 650,
+      majorInterestId: null,
     },
     {
       id: '37op5b3f7-d7c6-11ef-abb8-a7e09b2a500k',
@@ -414,6 +450,7 @@ const list: InterestListResponse = {
       score: 45,
       scoreThreshold: 70,
       totalScore: 545,
+      majorInterestId: null,
     },
     {
       id: '38qr6b3f7-d7c6-11ef-abb8-a7e09b2a500l',
@@ -425,6 +462,7 @@ const list: InterestListResponse = {
       score: 55,
       scoreThreshold: 75,
       totalScore: 655,
+      majorInterestId: null,
     },
     {
       id: '39st7b3f7-d7c6-11ef-abb8-a7e09b2a500m',
@@ -436,6 +474,7 @@ const list: InterestListResponse = {
       score: 65,
       scoreThreshold: 85,
       totalScore: 765,
+      majorInterestId: null,
     },
     {
       id: '40uv8b3f7-d7c6-11ef-abb8-a7e09b2a500n',
@@ -447,6 +486,7 @@ const list: InterestListResponse = {
       score: 45,
       scoreThreshold: 70,
       totalScore: 545,
+      majorInterestId: null,
     },
     {
       id: '41wx9b3f7-d7c6-11ef-abb8-a7e09b2a500o',
@@ -458,6 +498,7 @@ const list: InterestListResponse = {
       score: 60,
       scoreThreshold: 80,
       totalScore: 760,
+      majorInterestId: null,
     },
     {
       id: '42yz0b3f7-d7c6-11ef-abb8-a7e09b2a500p',
@@ -469,6 +510,7 @@ const list: InterestListResponse = {
       score: 35,
       scoreThreshold: 65,
       totalScore: 435,
+      majorInterestId: null,
     },
     {
       id: '43ab1b3f7-d7c6-11ef-abb8-a7e09b2a500q',
@@ -480,6 +522,7 @@ const list: InterestListResponse = {
       score: 55,
       scoreThreshold: 80,
       totalScore: 655,
+      majorInterestId: null,
     },
     {
       id: '44cd2b3f7-d7c6-11ef-abb8-a7e09b2a500r',
@@ -491,6 +534,7 @@ const list: InterestListResponse = {
       score: 25,
       scoreThreshold: 55,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '45ef3b3f7-d7c6-11ef-abb8-a7e09b2a500s',
@@ -502,6 +546,7 @@ const list: InterestListResponse = {
       score: 70,
       scoreThreshold: 90,
       totalScore: 870,
+      majorInterestId: null,
     },
     {
       id: '46gh4b3f7-d7c6-11ef-abb8-a7e09b2a500t',
@@ -513,6 +558,7 @@ const list: InterestListResponse = {
       score: 50,
       scoreThreshold: 75,
       totalScore: 650,
+      majorInterestId: null,
     },
     {
       id: '47ij5b3f7-d7c6-11ef-abb8-a7e09b2a500u',
@@ -524,6 +570,7 @@ const list: InterestListResponse = {
       score: 65,
       scoreThreshold: 85,
       totalScore: 765,
+      majorInterestId: null,
     },
     {
       id: '48kl6b3f7-d7c6-11ef-abb8-a7e09b2a500v',
@@ -535,6 +582,7 @@ const list: InterestListResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 430,
+      majorInterestId: null,
     },
     {
       id: '49mn7b3f7-d7c6-11ef-abb8-a7e09b2a500w',
@@ -546,6 +594,7 @@ const list: InterestListResponse = {
       score: 55,
       scoreThreshold: 75,
       totalScore: 655,
+      majorInterestId: null,
     },
   ],
 }
@@ -562,6 +611,7 @@ const graph: InterestGraphResponse = {
       score: 45,
       scoreThreshold: 60,
       totalScore: 445,
+      majorInterestId: null,
     },
     {
       id: '90a387a7-d7c5-11ef-b4d7-079c7dc41274',
@@ -573,6 +623,7 @@ const graph: InterestGraphResponse = {
       score: 20,
       scoreThreshold: 40,
       totalScore: 220,
+      majorInterestId: null,
     },
     {
       id: 'f8c51811-d7c5-11ef-82dc-4322ccc3e338',
@@ -584,6 +635,7 @@ const graph: InterestGraphResponse = {
       score: 30,
       scoreThreshold: 40,
       totalScore: 270,
+      majorInterestId: null,
     },
     {
       id: '4cd2b3f7-d7c6-11ef-abb8-a7e09b2a499d',
@@ -595,6 +647,7 @@ const graph: InterestGraphResponse = {
       score: 25,
       scoreThreshold: 50,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '5ef3b3f7-d7c6-11ef-abb8-a7e09b2a499e',
@@ -606,6 +659,7 @@ const graph: InterestGraphResponse = {
       score: 35,
       scoreThreshold: 70,
       totalScore: 535,
+      majorInterestId: null,
     },
     {
       id: '6fg4b3f7-d7c6-11ef-abb8-a7e09b2a499f',
@@ -617,6 +671,7 @@ const graph: InterestGraphResponse = {
       score: 55,
       scoreThreshold: 80,
       totalScore: 655,
+      majorInterestId: null,
     },
     {
       id: '7hi5b3f7-d7c6-11ef-abb8-a7e09b2a499g',
@@ -628,6 +683,7 @@ const graph: InterestGraphResponse = {
       score: 40,
       scoreThreshold: 60,
       totalScore: 440,
+      majorInterestId: null,
     },
     {
       id: '8ij6b3f7-d7c6-11ef-abb8-a7e09b2a499h',
@@ -639,6 +695,7 @@ const graph: InterestGraphResponse = {
       score: 65,
       scoreThreshold: 90,
       totalScore: 765,
+      majorInterestId: null,
     },
     {
       id: '9kl7b3f7-d7c6-11ef-abb8-a7e09b2a499i',
@@ -650,6 +707,7 @@ const graph: InterestGraphResponse = {
       score: 15,
       scoreThreshold: 45,
       totalScore: 215,
+      majorInterestId: null,
     },
     {
       id: '10mn8b3f7-d7c6-11ef-abb8-a7e09b2a499j',
@@ -661,6 +719,7 @@ const graph: InterestGraphResponse = {
       score: 45,
       scoreThreshold: 75,
       totalScore: 545,
+      majorInterestId: null,
     },
     {
       id: '11op9b3f7-d7c6-11ef-abb8-a7e09b2a499k',
@@ -672,6 +731,7 @@ const graph: InterestGraphResponse = {
       score: 30,
       scoreThreshold: 55,
       totalScore: 330,
+      majorInterestId: null,
     },
     {
       id: '12qr0b3f7-d7c6-11ef-abb8-a7e09b2a499l',
@@ -683,6 +743,7 @@ const graph: InterestGraphResponse = {
       score: 70,
       scoreThreshold: 85,
       totalScore: 870,
+      majorInterestId: null,
     },
     {
       id: '13st1b3f7-d7c6-11ef-abb8-a7e09b2a499m',
@@ -694,6 +755,7 @@ const graph: InterestGraphResponse = {
       score: 10,
       scoreThreshold: 40,
       totalScore: 110,
+      majorInterestId: null,
     },
     {
       id: '14uv2b3f7-d7c6-11ef-abb8-a7e09b2a499n',
@@ -705,6 +767,7 @@ const graph: InterestGraphResponse = {
       score: 35,
       scoreThreshold: 65,
       totalScore: 435,
+      majorInterestId: null,
     },
     {
       id: '15wx3b3f7-d7c6-11ef-abb8-a7e09b2a499o',
@@ -716,6 +779,7 @@ const graph: InterestGraphResponse = {
       score: 25,
       scoreThreshold: 55,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '16yz4b3f7-d7c6-11ef-abb8-a7e09b2a499p',
@@ -727,6 +791,7 @@ const graph: InterestGraphResponse = {
       score: 60,
       scoreThreshold: 85,
       totalScore: 760,
+      majorInterestId: null,
     },
     {
       id: '17ab5b3f7-d7c6-11ef-abb8-a7e09b2a499q',
@@ -738,6 +803,7 @@ const graph: InterestGraphResponse = {
       score: 40,
       scoreThreshold: 70,
       totalScore: 540,
+      majorInterestId: null,
     },
     {
       id: '18cd6b3f7-d7c6-11ef-abb8-a7e09b2a499r',
@@ -749,6 +815,7 @@ const graph: InterestGraphResponse = {
       score: 20,
       scoreThreshold: 45,
       totalScore: 220,
+      majorInterestId: null,
     },
     {
       id: '19ef7b3f7-d7c6-11ef-abb8-a7e09b2a499s',
@@ -760,6 +827,7 @@ const graph: InterestGraphResponse = {
       score: 50,
       scoreThreshold: 75,
       totalScore: 650,
+      majorInterestId: null,
     },
     {
       id: '20gh8b3f7-d7c6-11ef-abb8-a7e09b2a499t',
@@ -771,6 +839,7 @@ const graph: InterestGraphResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 330,
+      majorInterestId: null,
     },
     {
       id: '21ij9b3f7-d7c6-11ef-abb8-a7e09b2a499u',
@@ -782,6 +851,7 @@ const graph: InterestGraphResponse = {
       score: 35,
       scoreThreshold: 65,
       totalScore: 435,
+      majorInterestId: null,
     },
     {
       id: '22kl0b3f7-d7c6-11ef-abb8-a7e09b2a499v',
@@ -793,6 +863,7 @@ const graph: InterestGraphResponse = {
       score: 25,
       scoreThreshold: 50,
       totalScore: 225,
+      majorInterestId: null,
     },
     {
       id: '23mn1b3f7-d7c6-11ef-abb8-a7e09b2a499w',
@@ -804,6 +875,7 @@ const graph: InterestGraphResponse = {
       score: 45,
       scoreThreshold: 70,
       totalScore: 545,
+      majorInterestId: null,
     },
     {
       id: '24op2b3f7-d7c6-11ef-abb8-a7e09b2a499x',
@@ -815,6 +887,7 @@ const graph: InterestGraphResponse = {
       score: 25,
       scoreThreshold: 55,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '25qr3b3f7-d7c6-11ef-abb8-a7e09b2a499y',
@@ -826,6 +899,7 @@ const graph: InterestGraphResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 430,
+      majorInterestId: null,
     },
     {
       id: '26st4b3f7-d7c6-11ef-abb8-a7e09b2a499z',
@@ -837,6 +911,7 @@ const graph: InterestGraphResponse = {
       score: 60,
       scoreThreshold: 80,
       totalScore: 760,
+      majorInterestId: null,
     },
     {
       id: '27uv5b3f7-d7c6-11ef-abb8-a7e09b2a500a',
@@ -848,6 +923,7 @@ const graph: InterestGraphResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 430,
+      majorInterestId: null,
     },
     {
       id: '28wx6b3f7-d7c6-11ef-abb8-a7e09b2a500b',
@@ -859,6 +935,7 @@ const graph: InterestGraphResponse = {
       score: 65,
       scoreThreshold: 85,
       totalScore: 865,
+      majorInterestId: null,
     },
     {
       id: '29yz7b3f7-d7c6-11ef-abb8-a7e09b2a500c',
@@ -870,6 +947,7 @@ const graph: InterestGraphResponse = {
       score: 35,
       scoreThreshold: 65,
       totalScore: 435,
+      majorInterestId: null,
     },
     {
       id: '30ab8b3f7-d7c6-11ef-abb8-a7e09b2a500d',
@@ -881,6 +959,7 @@ const graph: InterestGraphResponse = {
       score: 40,
       scoreThreshold: 70,
       totalScore: 540,
+      majorInterestId: null,
     },
     {
       id: '31cd9b3f7-d7c6-11ef-abb8-a7e09b2a500e',
@@ -892,6 +971,7 @@ const graph: InterestGraphResponse = {
       score: 25,
       scoreThreshold: 55,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '32ef0b3f7-d7c6-11ef-abb8-a7e09b2a500f',
@@ -903,6 +983,7 @@ const graph: InterestGraphResponse = {
       score: 55,
       scoreThreshold: 80,
       totalScore: 755,
+      majorInterestId: null,
     },
     {
       id: '33gh1b3f7-d7c6-11ef-abb8-a7e09b2a500g',
@@ -914,6 +995,7 @@ const graph: InterestGraphResponse = {
       score: 20,
       scoreThreshold: 50,
       totalScore: 220,
+      majorInterestId: null,
     },
     {
       id: '34ij2b3f7-d7c6-11ef-abb8-a7e09b2a500h',
@@ -925,6 +1007,7 @@ const graph: InterestGraphResponse = {
       score: 70,
       scoreThreshold: 90,
       totalScore: 870,
+      majorInterestId: null,
     },
     {
       id: '35kl3b3f7-d7c6-11ef-abb8-a7e09b2a500i',
@@ -936,6 +1019,7 @@ const graph: InterestGraphResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 430,
+      majorInterestId: null,
     },
     {
       id: '36mn4b3f7-d7c6-11ef-abb8-a7e09b2a500j',
@@ -947,6 +1031,7 @@ const graph: InterestGraphResponse = {
       score: 50,
       scoreThreshold: 75,
       totalScore: 650,
+      majorInterestId: null,
     },
     {
       id: '37op5b3f7-d7c6-11ef-abb8-a7e09b2a500k',
@@ -958,6 +1043,7 @@ const graph: InterestGraphResponse = {
       score: 45,
       scoreThreshold: 70,
       totalScore: 545,
+      majorInterestId: null,
     },
     {
       id: '38qr6b3f7-d7c6-11ef-abb8-a7e09b2a500l',
@@ -969,6 +1055,7 @@ const graph: InterestGraphResponse = {
       score: 55,
       scoreThreshold: 75,
       totalScore: 655,
+      majorInterestId: null,
     },
     {
       id: '39st7b3f7-d7c6-11ef-abb8-a7e09b2a500m',
@@ -980,6 +1067,7 @@ const graph: InterestGraphResponse = {
       score: 65,
       scoreThreshold: 85,
       totalScore: 765,
+      majorInterestId: null,
     },
     {
       id: '40uv8b3f7-d7c6-11ef-abb8-a7e09b2a500n',
@@ -991,6 +1079,7 @@ const graph: InterestGraphResponse = {
       score: 45,
       scoreThreshold: 70,
       totalScore: 545,
+      majorInterestId: null,
     },
     {
       id: '41wx9b3f7-d7c6-11ef-abb8-a7e09b2a500o',
@@ -1002,6 +1091,7 @@ const graph: InterestGraphResponse = {
       score: 60,
       scoreThreshold: 80,
       totalScore: 760,
+      majorInterestId: null,
     },
     {
       id: '42yz0b3f7-d7c6-11ef-abb8-a7e09b2a500p',
@@ -1013,6 +1103,7 @@ const graph: InterestGraphResponse = {
       score: 35,
       scoreThreshold: 65,
       totalScore: 435,
+      majorInterestId: null,
     },
     {
       id: '43ab1b3f7-d7c6-11ef-abb8-a7e09b2a500q',
@@ -1024,6 +1115,7 @@ const graph: InterestGraphResponse = {
       score: 55,
       scoreThreshold: 80,
       totalScore: 655,
+      majorInterestId: null,
     },
     {
       id: '44cd2b3f7-d7c6-11ef-abb8-a7e09b2a500r',
@@ -1035,6 +1127,7 @@ const graph: InterestGraphResponse = {
       score: 25,
       scoreThreshold: 55,
       totalScore: 325,
+      majorInterestId: null,
     },
     {
       id: '45ef3b3f7-d7c6-11ef-abb8-a7e09b2a500s',
@@ -1046,6 +1139,7 @@ const graph: InterestGraphResponse = {
       score: 70,
       scoreThreshold: 90,
       totalScore: 870,
+      majorInterestId: null,
     },
     {
       id: '46gh4b3f7-d7c6-11ef-abb8-a7e09b2a500t',
@@ -1057,6 +1151,7 @@ const graph: InterestGraphResponse = {
       score: 50,
       scoreThreshold: 75,
       totalScore: 650,
+      majorInterestId: null,
     },
     {
       id: '47ij5b3f7-d7c6-11ef-abb8-a7e09b2a500u',
@@ -1068,6 +1163,7 @@ const graph: InterestGraphResponse = {
       score: 65,
       scoreThreshold: 85,
       totalScore: 765,
+      majorInterestId: null,
     },
     {
       id: '48kl6b3f7-d7c6-11ef-abb8-a7e09b2a500v',
@@ -1079,6 +1175,7 @@ const graph: InterestGraphResponse = {
       score: 30,
       scoreThreshold: 60,
       totalScore: 430,
+      majorInterestId: null,
     },
     {
       id: '49mn7b3f7-d7c6-11ef-abb8-a7e09b2a500w',
@@ -1090,6 +1187,7 @@ const graph: InterestGraphResponse = {
       score: 55,
       scoreThreshold: 75,
       totalScore: 655,
+      majorInterestId: null,
     },
   ],
   relations: [
@@ -1286,6 +1384,7 @@ const getOne: InterestResponse = {
   score: 45,
   scoreThreshold: 60,
   totalScore: 445,
+  majorInterestId: null,
 }
 
 const create = {
