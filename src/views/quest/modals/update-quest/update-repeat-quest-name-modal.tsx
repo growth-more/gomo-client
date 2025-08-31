@@ -1,7 +1,7 @@
 import { useRepeatQuest } from '@/api/hooks'
 import { Button } from '@/components/button'
 import { ModalView } from '@/components/modal'
-import { RepeatQuest } from '@/entities/quest'
+import { QUEST_TYPE, RepeatQuest } from '@/entities/quest'
 import { useModalStore } from '@/stores/use-modal-store'
 import { Stack, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
@@ -29,7 +29,7 @@ export function UpdateRepeatQuestNameModal({ quest }: UpdateRepeatQuestNameProps
         content: name,
         subjectId: quest.subjectId,
         subjectName: quest.subjectName,
-        questType: quest.questType,
+        questType: QUEST_TYPE[quest.questType].apiType,
       },
       {
         onSuccess: () => closeModal(),

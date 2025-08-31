@@ -1,4 +1,4 @@
-import { QuestType } from '@/entities/quest'
+import { QuestApiType, QuestType } from '@/entities/quest'
 
 // ===================================
 // QUEST
@@ -44,19 +44,19 @@ interface CompleteAssignQuestRequest {
 interface CreateRepeatQuestRequest {
   subjectId: string
   subjectName: string
-  questType: QuestType
+  questType: QuestApiType
   content: string
 }
 
 interface UpdateRepeatQuestRequest {
   subjectId: string
   subjectName: string
-  questType: QuestType
+  questType: QuestApiType
   content: string
 }
 
 interface UpdateRepeatQuestOrderRequest {
-  questType: QuestType
+  questType: QuestApiType
   updatedOrders: number[]
 }
 

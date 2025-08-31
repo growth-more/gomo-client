@@ -1,7 +1,7 @@
 import { useInterest, useRepeatQuest } from '@/api/hooks'
 import { Button } from '@/components/button'
 import { ModalView } from '@/components/modal'
-import { RepeatQuest } from '@/entities/quest'
+import { QUEST_TYPE, RepeatQuest } from '@/entities/quest'
 import { Interest } from '@/entities/interest'
 import { useModalStore } from '@/stores/use-modal-store'
 import { SelectInterest } from '@/views/interest/components'
@@ -34,7 +34,7 @@ export function UpdateRepeatQuestInterestModal({ quest }: UpdateRepeatQuestInter
       quest.id,
       {
         content: quest.content,
-        questType: quest.questType,
+        questType: QUEST_TYPE[quest.questType].apiType,
         subjectId: interest?.id,
         subjectName: interest?.name,
       },
