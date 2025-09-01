@@ -17,8 +17,7 @@ export function useUpdateInterestLogo() {
     mutationKey: ['PUT', endpoints.interest.updateLogo],
     mutationFn: fetches.interest.updateLogo,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getList] })
-      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getGraph] })
+      queryClient.invalidateQueries({ queryKey: ['INTEREST'] })
     },
   })
 

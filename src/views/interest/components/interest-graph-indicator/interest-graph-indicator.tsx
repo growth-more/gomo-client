@@ -44,19 +44,21 @@ export function InterestGraphIndicator({ interest }: InterestGraphIndicatorProps
       spacing={1}
       onContextMenu={onContextMenu}
     >
-      <Stack direction="row" spacing={1}>
+      <Stack direction="row" spacing={1} width={1}>
         <InterestGraphIndicatorImage src={interest.logoUrl} />
         <Stack flex={1} justifyContent="space-between">
-          {/* 레벨, 제목, 메뉴 */}
-          <Stack direction="row" justifyContent="space-between" spacing={1}>
-            <Stack direction="row" spacing={1} alignItems="center">
-              <InterestGraphIndicatorLevel level={interest.level} />
-              <Typography fontWeight={600} fontSize={16} noWrap>
-                {interest.name}
-              </Typography>
-            </Stack>
+          <Box
+            display="grid"
+            alignItems="center"
+            gridTemplateColumns="auto minmax(0, 1fr) auto"
+            gap={1}
+          >
+            <InterestGraphIndicatorLevel level={interest.level} />
+            <Typography fontWeight={600} fontSize={16} noWrap>
+              {interest.name}
+            </Typography>
             <IconButtons.Menu onClick={onContextMenu} />
-          </Stack>
+          </Box>
           <InterestGraphIndicatorScoreBar
             score={interest.score}
             scoreThreshold={interest.scoreThreshold}

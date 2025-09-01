@@ -12,6 +12,7 @@ interface InterestResponse {
   score: number
   scoreThreshold: number
   totalScore: number
+  majorInterestId: string | null
 }
 
 interface InterestListResponse {
@@ -25,6 +26,7 @@ interface InterestListResponse {
     score: number
     scoreThreshold: number
     totalScore: number
+    majorInterestId: string | null
   }[]
 }
 
@@ -45,6 +47,7 @@ interface RecommendInterestResponse {
 interface MajorInterestResponse {
   majorInterests: {
     id: string
+    interestId: string
     name: string
     logoUrl: string
     level: number
@@ -73,6 +76,7 @@ interface InterestGraphResponse {
     score: number
     scoreThreshold: number
     totalScore: number
+    majorInterestId: string | null
   }[]
   relations: {
     id: string

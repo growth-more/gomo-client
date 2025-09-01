@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { SelectInterest } from '@/pages/interest/components'
 import { Interest } from '@/entities/interest'
 import { REPEAT_QUEST_CREATE_PAGE_ID, REPEAT_QUEST_UPDATE_PAGE_ID } from '@/constants/window-view'
-import { RepeatQuest } from '@/entities/quest'
+import { QUEST_TYPE, RepeatQuest } from '@/entities/quest'
 
 interface RepeatQuestEditPageProps {
   prevData?: RepeatQuest
@@ -36,7 +36,7 @@ export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
       {
         subjectId: interest.id,
         subjectName: interest.name,
-        questType,
+        questType: QUEST_TYPE[questType].apiType,
         content,
       },
       { onSuccess: () => closeHandler() }
@@ -52,7 +52,7 @@ export function RepeatQuestEditPage({ prevData }: RepeatQuestEditPageProps) {
       {
         subjectId: interest.id,
         subjectName: interest.name,
-        questType,
+        questType: QUEST_TYPE[questType].apiType,
         content,
       },
       { onSuccess: () => closeHandler() }

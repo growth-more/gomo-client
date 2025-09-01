@@ -74,12 +74,7 @@ export const quest = {
   createRepeatQuest: async (
     params: CreateRepeatQuestFetchRequest
   ): Promise<CreateRepeatQuestResponse> => {
-    return axiosFetch.post(endpoints.quest.createRepeatQuest, params.body, {
-      onCode: {
-        [apiErrorCode.THRESHOLD_EXCEEDED]: errorCode.quest.repeat.create.THRESHOLD_EXCEEDED,
-        [apiErrorCode.INVALID_PARAMETER]: errorCode.quest.repeat.create.INVALID_PARAMETER,
-      },
-    })
+    return axiosFetch.post(endpoints.quest.createRepeatQuest, params.body)
   },
 
   getRepeatQuest: async (): Promise<RepeatQuestListResponse> => {

@@ -1,7 +1,7 @@
 import { useRepeatQuest } from '@/api/hooks'
 import { ModalView } from '@/components/modal'
 import { Stepper } from '@/components/stepper'
-import { QuestType } from '@/entities/quest'
+import { QUEST_TYPE, QuestType } from '@/entities/quest'
 import { Interest } from '@/entities/interest'
 import { useModalStore } from '@/stores/use-modal-store'
 import { CreateQuestModalS1 } from '@/views/quest/modals/create-quest/create-quest-modal-s1'
@@ -46,7 +46,7 @@ export function CreateRepeatQuestModal({ type, id: propsId }: CreateRepeatQuestM
     createQuest(
       {
         content: name,
-        questType: type,
+        questType: QUEST_TYPE[type].apiType,
         subjectId: interest.id,
         subjectName: interest.name,
       },

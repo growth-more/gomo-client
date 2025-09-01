@@ -28,8 +28,7 @@ export function useCreateInterest() {
     mutationKey: ['POST', endpoints.interest.create],
     mutationFn: fetches.interest.create,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getList] })
-      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getGraph] })
+      queryClient.invalidateQueries({ queryKey: ['INTEREST'] })
     },
   })
 

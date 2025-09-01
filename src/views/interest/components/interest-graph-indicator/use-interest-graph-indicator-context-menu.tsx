@@ -1,4 +1,4 @@
-import { useInterest } from '@/api/hooks'
+import { useCreateMajorInterest, useDeleteInterest, useDeleteMajorInterest } from '@/api/hooks'
 import { DANGER_DIALOG_ID } from '@/components/modal'
 import { Interest } from '@/entities/interest'
 import { IContextMenuItem } from '@/stores/use-context-menu-store'
@@ -16,14 +16,22 @@ import { useMemo } from 'react'
 
 export function useInterestGraphIndicatorContextMenu(interest: Interest) {
   const { addModal } = useModalStore()
-  const { deleteInterest } = useInterest()
+  const { deleteInterest } = useDeleteInterest()
+  const { createMajorInterest } = useCreateMajorInterest()
+  const { deleteMajorInterest } = useDeleteMajorInterest()
 
   const contextMenu = useMemo(() => {
     const context: IContextMenuItem[][] = [
       [
-        {
-          label: '주요 관심사로 지정',
-        },
+        interest.majorInterestId === null
+          ? {
+              label: '주요 관심사로 지정',
+              onClick: () => createMajorInterest(interest.id),
+            }
+          : {
+              label: '주요 관심사 해제',
+              onClick: () => deleteMajorInterest(interest.majorInterestId!),
+            },
       ],
       [
         {
@@ -64,7 +72,7 @@ export function useInterestGraphIndicatorContextMenu(interest: Interest) {
       ],
     ]
     return context
-  }, [addModal, deleteInterest, interest])
+  }, [addModal, createMajorInterest, deleteInterest, deleteMajorInterest, interest])
 
   return { contextMenu }
 }

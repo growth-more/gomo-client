@@ -11,8 +11,7 @@ export function useDeleteInterest() {
     mutationKey: ['DELETE', endpoints.interest.delete],
     mutationFn: fetches.interest.delete,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getList] })
-      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getGraph] })
+      queryClient.invalidateQueries({ queryKey: ['INTEREST'] })
     },
   })
 

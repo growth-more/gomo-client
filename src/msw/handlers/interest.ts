@@ -2,6 +2,7 @@ import { endpoints } from '@/api'
 import {
   CreateInterestEdgeRequest,
   CreateInterestRequest,
+  InterestResponse,
   UpdateInterestLogoRequest,
   UpdateInterestRequest,
 } from '@/api/types'
@@ -121,5 +122,9 @@ export const interest = [
   http.delete<IdParams>(endpoints.interest.deleteMajorInterest, async () => {
     return new HttpResponse(null, { status: 204 })
     // return new HttpResponse(null, { status: 400 })
+  }),
+
+  http.get<IdParams, InterestResponse>(endpoints.interest.get, async () => {
+    return HttpResponse.json(mock.interest.getOne, { status: 200 })
   }),
 ]

@@ -12,7 +12,7 @@ export function useCreateInterestEdge() {
     mutationKey: ['POST', endpoints.interest.createEdge],
     mutationFn: fetches.interest.createEdge,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.interest.getGraph] })
+      queryClient.invalidateQueries({ queryKey: ['INTEREST'] })
     },
   })
 

@@ -17,7 +17,7 @@ export function useCreateMajorInterest() {
     mutationFn: fetches.interest.createMajorInterest,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['GET', endpoints.interest.getMajorInterest],
+        queryKey: ['INTEREST'],
       })
     },
   })
