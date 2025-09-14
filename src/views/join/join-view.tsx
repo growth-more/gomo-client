@@ -2,15 +2,13 @@ import { Container, Stack, GlobalStyles } from '@mui/material'
 import { useRef, useState } from 'react'
 import { JoinStepper } from './components'
 import { InvisibleContainer } from '@/components/container'
-import { JoinTermPage } from './join-term-page'
-import { JoinFormPage } from './join-form-page'
-import { JoinSuccessPage } from './join-success-page'
 import { OnlyGuest } from '@/auth/guard'
 import { useAuth } from '@/auth/hooks'
 import { Navigate } from 'react-router-dom'
 import { paths } from '@/routes'
+import { JoinFormSection, JoinSuccessSection, JoinTermSection } from '@/views/join/sections'
 
-export function JoinPage() {
+export function JoinView() {
   const { login } = useAuth()
 
   const [step, setStep] = useState(0)
@@ -46,13 +44,13 @@ export function JoinPage() {
 
         <Stack alignItems="center" width={1} flex={1}>
           <InvisibleContainer visible={step === 0}>
-            <JoinTermPage onNext={() => setStep(1)} />
+            <JoinTermSection onNext={() => setStep(1)} />
           </InvisibleContainer>
           <InvisibleContainer visible={step === 1}>
-            <JoinFormPage onNext={formStepHandler} />
+            <JoinFormSection onNext={formStepHandler} />
           </InvisibleContainer>
           <InvisibleContainer visible={step === 2} sx={{ width: 1, height: 1 }}>
-            <JoinSuccessPage onSkip={skipHandler} onSurvey={surveyHandler} />
+            <JoinSuccessSection onSkip={skipHandler} onSurvey={surveyHandler} />
           </InvisibleContainer>
         </Stack>
       </Container>

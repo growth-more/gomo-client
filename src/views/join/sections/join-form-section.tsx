@@ -1,6 +1,6 @@
 import { Button, Stack, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import { EmailVerifyForm, PasswordForm, PersonalForm } from './components'
+import { EmailVerifyForm, PasswordForm, PersonalForm } from '../components'
 import { useBoolean } from '@/hooks'
 import { useJoin } from '@/api/hooks'
 
@@ -14,11 +14,11 @@ export interface Form {
   motto: string
 }
 
-interface JoinFormPageProps {
+interface JoinFormSectionProps {
   onNext?: (email: string, password: string) => void
 }
 
-export function JoinFormPage({ onNext }: JoinFormPageProps) {
+export function JoinFormSection({ onNext }: JoinFormSectionProps) {
   const { join } = useJoin()
 
   const emailVerified = useBoolean()

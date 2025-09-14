@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { JoinPage, LoginPage } from '@/pages'
+import { LoginPage } from '@/pages'
 import { paths } from '@/routes'
 import { MainLayout } from '@/layouts'
 import { MainView } from '@/views/app/main-view'
 import { OauthResult } from '@/views/login/oauth-result'
+import { JoinView } from '@/views/join/join-view'
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ export const router = createBrowserRouter([
       },
       {
         path: paths.join,
-        element: <JoinPage />,
+        element: <JoinView />,
       },
     ],
   },

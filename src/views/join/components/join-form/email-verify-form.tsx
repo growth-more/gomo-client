@@ -6,7 +6,7 @@ import { useState } from 'react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { JoinFieldInfo } from './join-field-info'
-import { Form } from '@/pages/join/join-form-page'
+import { Form } from '@/views/join/sections'
 import { useJoin } from '@/api/hooks'
 
 dayjs.extend(duration)
