@@ -3,6 +3,7 @@ import { JoinPage, LoginPage } from '@/pages'
 import { paths } from '@/routes'
 import { MainLayout } from '@/layouts'
 import { MainView } from '@/views/app/main-view'
+import { OauthResult } from '@/views/login/oauth-result'
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,18 @@ export const router = createBrowserRouter([
       {
         path: paths.login,
         element: <LoginPage />,
+      },
+      {
+        path: paths.oauth.google,
+        element: <OauthResult provider="google" />,
+      },
+      {
+        path: paths.oauth.kakao,
+        element: <OauthResult provider="kakao" />,
+      },
+      {
+        path: paths.oauth.naver,
+        element: <OauthResult provider="naver" />,
       },
       {
         path: paths.join,

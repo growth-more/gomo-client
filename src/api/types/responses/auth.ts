@@ -8,4 +8,9 @@ interface ReissueResponse {
   token: string
 }
 
-export type { LoginResponse, ReissueResponse }
+interface OauthResponse {
+  userInfo: unknown
+  accessToken: string | null
+}
+
+export type { LoginResponse, ReissueResponse, OauthResponse }

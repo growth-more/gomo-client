@@ -20,13 +20,28 @@ const oauthBtnSx: SxProps<Theme> = {
 export function OAuthForm() {
   return (
     <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
-      <Box component="button" bgcolor="transparent" sx={oauthBtnSx}>
+      <Box
+        component="a"
+        href={`${import.meta.env.VITE_OAUTH_NAVER}`}
+        bgcolor="transparent"
+        sx={oauthBtnSx}
+      >
         <Box component="img" src="/img/oauth/naver.png" sx={oauthImgSx} />
       </Box>
-      <Box component="button" bgcolor="transparent" sx={oauthBtnSx}>
+      <Box
+        component="a"
+        href={`${import.meta.env.VITE_OAUTH_KAKAO}`}
+        bgcolor="transparent"
+        sx={oauthBtnSx}
+      >
         <Box component="img" src="/img/oauth/kakao.svg" sx={oauthImgSx} />
       </Box>
-      <Box component="button" bgcolor="transparent" sx={oauthBtnSx}>
+      <Box
+        component="a"
+        href={`${import.meta.env.VITE_OAUTH_GOOGLE}`}
+        bgcolor="transparent"
+        sx={oauthBtnSx}
+      >
         <Box component="img" src="/img/oauth/google.svg" sx={oauthImgSx} />
       </Box>
     </Stack>

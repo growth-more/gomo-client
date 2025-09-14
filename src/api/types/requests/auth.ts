@@ -3,4 +3,9 @@ interface LoginRequest {
   password: string
 }
 
-export type { LoginRequest }
+interface OauthRequest {
+  provider: 'google' | 'kakao' | 'naver'
+  code: string
+}
+
+export type { LoginRequest, OauthRequest }

@@ -8,6 +8,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 export type AuthenticateStatus = 'LOADING' | 'AUTHENTICATED' | 'UNAUTHENTICATED'
+export type OauthProvider = 'google' | 'kakao' | 'naver'
 
 export function useAuth() {
   const { auth, isLoading } = useAuthStore()
