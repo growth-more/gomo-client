@@ -1,9 +1,11 @@
 import { fetches } from '@/api'
-import { useEffect, useMemo } from 'react'
+import { OauthProvider } from '@/entities/profile'
+import { useEffectOnce } from '@/hooks'
+import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 interface OauthResultProps {
-  provider: 'google' | 'kakao' | 'naver'
+  provider: OauthProvider
 }
 
 export function OauthResult({ provider }: OauthResultProps) {
@@ -11,7 +13,7 @@ export function OauthResult({ provider }: OauthResultProps) {
 
   const code = useMemo(() => searchParams.get('code'), [searchParams])
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (!code) {
       return
     }

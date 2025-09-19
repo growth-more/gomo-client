@@ -1,10 +1,12 @@
+import { OauthProvider } from '@/entities/profile'
+
 interface LoginRequest {
   email: string
   password: string
 }
 
 interface OauthRequest {
-  provider: 'google' | 'kakao' | 'naver'
+  provider: OauthProvider
   code: string
 }
 

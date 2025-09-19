@@ -16,6 +16,10 @@ export interface Form {
 
 interface JoinFormSectionProps {
   onNext?: (email: string, password: string) => void
+  oauth?: {
+    email: string
+    name: string
+  }
 }
 
 export function JoinFormSection({ onNext }: JoinFormSectionProps) {
@@ -44,6 +48,7 @@ export function JoinFormSection({ onNext }: JoinFormSectionProps) {
         password: form.password,
         handle: `@${form.handle}`,
         motto: form.motto,
+        loginProvider: 'EMAIL',
       },
       { onSuccess: () => onNext?.(form.email, form.password) }
     )

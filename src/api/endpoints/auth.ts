@@ -4,8 +4,8 @@ export const auth = {
   logout: '/members/logout',
   check: '/members',
   oauth: {
-    google: '/oauth/login/google',
-    kakao: '/oauth/login/kakao',
-    naver: '/oauth/login/naver',
+    GOOGLE: '/oauth/login/google',
+    KAKAO: '/oauth/login/kakao',
+    NAVER: '/oauth/login/naver',
   },
 }

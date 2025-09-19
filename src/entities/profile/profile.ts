@@ -1,3 +1,6 @@
+type LoginProvider = 'EMAIL' | 'GOOGLE' | 'KAKAO' | 'NAVER'
+type OauthProvider = Exclude<LoginProvider, 'EMAIL'>
+
 interface Profile {
   id: string
   email: string
@@ -9,7 +12,7 @@ interface Profile {
   profileBannerUrl: string
   subscriptionPlan: string
   signUpDateTime: Date
-  loginProvider: string
+  loginProvider: LoginProvider
 }
 
-export type { Profile }
+export type { Profile, LoginProvider, OauthProvider }
