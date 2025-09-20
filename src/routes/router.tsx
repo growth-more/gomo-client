@@ -20,15 +20,15 @@ export const router = createBrowserRouter([
       },
       {
         path: paths.oauth.google,
-        element: <OauthResult provider="google" />,
+        element: <OauthResult provider="GOOGLE" />,
       },
       {
         path: paths.oauth.kakao,
-        element: <OauthResult provider="kakao" />,
+        element: <OauthResult provider="KAKAO" />,
       },
       {
         path: paths.oauth.naver,
-        element: <OauthResult provider="naver" />,
+        element: <OauthResult provider="NAVER" />,
       },
       {
         path: paths.join,

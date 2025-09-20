@@ -21,6 +21,7 @@ interface EmailVerifyFormProps {
   watch: UseFormWatch<Form>
   onVerified?: () => void
   onUnverified?: () => void
+  disabled?: boolean
 }
 
 export function EmailVerifyForm({
@@ -28,10 +29,13 @@ export function EmailVerifyForm({
   watch,
   onVerified,
   onUnverified,
+  disabled,
 }: EmailVerifyFormProps) {
   const { createAuthCode, checkAuthCode } = useJoin()
 
-  const [verifyCodeStatus, setVerifyCodeStatus] = useState<VerifyCodeStatus>('none')
+  const [verifyCodeStatus, setVerifyCodeStatus] = useState<VerifyCodeStatus>(
+    disabled ? 'verified' : 'none'
+  )
 
   const verifyCodeTimer = useTimer(VERIFY_CODE_TIME)
 
@@ -64,6 +68,7 @@ export function EmailVerifyForm({
           inputMode="email"
           type="email"
           control={control}
+          disabled={disabled}
           rules={{
             required: {
               value: true,
@@ -78,7 +83,7 @@ export function EmailVerifyForm({
         <Button
           sx={{ flexShrink: 0, width: 120, height: 40 }}
           onClick={requestVerifyCode}
-          disabled={!email || !EMAIL_PATTERN.test(email)}
+          disabled={!email || !EMAIL_PATTERN.test(email) || disabled}
         >
           {verifyCodeStatus === 'none' ? '인증코드 전송' : '인증코드 재전송'}
         </Button>

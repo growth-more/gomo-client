@@ -21,4 +21,16 @@ export const auth = [
     return HttpResponse.json(null, { status: 200 })
     // return HttpResponse.json(null, { status: 401 })
   }),
+
+  http.get(endpoints.auth.oauth.GOOGLE, async () => {
+    return HttpResponse.json(mock.auth.oauthGoogle, { status: 200 })
+  }),
+
+  http.get(endpoints.auth.oauth.KAKAO, async () => {
+    return HttpResponse.json(mock.auth.oauthKakao, { status: 200 })
+  }),
+
+  http.get(endpoints.auth.oauth.NAVER, async () => {
+    return HttpResponse.json(mock.auth.oauthNaver, { status: 200 })
+  }),
 ]

@@ -1,3 +1,5 @@
+import { LoginProvider } from '@/entities/profile'
+
 interface LoginResponse {
   id: string
   token: string
@@ -9,7 +11,11 @@ interface ReissueResponse {
 }
 
 interface OauthResponse {
-  userInfo: unknown
+  userInfo: {
+    email: string
+    name: string
+    provider: LoginProvider
+  }
   accessToken: string | null
 }
 

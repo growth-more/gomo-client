@@ -1,15 +1,25 @@
 import { Container, Stack, GlobalStyles } from '@mui/material'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { JoinStepper } from './components'
 import { InvisibleContainer } from '@/components/container'
 import { OnlyGuest } from '@/auth/guard'
 import { useAuth } from '@/auth/hooks'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import { paths } from '@/routes'
 import { JoinFormSection, JoinSuccessSection, JoinTermSection } from '@/views/join/sections'
+import { LoginProvider } from '@/entities/profile'
+
+type OauthUserInfo = {
+  email: string
+  name: string
+  provider: LoginProvider
+}
 
 export function JoinView() {
   const { login } = useAuth()
+  const { state } = useLocation()
+
+  const [prefill, setPrefill] = useState<OauthUserInfo | null>(null)
 
   const [step, setStep] = useState(0)
   const loginRef = useRef<{ email: string; password: string }>()
@@ -33,6 +43,13 @@ export function JoinView() {
     login(loginRef.current, { onSuccess: () => <Navigate to={paths.root} /> })
   }
 
+  useEffect(() => {
+    if (!state) {
+      return
+    }
+    setPrefill(state as OauthUserInfo)
+  }, [state])
+
   return (
     <OnlyGuest>
       <GlobalStyles styles={{ body: { overflow: 'initial' } }} />
@@ -47,7 +64,7 @@ export function JoinView() {
             <JoinTermSection onNext={() => setStep(1)} />
           </InvisibleContainer>
           <InvisibleContainer visible={step === 1}>
-            <JoinFormSection onNext={formStepHandler} />
+            <JoinFormSection onNext={formStepHandler} oauth={prefill ?? undefined} />
           </InvisibleContainer>
           <InvisibleContainer visible={step === 2} sx={{ width: 1, height: 1 }}>
             <JoinSuccessSection onSkip={skipHandler} onSurvey={surveyHandler} />
