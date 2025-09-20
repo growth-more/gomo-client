@@ -1,6 +1,6 @@
 import { fetches } from '@/api'
 import { endpoints } from '@/api'
-import { Profile } from '@/entities/profile'
+import { LoginProvider, Profile } from '@/entities/profile'
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
@@ -23,7 +23,7 @@ export function useGetProfile() {
         profileBannerUrl: '',
         subscriptionPlan: '',
         signUpDateTime: new Date(),
-        loginProvider: '',
+        loginProvider: 'EMAIL',
       }
     }
     return {
@@ -37,7 +37,7 @@ export function useGetProfile() {
       profileBannerUrl: data.profileBannerUrl,
       subscriptionPlan: data.subscriptionPlan,
       signUpDateTime: data.signUpDateTime,
-      loginProvider: data.loginProvider,
+      loginProvider: data.loginProvider as LoginProvider,
     }
   }, [data])
 
