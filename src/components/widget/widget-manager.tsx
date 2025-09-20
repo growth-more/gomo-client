@@ -1,65 +1,67 @@
-import DailyQuestWidget from '@/views/quest/widgets/daily-quest'
-import UnconfirmedQuestWidget from '@/views/quest/widgets/unconfirmed-quest'
-import WeeklyQuestWidget from '@/views/quest/widgets/weekly-quest'
-import MonthlyQuestWidget from '@/views/quest/widgets/monthly-quest'
-import InterestGraphWidget from '@/views/interest/widgets/interest-graph'
-import MyProfileWidget from '@/views/profile/widgets/my-profile'
-import QuestHistoryWidget from '@/views/history/widgets/quest-history'
-import QuestStreakWidget from '@/views/history/widgets/quest-streak'
-import ConfirmedQuestWidget from '@/views/quest/widgets/confirmed-quest'
+import { QuestHistoryWidget, QuestStreakWidget } from '@/views/history/widgets'
+import { InterestGraphWidget } from '@/views/interest/widgets'
+import { MyProfileWidget } from '@/views/profile/widgets'
+import {
+  ConfirmedQuestWidget,
+  DailyQuestWidget,
+  MonthlyQuestWidget,
+  UnconfirmedQuestWidget,
+  WeeklyQuestWidget,
+} from '@/views/quest/widgets'
 
-import { Box, useMediaQuery } from '@mui/material'
+import { Box } from '@mui/material'
 
-export function WidgetManager() {
-  const x3 = useMediaQuery('(min-width: 1210px)')
-  const x2 = useMediaQuery('(min-width: 820px)')
+interface WidgetManagerProps {
+  mediaWidth: number
+}
 
-  if (x3) {
+export function WidgetManager({ mediaWidth }: WidgetManagerProps) {
+  if (mediaWidth === 3) {
     return (
       <Box display="flex" gap="40px" flexWrap="wrap" width="1130px">
-        <MyProfileWidget.components.S1x1 />
-        <ConfirmedQuestWidget.components.S1x2 />
+        <MyProfileWidget.widgets.S1x1.component />
+        <ConfirmedQuestWidget.widgets.S1x2.component />
 
-        <UnconfirmedQuestWidget.components.S1x2 />
-        <InterestGraphWidget.components.S1x1 />
+        <UnconfirmedQuestWidget.widgets.S1x2.component />
+        <InterestGraphWidget.widgets.S1x1.component />
 
-        <QuestStreakWidget.components.S1x3 />
+        <QuestStreakWidget.widgets.S1x3.component />
 
-        <DailyQuestWidget.components.S1x1 />
-        <WeeklyQuestWidget.components.S1x1 />
-        <MonthlyQuestWidget.components.S1x1 />
+        <DailyQuestWidget.widgets.S1x1.component />
+        <WeeklyQuestWidget.widgets.S1x1.component />
+        <MonthlyQuestWidget.widgets.S1x1.component />
       </Box>
     )
   }
 
-  if (x2) {
+  if (mediaWidth === 2) {
     return (
       <Box display="flex" gap="40px" flexWrap="wrap" width="740px">
-        <MyProfileWidget.components.S1x1 />
-        <ConfirmedQuestWidget.components.S1x1 />
+        <MyProfileWidget.widgets.S1x1.component />
+        <ConfirmedQuestWidget.widgets.S1x1.component />
 
-        <UnconfirmedQuestWidget.components.S1x2 />
+        <UnconfirmedQuestWidget.widgets.S1x2.component />
 
-        <QuestHistoryWidget.components.S1x1 />
-        <InterestGraphWidget.components.S1x1 />
+        <QuestHistoryWidget.widgets.S1x1.component />
+        <InterestGraphWidget.widgets.S1x1.component />
 
-        <DailyQuestWidget.components.S1x2 />
-        <WeeklyQuestWidget.components.S1x1 />
-        <MonthlyQuestWidget.components.S1x1 />
+        <DailyQuestWidget.widgets.S1x2.component />
+        <WeeklyQuestWidget.widgets.S1x1.component />
+        <MonthlyQuestWidget.widgets.S1x1.component />
       </Box>
     )
   }
 
   return (
     <Box display="flex" gap="40px" flexWrap="wrap" width="350px">
-      <MyProfileWidget.components.S1x1 />
-      <ConfirmedQuestWidget.components.S1x1 />
-      <UnconfirmedQuestWidget.components.S1x1 />
-      <QuestHistoryWidget.components.S1x1 />
-      <InterestGraphWidget.components.S1x1 />
-      <DailyQuestWidget.components.S1x1 />
-      <WeeklyQuestWidget.components.S1x1 />
-      <MonthlyQuestWidget.components.S1x1 />
+      <MyProfileWidget.widgets.S1x1.component />
+      <ConfirmedQuestWidget.widgets.S1x1.component />
+      <UnconfirmedQuestWidget.widgets.S1x1.component />
+      <QuestHistoryWidget.widgets.S1x1.component />
+      <InterestGraphWidget.widgets.S1x1.component />
+      <DailyQuestWidget.widgets.S1x1.component />
+      <WeeklyQuestWidget.widgets.S1x1.component />
+      <MonthlyQuestWidget.widgets.S1x1.component />
     </Box>
   )
 }

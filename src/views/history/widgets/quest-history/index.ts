@@ -1,12 +1,14 @@
 import { WidgetData } from '@/components/widget'
 import { QuestHistoryWidget1x1 } from '@/views/history/widgets/quest-history/quest-history-widget-1x1'
 
-const QuestHistoryWidget = {
+export const QuestHistoryWidget = {
   id: 'QUEST_HISTORY_WIDGET',
   name: '퀘스트 기록',
-  components: {
-    S1x1: QuestHistoryWidget1x1,
+  widgets: {
+    S1x1: {
+      width: 1,
+      height: 1,
+      component: QuestHistoryWidget1x1,
+    },
   } as const,
 } satisfies WidgetData
-
-export default QuestHistoryWidget
