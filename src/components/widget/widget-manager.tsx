@@ -17,17 +17,17 @@ export function WidgetManager() {
   if (x3) {
     return (
       <Box display="flex" gap="40px" flexWrap="wrap" width="1130px">
-        <MyProfileWidget.S1x1 />
-        <ConfirmedQuestWidget.S1x2 />
+        <MyProfileWidget.components.S1x1 />
+        <ConfirmedQuestWidget.components.S1x2 />
 
-        <UnconfirmedQuestWidget.S1x2 />
-        <InterestGraphWidget.S1x1 />
+        <UnconfirmedQuestWidget.components.S1x2 />
+        <InterestGraphWidget.components.S1x1 />
 
-        <QuestStreakWidget.S1x3 />
+        <QuestStreakWidget.components.S1x3 />
 
-        <DailyQuestWidget.S1x1 />
-        <WeeklyQuestWidget.S1x1 />
-        <MonthlyQuestWidget.S1x1 />
+        <DailyQuestWidget.components.S1x1 />
+        <WeeklyQuestWidget.components.S1x1 />
+        <MonthlyQuestWidget.components.S1x1 />
       </Box>
     )
   }
@@ -35,31 +35,31 @@ export function WidgetManager() {
   if (x2) {
     return (
       <Box display="flex" gap="40px" flexWrap="wrap" width="740px">
-        <MyProfileWidget.S1x1 />
-        <ConfirmedQuestWidget.S1x1 />
+        <MyProfileWidget.components.S1x1 />
+        <ConfirmedQuestWidget.components.S1x1 />
 
-        <UnconfirmedQuestWidget.S1x2 />
+        <UnconfirmedQuestWidget.components.S1x2 />
 
-        <QuestHistoryWidget.S1x1 />
-        <InterestGraphWidget.S1x1 />
+        <QuestHistoryWidget.components.S1x1 />
+        <InterestGraphWidget.components.S1x1 />
 
-        <DailyQuestWidget.S1x2 />
-        <WeeklyQuestWidget.S1x1 />
-        <MonthlyQuestWidget.S1x1 />
+        <DailyQuestWidget.components.S1x2 />
+        <WeeklyQuestWidget.components.S1x1 />
+        <MonthlyQuestWidget.components.S1x1 />
       </Box>
     )
   }
 
   return (
     <Box display="flex" gap="40px" flexWrap="wrap" width="350px">
-      <MyProfileWidget.S1x1 />
-      <ConfirmedQuestWidget.S1x1 />
-      <UnconfirmedQuestWidget.S1x1 />
-      <QuestHistoryWidget.S1x1 />
-      <InterestGraphWidget.S1x1 />
-      <DailyQuestWidget.S1x1 />
-      <WeeklyQuestWidget.S1x1 />
-      <MonthlyQuestWidget.S1x1 />
+      <MyProfileWidget.components.S1x1 />
+      <ConfirmedQuestWidget.components.S1x1 />
+      <UnconfirmedQuestWidget.components.S1x1 />
+      <QuestHistoryWidget.components.S1x1 />
+      <InterestGraphWidget.components.S1x1 />
+      <DailyQuestWidget.components.S1x1 />
+      <WeeklyQuestWidget.components.S1x1 />
+      <MonthlyQuestWidget.components.S1x1 />
     </Box>
   )
 }

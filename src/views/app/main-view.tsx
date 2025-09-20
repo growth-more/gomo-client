@@ -1,6 +1,6 @@
 import { Box, Stack, SxProps, Theme } from '@mui/material'
 import { OnlyAuth } from '@/auth/guard'
-import { WidgetManager } from '@/views/app/components/widget-manager'
+import { WidgetManager } from '@/components/widget'
 
 const backgroundSx: SxProps<Theme> = {
   backgroundImage: 'url("/img/bg.jpg")',
