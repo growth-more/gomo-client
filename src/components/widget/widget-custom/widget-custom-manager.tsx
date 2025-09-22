@@ -1,4 +1,4 @@
-import { ActiveWidget, OverStatus, Position } from '@/components/widget/type'
+import { ActiveWidget, ManagerData, OverStatus, Position } from '@/components/widget/type'
 import { WidgetCustomGrid } from '@/components/widget/widget-custom/widget-custom-grid'
 import { WidgetCustomToolbox } from '@/components/widget/widget-custom/widget-custom-toolbox'
 import { useBoolean } from '@/hooks'
@@ -14,38 +14,43 @@ import { Box } from '@mui/material'
 import _ from 'lodash'
 import { useMemo, useState } from 'react'
 
-interface ManagerData {
-  id: string
-  width: number
-  height: number
-  row: number
-  column: number
-}
-
 interface WidgetCustomManagerProps {
   mediaWidth: number
 }
 
 export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
-  const [height, setHeight] = useState(5)
+  // const [meidaHeight, setMediaHeight] = useState(1)
+
   const [active, setActive] = useState<ActiveWidget | null>(null)
   const [overPosition, setOverPosition] = useState<OverStatus | null>(null)
+
   const [widgetData, setWidgetData] = useState<ManagerData[]>([])
   const toolboxCollapsed = useBoolean()
 
+  const mediaHeight = useMemo(() => {
+    const max = _(widgetData)
+      .map((widget) => widget.row + widget.height)
+      .max()
+
+    if (max) {
+      return max + 1
+    }
+    return 1
+  }, [widgetData])
+
   const gridData = useMemo(() => {
-    const grid = _.times(height, () => _.times(mediaWidth, () => false))
+    const grid = _.times(mediaHeight, () => _.times(mediaWidth, () => false))
     widgetData.forEach((widget) => {
       for (let r = widget.row; r < widget.row + widget.height; r++) {
         for (let c = widget.column; c < widget.column + widget.width; c++) {
-          if (r < height && c < mediaWidth) {
+          if (r < mediaHeight && c < mediaWidth) {
             grid[r][c] = true
           }
         }
       }
     })
     return grid
-  }, [widgetData, height, mediaWidth])
+  }, [widgetData, mediaHeight, mediaWidth])
 
   const checkCollision = (row: number, column: number, width: number, height: number) => {
     for (let r = row; r < row + height; r++) {
@@ -56,6 +61,10 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
       }
     }
     return false
+  }
+
+  const checkOutOfBound = (row: number, column: number, width: number, height: number) => {
+    return row + height > mediaHeight || column + width > mediaWidth
   }
 
   const dragStartHandler = (e: DragStartEvent) => {
@@ -72,12 +81,15 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
       return
     }
 
-    const { id, width, height } = e.active.data.current as ActiveWidget
+    const { id, width, height, preview } = e.active.data.current as ActiveWidget
     const { row, column } = e.over.data.current as Position
     if (checkCollision(row, column, width, height)) {
       return
     }
-    setWidgetData((prev) => [...prev, { id, width, height, row, column }])
+    if (checkOutOfBound(row, column, width, height)) {
+      return
+    }
+    setWidgetData((prev) => [...prev, { id, width, height, row, column, preview }])
   }
 
   const dragOverHandler = (e: DragOverEvent) => {
@@ -88,8 +100,12 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
 
     const { width, height } = e.active.data.current as ActiveWidget
     const { row, column } = e.over.data.current as Position
+
     const isCollied = checkCollision(row, column, width, height)
-    setOverPosition({ row, column, isPossible: !isCollied })
+    const isOutOfBound = checkOutOfBound(row, column, width, height)
+    const isPossible = !isCollied && !isOutOfBound
+
+    setOverPosition({ row, column, isPossible })
   }
 
   return (
@@ -100,10 +116,10 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
       collisionDetection={pointerWithin}
     >
       <WidgetCustomGrid
-        height={height}
+        height={mediaHeight}
         mediaWidth={mediaWidth}
         overStatus={overPosition}
-        gridData={gridData}
+        widgetData={widgetData}
       />
       <WidgetCustomToolbox
         collapsed={toolboxCollapsed.value}

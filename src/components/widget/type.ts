@@ -29,3 +29,12 @@ export interface Position {
 export interface OverStatus extends Position {
   isPossible: boolean
 }
+
+export interface ManagerData {
+  id: string
+  width: number
+  height: number
+  row: number
+  column: number
+  preview: ReactNode
+}

@@ -4,46 +4,69 @@ import {
   WIDGET_ROW_SPACING,
   WIDGET_WIDTH,
 } from '@/components/widget/constant'
-import { OverStatus } from '@/components/widget/type'
+import { ManagerData, OverStatus } from '@/components/widget/type'
 import { useDroppable } from '@dnd-kit/core'
-import { Box } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import { colord } from 'colord'
 
 interface WidgetCustomGridProps {
   height: number
   mediaWidth: number
   overStatus: OverStatus | null
-  gridData: boolean[][]
+  widgetData: ManagerData[]
 }
 
 export function WidgetCustomGrid({
   height,
   mediaWidth,
   overStatus: overStatus,
-  gridData,
+  widgetData,
 }: WidgetCustomGridProps) {
   return (
-    <Box
-      display="grid"
-      gridTemplateColumns={`repeat(${mediaWidth}, ${WIDGET_WIDTH}px)`}
-      gridTemplateRows={`repeat(${height}, ${WIDGET_HEIGHT}px)`}
-      rowGap={`${WIDGET_ROW_SPACING}px`}
-      columnGap={`${WIDGET_COLUMN_SPACING}px`}
-      mb="400px"
-    >
-      {Array.from({ length: height }).map((_, row) =>
-        Array.from({ length: mediaWidth }).map((_, column) => (
-          <WidgetCustomGridCell
-            key={row * mediaWidth + column}
-            row={row}
-            column={column}
-            isOver={overStatus?.row === row && overStatus?.column === column}
-            isPossible={!!overStatus?.isPossible}
-            isFilled={gridData[row][column]}
-          />
-        ))
-      )}
-    </Box>
+    <Stack position="relative" width={1} height={1} mb={40}>
+      <Box
+        display="grid"
+        position="absolute"
+        left={0}
+        top={0}
+        gridTemplateColumns={`repeat(${mediaWidth}, ${WIDGET_WIDTH}px)`}
+        gridTemplateRows={`repeat(${height}, ${WIDGET_HEIGHT}px)`}
+        rowGap={`${WIDGET_ROW_SPACING}px`}
+        columnGap={`${WIDGET_COLUMN_SPACING}px`}
+      >
+        {widgetData.map((widget) => (
+          <Box
+            key={`${widget.id}-${widget.row}-${widget.column}`}
+            gridRow={widget.row + 1}
+            gridColumn={widget.column + 1}
+            width={widget.width}
+            height={widget.height}
+          >
+            {widget.preview}
+          </Box>
+        ))}
+      </Box>
+
+      <Box
+        display="grid"
+        gridTemplateColumns={`repeat(${mediaWidth}, ${WIDGET_WIDTH}px)`}
+        gridTemplateRows={`repeat(${height}, ${WIDGET_HEIGHT}px)`}
+        rowGap={`${WIDGET_ROW_SPACING}px`}
+        columnGap={`${WIDGET_COLUMN_SPACING}px`}
+      >
+        {Array.from({ length: height }).map((_, row) =>
+          Array.from({ length: mediaWidth }).map((_, column) => (
+            <WidgetCustomGridCell
+              key={`GRID-CELL-${row * mediaWidth + column}`}
+              row={row}
+              column={column}
+              isOver={overStatus?.row === row && overStatus?.column === column}
+              isPossible={!!overStatus?.isPossible}
+            />
+          ))
+        )}
+      </Box>
+    </Stack>
   )
 }
 
@@ -52,16 +75,9 @@ interface WidgetCustomGridCellProps {
   column: number
   isOver: boolean
   isPossible: boolean
-  isFilled: boolean
 }
 
-function WidgetCustomGridCell({
-  row,
-  column,
-  isOver,
-  isPossible,
-  isFilled,
-}: WidgetCustomGridCellProps) {
+function WidgetCustomGridCell({ row, column, isOver, isPossible }: WidgetCustomGridCellProps) {
   const { setNodeRef } = useDroppable({
     id: `widget-grid-cell-${row}-${column}`,
     data: { row, column },
@@ -78,11 +94,6 @@ function WidgetCustomGridCell({
             ? (theme) => theme.palette.common.white
             : (theme) => theme.palette.error.main
           : (theme) => colord(theme.palette.border.main).alpha(0.2).toHex()
-      }
-      bgcolor={
-        isFilled
-          ? (theme) => colord(theme.palette.background.dark).alpha(0.3).toHex()
-          : 'transparent'
       }
       sx={{
         borderStyle: isOver ? 'solid' : 'dashed',
