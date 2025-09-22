@@ -1,4 +1,4 @@
-import { Box, IconButton, Stack, Typography } from '@mui/material'
+import { Box, Icon, IconButton, Stack, Typography } from '@mui/material'
 
 import { QuestHistoryWidget, QuestStreakWidget } from '@/views/history/widgets'
 import { InterestGraphWidget } from '@/views/interest/widgets'
@@ -14,7 +14,8 @@ import { useMemo, useState } from 'react'
 import { ScrollContainer } from '@/components/scrollbar'
 import { Button } from '@/components/button'
 import { WidgetData } from '@/components/widget/type'
-import { colord } from 'colord'
+import { WidgetCustomItem } from '@/components/widget/widget-custom/widget-custom-item'
+import { Iconify } from '@/components/iconify'
 
 const WIDGETS = [
   QuestHistoryWidget,
@@ -28,13 +29,17 @@ const WIDGETS = [
   DailyQuestWidget,
 ] as const
 
-export function WidgetCustomList() {
+interface WidgetCustomToolboxProps {
+  collapsed: boolean
+  toggleCollapsed: () => void
+}
+
+export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustomToolboxProps) {
   const [selectedCategoryIdx, setSelectedCategoryIdx] = useState<number>(0)
 
   return (
     <Stack
       width={1}
-      height={400}
       position="fixed"
       left={0}
       right={0}
@@ -44,39 +49,68 @@ export function WidgetCustomList() {
       alignItems="center"
     >
       <Stack
-        borderRadius={1}
         width={1}
         maxWidth={1100}
-        border={1}
-        borderColor={(theme) => theme.palette.border.main}
-        bgcolor={(theme) => theme.palette.background.main}
-        overflow="hidden"
-        divider={
-          <Box width={1} borderBottom={1} borderColor={(theme) => theme.palette.border.main} />
-        }
+        height={400}
+        alignItems="center"
+        sx={{
+          transform: collapsed ? 'translateY(calc(100% - 30px))' : 'translateY(0)',
+          transition: 'transform 0.3s ease-in-out',
+        }}
       >
-        <Stack direction="row" overflow="hidden" flex={1}>
-          <WidgetCustomListCategory
-            selectedIdx={selectedCategoryIdx}
-            onSelected={setSelectedCategoryIdx}
-          />
-          <WidgetCustomListWidgets selectedIdx={selectedCategoryIdx} />
-        </Stack>
-        <Stack p={1} justifyContent="flex-end" spacing={1} direction="row">
-          <Button.Plain label="취소" />
-          <Button.Primary label="완료" />
+        <Box
+          border={1}
+          borderBottom={0}
+          borderRadius={2}
+          borderColor={(theme) => theme.palette.border.main}
+          bgcolor={(theme) => theme.palette.background.main}
+          sx={{
+            borderBottomLeftRadius: 0,
+            borderBottomRightRadius: 0,
+          }}
+          overflow="hidden"
+        >
+          <IconButton onClick={toggleCollapsed} sx={{ width: 1, borderRadius: 0, px: 10, py: 0.5 }}>
+            <Iconify icon={collapsed ? 'mdi:chevron-up' : 'mdi:chevron-down'} />
+          </IconButton>
+        </Box>
+        <Stack
+          borderRadius={1}
+          width={1}
+          border={1}
+          borderColor={(theme) => theme.palette.border.main}
+          bgcolor={(theme) => theme.palette.background.main}
+          overflow="hidden"
+          divider={
+            <Box width={1} borderBottom={1} borderColor={(theme) => theme.palette.border.main} />
+          }
+        >
+          <Stack direction="row" overflow="hidden" flex={1}>
+            <WidgetCustomToolboxCategory
+              selectedIdx={selectedCategoryIdx}
+              onSelected={setSelectedCategoryIdx}
+            />
+            <WidgetCustomToolboxWidgets selectedIdx={selectedCategoryIdx} />
+          </Stack>
+          <Stack p={1} justifyContent="flex-end" spacing={1} direction="row">
+            <Button.Plain label="취소" />
+            <Button.Primary label="완료" />
+          </Stack>
         </Stack>
       </Stack>
     </Stack>
   )
 }
 
-interface WidgetCustomListCategoryProps {
+interface WidgetCustomToolboxCategoryProps {
   selectedIdx: number
   onSelected: (idx: number) => void
 }
 
-function WidgetCustomListCategory({ selectedIdx, onSelected }: WidgetCustomListCategoryProps) {
+function WidgetCustomToolboxCategory({
+  selectedIdx,
+  onSelected,
+}: WidgetCustomToolboxCategoryProps) {
   return (
     <ScrollContainer
       sx={{
@@ -120,11 +154,11 @@ function WidgetCustomListCategory({ selectedIdx, onSelected }: WidgetCustomListC
   )
 }
 
-interface WidgetCustomListWidgetsProps {
+interface WidgetCustomToolboxWidgetsProps {
   selectedIdx: number
 }
 
-function WidgetCustomListWidgets({ selectedIdx }: WidgetCustomListWidgetsProps) {
+function WidgetCustomToolboxWidgets({ selectedIdx }: WidgetCustomToolboxWidgetsProps) {
   const widgets = useMemo(() => {
     const result: WidgetData['widgets'][keyof WidgetData['widgets']][] = []
     for (const widget of Object.values(WIDGETS[selectedIdx].widgets)) {
@@ -137,36 +171,14 @@ function WidgetCustomListWidgets({ selectedIdx }: WidgetCustomListWidgetsProps) 
     <ScrollContainer sx={{ p: 1 }}>
       <Stack flexWrap="wrap" gap={1} direction="row">
         {widgets.map((widget, i) => (
-          <WidgetPreviewItem key={i} width={widget.width} height={widget.height} />
+          <WidgetCustomItem
+            key={i}
+            id={WIDGETS[selectedIdx].id}
+            width={widget.width}
+            height={widget.height}
+          />
         ))}
       </Stack>
     </ScrollContainer>
-  )
-}
-
-const PREVIEW_WIDTH = 200
-const PREVIEW_HEIGHT = 200
-
-interface WidgetPreviewItemProps {
-  width: number
-  height: number
-}
-
-function WidgetPreviewItem({ width, height }: WidgetPreviewItemProps) {
-  return (
-    <Box
-      borderRadius={1}
-      width={PREVIEW_WIDTH * width}
-      height={PREVIEW_HEIGHT * height}
-      border={1}
-      borderColor={(theme) => theme.palette.border.main}
-      bgcolor={(theme) => colord(theme.palette.background.dark).alpha(0.5).toHex()}
-      sx={{
-        cursor: 'pointer',
-        '&:hover': {
-          bgcolor: (theme) => colord(theme.palette.background.dark).alpha(0.8).toHex(),
-        },
-      }}
-    ></Box>
   )
 }

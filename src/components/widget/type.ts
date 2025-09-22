@@ -12,3 +12,18 @@ export interface WidgetData {
     }
   >
 }
+
+export interface ActiveWidget {
+  id: string
+  width: number
+  height: number
+}
+
+export interface Position {
+  row: number
+  column: number
+}
+
+export interface OverStatus extends Position {
+  isPossible: boolean
+}

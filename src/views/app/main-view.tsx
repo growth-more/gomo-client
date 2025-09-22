@@ -1,6 +1,7 @@
 import { Box, Button, Stack, SxProps, Theme, useMediaQuery } from '@mui/material'
 import { OnlyAuth } from '@/auth/guard'
-import { WidgetCustomGrid, WidgetCustomList, WidgetManager } from '@/components/widget'
+import { WidgetManager } from '@/components/widget'
+import { WidgetCustomManager } from '@/components/widget/widget-custom'
 import { useBoolean } from '@/hooks'
 import { useMemo } from 'react'
 
@@ -42,20 +43,16 @@ export function MainView() {
 
       <Stack width={1} alignItems="center" px={5} py={15}>
         {customMode.value ? (
-          <WidgetCustomGrid mediaWidth={mediaWidth} />
+          <WidgetCustomManager mediaWidth={mediaWidth} />
         ) : (
-          <>
+          <Stack spacing={10} alignItems="center">
             <WidgetManager mediaWidth={mediaWidth} />
-            <Button
-              sx={{ width: 150, p: 1, borderRadius: 100, mt: 10 }}
-              onClick={customButtonHandler}
-            >
+            <Button sx={{ width: 150, p: 1, borderRadius: 100 }} onClick={customButtonHandler}>
               {customMode.value ? '완료' : '위젯 편집'}
             </Button>
-          </>
+          </Stack>
         )}
       </Stack>
-      {customMode.value && <WidgetCustomList />}
     </OnlyAuth>
   )
 }
