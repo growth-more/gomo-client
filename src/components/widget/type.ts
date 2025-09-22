@@ -9,6 +9,7 @@ export interface WidgetData {
       width: number
       height: number
       component: () => ReactNode
+      preview: () => ReactNode
     }
   >
 }

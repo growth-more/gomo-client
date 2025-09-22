@@ -1,9 +1,4 @@
-import {
-  WIDGET_COLUMN_SPACING,
-  WIDGET_HEIGHT,
-  WIDGET_ROW_SPACING,
-  WIDGET_WIDTH,
-} from '@/components/widget/constant'
+import { calculateWidgetHeight, calculateWidgetWidth } from '@/components/widget/utils'
 import { WidgetTitle } from '@/components/widget/widget-title'
 import { Box, Stack, SxProps, Theme } from '@mui/material'
 import { colord } from 'colord'
@@ -32,14 +27,6 @@ export function Widget({
   sx,
   disableTitle = false,
 }: WidgetProps) {
-  const calculateWidgetWidth = (width: number) => {
-    return WIDGET_WIDTH * width + WIDGET_COLUMN_SPACING * (width - 1)
-  }
-
-  const calculateWidgetHeight = (height: number) => {
-    return WIDGET_HEIGHT * height + WIDGET_ROW_SPACING * (height - 1)
-  }
-
   return (
     <Stack
       border={1}

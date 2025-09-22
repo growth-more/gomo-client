@@ -1,4 +1,4 @@
-import { Box, Icon, IconButton, Stack, Typography } from '@mui/material'
+import { Box, IconButton, Stack, Typography } from '@mui/material'
 
 import { QuestHistoryWidget, QuestStreakWidget } from '@/views/history/widgets'
 import { InterestGraphWidget } from '@/views/interest/widgets'
@@ -176,7 +176,9 @@ function WidgetCustomToolboxWidgets({ selectedIdx }: WidgetCustomToolboxWidgetsP
             id={WIDGETS[selectedIdx].id}
             width={widget.width}
             height={widget.height}
-          />
+          >
+            <widget.preview />
+          </WidgetCustomItem>
         ))}
       </Stack>
     </ScrollContainer>

@@ -1,5 +1,6 @@
 import { WidgetData } from '@/components/widget'
 import { InterestGraphWidget1x1 } from '@/views/interest/widgets/interest-graph/interest-graph-widget-1x1'
+import { InterestGraphWidget1x1Preview } from '@/views/interest/widgets/interest-graph/interest-graph-widget-1x1-preview'
 
 export const InterestGraphWidget = {
   id: 'INTEREST_GRAPH_WIDGET',
@@ -9,6 +10,7 @@ export const InterestGraphWidget = {
       width: 1,
       height: 1,
       component: InterestGraphWidget1x1,
+      preview: InterestGraphWidget1x1Preview,
     },
   } as const,
 } satisfies WidgetData

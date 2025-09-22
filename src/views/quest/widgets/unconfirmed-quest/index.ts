@@ -1,6 +1,8 @@
 import { WidgetData } from '@/components/widget'
 import { UnconfirmedQuestWidget1x1 } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x1'
+import { UnconfirmedQuestWidget1x1Preview } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x1-preview'
 import { UnconfirmedQuestWidget1x2 } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x2'
+import { UnconfirmedQuestWidget1x2Preview } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x2-preview'
 
 export const UnconfirmedQuestWidget = {
   id: 'UNCONFIRMED_QUEST_WIDGET',
@@ -10,11 +12,13 @@ export const UnconfirmedQuestWidget = {
       width: 1,
       height: 1,
       component: UnconfirmedQuestWidget1x1,
+      preview: UnconfirmedQuestWidget1x1Preview,
     },
     S1x2: {
       width: 2,
       height: 1,
       component: UnconfirmedQuestWidget1x2,
+      preview: UnconfirmedQuestWidget1x2Preview,
     },
   } as const,
 } satisfies WidgetData

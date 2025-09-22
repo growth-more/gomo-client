@@ -1,5 +1,6 @@
 import { WidgetData } from '@/components/widget'
 import { MyProfileWidget1x1 } from '@/views/profile/widgets/my-profile/my-profile-widget-1x1'
+import { MyProfileWidget1x1Preview } from '@/views/profile/widgets/my-profile/my-profile-widget-1x1-preview'
 
 export const MyProfileWidget = {
   id: 'MY_PROFILE_WIDGET',
@@ -9,6 +10,7 @@ export const MyProfileWidget = {
       width: 1,
       height: 1,
       component: MyProfileWidget1x1,
+      preview: MyProfileWidget1x1Preview,
     },
   } as const,
 } satisfies WidgetData
