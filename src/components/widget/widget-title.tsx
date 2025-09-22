@@ -25,6 +25,7 @@ export function WidgetTitle({ title, subtitle, onTitle, onAdd }: WidgetTitleProp
       <Stack
         p={1}
         flex={1}
+        alignItems="flex-start"
         borderRadius={1.5}
         sx={{
           ':hover': {

@@ -1,4 +1,3 @@
-import { WIDGET_HEIGHT, WIDGET_WIDTH } from '@/components/widget/constant'
 import { ActiveWidget, OverStatus, Position } from '@/components/widget/type'
 import { WidgetCustomGrid } from '@/components/widget/widget-custom/widget-custom-grid'
 import { WidgetCustomToolbox } from '@/components/widget/widget-custom/widget-custom-toolbox'
@@ -12,7 +11,6 @@ import {
   pointerWithin,
 } from '@dnd-kit/core'
 import { Box } from '@mui/material'
-import { colord } from 'colord'
 import _ from 'lodash'
 import { useMemo, useState } from 'react'
 
@@ -66,11 +64,6 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
   }
 
   const dragEndHandler = (e: DragEndEvent) => {
-    // console.group('dragEnd')
-    // console.log(e.active.data.current)
-    // console.log(e.over?.data.current)
-    // console.groupEnd()
-
     setActive(null)
     setOverPosition(null)
     toolboxCollapsed.onFalse()
@@ -119,13 +112,9 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
 
       <DragOverlay>
         {active && (
-          <Box
-            width={WIDGET_WIDTH}
-            height={WIDGET_HEIGHT}
-            bgcolor={(theme) => colord(theme.palette.background.dark).alpha(0.5).toHex()}
-            borderRadius={1}
-            boxShadow="0 5 10px 10px rgba(0, 0, 0, 0.3)"
-          />
+          <Box sx={{ pointerEvents: 'none', userSelect: 'none', opacity: 0.8 }}>
+            {active.preview}
+          </Box>
         )}
       </DragOverlay>
     </DndContext>

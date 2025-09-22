@@ -18,6 +18,7 @@ export interface ActiveWidget {
   id: string
   width: number
   height: number
+  preview: ReactNode
 }
 
 export interface Position {

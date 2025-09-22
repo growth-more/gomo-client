@@ -71,11 +71,11 @@ function WidgetCustomGridCell({
     <Box
       ref={setNodeRef}
       border={3}
-      borderRadius={1}
+      borderRadius={2}
       borderColor={
         isOver
           ? isPossible
-            ? (theme) => theme.palette.border.main
+            ? (theme) => theme.palette.common.white
             : (theme) => theme.palette.error.main
           : (theme) => colord(theme.palette.border.main).alpha(0.2).toHex()
       }

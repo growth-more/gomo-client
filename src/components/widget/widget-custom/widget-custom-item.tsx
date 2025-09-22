@@ -1,7 +1,6 @@
 import { calculateWidgetHeight, calculateWidgetWidth } from '@/components/widget/utils'
 import { useDraggable } from '@dnd-kit/core'
-import { Box, Stack } from '@mui/material'
-import { colord } from 'colord'
+import { Box, IconButton } from '@mui/material'
 import { ReactNode } from 'react'
 
 const PREVIEW_SCALE = 0.5
@@ -17,23 +16,18 @@ interface WidgetCustomItemProps {
 export function WidgetCustomItem({ id, width, height, children }: WidgetCustomItemProps) {
   const { setNodeRef, listeners, attributes } = useDraggable({
     id: `${id}S${height}x${width}`,
-    data: { id, width, height },
+    data: { id, width, height, preview: children },
   })
 
   return (
-    <Stack
+    <IconButton
       ref={setNodeRef}
-      justifyContent="center"
-      alignItems="center"
-      borderRadius={1}
-      width={calculateWidgetWidth(width) * PREVIEW_SCALE + PREVIEW_PADDING}
-      height={calculateWidgetHeight(height) * PREVIEW_SCALE + PREVIEW_PADDING}
-      overflow="hidden"
       sx={{
+        borderRadius: 1,
+        width: calculateWidgetWidth(width) * PREVIEW_SCALE + PREVIEW_PADDING,
+        height: calculateWidgetHeight(height) * PREVIEW_SCALE + PREVIEW_PADDING,
+        overflow: 'hidden',
         cursor: 'pointer',
-        '&:hover': {
-          bgcolor: (theme) => colord(theme.palette.background.dark).alpha(0.8).toHex(),
-        },
       }}
       {...listeners}
       {...attributes}
@@ -41,6 +35,6 @@ export function WidgetCustomItem({ id, width, height, children }: WidgetCustomIt
       <Box sx={{ pointerEvents: 'none', userSelect: 'none', transform: `scale(${PREVIEW_SCALE})` }}>
         {children}
       </Box>
-    </Stack>
+    </IconButton>
   )
 }
