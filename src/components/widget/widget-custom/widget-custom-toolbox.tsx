@@ -16,8 +16,8 @@ interface WidgetCustomToolboxProps {
 export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustomToolboxProps) {
   const [selectedCategoryIdx, setSelectedCategoryIdx] = useState<number>(0)
 
-  const selectedCategory = useMemo(() => {
-    return widgetCategory[selectedCategoryIdx].widgets.flatMap((widget) => widget.sizes)
+  const selectedWidgets = useMemo(() => {
+    return widgetCategory[selectedCategoryIdx].widgets
   }, [selectedCategoryIdx])
 
   return (
@@ -26,7 +26,7 @@ export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustom
       position="fixed"
       left={0}
       right={0}
-      bottom={0}
+      bottom={-370}
       p={2}
       zIndex={1}
       alignItems="center"
@@ -37,7 +37,7 @@ export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustom
         height={400}
         alignItems="center"
         sx={{
-          transform: collapsed ? 'translateY(calc(100% - 30px))' : 'translateY(0)',
+          transform: collapsed ? 'translateY(0px)' : 'translateY(-370px)',
           transition: 'transform 0.3s ease-in-out',
         }}
       >
@@ -74,7 +74,7 @@ export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustom
               selectedIdx={selectedCategoryIdx}
               onSelected={setSelectedCategoryIdx}
             />
-            <WidgetCustomToolboxWidgets widgets={selectedCategory} />
+            <WidgetCustomToolboxWidgets widgets={selectedWidgets} />
           </Stack>
           <Stack p={1} justifyContent="flex-end" spacing={1} direction="row">
             <Button.Plain label="취소" />
@@ -139,18 +139,25 @@ function WidgetCustomToolboxCategory({
 }
 
 interface WidgetCustomToolboxWidgetsProps {
-  widgets: Widget['sizes']
+  widgets: Widget[]
 }
 
 function WidgetCustomToolboxWidgets({ widgets }: WidgetCustomToolboxWidgetsProps) {
   return (
     <ScrollContainer sx={{ p: 1 }}>
-      <Stack flexWrap="wrap" gap={1} direction="row">
-        {widgets.map((widget, i) => (
-          <WidgetCustomItem key={i} id={`${i}`} width={widget.width} height={widget.height}>
-            <widget.preview />
-          </WidgetCustomItem>
-        ))}
+      <Stack flexWrap="wrap" gap={3} direction="row">
+        {widgets.map((widget, i) =>
+          widget.sizes.map((size, j) => (
+            <Stack spacing={0.5} key={`${i}.${j}`}>
+              <WidgetCustomItem widgetId={widget.id} width={size.width} height={size.height}>
+                <size.preview />
+              </WidgetCustomItem>
+              <Typography fontSize={13} fontWeight={400} textAlign="center">
+                {widget.name}
+              </Typography>
+            </Stack>
+          ))
+        )}
       </Stack>
     </ScrollContainer>
   )
