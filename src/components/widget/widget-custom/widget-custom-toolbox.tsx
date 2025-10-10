@@ -1,33 +1,12 @@
 import { Box, IconButton, Stack, Typography } from '@mui/material'
 
-import { QuestHistoryWidget, QuestStreakWidget } from '@/views/history/widgets'
-import { InterestGraphWidget } from '@/views/interest/widgets'
-import { MyProfileWidget } from '@/views/profile/widgets'
-import {
-  ConfirmedQuestWidget,
-  UnconfirmedQuestWidget,
-  WeeklyQuestWidget,
-  MonthlyQuestWidget,
-  DailyQuestWidget,
-} from '@/views/quest/widgets'
 import { useMemo, useState } from 'react'
 import { ScrollContainer } from '@/components/scrollbar'
 import { Button } from '@/components/button'
-import { WidgetData } from '@/components/widget/type'
 import { WidgetCustomItem } from '@/components/widget/widget-custom/widget-custom-item'
 import { Iconify } from '@/components/iconify'
-
-const WIDGETS = [
-  QuestHistoryWidget,
-  QuestStreakWidget,
-  InterestGraphWidget,
-  MyProfileWidget,
-  ConfirmedQuestWidget,
-  UnconfirmedQuestWidget,
-  WeeklyQuestWidget,
-  MonthlyQuestWidget,
-  DailyQuestWidget,
-] as const
+import { widgetCategory } from '@/widgets'
+import { Widget } from '@/components/widget/widget.types'
 
 interface WidgetCustomToolboxProps {
   collapsed: boolean
@@ -36,6 +15,10 @@ interface WidgetCustomToolboxProps {
 
 export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustomToolboxProps) {
   const [selectedCategoryIdx, setSelectedCategoryIdx] = useState<number>(0)
+
+  const selectedCategory = useMemo(() => {
+    return widgetCategory[selectedCategoryIdx].widgets.flatMap((widget) => widget.sizes)
+  }, [selectedCategoryIdx])
 
   return (
     <Stack
@@ -77,6 +60,7 @@ export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustom
         <Stack
           borderRadius={1}
           width={1}
+          height={1}
           border={1}
           borderColor={(theme) => theme.palette.border.main}
           bgcolor={(theme) => theme.palette.background.main}
@@ -90,7 +74,7 @@ export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustom
               selectedIdx={selectedCategoryIdx}
               onSelected={setSelectedCategoryIdx}
             />
-            <WidgetCustomToolboxWidgets selectedIdx={selectedCategoryIdx} />
+            <WidgetCustomToolboxWidgets widgets={selectedCategory} />
           </Stack>
           <Stack p={1} justifyContent="flex-end" spacing={1} direction="row">
             <Button.Plain label="취소" />
@@ -122,7 +106,7 @@ function WidgetCustomToolboxCategory({
       }}
     >
       <Stack spacing={0.5}>
-        {WIDGETS.map((widget, i) => (
+        {widgetCategory.map((category, i) => (
           <IconButton
             key={i}
             onClick={() => onSelected(i)}
@@ -145,7 +129,7 @@ function WidgetCustomToolboxCategory({
                   selectedIdx === i ? theme.palette.common.white : theme.palette.text.primary,
               }}
             >
-              {widget.name}
+              {category.name}
             </Typography>
           </IconButton>
         ))}
@@ -155,28 +139,15 @@ function WidgetCustomToolboxCategory({
 }
 
 interface WidgetCustomToolboxWidgetsProps {
-  selectedIdx: number
+  widgets: Widget['sizes']
 }
 
-function WidgetCustomToolboxWidgets({ selectedIdx }: WidgetCustomToolboxWidgetsProps) {
-  const widgets = useMemo(() => {
-    const result: WidgetData['widgets'][keyof WidgetData['widgets']][] = []
-    for (const widget of Object.values(WIDGETS[selectedIdx].widgets)) {
-      result.push(widget)
-    }
-    return result
-  }, [selectedIdx])
-
+function WidgetCustomToolboxWidgets({ widgets }: WidgetCustomToolboxWidgetsProps) {
   return (
     <ScrollContainer sx={{ p: 1 }}>
       <Stack flexWrap="wrap" gap={1} direction="row">
         {widgets.map((widget, i) => (
-          <WidgetCustomItem
-            key={i}
-            id={WIDGETS[selectedIdx].id}
-            width={widget.width}
-            height={widget.height}
-          >
+          <WidgetCustomItem key={i} id={`${i}`} width={widget.width} height={widget.height}>
             <widget.preview />
           </WidgetCustomItem>
         ))}

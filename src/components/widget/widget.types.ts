@@ -1,8 +1,28 @@
 import { ReactNode } from 'react'
 
+export interface Widget {
+  id: string
+  name: string
+  description?: string
+  sizes: {
+    width: number
+    height: number
+    component: () => ReactNode
+    preview: () => ReactNode
+  }[]
+  render: (width: number, height: number) => ReactNode
+}
+
+export interface WidgetCategory {
+  name: string
+  widgets: Widget[]
+}
+
+// legacy
 export interface WidgetData {
   id: string
   name: string
+  description?: string
   widgets: Record<
     string,
     {
@@ -15,7 +35,7 @@ export interface WidgetData {
 }
 
 export interface ActiveWidget {
-  id: string
+  name: string
   width: number
   height: number
   preview: ReactNode
@@ -32,6 +52,7 @@ export interface OverStatus extends Position {
 
 export interface ManagerData {
   id: string
+  name: string
   width: number
   height: number
   row: number

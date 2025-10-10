@@ -1,4 +1,4 @@
-import { ActiveWidget, ManagerData, OverStatus, Position } from '@/components/widget/type'
+import { ActiveWidget, ManagerData, OverStatus, Position } from '@/components/widget/widget.types'
 import { WidgetCustomGrid } from '@/components/widget/widget-custom/widget-custom-grid'
 import { WidgetCustomToolbox } from '@/components/widget/widget-custom/widget-custom-toolbox'
 import { useBoolean } from '@/hooks'
@@ -19,8 +19,6 @@ interface WidgetCustomManagerProps {
 }
 
 export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
-  // const [meidaHeight, setMediaHeight] = useState(1)
-
   const [active, setActive] = useState<ActiveWidget | null>(null)
   const [overPosition, setOverPosition] = useState<OverStatus | null>(null)
 
@@ -81,7 +79,7 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
       return
     }
 
-    const { id, width, height, preview } = e.active.data.current as ActiveWidget
+    const { name, width, height, preview } = e.active.data.current as ActiveWidget
     const { row, column } = e.over.data.current as Position
     if (checkCollision(row, column, width, height)) {
       return
@@ -89,7 +87,11 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
     if (checkOutOfBound(row, column, width, height)) {
       return
     }
-    setWidgetData((prev) => [...prev, { id, width, height, row, column, preview }])
+    const id = e.active.id as string
+    setWidgetData((prev) => [
+      ...prev.filter((widget) => widget.id !== id),
+      { id, name, width, height, row, column, preview },
+    ])
   }
 
   const dragOverHandler = (e: DragOverEvent) => {

@@ -1,5 +1,5 @@
-export * from './widget'
+export * from './widget-basic'
 export * from './widget-custom/widget-custom-toolbox'
 export * from './widget-custom/widget-custom-grid'
 export * from './widget-manager'
-export type * from './type'
+export type * from './widget.types'

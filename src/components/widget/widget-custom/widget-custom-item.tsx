@@ -16,7 +16,7 @@ interface WidgetCustomItemProps {
 export function WidgetCustomItem({ id, width, height, children }: WidgetCustomItemProps) {
   const { setNodeRef, listeners, attributes } = useDraggable({
     id: `${id}S${height}x${width}`,
-    data: { id, width, height, preview: children },
+    data: { id: `${id}S${height}x${width}`, name: id, width, height, preview: children },
   })
 
   return (

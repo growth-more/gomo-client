@@ -4,7 +4,8 @@ import {
   WIDGET_ROW_SPACING,
   WIDGET_WIDTH,
 } from '@/components/widget/constant'
-import { ManagerData, OverStatus } from '@/components/widget/type'
+import { ManagerData, OverStatus } from '@/components/widget/widget.types'
+import { WidgetCustomGridItem } from '@/components/widget/widget-custom'
 import { useDroppable } from '@dnd-kit/core'
 import { Box, Stack } from '@mui/material'
 import { colord } from 'colord'
@@ -19,7 +20,7 @@ interface WidgetCustomGridProps {
 export function WidgetCustomGrid({
   height,
   mediaWidth,
-  overStatus: overStatus,
+  overStatus,
   widgetData,
 }: WidgetCustomGridProps) {
   return (
@@ -34,16 +35,12 @@ export function WidgetCustomGrid({
         rowGap={`${WIDGET_ROW_SPACING}px`}
         columnGap={`${WIDGET_COLUMN_SPACING}px`}
       >
-        {widgetData.map((widget) => (
-          <Box
-            key={`${widget.id}-${widget.row}-${widget.column}`}
-            gridRow={widget.row + 1}
-            gridColumn={widget.column + 1}
-            width={widget.width}
-            height={widget.height}
-          >
-            {widget.preview}
-          </Box>
+        {widgetData.map((widget, i) => (
+          <WidgetCustomGridItem
+            // key={`${widget.id}-${widget.row}-${widget.column}`}
+            key={i}
+            widgetData={widget}
+          />
         ))}
       </Box>
 
