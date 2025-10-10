@@ -15,6 +15,7 @@ interface WidgetCustomGridProps {
   mediaWidth: number
   overStatus: OverStatus | null
   widgetData: ManagerData[]
+  removeWidget: (id: string) => void
 }
 
 export function WidgetCustomGrid({
@@ -22,6 +23,7 @@ export function WidgetCustomGrid({
   mediaWidth,
   overStatus,
   widgetData,
+  removeWidget,
 }: WidgetCustomGridProps) {
   return (
     <Stack position="relative" width={1} height={1} mb={40}>
@@ -36,11 +38,7 @@ export function WidgetCustomGrid({
         columnGap={`${WIDGET_COLUMN_SPACING}px`}
       >
         {widgetData.map((widget, i) => (
-          <WidgetCustomGridItem
-            // key={`${widget.id}-${widget.row}-${widget.column}`}
-            key={i}
-            widgetData={widget}
-          />
+          <WidgetCustomGridItem key={i} widgetData={widget} removeWidget={removeWidget} />
         ))}
       </Box>
 

@@ -50,6 +50,10 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
     return grid
   }, [widgetData, mediaHeight, mediaWidth])
 
+  const removeWidget = (id: string) => {
+    setWidgetData((prev) => prev.filter((widget) => widget.id !== id))
+  }
+
   const checkCollision = (row: number, column: number, width: number, height: number) => {
     for (let r = row; r < row + height; r++) {
       for (let c = column; c < column + width; c++) {
@@ -121,6 +125,7 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
         mediaWidth={mediaWidth}
         overStatus={overPosition}
         widgetData={widgetData}
+        removeWidget={removeWidget}
       />
       <WidgetCustomToolbox
         collapsed={toolboxCollapsed.value}
