@@ -79,7 +79,7 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
       return
     }
 
-    const { name, width, height, preview } = e.active.data.current as ActiveWidget
+    const { id, widgetId, width, height, preview } = e.active.data.current as ActiveWidget
     const { row, column } = e.over.data.current as Position
     if (checkCollision(row, column, width, height)) {
       return
@@ -87,10 +87,9 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
     if (checkOutOfBound(row, column, width, height)) {
       return
     }
-    const id = e.active.id as string
     setWidgetData((prev) => [
       ...prev.filter((widget) => widget.id !== id),
-      { id, name, width, height, row, column, preview },
+      { id, widgetId, width, height, row, column, preview },
     ])
   }
 

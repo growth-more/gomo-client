@@ -9,10 +9,10 @@ interface WidgetCustomGridItemProps {
 
 export function WidgetCustomGridItem({ widgetData }: WidgetCustomGridItemProps) {
   const { setNodeRef, listeners, attributes } = useDraggable({
-    id: `${widgetData.name}S${widgetData.height}x${widgetData.width}`,
+    id: widgetData.id,
     data: {
       id: widgetData.id,
-      name: widgetData.name,
+      widgetId: widgetData.widgetId,
       width: widgetData.width,
       height: widgetData.height,
       preview: widgetData.preview,

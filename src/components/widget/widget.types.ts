@@ -35,7 +35,8 @@ export interface WidgetData {
 }
 
 export interface ActiveWidget {
-  name: string
+  id: string
+  widgetId: string
   width: number
   height: number
   preview: ReactNode
@@ -52,7 +53,7 @@ export interface OverStatus extends Position {
 
 export interface ManagerData {
   id: string
-  name: string
+  widgetId: string
   width: number
   height: number
   row: number
