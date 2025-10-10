@@ -21,9 +21,10 @@ interface WidgetCustomManagerProps {
 export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
   const [active, setActive] = useState<ActiveWidget | null>(null)
   const [overPosition, setOverPosition] = useState<OverStatus | null>(null)
-
   const [widgetData, setWidgetData] = useState<ManagerData[]>([])
+
   const toolboxCollapsed = useBoolean()
+  const toolboxCollapsedMemory = useBoolean()
 
   const mediaHeight = useMemo(() => {
     const max = _(widgetData)
@@ -71,13 +72,17 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
 
   const dragStartHandler = (e: DragStartEvent) => {
     setActive(e.active.data.current as ActiveWidget)
+    toolboxCollapsedMemory.setValue(toolboxCollapsed.value)
     toolboxCollapsed.onTrue()
   }
 
   const dragEndHandler = (e: DragEndEvent) => {
     setActive(null)
     setOverPosition(null)
-    toolboxCollapsed.onFalse()
+
+    if (!toolboxCollapsedMemory.value) {
+      toolboxCollapsed.onFalse()
+    }
 
     if (!e.over) {
       return
