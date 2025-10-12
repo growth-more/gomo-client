@@ -9,11 +9,20 @@ import { widgetCategory } from '@/widgets'
 import { Widget } from '@/components/widget/widget.types'
 
 interface WidgetCustomToolboxProps {
+  mediaWidth: number
+  selectedWidth: number
+  setSelectedWidth: (width: number) => void
   collapsed: boolean
   toggleCollapsed: () => void
 }
 
-export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustomToolboxProps) {
+export function WidgetCustomToolbox({
+  mediaWidth,
+  selectedWidth,
+  setSelectedWidth,
+  collapsed,
+  toggleCollapsed,
+}: WidgetCustomToolboxProps) {
   const [selectedCategoryIdx, setSelectedCategoryIdx] = useState<number>(0)
 
   const selectedWidgets = useMemo(() => {
@@ -76,12 +85,66 @@ export function WidgetCustomToolbox({ collapsed, toggleCollapsed }: WidgetCustom
             />
             <WidgetCustomToolboxWidgets widgets={selectedWidgets} />
           </Stack>
-          <Stack p={1} justifyContent="flex-end" spacing={1} direction="row">
-            <Button.Plain label="취소" />
-            <Button.Primary label="완료" />
+          <Stack p={1} justifyContent="space-between" spacing={1} direction="row">
+            <WidgetCustomWidthSelector
+              mediaWidth={mediaWidth}
+              selectedWidth={selectedWidth}
+              onSelected={setSelectedWidth}
+            />
+            <Stack direction="row" spacing={1}>
+              <Button.Plain label="취소" />
+              <Button.Primary label="완료" />
+            </Stack>
           </Stack>
         </Stack>
       </Stack>
+    </Stack>
+  )
+}
+
+interface WidgetCustomWidthSelectorProps {
+  mediaWidth: number
+  selectedWidth: number
+  onSelected: (width: number) => void
+}
+
+function WidgetCustomWidthSelector({
+  mediaWidth,
+  selectedWidth,
+  onSelected,
+}: WidgetCustomWidthSelectorProps) {
+  return (
+    <Stack
+      direction="row"
+      p={0.5}
+      spacing={0.5}
+      border={1}
+      borderRadius={1}
+      borderColor={(theme) => theme.palette.border.main}
+    >
+      <Button.Selected
+        label="작은 화면"
+        onClick={() => onSelected(1)}
+        selected={selectedWidth === 1}
+        sx={{ px: 1, py: 0.5 }}
+        typoProps={{ textAlign: 'center' }}
+      />
+      <Button.Selected
+        label="중간 화면"
+        onClick={() => onSelected(2)}
+        selected={selectedWidth === 2}
+        sx={{ px: 1, py: 0.5 }}
+        typoProps={{ textAlign: 'center' }}
+        disabled={mediaWidth < 2}
+      />
+      <Button.Selected
+        label="큰 화면"
+        onClick={() => onSelected(3)}
+        selected={selectedWidth === 3}
+        sx={{ px: 1, py: 0.5 }}
+        typoProps={{ textAlign: 'center' }}
+        disabled={mediaWidth < 3}
+      />
     </Stack>
   )
 }
@@ -107,31 +170,12 @@ function WidgetCustomToolboxCategory({
     >
       <Stack spacing={0.5}>
         {widgetCategory.map((category, i) => (
-          <IconButton
+          <Button.Selected
             key={i}
+            label={category.name}
             onClick={() => onSelected(i)}
-            sx={{
-              p: 1,
-              borderRadius: 1,
-              bgcolor: selectedIdx === i ? 'primary.main' : undefined,
-              '&:hover': {
-                bgcolor: selectedIdx === i ? 'primary.main' : undefined,
-              },
-            }}
-          >
-            <Typography
-              fontSize={13}
-              fontWeight={400}
-              textAlign="left"
-              width={1}
-              sx={{
-                color: (theme) =>
-                  selectedIdx === i ? theme.palette.common.white : theme.palette.text.primary,
-              }}
-            >
-              {category.name}
-            </Typography>
-          </IconButton>
+            selected={selectedIdx === i}
+          />
         ))}
       </Stack>
     </ScrollContainer>
