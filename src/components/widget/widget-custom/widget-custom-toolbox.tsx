@@ -14,6 +14,8 @@ interface WidgetCustomToolboxProps {
   setSelectedWidth: (width: number) => void
   collapsed: boolean
   toggleCollapsed: () => void
+  onSave?: () => void
+  onCancel?: () => void
 }
 
 export function WidgetCustomToolbox({
@@ -22,6 +24,8 @@ export function WidgetCustomToolbox({
   setSelectedWidth,
   collapsed,
   toggleCollapsed,
+  onSave,
+  onCancel,
 }: WidgetCustomToolboxProps) {
   const [selectedCategoryIdx, setSelectedCategoryIdx] = useState<number>(0)
 
@@ -92,8 +96,8 @@ export function WidgetCustomToolbox({
               onSelected={setSelectedWidth}
             />
             <Stack direction="row" spacing={1}>
-              <Button.Plain label="취소" />
-              <Button.Primary label="완료" />
+              <Button.Plain label="돌아가기" onClick={onCancel} />
+              <Button.Primary label="저장하기" onClick={onSave} />
             </Stack>
           </Stack>
         </Stack>

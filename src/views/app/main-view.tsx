@@ -1,9 +1,11 @@
-import { Box, Button, Stack, SxProps, Theme, useMediaQuery } from '@mui/material'
+import { Box, Button, Stack, SxProps, Theme, Typography, useMediaQuery } from '@mui/material'
 import { OnlyAuth } from '@/auth/guard'
 import { WidgetManager } from '@/components/widget'
 import { WidgetCustomManager } from '@/components/widget/widget-custom'
 import { useBoolean } from '@/hooks'
 import { useMemo } from 'react'
+import { useModalStore } from '@/stores/use-modal-store'
+import { DANGER_DIALOG_ID, DangerDialog } from '@/components/modal'
 
 const backgroundSx: SxProps<Theme> = {
   backgroundImage: 'url("/img/bg.jpg")',
@@ -13,6 +15,8 @@ const backgroundSx: SxProps<Theme> = {
 }
 
 export function MainView() {
+  const { addModal } = useModalStore()
+
   const x3 = useMediaQuery('(min-width: 1210px)')
   const x2 = useMediaQuery('(min-width: 820px)')
 
@@ -28,13 +32,20 @@ export function MainView() {
 
   const customMode = useBoolean()
 
-  const customButtonHandler = () => {
-    if (customMode.value) {
-      // save api
-      customMode.onFalse()
-      return
-    }
-    customMode.onTrue()
+  const customSaveHandler = () => {
+    // customMode.onFalse()
+    return
+  }
+
+  const cancelHandler = () => {
+    addModal(
+      DANGER_DIALOG_ID,
+      <DangerDialog onSuccess={customMode.onFalse} successColor="error">
+        <Typography fontSize={15} fontWeight={400}>
+          위젯 편집 내용이 저장되지 않습니다. 정말 돌아가시겠습니까?
+        </Typography>
+      </DangerDialog>
+    )
   }
 
   return (
@@ -43,12 +54,16 @@ export function MainView() {
 
       <Stack width={1} alignItems="center" px={5} py={15}>
         {customMode.value ? (
-          <WidgetCustomManager mediaWidth={mediaWidth} />
+          <WidgetCustomManager
+            mediaWidth={mediaWidth}
+            onSave={customSaveHandler}
+            onCancel={cancelHandler}
+          />
         ) : (
           <Stack spacing={10} alignItems="center">
             <WidgetManager mediaWidth={mediaWidth} />
-            <Button sx={{ width: 150, p: 1, borderRadius: 100 }} onClick={customButtonHandler}>
-              {customMode.value ? '완료' : '위젯 편집'}
+            <Button sx={{ width: 150, p: 1, borderRadius: 100 }} onClick={customMode.onTrue}>
+              위젯 편집
             </Button>
           </Stack>
         )}

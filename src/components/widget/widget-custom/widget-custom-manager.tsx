@@ -1,6 +1,6 @@
 import { WidgetCustomGrid } from '@/components/widget/widget-custom'
 import { WidgetCustomToolbox } from '@/components/widget/widget-custom/widget-custom-toolbox'
-import { ActiveWidget, ManagerData } from '@/components/widget/widget.types'
+import { ActiveWidget, ManagerData, WidgetSnapshot } from '@/components/widget/widget.types'
 import { useBoolean } from '@/hooks'
 import { DndContext, DragOverlay, DragStartEvent, pointerWithin } from '@dnd-kit/core'
 import { Box, Stack } from '@mui/material'
@@ -8,9 +8,11 @@ import { useEffect, useMemo, useState } from 'react'
 
 interface WidgetCustomManagerProps {
   mediaWidth: number
+  onSave?: () => void
+  onCancel?: () => void
 }
 
-export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
+export function WidgetCustomManager({ mediaWidth, onSave, onCancel }: WidgetCustomManagerProps) {
   const [selectedWidth, setSelectedWidth] = useState<number>(mediaWidth)
   const [active, setActive] = useState<ActiveWidget | null>(null)
 
@@ -32,6 +34,35 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
     if (!toolboxCollapsedMemory.value) {
       toolboxCollapsed.onFalse()
     }
+  }
+
+  const saveHandler = () => {
+    const data: WidgetSnapshot = {
+      mediaWidth1: widgetx1.map((widget) => ({
+        id: widget.id,
+        width: widget.width,
+        height: widget.height,
+        row: widget.row,
+        column: widget.column,
+      })),
+      mediaWidth2: widgetx2.map((widget) => ({
+        id: widget.id,
+        width: widget.width,
+        height: widget.height,
+        row: widget.row,
+        column: widget.column,
+      })),
+      mediaWidth3: widgetx3.map((widget) => ({
+        id: widget.id,
+        width: widget.width,
+        height: widget.height,
+        row: widget.row,
+        column: widget.column,
+      })),
+    }
+    console.log(data)
+    console.log(JSON.stringify(data))
+    onSave?.()
   }
 
   useEffect(() => {
@@ -63,6 +94,8 @@ export function WidgetCustomManager({ mediaWidth }: WidgetCustomManagerProps) {
         setSelectedWidth={setSelectedWidth}
         collapsed={toolboxCollapsed.value}
         toggleCollapsed={toolboxCollapsed.toggle}
+        onSave={saveHandler}
+        onCancel={onCancel}
       />
       <DragOverlay>
         {active && (

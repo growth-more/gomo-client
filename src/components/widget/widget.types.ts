@@ -60,3 +60,17 @@ export interface ManagerData {
   column: number
   preview: ReactNode
 }
+
+export interface WidgetApiData {
+  id: string
+  width: number
+  height: number
+  row: number
+  column: number
+}
+
+export interface WidgetSnapshot {
+  mediaWidth1: WidgetApiData[]
+  mediaWidth2: WidgetApiData[]
+  mediaWidth3: WidgetApiData[]
+}
