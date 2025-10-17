@@ -1,67 +1,60 @@
-import { QuestHistoryWidget, QuestStreakWidget } from '@/views/history/widgets'
-import { InterestGraphWidget } from '@/views/interest/widgets'
-import { MyProfileWidget } from '@/views/profile/widgets'
+import { useGetWidgetSnapshot } from '@/api/hooks'
 import {
-  ConfirmedQuestWidget,
-  DailyQuestWidget,
-  MonthlyQuestWidget,
-  UnconfirmedQuestWidget,
-  WeeklyQuestWidget,
-} from '@/views/quest/widgets'
+  WIDGET_COLUMN_SPACING,
+  WIDGET_HEIGHT,
+  WIDGET_ROW_SPACING,
+  WIDGET_WIDTH,
+} from '@/components/widget/constant'
+import { calculateWidgetHeight, calculateWidgetWidth, getWidget } from '@/components/widget/utils'
 
 import { Box } from '@mui/material'
+import _ from 'lodash'
+import { useMemo } from 'react'
 
 interface WidgetManagerProps {
   mediaWidth: number
 }
 
 export function WidgetManager({ mediaWidth }: WidgetManagerProps) {
-  if (mediaWidth === 3) {
+  const { snapshot } = useGetWidgetSnapshot()
+
+  const widgetData = useMemo(() => {
+    if (mediaWidth === 1) {
+      return snapshot.mediaWidth1
+    }
+    if (mediaWidth === 2) {
+      return snapshot.mediaWidth2
+    }
+    return snapshot.mediaWidth3
+  }, [snapshot, mediaWidth])
+
+  const mediaHeight = useMemo(() => {
     return (
-      <Box display="flex" gap="40px" flexWrap="wrap" width="1130px">
-        <MyProfileWidget.widgets.S1x1.component />
-        <ConfirmedQuestWidget.widgets.S1x2.component />
-
-        <UnconfirmedQuestWidget.widgets.S1x2.component />
-        <InterestGraphWidget.widgets.S1x1.component />
-
-        <QuestStreakWidget.widgets.S1x3.component />
-
-        <DailyQuestWidget.widgets.S1x1.component />
-        <WeeklyQuestWidget.widgets.S1x1.component />
-        <MonthlyQuestWidget.widgets.S1x1.component />
-      </Box>
+      _(widgetData)
+        .map((widget) => widget.row + widget.height)
+        .max() ?? 0
     )
-  }
-
-  if (mediaWidth === 2) {
-    return (
-      <Box display="flex" gap="40px" flexWrap="wrap" width="740px">
-        <MyProfileWidget.widgets.S1x1.component />
-        <ConfirmedQuestWidget.widgets.S1x1.component />
-
-        <UnconfirmedQuestWidget.widgets.S1x2.component />
-
-        <QuestHistoryWidget.widgets.S1x1.component />
-        <InterestGraphWidget.widgets.S1x1.component />
-
-        <DailyQuestWidget.widgets.S1x2.component />
-        <WeeklyQuestWidget.widgets.S1x1.component />
-        <MonthlyQuestWidget.widgets.S1x1.component />
-      </Box>
-    )
-  }
+  }, [widgetData])
 
   return (
-    <Box display="flex" gap="40px" flexWrap="wrap" width="350px">
-      <MyProfileWidget.widgets.S1x1.component />
-      <ConfirmedQuestWidget.widgets.S1x1.component />
-      <UnconfirmedQuestWidget.widgets.S1x1.component />
-      <QuestHistoryWidget.widgets.S1x1.component />
-      <InterestGraphWidget.widgets.S1x1.component />
-      <DailyQuestWidget.widgets.S1x1.component />
-      <WeeklyQuestWidget.widgets.S1x1.component />
-      <MonthlyQuestWidget.widgets.S1x1.component />
+    <Box
+      display="grid"
+      gridTemplateColumns={`repeat(${mediaWidth}, ${WIDGET_WIDTH}px)`}
+      gridTemplateRows={`repeat(${mediaHeight}, ${WIDGET_HEIGHT}px)`}
+      rowGap={`${WIDGET_ROW_SPACING}px`}
+      columnGap={`${WIDGET_COLUMN_SPACING}px`}
+    >
+      {widgetData.map((widget) => (
+        <Box
+          key={widget.id}
+          gridRow={widget.row + 1}
+          gridColumn={widget.column + 1}
+          width={calculateWidgetWidth(widget.width)}
+          height={calculateWidgetHeight(widget.height)}
+        >
+          {getWidget(widget.id, widget.width, widget.height)}
+        </Box>
+      ))}
     </Box>
   )
 }

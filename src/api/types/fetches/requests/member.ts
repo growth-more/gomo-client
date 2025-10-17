@@ -6,6 +6,7 @@ import {
   UpdatePasswordRequest,
   UpdateProfileImageRequest,
   UpdateQuestPropertyRequest,
+  UpdateWidgetRequest,
 } from '@/api/types'
 
 // ===================================
@@ -49,6 +50,10 @@ interface UpdateProfileImageFetchRequest {
   body: UpdateProfileImageRequest
 }
 
+interface UpdateWidgetFetchRequest {
+  body: UpdateWidgetRequest
+}
+
 // ===================================
 // QUEST SETTING
 // ===================================
@@ -66,5 +71,6 @@ export type {
   UpdatePasswordFetchRequest,
   UpdateProfileImageFetchRequest,
   UpdateQuestPropertyFetchRequest,
+  UpdateWidgetFetchRequest,
   VerifyEmailCodeFetchRequest,
 }

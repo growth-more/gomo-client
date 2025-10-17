@@ -5,6 +5,7 @@ import {
   UpdatePasswordRequest,
   UpdateProfileImageRequest,
   UpdateQuestPropertyRequest,
+  UpdateWidgetRequest,
 } from '@/api/types'
 import { mock } from '@/msw/data'
 import { delay, http, HttpResponse } from 'msw'
@@ -114,5 +115,15 @@ export const member = [
     //   },
     //   { status: 422 }
     // )
+  }),
+
+  http.get<never, never>(endpoints.member.getWidget, async () => {
+    await delay(1000)
+    return HttpResponse.json(mock.member.widget, { status: 200 })
+  }),
+
+  http.post<never, UpdateWidgetRequest>(endpoints.member.updateWidget, async () => {
+    await delay(1000)
+    return new HttpResponse(null, { status: 204 })
   }),
 ]

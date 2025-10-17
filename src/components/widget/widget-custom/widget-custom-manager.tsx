@@ -39,21 +39,21 @@ export function WidgetCustomManager({ mediaWidth, onSave, onCancel }: WidgetCust
   const saveHandler = () => {
     const data: WidgetSnapshot = {
       mediaWidth1: widgetx1.map((widget) => ({
-        id: widget.id,
+        id: widget.widgetId,
         width: widget.width,
         height: widget.height,
         row: widget.row,
         column: widget.column,
       })),
       mediaWidth2: widgetx2.map((widget) => ({
-        id: widget.id,
+        id: widget.widgetId,
         width: widget.width,
         height: widget.height,
         row: widget.row,
         column: widget.column,
       })),
       mediaWidth3: widgetx3.map((widget) => ({
-        id: widget.id,
+        id: widget.widgetId,
         width: widget.width,
         height: widget.height,
         row: widget.row,

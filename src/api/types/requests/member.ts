@@ -36,6 +36,10 @@ interface UpdateProfileImageRequest {
   profileImage: File
 }
 
+interface UpdateWidgetRequest {
+  snapshot: string
+}
+
 // ===================================
 // QUEST SETTING
 // ===================================
@@ -54,4 +58,5 @@ export type {
   UpdatePasswordRequest,
   UpdateProfileImageRequest,
   UpdateQuestPropertyRequest,
+  UpdateWidgetRequest,
 }
