@@ -1,3 +1,9 @@
+import { useGetWidgetSnapshot, useUpdateWidget } from '@/api/hooks'
+import {
+  createWidgetSnapshot,
+  getWidgetPreview,
+  parseWidgetSnapshot,
+} from '@/components/widget/utils'
 import { WidgetCustomGrid } from '@/components/widget/widget-custom'
 import { WidgetCustomToolbox } from '@/components/widget/widget-custom/widget-custom-toolbox'
 import { ActiveWidget, ManagerData, WidgetSnapshot } from '@/components/widget/widget.types'
@@ -13,6 +19,9 @@ interface WidgetCustomManagerProps {
 }
 
 export function WidgetCustomManager({ mediaWidth, onSave, onCancel }: WidgetCustomManagerProps) {
+  const { snapshot } = useGetWidgetSnapshot()
+  const { updateWidget } = useUpdateWidget()
+
   const [selectedWidth, setSelectedWidth] = useState<number>(mediaWidth)
   const [active, setActive] = useState<ActiveWidget | null>(null)
 
@@ -38,32 +47,23 @@ export function WidgetCustomManager({ mediaWidth, onSave, onCancel }: WidgetCust
 
   const saveHandler = () => {
     const data: WidgetSnapshot = {
-      mediaWidth1: widgetx1.map((widget) => ({
-        id: widget.widgetId,
-        width: widget.width,
-        height: widget.height,
-        row: widget.row,
-        column: widget.column,
-      })),
-      mediaWidth2: widgetx2.map((widget) => ({
-        id: widget.widgetId,
-        width: widget.width,
-        height: widget.height,
-        row: widget.row,
-        column: widget.column,
-      })),
-      mediaWidth3: widgetx3.map((widget) => ({
-        id: widget.widgetId,
-        width: widget.width,
-        height: widget.height,
-        row: widget.row,
-        column: widget.column,
-      })),
+      mediaWidth1: createWidgetSnapshot(widgetx1),
+      mediaWidth2: createWidgetSnapshot(widgetx2),
+      mediaWidth3: createWidgetSnapshot(widgetx3),
     }
-    console.log(data)
-    console.log(JSON.stringify(data))
-    onSave?.()
+    updateWidget(
+      { body: { snapshot: JSON.stringify(data) } },
+      {
+        onSuccess: onSave,
+      }
+    )
   }
+
+  useEffect(() => {
+    setWidgetx1(parseWidgetSnapshot(snapshot.mediaWidth1))
+    setWidgetx2(parseWidgetSnapshot(snapshot.mediaWidth2))
+    setWidgetx3(parseWidgetSnapshot(snapshot.mediaWidth3))
+  }, [snapshot])
 
   useEffect(() => {
     if (selectedWidth > mediaWidth) {
@@ -100,7 +100,7 @@ export function WidgetCustomManager({ mediaWidth, onSave, onCancel }: WidgetCust
       <DragOverlay>
         {active && (
           <Box sx={{ pointerEvents: 'none', userSelect: 'none', opacity: 0.8 }}>
-            {active.preview}
+            {getWidgetPreview(active.widgetId, active.width, active.height)}
           </Box>
         )}
       </DragOverlay>

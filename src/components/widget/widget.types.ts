@@ -39,7 +39,6 @@ export interface ActiveWidget {
   widgetId: string
   width: number
   height: number
-  preview: ReactNode
 }
 
 export interface Position {
@@ -58,7 +57,6 @@ export interface ManagerData {
   height: number
   row: number
   column: number
-  preview: ReactNode
 }
 
 export interface WidgetApiData {

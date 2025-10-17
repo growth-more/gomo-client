@@ -72,7 +72,7 @@ export function WidgetCustomGrid({ mediaWidth, widgetData, setWidgetData }: Widg
       return
     }
 
-    const { id, widgetId, width, height, preview } = e.active.data.current as ActiveWidget
+    const { id, widgetId, width, height } = e.active.data.current as ActiveWidget
     const { row, column } = e.over.data.current as Position
     if (checkCollision(row, column, width, height)) {
       return
@@ -82,7 +82,7 @@ export function WidgetCustomGrid({ mediaWidth, widgetData, setWidgetData }: Widg
     }
     setWidgetData((prev) => [
       ...prev.filter((widget) => widget.id !== id),
-      { id, widgetId, width, height, row, column, preview },
+      { id, widgetId, width, height, row, column },
     ])
   }
 
