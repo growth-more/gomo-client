@@ -1,6 +1,7 @@
 import { Widget } from '@/components/widget'
 import { QuestStreakWidget1x3 } from '@/views/history/widgets/quest-streak/quest-streak-widget-1x3'
 import { QuestStreakWidget1x3Preview } from '@/views/history/widgets/quest-streak/quest-streak-widget-1x3-preview'
+import { QuestStreakWidget } from '@/widgets/quest-streak/quest-streak'
 
 export const questStreakWidget: Widget = {
   id: 'QUEST_STREAK_WIDGET',
@@ -13,10 +14,5 @@ export const questStreakWidget: Widget = {
       preview: QuestStreakWidget1x3Preview,
     },
   ],
-  render: (width: number, height: number) => {
-    if (width === 3 && height === 1) {
-      return <QuestStreakWidget1x3 />
-    }
-    return null
-  },
+  render: (width: number, height: number) => <QuestStreakWidget width={width} height={height} />,
 }

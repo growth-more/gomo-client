@@ -3,6 +3,7 @@ import { MonthlyQuestWidget1x1 } from '@/views/quest/widgets/monthly-quest/month
 import { MonthlyQuestWidget1x1Preview } from '@/views/quest/widgets/monthly-quest/monthly-quest-widget-1x1-preview'
 import { MonthlyQuestWidget1x2 } from '@/views/quest/widgets/monthly-quest/monthly-quest-widget-1x2'
 import { MonthlyQuestWidget1x2Preview } from '@/views/quest/widgets/monthly-quest/monthly-quest-widget-1x2-preview'
+import { MonthlyQuestWidget } from '@/widgets/monthly-quest/monthly-quest-widget'
 
 export const monthlyQuestWidget: Widget = {
   id: 'MONTHLY_QUEST_WIDGET',
@@ -21,13 +22,5 @@ export const monthlyQuestWidget: Widget = {
       preview: MonthlyQuestWidget1x2Preview,
     },
   ],
-  render: (width: number, height: number) => {
-    if (width === 1 && height === 1) {
-      return <MonthlyQuestWidget1x1 />
-    }
-    if (width === 2 && height === 1) {
-      return <MonthlyQuestWidget1x2 />
-    }
-    return null
-  },
+  render: (width: number, height: number) => <MonthlyQuestWidget width={width} height={height} />,
 }

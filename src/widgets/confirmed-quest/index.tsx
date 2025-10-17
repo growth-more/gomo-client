@@ -3,6 +3,7 @@ import { ConfirmedQuestWidget1x1 } from '@/views/quest/widgets/confirmed-quest/c
 import { ConfirmedQuestWidget1x1Preview } from '@/views/quest/widgets/confirmed-quest/confirmed-quest-widget-1x1-preview'
 import { ConfirmedQuestWidget1x2 } from '@/views/quest/widgets/confirmed-quest/confirmed-quest-widget-1x2'
 import { ConfirmedQuestWidget1x2Preview } from '@/views/quest/widgets/confirmed-quest/confirmed-quest-widget-1x2-preview'
+import { ConfirmedQuestWidget } from '@/widgets/confirmed-quest/confirmed-quest-widget'
 
 export const confirmedQuestWidget: Widget = {
   id: 'CONFIRMED_QUEST_WIDGET',
@@ -21,13 +22,5 @@ export const confirmedQuestWidget: Widget = {
       preview: ConfirmedQuestWidget1x2Preview,
     },
   ],
-  render: (width: number, height: number) => {
-    if (width === 1 && height === 1) {
-      return <ConfirmedQuestWidget1x1 />
-    }
-    if (width === 2 && height === 1) {
-      return <ConfirmedQuestWidget1x2 />
-    }
-    return null
-  },
+  render: (width: number, height: number) => <ConfirmedQuestWidget width={width} height={height} />,
 }

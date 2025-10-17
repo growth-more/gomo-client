@@ -1,5 +1,9 @@
 import { ManagerData } from '@/components/widget/widget.types'
-import { calculateWidgetHeight, calculateWidgetWidth, getWidget } from '@/components/widget/utils'
+import {
+  calculateWidgetHeight,
+  calculateWidgetWidth,
+  getWidgetPreview,
+} from '@/components/widget/utils'
 import { useDraggable } from '@dnd-kit/core'
 import { Box, IconButton, Stack } from '@mui/material'
 import { Iconify } from '@/components/iconify'
@@ -63,7 +67,7 @@ export function WidgetCustomGridItem({ widgetData, removeWidget }: WidgetCustomG
         {...attributes}
       >
         <Box sx={{ pointerEvents: 'none', userSelect: 'none' }}>
-          {getWidget(widgetData.widgetId, widgetData.width, widgetData.height)}
+          {getWidgetPreview(widgetData.widgetId, widgetData.width, widgetData.height)}
         </Box>
       </Box>
     </Box>

@@ -1,6 +1,7 @@
 import { Widget } from '@/components/widget'
 import { InterestGraphWidget1x1 } from '@/views/interest/widgets/interest-graph/interest-graph-widget-1x1'
 import { InterestGraphWidget1x1Preview } from '@/views/interest/widgets/interest-graph/interest-graph-widget-1x1-preview'
+import { InterestGraphWidget } from '@/widgets/interest-graph/interest-graph-widget'
 
 export const interestGraphWidget: Widget = {
   id: 'INTEREST_GRAPH_WIDGET',
@@ -13,10 +14,5 @@ export const interestGraphWidget: Widget = {
       preview: InterestGraphWidget1x1Preview,
     },
   ],
-  render: (width: number, height: number) => {
-    if (width === 1 && height === 1) {
-      return <InterestGraphWidget1x1 />
-    }
-    return null
-  },
+  render: (width: number, height: number) => <InterestGraphWidget width={width} height={height} />,
 }

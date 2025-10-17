@@ -6,7 +6,6 @@ import { Stack } from '@mui/material'
 
 export function HeaderSection() {
   const { profile, updateHandle, updateMotto, updateName, updateProfileImage } = useProfile()
-  useProfile()
 
   const updateNameHandler = (name: string, handler?: OnEditHandler) => {
     updateName(name, handler)

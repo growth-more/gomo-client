@@ -3,6 +3,7 @@ import { UnconfirmedQuestWidget1x1 } from '@/views/quest/widgets/unconfirmed-que
 import { UnconfirmedQuestWidget1x1Preview } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x1-preview'
 import { UnconfirmedQuestWidget1x2 } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x2'
 import { UnconfirmedQuestWidget1x2Preview } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x2-preview'
+import { UnconfirmedQuestWidget } from '@/widgets/unconfirmed-quest/unconfirmed-quiest'
 
 export const unconfirmedQuestWidget: Widget = {
   id: 'UNCONFIRMED_QUEST_WIDGET',
@@ -21,13 +22,7 @@ export const unconfirmedQuestWidget: Widget = {
       preview: UnconfirmedQuestWidget1x2Preview,
     },
   ],
-  render: (width: number, height: number) => {
-    if (width === 1 && height === 1) {
-      return <UnconfirmedQuestWidget1x1 />
-    }
-    if (width === 2 && height === 1) {
-      return <UnconfirmedQuestWidget1x2 />
-    }
-    return null
-  },
+  render: (width: number, height: number) => (
+    <UnconfirmedQuestWidget width={width} height={height} />
+  ),
 }

@@ -1,11 +1,23 @@
 import { WidgetBasic } from '@/components/widget'
 import { Motto, ProfileInfo } from '@/views/profile/components'
 import { Divider, Stack } from '@mui/material'
-import { useProfile } from '@/api/hooks'
+import { Profile } from '@/entities/profile'
+
+const profile: Profile = {
+  id: 'a10581ce-d721-11ef-a8a5-2508e2a6438b',
+  email: 'gomo@gomo.com',
+  handle: '',
+  name: 'GOMO',
+  motto: 'GOMO와 함꼐 성장하자!',
+  availablePoints: 0,
+  profileImageUrl: '',
+  profileBannerUrl: '',
+  subscriptionPlan: '',
+  signUpDateTime: new Date(),
+  loginProvider: '',
+}
 
 export function MyProfileWidget1x1Preview() {
-  const { profile } = useProfile()
-
   return (
     <WidgetBasic
       width={1}

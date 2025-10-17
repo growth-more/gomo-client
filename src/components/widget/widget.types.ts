@@ -1,5 +1,10 @@
 import { ReactNode } from 'react'
 
+export interface WidgetComponentProps {
+  width: number
+  height: number
+}
+
 export interface Widget {
   id: string
   name: string
