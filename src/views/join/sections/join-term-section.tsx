@@ -1,13 +1,13 @@
 import { Button, Stack, Typography } from '@mui/material'
 import terms from '@/assets/term'
-import { TermForm } from './components'
+import { TermForm } from '../components'
 import { useMemo, useState } from 'react'
 
-interface JoinTermPageProps {
+interface JoinTermSectionProps {
   onNext?: () => void
 }
 
-export function JoinTermPage({ onNext }: JoinTermPageProps) {
+export function JoinTermSection({ onNext }: JoinTermSectionProps) {
   const [agrees, setAgrees] = useState<boolean[]>(() => terms.map(() => false))
 
   const isAllAgree = useMemo(() => agrees.every((agree) => agree), [agrees])

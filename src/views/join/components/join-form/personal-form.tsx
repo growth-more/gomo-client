@@ -1,7 +1,7 @@
 import { FormInput } from '@/components/form'
 import { Button, InputAdornment, Stack } from '@mui/material'
 import { Control, UseFormWatch } from 'react-hook-form'
-import { Form } from '@/pages/join/join-form-page'
+import { Form } from '@/views/join/sections'
 import { JoinFieldInfo } from './join-field-info'
 import { useBoolean } from '@/hooks'
 import { useEffect, useState } from 'react'

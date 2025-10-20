@@ -5,12 +5,12 @@ import { Button, Typography } from '@mui/material'
 import { Stack } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-interface JoinSuccessPageProps {
+interface JoinSuccessSectionProps {
   onSurvey?: () => void
   onSkip?: () => void
 }
 
-export function JoinSuccessPage({ onSurvey, onSkip }: JoinSuccessPageProps) {
+export function JoinSuccessSection({ onSurvey, onSkip }: JoinSuccessSectionProps) {
   return (
     <Stack width={1} height={1} p={6} justifyContent="center" alignItems="center">
       <Stack height={1} maxHeight={400} justifyContent="space-between" alignItems="center" gap={4}>

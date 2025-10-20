@@ -1,6 +1,13 @@
+import { OauthProvider } from '@/entities/profile'
+
 interface LoginRequest {
   email: string
   password: string
 }
 
-export type { LoginRequest }
+interface OauthRequest {
+  provider: OauthProvider
+  code: string
+}
+
+export type { LoginRequest, OauthRequest }

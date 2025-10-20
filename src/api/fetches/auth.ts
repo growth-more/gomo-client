@@ -1,4 +1,10 @@
-import { LoginRequest, LoginResponse, ReissueResponse } from '@/api/types'
+import {
+  LoginRequest,
+  LoginResponse,
+  OauthRequest,
+  OauthResponse,
+  ReissueResponse,
+} from '@/api/types'
 import { endpoints, axiosFetch } from '@/api'
 import { apiErrorCode, errorCode } from '@/api/error'
 import { authCode } from '@/api/error/code/auth'
@@ -25,5 +31,9 @@ export const auth = {
       onSuccess: () => true,
       on401: authCode.NOT_AUTHENTICATED,
     })
+  },
+
+  oauth: async (request: OauthRequest): Promise<OauthResponse> => {
+    return axiosFetch.get(`${endpoints.auth.oauth[request.provider]}?code=${request.code}`)
   },
 }

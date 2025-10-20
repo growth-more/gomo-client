@@ -1,3 +1,5 @@
+import { LoginProvider } from '@/entities/profile'
+
 // ===================================
 // JOIN
 // ===================================
@@ -8,6 +10,7 @@ interface CreateMemberRequest {
   handle: string
   name: string
   motto: string
+  loginProvider: LoginProvider
 }
 
 interface CreateEmailAuthCodeRequest {

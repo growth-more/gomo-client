@@ -1,8 +1,10 @@
 import { Button, Stack, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import { EmailVerifyForm, PasswordForm, PersonalForm } from './components'
+import { EmailVerifyForm, PasswordForm, PersonalForm } from '../components'
 import { useBoolean } from '@/hooks'
 import { useJoin } from '@/api/hooks'
+import { LoginProvider } from '@/entities/profile'
+import { useEffect } from 'react'
 
 export interface Form {
   email: string
@@ -14,27 +16,50 @@ export interface Form {
   motto: string
 }
 
-interface JoinFormPageProps {
+interface JoinFormSectionProps {
   onNext?: (email: string, password: string) => void
+  oauth?: {
+    email: string
+    name: string
+    loginProvider: LoginProvider
+  }
 }
 
-export function JoinFormPage({ onNext }: JoinFormPageProps) {
+export function JoinFormSection({ onNext, oauth }: JoinFormSectionProps) {
   const { join } = useJoin()
 
   const emailVerified = useBoolean()
   const handleVerified = useBoolean()
 
-  const { control, handleSubmit, watch } = useForm<Form>({
+  const { control, handleSubmit, watch, reset, unregister } = useForm<Form>({
     mode: 'onSubmit',
     defaultValues: {
-      email: '',
+      email: oauth?.email ?? '',
       verifyCode: '',
       password: '',
       passwordConfirm: '',
-      name: '',
+      name: oauth?.name ?? '',
       handle: '',
     },
   })
+
+  useEffect(() => {
+    if (!oauth) {
+      return
+    }
+    unregister('password')
+    unregister('passwordConfirm')
+    emailVerified.onTrue()
+    reset(
+      {
+        email: oauth.email,
+        name: oauth.name,
+      },
+      {
+        keepDirtyValues: true,
+      }
+    )
+  }, [oauth, reset, emailVerified, unregister])
 
   const submitHandler = handleSubmit((form) => {
     join(
@@ -44,6 +69,7 @@ export function JoinFormPage({ onNext }: JoinFormPageProps) {
         password: form.password,
         handle: `@${form.handle}`,
         motto: form.motto,
+        loginProvider: oauth?.loginProvider ?? 'EMAIL',
       },
       { onSuccess: () => onNext?.(form.email, form.password) }
     )
@@ -62,8 +88,9 @@ export function JoinFormPage({ onNext }: JoinFormPageProps) {
             watch={watch}
             onVerified={emailVerified.onTrue}
             onUnverified={emailVerified.onFalse}
+            disabled={!!oauth}
           />
-          <PasswordForm control={control} watch={watch} />
+          <PasswordForm control={control} watch={watch} disabled={!!oauth} />
           <PersonalForm
             control={control}
             watch={watch}

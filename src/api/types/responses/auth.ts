@@ -1,3 +1,5 @@
+import { LoginProvider } from '@/entities/profile'
+
 interface LoginResponse {
   id: string
   token: string
@@ -8,4 +10,13 @@ interface ReissueResponse {
   token: string
 }
 
-export type { LoginResponse, ReissueResponse }
+interface OauthResponse {
+  principal: {
+    email: string
+    name: string
+    loginProvider: LoginProvider
+  }
+  accessToken: string | null
+}
+
+export type { LoginResponse, ReissueResponse, OauthResponse }
