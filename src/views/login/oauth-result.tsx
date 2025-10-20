@@ -21,7 +21,7 @@ export function OauthResult({ provider }: OauthResultProps) {
     if (!code) {
       return
     }
-    const { accessToken, userInfo } = await fetches.auth.oauth({ provider, code })
+    const { accessToken, principal } = await fetches.auth.oauth({ provider, code })
 
     // oauth login
     if (accessToken) {
@@ -31,7 +31,7 @@ export function OauthResult({ provider }: OauthResultProps) {
     }
 
     // oauth join
-    navigate(paths.join, { replace: true, state: userInfo })
+    navigate(paths.join, { replace: true, state: principal })
     return
   }, [provider, code])
 

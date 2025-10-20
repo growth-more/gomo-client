@@ -11,10 +11,10 @@ interface ReissueResponse {
 }
 
 interface OauthResponse {
-  userInfo: {
+  principal: {
     email: string
     name: string
-    provider: LoginProvider
+    loginProvider: LoginProvider
   }
   accessToken: string | null
 }

@@ -12,7 +12,7 @@ import { LoginProvider } from '@/entities/profile'
 type OauthUserInfo = {
   email: string
   name: string
-  provider: LoginProvider
+  loginProvider: LoginProvider
 }
 
 export function JoinView() {

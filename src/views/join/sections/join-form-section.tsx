@@ -21,7 +21,7 @@ interface JoinFormSectionProps {
   oauth?: {
     email: string
     name: string
-    provider: LoginProvider
+    loginProvider: LoginProvider
   }
 }
 
@@ -69,7 +69,7 @@ export function JoinFormSection({ onNext, oauth }: JoinFormSectionProps) {
         password: form.password,
         handle: `@${form.handle}`,
         motto: form.motto,
-        loginProvider: oauth?.provider ?? 'EMAIL',
+        loginProvider: oauth?.loginProvider ?? 'EMAIL',
       },
       { onSuccess: () => onNext?.(form.email, form.password) }
     )

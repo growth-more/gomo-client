@@ -7,28 +7,28 @@ const login: LoginResponse = {
 }
 
 const oauthGoogle: OauthResponse = {
-  userInfo: {
+  principal: {
     email: 'gomo@google.com',
     name: '쓸쓸한고라니',
-    provider: 'GOOGLE',
+    loginProvider: 'GOOGLE',
   },
   accessToken: null,
 }
 
 const oauthKakao: OauthResponse = {
-  userInfo: {
+  principal: {
     email: 'gomo@kakao.com',
     name: '쓸쓸한고라니',
-    provider: 'KAKAO',
+    loginProvider: 'KAKAO',
   },
   accessToken: null,
 }
 
 const oauthNaver: OauthResponse = {
-  userInfo: {
+  principal: {
     email: 'gomo@naver.com',
     name: '쓸쓸한고라니',
-    provider: 'NAVER',
+    loginProvider: 'NAVER',
   },
   accessToken: null,
 }
