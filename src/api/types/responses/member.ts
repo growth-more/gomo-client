@@ -35,6 +35,10 @@ interface UpdateProfileImageResponse {
   profileImageName: string
 }
 
+interface WidgetResponse {
+  snapshot: string
+}
+
 // ===================================
 // QUEST SETTING
 // ===================================
@@ -50,5 +54,6 @@ export type {
   CreateMemberResponse,
   QuestPropertyResponse,
   UpdateProfileImageResponse,
+  WidgetResponse,
   ProfileResponse,
 }

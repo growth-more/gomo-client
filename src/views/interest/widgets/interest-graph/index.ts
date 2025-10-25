@@ -1,7 +1,16 @@
+import { WidgetData } from '@/components/widget'
 import { InterestGraphWidget1x1 } from '@/views/interest/widgets/interest-graph/interest-graph-widget-1x1'
+import { InterestGraphWidget1x1Preview } from '@/views/interest/widgets/interest-graph/interest-graph-widget-1x1-preview'
 
-const InterestGraphWidget = {
-  S1x1: InterestGraphWidget1x1,
-}
-
-export default InterestGraphWidget
+export const InterestGraphWidget = {
+  id: 'INTEREST_GRAPH_WIDGET',
+  name: '관심사 그래프',
+  widgets: {
+    S1x1: {
+      width: 1,
+      height: 1,
+      component: InterestGraphWidget1x1,
+      preview: InterestGraphWidget1x1Preview,
+    },
+  } as const,
+} satisfies WidgetData
