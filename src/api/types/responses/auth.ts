@@ -1,13 +1,13 @@
 import { LoginProvider } from '@/entities/profile'
 
 interface LoginResponse {
-  id: string
-  token: string
+  principalId: string
+  accessToken: string
 }
 
 interface ReissueResponse {
-  id: string
-  token: string
+  principalId: string
+  accessToken: string
 }
 
 interface OauthResponse {
