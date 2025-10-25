@@ -19,7 +19,7 @@ type VerifyCodeStatus = 'none' | 'pending' | 'verified'
 interface EmailVerifyFormProps {
   control: Control<Form>
   watch: UseFormWatch<Form>
-  onVerified?: () => void
+  onVerified?: (temporaryToken: string) => void
   onUnverified?: () => void
   disabled?: boolean
 }
@@ -51,10 +51,10 @@ export function EmailVerifyForm({
   const checkVerifyCode = () => {
     const code = watch('verifyCode')
     checkAuthCode(email, code, {
-      onSuccess: () => {
+      onSuccess: (data) => {
         setVerifyCodeStatus('verified')
         verifyCodeTimer.stop()
-        onVerified?.()
+        onVerified?.(data.temporaryToken)
       },
     })
   }

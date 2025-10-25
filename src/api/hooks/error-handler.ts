@@ -25,8 +25,8 @@ export function apiErrorHandler(error: Error, listener: ApiErrorHandlerListener)
   listener.onElse?.(error)
 }
 
-interface QueryCallback {
-  onSuccess?: () => void
+interface QueryCallback<T = never> {
+  onSuccess?: (data: T extends never ? undefined : T) => void
   onError?: () => void
   onElse?: () => void
 }

@@ -16,6 +16,7 @@ import {
   UpdateQuestPropertyFetchRequest,
   UpdateWidgetFetchRequest,
   VerifyEmailCodeFetchRequest,
+  VerifyEmailCodeResponse,
   WidgetResponse,
 } from '@/api/types'
 
@@ -47,14 +48,16 @@ export const member = {
   createEmailCode: async (
     params: CreateEmailAuthCodeFetchRequest
   ): Promise<CreateEmailAuthCodeResponse> => {
-    return axiosFetch.post(endpoints.member.createEmailCode, params.body, {
+    return axiosFetch.post(endpoints.member.createSignUpEmailCode, params.body, {
       onCode: {
         [apiErrorCode.EMAIL_DUPLICATED]: errorCode.auth.join.EMAIL_DUPLICATED,
       },
     })
   },
 
-  verifyEmailCode: async (params: VerifyEmailCodeFetchRequest): Promise<void> => {
+  verifyEmailCode: async (
+    params: VerifyEmailCodeFetchRequest
+  ): Promise<VerifyEmailCodeResponse> => {
     return axiosFetch.get(
       `${endpoints.member.verifyEmailCode}?email=${params.email}&code=${params.code}`
     )

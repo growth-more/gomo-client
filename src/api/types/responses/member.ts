@@ -6,6 +6,10 @@ interface CreateMemberResponse {
   id: string
 }
 
+interface VerifyEmailCodeResponse {
+  temporaryToken: string
+}
+
 interface CreateEmailAuthCodeResponse {
   code: string
 }
@@ -56,4 +60,5 @@ export type {
   UpdateProfileImageResponse,
   WidgetResponse,
   ProfileResponse,
+  VerifyEmailCodeResponse,
 }

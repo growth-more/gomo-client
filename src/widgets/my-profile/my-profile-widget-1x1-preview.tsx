@@ -14,7 +14,7 @@ const profile: Profile = {
   profileBannerUrl: '',
   subscriptionPlan: '',
   signUpDateTime: new Date(),
-  loginProvider: '',
+  loginProvider: 'EMAIL',
 }
 
 export function MyProfileWidget1x1Preview() {
