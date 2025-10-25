@@ -3,7 +3,6 @@ import { DailyTotalAssignQuestHistory } from '@/entities'
 import { DailyTotalHistoryItem } from '@/views/history/components'
 import { Stack } from '@mui/material'
 import dayjs from 'dayjs'
-import { useMemo } from 'react'
 
 const dailyTotalHistoryData: DailyTotalAssignQuestHistory[] = [
   {
@@ -33,16 +32,12 @@ const dailyTotalHistoryData: DailyTotalAssignQuestHistory[] = [
 ]
 
 export function QuestHistoryWidget1x1Preview() {
-  const now = useMemo(() => {
-    return new Date()
-  }, [])
-
   return (
     <WidgetBasic
       width={1}
       height={1}
       title="퀘스트 기록"
-      subtitle={dayjs(now).format('YYYY년 MM월 DD일')}
+      subtitle={dayjs().format('YYYY년 MM월 DD일')}
     >
       <Stack p={1} height={1}>
         {dailyTotalHistoryData.map((data, i) => (

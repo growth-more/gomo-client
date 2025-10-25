@@ -1,8 +1,9 @@
 import { Widget } from '@/components/widget'
-import { UnconfirmedQuestWidget1x1 } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x1'
-import { UnconfirmedQuestWidget1x1Preview } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x1-preview'
-import { UnconfirmedQuestWidget1x2 } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x2'
-import { UnconfirmedQuestWidget1x2Preview } from '@/views/quest/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x2-preview'
+
+import { UnconfirmedQuestWidget1x1 } from '@/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x1'
+import { UnconfirmedQuestWidget1x1Preview } from '@/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x1-preview'
+import { UnconfirmedQuestWidget1x2 } from '@/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x2'
+import { UnconfirmedQuestWidget1x2Preview } from '@/widgets/unconfirmed-quest/unconfirmed-quest-widget-1x2-preview'
 import { UnconfirmedQuestWidget } from '@/widgets/unconfirmed-quest/unconfirmed-quiest'
 
 export const unconfirmedQuestWidget: Widget = {

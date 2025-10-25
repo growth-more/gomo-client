@@ -1,9 +1,10 @@
 import { Widget } from '@/components/widget'
-import { DailyQuestWidget1x1 } from '@/views/quest/widgets/daily-quest/daily-quest-widget-1x1'
-import { DailyQuestWidget1x1Preview } from '@/views/quest/widgets/daily-quest/daily-quest-widget-1x1-preview'
-import { DailyQuestWidget1x2 } from '@/views/quest/widgets/daily-quest/daily-quest-widget-1x2'
-import { DailyQuestWidget1x2Preview } from '@/views/quest/widgets/daily-quest/daily-quest-widget-1x2-preview'
+
 import { DailyQuestWidget } from '@/widgets/daily-quest/daily-quest-widget'
+import { DailyQuestWidget1x1 } from '@/widgets/daily-quest/daily-quest-widget-1x1'
+import { DailyQuestWidget1x1Preview } from '@/widgets/daily-quest/daily-quest-widget-1x1-preview'
+import { DailyQuestWidget1x2 } from '@/widgets/daily-quest/daily-quest-widget-1x2'
+import { DailyQuestWidget1x2Preview } from '@/widgets/daily-quest/daily-quest-widget-1x2-preview'
 
 export const dailyQuestWidget: Widget = {
   id: 'DAILY_QUEST_WIDGET',

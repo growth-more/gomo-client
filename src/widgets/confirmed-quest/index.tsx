@@ -1,9 +1,10 @@
 import { Widget } from '@/components/widget'
-import { ConfirmedQuestWidget1x1 } from '@/views/quest/widgets/confirmed-quest/confirmed-quest-widget-1x1'
-import { ConfirmedQuestWidget1x1Preview } from '@/views/quest/widgets/confirmed-quest/confirmed-quest-widget-1x1-preview'
-import { ConfirmedQuestWidget1x2 } from '@/views/quest/widgets/confirmed-quest/confirmed-quest-widget-1x2'
-import { ConfirmedQuestWidget1x2Preview } from '@/views/quest/widgets/confirmed-quest/confirmed-quest-widget-1x2-preview'
+
 import { ConfirmedQuestWidget } from '@/widgets/confirmed-quest/confirmed-quest-widget'
+import { ConfirmedQuestWidget1x1 } from '@/widgets/confirmed-quest/confirmed-quest-widget-1x1'
+import { ConfirmedQuestWidget1x1Preview } from '@/widgets/confirmed-quest/confirmed-quest-widget-1x1-preview'
+import { ConfirmedQuestWidget1x2 } from '@/widgets/confirmed-quest/confirmed-quest-widget-1x2'
+import { ConfirmedQuestWidget1x2Preview } from '@/widgets/confirmed-quest/confirmed-quest-widget-1x2-preview'
 
 export const confirmedQuestWidget: Widget = {
   id: 'CONFIRMED_QUEST_WIDGET',

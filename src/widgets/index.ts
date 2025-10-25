@@ -1,4 +1,5 @@
 import { WidgetCategory } from '@/components/widget/widget.types'
+
 import { confirmedQuestWidget } from '@/widgets/confirmed-quest'
 import { dailyQuestWidget } from '@/widgets/daily-quest'
 import { interestGraphWidget } from '@/widgets/interest-graph'

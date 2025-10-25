@@ -1,9 +1,10 @@
 import { Widget } from '@/components/widget'
-import { MonthlyQuestWidget1x1 } from '@/views/quest/widgets/monthly-quest/monthly-quest-widget-1x1'
-import { MonthlyQuestWidget1x1Preview } from '@/views/quest/widgets/monthly-quest/monthly-quest-widget-1x1-preview'
-import { MonthlyQuestWidget1x2 } from '@/views/quest/widgets/monthly-quest/monthly-quest-widget-1x2'
-import { MonthlyQuestWidget1x2Preview } from '@/views/quest/widgets/monthly-quest/monthly-quest-widget-1x2-preview'
+
 import { MonthlyQuestWidget } from '@/widgets/monthly-quest/monthly-quest-widget'
+import { MonthlyQuestWidget1x1 } from '@/widgets/monthly-quest/monthly-quest-widget-1x1'
+import { MonthlyQuestWidget1x1Preview } from '@/widgets/monthly-quest/monthly-quest-widget-1x1-preview'
+import { MonthlyQuestWidget1x2 } from '@/widgets/monthly-quest/monthly-quest-widget-1x2'
+import { MonthlyQuestWidget1x2Preview } from '@/widgets/monthly-quest/monthly-quest-widget-1x2-preview'
 
 export const monthlyQuestWidget: Widget = {
   id: 'MONTHLY_QUEST_WIDGET',

@@ -1,7 +1,8 @@
 import { Widget } from '@/components/widget'
-import { InterestGraphWidget1x1 } from '@/views/interest/widgets/interest-graph/interest-graph-widget-1x1'
-import { InterestGraphWidget1x1Preview } from '@/views/interest/widgets/interest-graph/interest-graph-widget-1x1-preview'
+
 import { InterestGraphWidget } from '@/widgets/interest-graph/interest-graph-widget'
+import { InterestGraphWidget1x1 } from '@/widgets/interest-graph/interest-graph-widget-1x1'
+import { InterestGraphWidget1x1Preview } from '@/widgets/interest-graph/interest-graph-widget-1x1-preview'
 
 export const interestGraphWidget: Widget = {
   id: 'INTEREST_GRAPH_WIDGET',

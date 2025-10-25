@@ -1,9 +1,10 @@
 import { Widget } from '@/components/widget'
-import { WeeklyQuestWidget1x1 } from '@/views/quest/widgets/weekly-quest/weekly-quest-widget-1x1'
-import { WeeklyQuestWidget1x1Preview } from '@/views/quest/widgets/weekly-quest/weekly-quest-widget-1x1-preivew'
-import { WeeklyQuestWidget1x2 } from '@/views/quest/widgets/weekly-quest/weekly-quest-widget-1x2'
-import { WeeklyQuestWidget1x2Preview } from '@/views/quest/widgets/weekly-quest/weekly-quest-widget-1x2-preivew'
+
 import { WeeklyQuestWidget } from '@/widgets/weekly-quest/weekly-quest-widget'
+import { WeeklyQuestWidget1x1 } from '@/widgets/weekly-quest/weekly-quest-widget-1x1'
+import { WeeklyQuestWidget1x1Preview } from '@/widgets/weekly-quest/weekly-quest-widget-1x1-preivew'
+import { WeeklyQuestWidget1x2 } from '@/widgets/weekly-quest/weekly-quest-widget-1x2'
+import { WeeklyQuestWidget1x2Preview } from '@/widgets/weekly-quest/weekly-quest-widget-1x2-preivew'
 
 export const weeklyQuestWidget: Widget = {
   id: 'WEEKLY_QUEST_WIDGET',

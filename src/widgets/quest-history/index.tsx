@@ -1,7 +1,8 @@
 import { Widget } from '@/components/widget'
-import { QuestHistoryWidget1x1 } from '@/views/history/widgets/quest-history/quest-history-widget-1x1'
-import { QuestHistoryWidget1x1Preview } from '@/views/history/widgets/quest-history/quest-history-widget-1x1-preview'
+
 import { QuestHistoryWidget } from '@/widgets/quest-history/quest-history-widget'
+import { QuestHistoryWidget1x1 } from '@/widgets/quest-history/quest-history-widget-1x1'
+import { QuestHistoryWidget1x1Preview } from '@/widgets/quest-history/quest-history-widget-1x1-preview'
 
 export const questHistoryWidget: Widget = {
   id: 'QUEST_HISTORY_WIDGET',
