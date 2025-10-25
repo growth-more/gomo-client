@@ -33,8 +33,7 @@ export function MainView() {
   const customMode = useBoolean()
 
   const customSaveHandler = () => {
-    // customMode.onFalse()
-    return
+    customMode.onFalse()
   }
 
   const cancelHandler = () => {

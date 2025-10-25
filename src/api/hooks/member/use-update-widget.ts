@@ -1,6 +1,7 @@
 import { endpoints } from '@/api/endpoints'
 import { fetches } from '@/api/fetches'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
 export function useUpdateWidget() {
   const queryClient = useQueryClient()
@@ -9,6 +10,7 @@ export function useUpdateWidget() {
     mutationFn: fetches.member.updateWidget,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['GET', endpoints.member.getWidget] })
+      toast.success('위젯이 저장되었습니다.')
     },
   })
 

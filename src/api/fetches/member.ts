@@ -105,6 +105,6 @@ export const member = {
   },
 
   updateWidget: async (params: UpdateWidgetFetchRequest): Promise<void> => {
-    return axiosFetch.post(endpoints.member.updateWidget, params.body)
+    return axiosFetch.put(endpoints.member.updateWidget, params.body)
   },
 }

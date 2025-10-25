@@ -122,7 +122,7 @@ export const member = [
     return HttpResponse.json(mock.member.widget, { status: 200 })
   }),
 
-  http.post<never, UpdateWidgetRequest>(endpoints.member.updateWidget, async () => {
+  http.put<never, UpdateWidgetRequest>(endpoints.member.updateWidget, async () => {
     await delay(1000)
     return new HttpResponse(null, { status: 204 })
   }),
