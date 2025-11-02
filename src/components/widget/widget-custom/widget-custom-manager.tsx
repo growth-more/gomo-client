@@ -1,4 +1,4 @@
-import { useGetWidgetSnapshot, useUpdateWidget } from '@/api/hooks'
+import { useProfile, useUpdateWidget } from '@/api/hooks'
 import {
   createWidgetSnapshot,
   getWidgetPreview,
@@ -19,7 +19,9 @@ interface WidgetCustomManagerProps {
 }
 
 export function WidgetCustomManager({ mediaWidth, onSave, onCancel }: WidgetCustomManagerProps) {
-  const { snapshot } = useGetWidgetSnapshot()
+  const {
+    profile: { widgetSnapshot: snapshot },
+  } = useProfile()
   const { updateWidget } = useUpdateWidget()
 
   const [selectedWidth, setSelectedWidth] = useState<number>(mediaWidth)

@@ -9,7 +9,7 @@ export function useUpdateWidget() {
   const { mutate: updateWidget } = useMutation({
     mutationFn: fetches.member.updateWidget,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.member.getWidget] })
+      queryClient.invalidateQueries({ queryKey: ['GET', endpoints.member.profile] })
       toast.success('위젯이 저장되었습니다.')
     },
   })

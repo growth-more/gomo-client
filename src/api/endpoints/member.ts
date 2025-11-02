@@ -16,6 +16,5 @@ export const member = {
   getQuestProperty: '/members/properties/quests',
   updateQuestProperty: '/members/properties/quests',
 
-  getWidget: '/members/widgets',
   updateWidget: '/members/widgets',
 }

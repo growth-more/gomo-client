@@ -32,6 +32,7 @@ interface ProfileResponse {
   subscriptionPlan: string
   activateStatus: string
   signUpDateTime: Date
+  widgetSnapshot: string
 }
 
 interface UpdateProfileImageResponse {

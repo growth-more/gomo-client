@@ -17,7 +17,6 @@ import {
   UpdateWidgetFetchRequest,
   VerifyEmailCodeFetchRequest,
   VerifyEmailCodeResponse,
-  WidgetResponse,
 } from '@/api/types'
 
 export const member = {
@@ -101,10 +100,6 @@ export const member = {
 
   updateQuestProperty: async (params: UpdateQuestPropertyFetchRequest): Promise<void> => {
     return axiosFetch.put(endpoints.member.updateQuestProperty, params.body)
-  },
-
-  getWidget: async (): Promise<WidgetResponse> => {
-    return axiosFetch.get(endpoints.member.getWidget)
   },
 
   updateWidget: async (params: UpdateWidgetFetchRequest): Promise<void> => {
