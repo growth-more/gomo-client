@@ -11,6 +11,7 @@ interface CreateMemberRequest {
   name: string
   motto: string
   loginProvider: LoginProvider
+  temporaryToken: string
 }
 
 interface CreateEmailAuthCodeRequest {

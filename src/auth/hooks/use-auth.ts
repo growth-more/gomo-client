@@ -16,7 +16,7 @@ export function useAuth() {
   const { mutate: loginMutate } = useMutation({
     mutationFn: fetches.auth.login,
     onSuccess: (data) => {
-      setAccessToken(data.token)
+      setAccessToken(data.accessToken)
     },
   })
 

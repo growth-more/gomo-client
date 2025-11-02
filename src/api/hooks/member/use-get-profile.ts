@@ -1,5 +1,6 @@
 import { fetches } from '@/api'
 import { endpoints } from '@/api'
+import { WidgetSnapshot } from '@/components/widget'
 import { LoginProvider, Profile } from '@/entities/profile'
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
@@ -24,6 +25,11 @@ export function useGetProfile() {
         subscriptionPlan: '',
         signUpDateTime: new Date(),
         loginProvider: 'EMAIL',
+        widgetSnapshot: {
+          mediaWidth1: [],
+          mediaWidth2: [],
+          mediaWidth3: [],
+        },
       }
     }
     return {
@@ -38,6 +44,7 @@ export function useGetProfile() {
       subscriptionPlan: data.subscriptionPlan,
       signUpDateTime: data.signUpDateTime,
       loginProvider: data.loginProvider as LoginProvider,
+      widgetSnapshot: JSON.parse(data.widgetSnapshot) as WidgetSnapshot,
     }
   }, [data])
 

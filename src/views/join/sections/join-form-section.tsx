@@ -4,7 +4,7 @@ import { EmailVerifyForm, PasswordForm, PersonalForm } from '../components'
 import { useBoolean } from '@/hooks'
 import { useJoin } from '@/api/hooks'
 import { LoginProvider } from '@/entities/profile'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export interface Form {
   email: string
@@ -31,6 +31,8 @@ export function JoinFormSection({ onNext, oauth }: JoinFormSectionProps) {
   const emailVerified = useBoolean()
   const handleVerified = useBoolean()
 
+  const [temporaryToken, setTemporaryToken] = useState<string | null>(null)
+
   const { control, handleSubmit, watch, reset, unregister } = useForm<Form>({
     mode: 'onSubmit',
     defaultValues: {
@@ -42,6 +44,11 @@ export function JoinFormSection({ onNext, oauth }: JoinFormSectionProps) {
       handle: '',
     },
   })
+
+  const emailVerifiedHandler = (temporaryToken: string) => {
+    setTemporaryToken(temporaryToken)
+    emailVerified.onTrue()
+  }
 
   useEffect(() => {
     if (!oauth) {
@@ -62,6 +69,10 @@ export function JoinFormSection({ onNext, oauth }: JoinFormSectionProps) {
   }, [oauth, reset, emailVerified, unregister])
 
   const submitHandler = handleSubmit((form) => {
+    if (!temporaryToken) {
+      return
+    }
+
     join(
       {
         email: form.email,
@@ -70,6 +81,7 @@ export function JoinFormSection({ onNext, oauth }: JoinFormSectionProps) {
         handle: `@${form.handle}`,
         motto: form.motto,
         loginProvider: oauth?.loginProvider ?? 'EMAIL',
+        temporaryToken,
       },
       { onSuccess: () => onNext?.(form.email, form.password) }
     )
@@ -86,7 +98,7 @@ export function JoinFormSection({ onNext, oauth }: JoinFormSectionProps) {
           <EmailVerifyForm
             control={control}
             watch={watch}
-            onVerified={emailVerified.onTrue}
+            onVerified={emailVerifiedHandler}
             onUnverified={emailVerified.onFalse}
             disabled={!!oauth}
           />

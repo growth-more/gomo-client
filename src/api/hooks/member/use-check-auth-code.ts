@@ -1,16 +1,17 @@
 import { endpoints, fetches } from '@/api'
 import { apiMutate } from '@/api/hooks/api-mutate'
 import { QueryCallback } from '@/api/hooks/error-handler'
+import { VerifyEmailCodeResponse } from '@/api/types'
 import { toast } from '@/components/toast'
 import { useMutation } from '@tanstack/react-query'
 
-interface CheckAuthCodeCallback extends QueryCallback {
+interface CheckAuthCodeCallback extends QueryCallback<VerifyEmailCodeResponse> {
   onInvalidParameter?: () => void
 }
 
 export function useCheckAuthCode() {
   const { mutate } = useMutation({
-    mutationKey: ['POST', endpoints.member.verifyEmailCode],
+    mutationKey: ['GET', endpoints.member.verifyEmailCode],
     mutationFn: fetches.member.verifyEmailCode,
   })
 
@@ -19,9 +20,9 @@ export function useCheckAuthCode() {
       mutate,
       { email, code },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
           toast.success('인증이 완료되었습니다.')
-          callback?.onSuccess?.()
+          callback?.onSuccess?.(data)
         },
         onError: () => {
           callback?.onError?.()

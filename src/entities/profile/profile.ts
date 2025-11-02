@@ -1,3 +1,5 @@
+import { WidgetSnapshot } from '@/components/widget'
+
 type LoginProvider = 'EMAIL' | 'GOOGLE' | 'KAKAO' | 'NAVER'
 type OauthProvider = Exclude<LoginProvider, 'EMAIL'>
 
@@ -13,6 +15,7 @@ interface Profile {
   subscriptionPlan: string
   signUpDateTime: Date
   loginProvider: LoginProvider
+  widgetSnapshot: WidgetSnapshot
 }
 
 export type { Profile, LoginProvider, OauthProvider }

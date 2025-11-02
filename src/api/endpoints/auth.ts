@@ -1,7 +1,7 @@
 export const auth = {
-  login: '/members/login',
-  reissue: '/members/refresh',
-  logout: '/members/logout',
+  login: '/auth/login',
+  reissue: '/auth/refresh',
+  logout: '/auth/logout',
   check: '/members',
   oauth: {
     GOOGLE: '/oauth/login/google',

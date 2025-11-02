@@ -16,7 +16,7 @@ import {
   UpdateQuestPropertyFetchRequest,
   UpdateWidgetFetchRequest,
   VerifyEmailCodeFetchRequest,
-  WidgetResponse,
+  VerifyEmailCodeResponse,
 } from '@/api/types'
 
 export const member = {
@@ -47,14 +47,16 @@ export const member = {
   createEmailCode: async (
     params: CreateEmailAuthCodeFetchRequest
   ): Promise<CreateEmailAuthCodeResponse> => {
-    return axiosFetch.post(endpoints.member.createEmailCode, params.body, {
+    return axiosFetch.post(endpoints.member.createSignUpEmailCode, params.body, {
       onCode: {
         [apiErrorCode.EMAIL_DUPLICATED]: errorCode.auth.join.EMAIL_DUPLICATED,
       },
     })
   },
 
-  verifyEmailCode: async (params: VerifyEmailCodeFetchRequest): Promise<void> => {
+  verifyEmailCode: async (
+    params: VerifyEmailCodeFetchRequest
+  ): Promise<VerifyEmailCodeResponse> => {
     return axiosFetch.get(
       `${endpoints.member.verifyEmailCode}?email=${params.email}&code=${params.code}`
     )
@@ -98,10 +100,6 @@ export const member = {
 
   updateQuestProperty: async (params: UpdateQuestPropertyFetchRequest): Promise<void> => {
     return axiosFetch.put(endpoints.member.updateQuestProperty, params.body)
-  },
-
-  getWidget: async (): Promise<WidgetResponse> => {
-    return axiosFetch.get(endpoints.member.getWidget)
   },
 
   updateWidget: async (params: UpdateWidgetFetchRequest): Promise<void> => {

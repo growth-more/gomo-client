@@ -1,4 +1,4 @@
-import { useGetWidgetSnapshot } from '@/api/hooks'
+import { useProfile } from '@/api/hooks'
 import {
   WIDGET_COLUMN_SPACING,
   WIDGET_HEIGHT,
@@ -16,7 +16,9 @@ interface WidgetManagerProps {
 }
 
 export function WidgetManager({ mediaWidth }: WidgetManagerProps) {
-  const { snapshot } = useGetWidgetSnapshot()
+  const {
+    profile: { widgetSnapshot: snapshot },
+  } = useProfile()
 
   const widgetData = useMemo(() => {
     if (mediaWidth === 1) {

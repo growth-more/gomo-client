@@ -12,7 +12,7 @@ interface CreateAuthCodeCallback extends QueryCallback {
 
 export function useCreateAuthCode() {
   const { mutate } = useMutation({
-    mutationKey: ['POST', endpoints.member.createEmailCode],
+    mutationKey: ['POST', endpoints.member.createSignUpEmailCode],
     mutationFn: fetches.member.createEmailCode,
   })
 

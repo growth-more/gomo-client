@@ -54,12 +54,12 @@ export function setupRefreshTokenInterceptor() {
       isRefreshing = true
 
       try {
-        const { token } = await fetches.auth.reissue()
+        const { accessToken } = await fetches.auth.reissue()
 
-        useTokenStore.getState().setAccessToken(token)
-        originalRequest.headers.Authorization = `Bearer ${token}`
+        useTokenStore.getState().setAccessToken(accessToken)
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`
 
-        failedQueue.forEach((failed) => failed.resolve(token))
+        failedQueue.forEach((failed) => failed.resolve(accessToken))
         failedQueue = []
 
         return await AXIOS(originalRequest)

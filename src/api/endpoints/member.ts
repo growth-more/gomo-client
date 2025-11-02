@@ -4,8 +4,9 @@ export const member = {
   update: '/members',
   delete: '/members',
 
-  createEmailCode: '/auth/codes/generate/emails',
-  verifyEmailCode: '/auth/codes/verify',
+  createSignUpEmailCode: '/members/emails/codes/signup',
+  createResetPasswordEmailCode: '/members/emails/codes/passwords/reset',
+  verifyEmailCode: '/members/emails/codes/verify',
   checkHandleDuplicate: '/members/handles/duplicate',
 
   updateHandle: '/members/handles',
@@ -15,6 +16,5 @@ export const member = {
   getQuestProperty: '/members/properties/quests',
   updateQuestProperty: '/members/properties/quests',
 
-  getWidget: '/members/widgets',
   updateWidget: '/members/widgets',
 }
