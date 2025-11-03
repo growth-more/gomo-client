@@ -7,15 +7,6 @@ export const MemberException = {
   =========================================
   */
 
-  // 존재하지 않는 계정
-  MEMBER_NOT_FOUND_EXCEPTION: {
-    code: 'MEM-ROO-001',
-    message: {
-      value: '존재하지 않는 계정입니다.',
-      type: 'warning',
-    },
-  },
-
   // 계정 접근 권한 없음
   MEMBER_ACCESS_DENIED_EXCEPTION: {
     code: 'MEM-ROO-002',
@@ -72,15 +63,6 @@ export const MemberException = {
     code: 'MEM-EMA-004',
     message: {
       value: '이메일에 사용할 수 없는 문자가 포함되어 있습니다.',
-      type: 'warning',
-    },
-  },
-
-  // 이메일 존재
-  MEMBER_EMAIL_EXIST_EXCEPTION: {
-    code: 'MEM-EMA-005',
-    message: {
-      value: '이미 사용중인 이메일입니다.',
       type: 'warning',
     },
   },
