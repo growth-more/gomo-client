@@ -11,7 +11,7 @@ interface CheckAuthCodeCallback extends QueryCallback<VerifyEmailCodeResponse> {
 
 export function useCheckAuthCode() {
   const { mutate } = useMutation({
-    mutationKey: ['GET', endpoints.member.verifyEmailCode],
+    mutationKey: ['POST', endpoints.member.verifyEmailCode],
     mutationFn: fetches.member.verifyEmailCode,
   })
 
