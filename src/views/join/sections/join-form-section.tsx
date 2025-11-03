@@ -69,10 +69,9 @@ export function JoinFormSection({ onNext, oauth }: JoinFormSectionProps) {
   }, [oauth, reset, emailVerified, unregister])
 
   const submitHandler = handleSubmit((form) => {
-    if (!temporaryToken) {
+    if (!temporaryToken && !oauth) {
       return
     }
-
     join(
       {
         email: form.email,
@@ -81,7 +80,7 @@ export function JoinFormSection({ onNext, oauth }: JoinFormSectionProps) {
         handle: `@${form.handle}`,
         motto: form.motto,
         loginProvider: oauth?.loginProvider ?? 'EMAIL',
-        temporaryToken,
+        temporaryToken: temporaryToken ?? '',
       },
       { onSuccess: () => onNext?.(form.email, form.password) }
     )
