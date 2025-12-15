@@ -57,9 +57,7 @@ export const member = {
   verifyEmailCode: async (
     params: VerifyEmailCodeFetchRequest
   ): Promise<VerifyEmailCodeResponse> => {
-    return axiosFetch.get(
-      `${endpoints.member.verifyEmailCode}?email=${params.email}&code=${params.code}`
-    )
+    return axiosFetch.post(endpoints.member.verifyEmailCode, params)
   },
 
   checkHandleDuplicate: async (params: CheckHandleDuplicateFetchRequest): Promise<void> => {

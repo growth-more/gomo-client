@@ -1,12 +1,12 @@
 export const member = {
   profile: '/members',
-  create: '/members',
+  create: '/auth/signup',
   update: '/members',
   delete: '/members',
 
-  createSignUpEmailCode: '/members/emails/codes/signup',
-  createResetPasswordEmailCode: '/members/emails/codes/passwords/reset',
-  verifyEmailCode: '/members/emails/codes/verify',
+  createSignUpEmailCode: '/auth/codes/emails/signup',
+  createResetPasswordEmailCode: '/auth/codes/emails/passwords/reset',
+  verifyEmailCode: '/auth/codes/emails/verify',
   checkHandleDuplicate: '/members/handles/duplicate',
 
   updateHandle: '/members/handles',
